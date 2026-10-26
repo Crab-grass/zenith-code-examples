@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Company Analysis · ZENITH Code</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip" href="#overview">Skip to content</a>
+    <aside class="sidebar">
+      <a
+        class="brand"
+        href="https://zenithcode.net"
+        target="_blank"
+        rel="noreferrer"
+        >ZENITH <span>Code</span></a
+      >
+      <div class="workspace-label">RESEARCH WORKSPACE</div>
+      <nav aria-label="Workspace">
+        <a href="#overview" class="selected"
+          ><span aria-hidden="true">▦</span><span data-i18n="overview"></span
+        ></a>
+        <a href="#financials"
+          ><span aria-hidden="true">▤</span><span data-i18n="financials"></span
+        ></a>
+        <a href="#sources"
+          ><span aria-hidden="true">◇</span><span data-i18n="sources"></span
+        ></a>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="tiny-label">BUILD YOUR OWN</span>
+        <h3 data-i18n="yourWorkspace"></h3>
+        <p data-i18n="templateNote"></p>
+        <a
+          href="https://github.com/Crab-grass/zenith-code-examples"
+          target="_blank"
+          rel="noreferrer"
+          data-i18n="viewCode"
+        ></a>
+      </div>
+    </aside>
+    <div class="shell">
+      <header class="topbar">
+        <div>
+          <span class="mobile-brand">ZENITH Code / </span
+          ><span data-i18n="breadcrumb"></span>
+        </div>
+        <div class="top-actions">
+          <a
+            id="guideLink"
+            href="https://zenithcode.net/learn/tdnet-xbrl"
+            target="_blank"
+            rel="noreferrer"
+            data-i18n="guide"
+          ></a>
+          <div class="languages" role="group" aria-label="Language">
+            <button id="ja" aria-pressed="true">JA</button
+            ><button id="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
+      </header>
+      <main id="overview">
+        <section class="page-heading">
+          <div>
+            <p class="eyebrow">COMPANY ANALYSIS</p>
+            <h1 data-i18n="title"></h1>
+            <p class="lead" data-i18n="lead"></p>
+          </div>
+          <span class="local-badge"
+            ><i></i><span data-i18n="private"></span
+          ></span>
+        </section>
+        <section class="control-panel" aria-label="Data selection">
+          <div class="mode-tabs" role="group" aria-label="Data source">
+            <button id="demoMode" aria-pressed="true" data-i18n="demo"></button
+            ><button
+              id="liveMode"
+              aria-pressed="false"
+              data-i18n="live"
+            ></button>
+          </div>
+          <form id="queryForm">
+            <div id="demoField" class="field">
+              <label for="company" data-i18n="company"></label
+              ><select id="company"></select>
+            </div>
+            <div id="liveField" class="field" hidden>
+              <label for="symbol" data-i18n="symbol"></label
+              ><input
+                id="symbol"
+                value="7203"
+                maxlength="7"
+                autocomplete="off"
+                spellcheck="false"
+                pattern="[0-9A-Z]{4,5}(\.T)?"
+              />
+            </div>
+            <button
+              class="primary"
+              id="load"
+              type="submit"
+              data-i18n="loadDemo"
+            ></button>
+          </form>
+          <p id="requestNote" class="request-note"></p>
+        </section>
+        <section id="setup" class="setup" hidden>
+          <h2 data-i18n="setupTitle"></h2>
+          <p data-i18n="setupBody"></p>
+          <code>python3 templates/company-analysis/server.py --live</code>
+          <p data-i18n="setupKey"></p>
+          <a
+            id="signupLink"
+            href="https://zenithcode.net/sign-up"
+            target="_blank"
+            rel="noreferrer"
+            data-i18n="signup"
+          ></a>
+        </section>
+        <div id="status" class="notice" role="status" aria-live="polite"></div>
+        <div id="dashboard" hidden>
+          <section class="company-heading">
+            <div>
+              <h2 id="companyName"></h2>
+              <div class="company-meta">
+                <span id="companyCode"></span><span id="periodBadge"></span
+                ><span id="standardBadge"></span>
+              </div>
+            </div>
+            <p id="asOf"></p>
+          </section>
+          <section class="kpis" aria-label="Key figures">
+            <article class="kpi">
+              <p data-i18n="revenue"></p>
+              <strong id="revenue"></strong><small id="revenuePeriod"></small>
+            </article>
+            <article class="kpi">
+              <p data-i18n="operatingIncome"></p>
+              <strong id="operatingIncome"></strong
+              ><small id="operatingPeriod"></small>
+            </article>
+            <article class="kpi">
+              <p data-i18n="operatingMargin"></p>
+              <strong id="operatingMargin"></strong
+              ><small data-i18n="reportedMargin"></small>
+            </article>
+            <article class="kpi price">
+              <p data-i18n="price"></p>
+              <strong id="price"></strong><small id="priceDate"></small>
+            </article>
+          </section>
+          <section class="charts">
+            <article class="panel chart-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow" data-i18n="performance"></p>
+                  <h3 data-i18n="trend"></h3>
+                </div>
+                <div class="chart-controls">
+                  <label for="metric" class="sr-only" data-i18n="metric"></label
+                  ><select id="metric">
+                    <option value="revenue" data-i18n="revenue"></option>
+                    <option
+                      value="operatingIncome"
+                      data-i18n="operatingIncome"
+                    ></option>
+                    <option
+                      value="netIncome"
+                      data-i18n="netIncome"
+                    ></option></select
+                  ><span class="unit" data-i18n="amountUnit"></span>
+                </div>
+              </div>
+              <div id="barChart" class="chart"></div>
+            </article>
+            <article class="panel chart-panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">PROFITABILITY</p>
+                  <h3 data-i18n="operatingMargin"></h3>
+                </div>
+                <span class="unit">%</span>
+              </div>
+              <div id="marginChart" class="chart"></div>
+            </article>
+          </section>
+          <section class="panel table-panel" id="financials">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">FINANCIAL STATEMENTS</p>
+                <h3 data-i18n="financials"></h3>
+              </div>
+              <span class="unit" data-i18n="fullYen"></span>
+            </div>
+            <div
+              class="table-scroll"
+              tabindex="0"
+              role="region"
+              aria-label="Financial data"
+            >
+              <table id="financialTable"></table>
+            </div>
+            <p class="table-note" data-i18n="periodNote"></p>
+          </section>
+          <section class="bottom-grid" id="sources">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <p class="eyebrow">DATA PROVENANCE</p>
+                  <h3 data-i18n="sources"></h3>
+                </div>
+              </div>
+              <div id="sourceList"></div>
+            </article>
+            <article class="panel reading">
+              <span class="tiny-label">READ THE NUMBERS</span>
+              <h3 data-i18n="readCarefully"></h3>
+              <p data-i18n="readingNote"></p>
+              <ul>
+                <li data-i18n="missingNote"></li>
+                <li data-i18n="datesNote"></li>
+                <li data-i18n="amendmentNote"></li>
+              </ul>
+            </article>
+          </section>
+        </div>
+        <footer>
+          <span>ZENITH Code · Company Analysis Template</span
+          ><a
+            href="https://zenithcode.net/docs/display-rights"
+            target="_blank"
+            rel="noreferrer"
+            data-i18n="dataTerms"
+          ></a>
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

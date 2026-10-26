@@ -1,0 +1,657 @@
+import { normalize, finite, axis, money, percent } from "./model.mjs";
+const $ = (id) => document.getElementById(id);
+const texts = {
+  ja: {
+    overview: "企業の概要",
+    financials: "財務データ",
+    sources: "データの出典",
+    yourWorkspace: "自分だけの分析ツールへ",
+    templateNote: "この画面を出発点に、自分の用途に合わせた分析ツールへ。",
+    viewCode: "GitHubでコードを見る ↗",
+    breadcrumb: "ワークスペース / 企業分析",
+    guide: "解析ガイド ↗",
+    title: "企業・決算分析",
+    lead: "業績の推移と、その出典をひとつの画面で。",
+    private: "ローカル環境",
+    demo: "サンプルで試す",
+    live: "実データに接続",
+    company: "サンプル企業",
+    symbol: "証券コード",
+    loadDemo: "表示する",
+    loadLive: "データを取得",
+    setupTitle: "ZENITH Codeの実データを使う",
+    setupBody:
+      "会員登録と必要なデータ利用条件への同意後、APIキーを作成してください。このプログラムを終了し、次のコマンドで起動し直すと接続できます。",
+    setupKey:
+      "APIキーは端末の非表示入力で設定します。チャットやブラウザの入力欄へ貼り付ける必要はありません。",
+    signup: "会員登録・APIキーの取得 ↗",
+    revenue: "売上高",
+    operatingIncome: "営業利益",
+    netIncome: "純利益",
+    operatingMargin: "営業利益率",
+    reportedMargin: "APIの営業利益率を表示",
+    price: "直近終値",
+    performance: "BUSINESS PERFORMANCE",
+    trend: "業績の推移",
+    metric: "表示する指標",
+    amountUnit: "単位：億円",
+    fullYen: "金額：円 / 利益率：%",
+    periodNote:
+      "FY（通期）のみを表示。決算期間の日数・会計基準も確認してください。期間変更などの比較調整はしていません。",
+    readCarefully: "数字を読む前に",
+    readingNote: "まず期間・単位・出典を確認する。それが分析の出発点です。",
+    missingNote: "「—」は未取得・未開示です。0に置き換えません。",
+    datesNote:
+      "株価の日付と決算期は別です。最新株価と過去決算から独自のPER等は計算しません。",
+    amendmentNote: "訂正後の数値は、過去の時点で知り得た数値とは限りません。",
+    dataTerms: "データの表示・利用条件 ↗",
+    demoNotice:
+      "デモ表示：企業名・株価・財務数値はすべて架空です。実際の企業データではありません。",
+    liveNotice:
+      "実データ表示：ご自身の非公開環境で利用してください。株価・制限対象の書類等の公開はできません。",
+    demoRequest:
+      "登録不要・API通信なし。企業を切り替えて、グラフと表の動きを試せます。",
+    liveRequest:
+      "取得ボタン1回につき最大2リクエスト / 2 APIトークン。最新の利用枠が適用されます。自動更新・自動購入は行いません。",
+    loading: "データを取得しています…",
+    unavailable: "—",
+    missing: "未取得",
+    noData: "この銘柄・期間の財務データはありません。",
+    noQuote: "株価未取得",
+    period: "決算期",
+    days: "決算期間（日）",
+    basis: "会計基準",
+    fy: "通期",
+    obtained: "取得日時",
+    updated: "行の更新日時",
+    sourceDetail: "出典情報を確認",
+    synthetic: "架空の学習用データ",
+    amended: "訂正あり",
+    unknown: "情報なし",
+    priceOn: "株価日付",
+    yen: "円",
+    hundredMillion: "億円",
+    invalid_symbol: "証券コードを確認してください（例：7203 / 130A）。",
+    upstream_failed:
+      "取得できませんでした。キー・利用条件への同意・利用枠・接続状態を確認してください。自動再試行はしません。",
+    invalid_response: "想定外のデータ形式のため、表示を停止しました。",
+    busy: "別の取得が進行中です。少し待ってから再度操作してください。",
+    local_only: "ローカル接続を確認し、ページを開き直してください。",
+    setup_required: "実データ接続の設定が必要です。",
+    network:
+      "接続できませんでした。ローカルサーバーが起動しているか確認してください。",
+    noRows: "データなし",
+    field: "項目",
+    companyLabel: "銘柄",
+    demoAsOf: "サンプルの固定日時",
+    range: "収録期間",
+    mixed: "複数の出典",
+  },
+  en: {
+    overview: "Company overview",
+    financials: "Financial data",
+    sources: "Data sources",
+    yourWorkspace: "Make it your workspace.",
+    templateNote:
+      "Start with this template. Build an analysis tool around your own questions.",
+    viewCode: "View code on GitHub ↗",
+    breadcrumb: "Workspace / Company analysis",
+    guide: "Analysis guide ↗",
+    title: "Company analysis",
+    lead: "Financial performance and its sources, in one workspace.",
+    private: "Local workspace",
+    demo: "Try sample data",
+    live: "Connect live data",
+    company: "Sample company",
+    symbol: "Securities code",
+    loadDemo: "View company",
+    loadLive: "Fetch data",
+    setupTitle: "Connect to ZENITH Code",
+    setupBody:
+      "Create an account, accept the applicable data terms, and create an API key. Stop this program and restart with the command below to enable live access.",
+    setupKey:
+      "Enter the API key privately in your terminal. Do not paste it into chat or the browser.",
+    signup: "Create an account / get an API key ↗",
+    revenue: "Revenue",
+    operatingIncome: "Operating profit",
+    netIncome: "Net income",
+    operatingMargin: "Operating margin",
+    reportedMargin: "Operating margin returned by the API",
+    price: "Latest close",
+    performance: "BUSINESS PERFORMANCE",
+    trend: "Performance over time",
+    metric: "Chart metric",
+    amountUnit: "JPY 100 million",
+    fullYen: "Amounts: JPY / Margins: %",
+    periodNote:
+      "Full fiscal years (FY) only. Check period lengths and accounting standards; no adjustments for changes in periods or comparability are applied.",
+    readCarefully: "Before reading the numbers",
+    readingNote:
+      "Check the period, units and source first. This is where analysis begins.",
+    missingNote:
+      "“—” means unavailable or undisclosed. It is never replaced with zero.",
+    datesNote:
+      "The price date and financial period differ. No valuation ratios are derived from mismatched dates.",
+    amendmentNote:
+      "Revised financials may not represent what was known at an earlier point in time.",
+    dataTerms: "Data display and usage terms ↗",
+    demoNotice:
+      "Demo: all company names, stock prices and financial figures are fictional. These are not actual company records.",
+    liveNotice:
+      "Live data: use in your private environment. Do not publish stock prices or restricted filing material.",
+    demoRequest:
+      "No account or API requests. Switch companies to explore the charts and table.",
+    liveRequest:
+      "Each fetch makes up to 2 requests / 2 API tokens. Current quota rules apply. No automatic refreshes or purchases.",
+    loading: "Fetching data…",
+    unavailable: "—",
+    missing: "N/A",
+    noData: "No financial data for this company and period.",
+    noQuote: "Price unavailable",
+    period: "Fiscal period",
+    days: "Period length (days)",
+    basis: "Accounting basis",
+    fy: "FY",
+    obtained: "Retrieved",
+    updated: "Row updated",
+    sourceDetail: "Inspect provenance",
+    synthetic: "Synthetic learning data",
+    amended: "Amended",
+    unknown: "Not provided",
+    priceOn: "Price date",
+    yen: "JPY",
+    hundredMillion: "× JPY 100m",
+    invalid_symbol: "Check the securities code (e.g. 7203 or 130A).",
+    upstream_failed:
+      "Fetch failed. Check the API key, accepted data terms, quota and connection. No automatic retry was made.",
+    invalid_response: "Unexpected data format. Display stopped.",
+    busy: "Another request is in progress. Try again after it finishes.",
+    local_only: "Check the local connection and reopen this page.",
+    setup_required: "Live access needs setup.",
+    network: "Connection failed. Check that the local server is running.",
+    noRows: "No data",
+    field: "Metric",
+    companyLabel: "Company",
+    demoAsOf: "Fixed sample timestamp",
+    range: "Available periods",
+    mixed: "Multiple sources",
+  },
+};
+let lang =
+  new URLSearchParams(location.search).get("lang") === "en" ? "en" : "ja";
+let mode = "demo",
+  companies = [],
+  config = null,
+  current = null,
+  currentName = null,
+  busy = false,
+  statusKey = "demoNotice";
+const t = (key) => texts[lang][key] ?? key;
+function node(tag, text, attrs = {}) {
+  const el = document.createElement(tag);
+  if (text !== undefined) el.textContent = text;
+  for (const [key, value] of Object.entries(attrs)) el.setAttribute(key, value);
+  return el;
+}
+function notice(key, error = false) {
+  statusKey = key;
+  $("status").textContent = t(key);
+  $("status").classList.toggle("error", error);
+}
+function setText(id, text) {
+  $(id).textContent = text;
+}
+function kpi(id, value, unit) {
+  $(id).replaceChildren(
+    document.createTextNode(value),
+    node("span", unit, { class: "suffix" }),
+  );
+}
+function fmtDate(value) {
+  if (!value) return t("unknown");
+  const d = new Date(value);
+  return Number.isNaN(d.getTime())
+    ? t("unknown")
+    : new Intl.DateTimeFormat(lang === "ja" ? "ja-JP" : "en-GB", {
+        timeZone: "Asia/Tokyo",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+      }).format(d) + " JST";
+}
+function translate() {
+  document.documentElement.lang = lang;
+  document.title = `${t("title")} · ZENITH Code`;
+  document
+    .querySelectorAll("[data-i18n]")
+    .forEach((el) => (el.textContent = t(el.dataset.i18n)));
+  $("ja").setAttribute("aria-pressed", String(lang === "ja"));
+  $("en").setAttribute("aria-pressed", String(lang === "en"));
+  $("guideLink").href =
+    lang === "ja"
+      ? "https://zenithcode.net/learn/tdnet-xbrl"
+      : "https://zenithcode.net/en/docs";
+  $("signupLink").href =
+    `https://zenithcode.net${lang === "en" ? "/en" : ""}/sign-up`;
+  const selection = $("company").value;
+  $("company").replaceChildren(
+    ...companies.map((item, index) =>
+      node("option", item.name[lang], { value: String(index) }),
+    ),
+  );
+  $("company").value = selection || "0";
+  controls();
+  notice(statusKey, $("status").classList.contains("error"));
+  if (current) render();
+}
+function controls() {
+  $("demoMode").setAttribute("aria-pressed", String(mode === "demo"));
+  $("liveMode").setAttribute("aria-pressed", String(mode === "live"));
+  $("demoField").hidden = mode !== "demo";
+  $("liveField").hidden = mode !== "live";
+  $("setup").hidden = mode !== "live" || Boolean(config?.liveEnabled);
+  $("load").textContent = busy
+    ? t("loading")
+    : t(mode === "demo" ? "loadDemo" : "loadLive");
+  $("load").disabled =
+    busy || (mode === "live" && !config?.liveEnabled) || !config;
+  for (const id of ["demoMode", "liveMode", "company", "symbol"])
+    $(id).disabled = busy;
+  $("requestNote").textContent = t(
+    mode === "demo" ? "demoRequest" : "liveRequest",
+  );
+}
+function switchMode(next) {
+  mode = next;
+  current = null;
+  currentName = null;
+  $("dashboard").hidden = true;
+  notice(
+    next === "demo"
+      ? "demoNotice"
+      : config?.liveEnabled
+        ? "liveNotice"
+        : "setup_required",
+  );
+  controls();
+  if (next === "demo" && companies.length) loadDemo();
+}
+function loadDemo() {
+  const company = companies[Number($("company").value) || 0];
+  current = normalize(company.snapshot);
+  currentName = company.name;
+  notice("demoNotice");
+  render();
+}
+async function fetchLive() {
+  const symbol = $("symbol").value.trim().toUpperCase();
+  $("symbol").value = symbol;
+  if (!/^[0-9A-Z]{4,5}(\.T)?$/.test(symbol)) {
+    notice("invalid_symbol", true);
+    return;
+  }
+  busy = true;
+  current = null;
+  $("dashboard").hidden = true;
+  notice("loading");
+  controls();
+  try {
+    const response = await fetch("/api/snapshot", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Local-Token": config.requestToken,
+      },
+      body: JSON.stringify({ symbol }),
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error);
+    current = normalize(result.snapshot);
+    currentName = null;
+    notice("liveNotice");
+    render();
+  } catch (error) {
+    notice(texts.en[error.message] ? error.message : "network", true);
+  } finally {
+    busy = false;
+    controls();
+  }
+}
+function svgElement(tag, attrs = {}, text) {
+  const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
+  for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+  if (text !== undefined) el.textContent = text;
+  return el;
+}
+function chart(target, field, line = false) {
+  const box = $(target);
+  box.replaceChildren();
+  const rows = current.years,
+    values = rows.map((r) => finite(r[field]));
+  if (!rows.length || values.every((v) => v === null)) {
+    box.append(node("div", t("noData"), { class: "chart-empty" }));
+    return;
+  }
+  const w = Math.max(300, Math.min(line ? 410 : 580, box.clientWidth - 32)),
+    h = 250,
+    left = 48,
+    right = w - 24,
+    top = 32,
+    bottom = 205;
+  const scaled = values.map((v) =>
+      v === null ? null : v * (line ? 100 : 1e-8),
+    ),
+    bounds = axis(scaled),
+    y = (v) =>
+      bottom - ((v - bounds.min) / (bounds.max - bounds.min)) * (bottom - top),
+    x = (i) => left + ((right - left) * (i + 0.5)) / rows.length;
+  const svg = svgElement("svg", {
+    viewBox: `0 0 ${w} ${h}`,
+    role: "img",
+    "aria-label": `${t(field)} · ${line ? "%" : t("amountUnit")}`,
+  });
+  svg.append(
+    svgElement(
+      "title",
+      {},
+      `${t(field)}: ${rows.map((r, i) => `${r.fiscalPeriod} ${scaled[i] === null ? t("missing") : line ? percent(values[i], lang) : money(values[i], lang, true)}`).join(", ")} (${line ? "%" : t("amountUnit")})`,
+    ),
+  );
+  for (let i = 0; i < 4; i++) {
+    const tick = bounds.min + ((bounds.max - bounds.min) * i) / 3,
+      yy = y(tick);
+    svg.append(
+      svgElement("line", {
+        x1: left,
+        x2: right,
+        y1: yy,
+        y2: yy,
+        stroke: "#e7edf3",
+        "stroke-dasharray": "3 4",
+      }),
+    );
+    svg.append(
+      svgElement(
+        "text",
+        {
+          x: left - 10,
+          y: yy + 4,
+          "text-anchor": "end",
+          fill: "#74859b",
+          "font-size": 11,
+        },
+        new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }).format(tick),
+      ),
+    );
+  }
+  svg.append(
+    svgElement("line", {
+      x1: left,
+      x2: right,
+      y1: y(0),
+      y2: y(0),
+      stroke: "#c6d4df",
+    }),
+  );
+  if (line) {
+    for (let i = 1; i < rows.length; i++) {
+      if (scaled[i] !== null && scaled[i - 1] !== null)
+        svg.append(
+          svgElement("line", {
+            x1: x(i - 1),
+            x2: x(i),
+            y1: y(scaled[i - 1]),
+            y2: y(scaled[i]),
+            stroke: "#128ca5",
+            "stroke-width": 3,
+          }),
+        );
+    }
+  }
+  rows.forEach((row, i) => {
+    const v = scaled[i],
+      xx = x(i);
+    if (v !== null) {
+      if (line)
+        svg.append(
+          svgElement("circle", {
+            cx: xx,
+            cy: y(v),
+            r: 5,
+            fill: "#fff",
+            stroke: "#128ca5",
+            "stroke-width": 3,
+          }),
+        );
+      else {
+        const bw = Math.min(66, ((right - left) / rows.length) * 0.43);
+        svg.append(
+          svgElement("rect", {
+            x: xx - bw / 2,
+            y: Math.min(y(0), y(v)),
+            width: bw,
+            height: Math.max(0, Math.abs(y(v) - y(0))),
+            rx: 4,
+            fill:
+              v < 0 ? "#e3a8ad" : i === rows.length - 1 ? "#138aa6" : "#bce9f2",
+          }),
+        );
+      }
+      svg.append(
+        svgElement(
+          "text",
+          {
+            x: xx,
+            y: Math.max(top - 10, y(v) - 12),
+            "text-anchor": "middle",
+            fill: v < 0 ? "#9d444b" : "#214b60",
+            "font-size": 14,
+            "font-weight": 650,
+          },
+          line ? percent(values[i], lang) : money(values[i], lang, true),
+        ),
+      );
+    } else
+      svg.append(
+        svgElement(
+          "text",
+          {
+            x: xx,
+            y: bottom - 12,
+            "text-anchor": "middle",
+            fill: "#74859b",
+            "font-size": 12,
+          },
+          t("missing"),
+        ),
+      );
+    svg.append(
+      svgElement(
+        "text",
+        {
+          x: xx,
+          y: bottom + 26,
+          "text-anchor": "middle",
+          fill: "#718198",
+          "font-size": 12,
+        },
+        row.fiscalPeriod,
+      ),
+    );
+  });
+  box.append(svg);
+}
+function render() {
+  $("dashboard").hidden = false;
+  const years = current.years,
+    latest = years.at(-1),
+    quote = current.quote;
+  setText(
+    "companyName",
+    currentName ? currentName[lang] : `${t("companyLabel")} ${current.symbol}`,
+  );
+  setText("companyCode", current.symbol);
+  setText(
+    "periodBadge",
+    latest ? `${t("fy")} ${latest.fiscalPeriod}` : t("noRows"),
+  );
+  setText("standardBadge", latest?.accountingStandard || t("unknown"));
+  setText(
+    "asOf",
+    `${t(mode === "demo" ? "demoAsOf" : "obtained")}\n${fmtDate(current.retrievedAt)}`,
+  );
+  for (const field of ["revenue", "operatingIncome"])
+    kpi(field, money(latest?.[field], lang, true), t("hundredMillion"));
+  setText(
+    "revenuePeriod",
+    latest ? `${t("fy")} ${latest.fiscalPeriod}` : t("noData"),
+  );
+  setText(
+    "operatingPeriod",
+    latest ? `${t("fy")} ${latest.fiscalPeriod}` : t("noData"),
+  );
+  setText("operatingMargin", percent(latest?.operatingMargin, lang));
+  kpi("price", money(quote?.price, lang), t("yen"));
+  setText(
+    "priceDate",
+    quote?.priceDate ? `${t("priceOn")} ${quote.priceDate}` : t("noQuote"),
+  );
+  chart("barChart", $("metric").value);
+  chart("marginChart", "operatingMargin", true);
+  const table = $("financialTable");
+  table.replaceChildren();
+  const head = node("thead"),
+    headRow = node("tr");
+  headRow.append(node("th", t("field"), { scope: "col" }));
+  years.forEach((r) =>
+    headRow.append(node("th", `${r.fiscalPeriod} FY`, { scope: "col" })),
+  );
+  head.append(headRow);
+  table.append(head);
+  const body = node("tbody");
+  for (const field of [
+    "revenue",
+    "operatingIncome",
+    "netIncome",
+    "operatingMargin",
+    "fiscalPeriodDays",
+    "accountingStandard",
+  ]) {
+    const row = node("tr");
+    row.append(
+      node(
+        "th",
+        t(
+          field === "fiscalPeriodDays"
+            ? "days"
+            : field === "accountingStandard"
+              ? "basis"
+              : field,
+        ),
+        { scope: "row" },
+      ),
+    );
+    years.forEach((r) =>
+      row.append(
+        node(
+          "td",
+          field === "operatingMargin"
+            ? percent(r[field], lang)
+            : field === "accountingStandard"
+              ? r[field] || "—"
+              : money(r[field], lang),
+        ),
+      ),
+    );
+    body.append(row);
+  }
+  table.append(body);
+  if (!years.length) {
+    const row = node("tr");
+    row.append(node("td", t("noData")));
+    body.replaceChildren(row);
+  }
+  const list = $("sourceList");
+  list.replaceChildren();
+  [...years].reverse().forEach((row) => {
+    const prov = row.provenance,
+      el = node("div", undefined, { class: "source-row" }),
+      heading = node("div", undefined, { class: "source-top" });
+    heading.append(
+      node("strong", `${row.fiscalPeriod} FY`),
+      node(
+        "span",
+        prov?.source === "synthetic"
+          ? t("synthetic")
+          : prov?.source === "mixed"
+            ? t("mixed")
+            : prov?.source?.toUpperCase() || t("unknown"),
+      ),
+    );
+    el.append(
+      heading,
+      node(
+        "p",
+        `${t("updated")}: ${fmtDate(row.updatedAt)}${prov?.amended ? " · " + t("amended") : ""}`,
+      ),
+    );
+    const details = node("details");
+    details.append(
+      node("summary", t("sourceDetail")),
+      node("pre", JSON.stringify(prov ?? null, null, 2)),
+    );
+    el.append(details);
+    list.append(el);
+  });
+  if (!years.length)
+    list.append(node("p", t("noData"), { class: "source-row" }));
+}
+$("ja").addEventListener("click", () => {
+  lang = "ja";
+  translate();
+});
+$("en").addEventListener("click", () => {
+  lang = "en";
+  translate();
+});
+$("demoMode").addEventListener("click", () => switchMode("demo"));
+$("liveMode").addEventListener("click", () => switchMode("live"));
+$("metric").addEventListener("change", () => {
+  if (current) chart("barChart", $("metric").value);
+});
+window.addEventListener("resize", () => {
+  if (current) {
+    chart("barChart", $("metric").value);
+    chart("marginChart", "operatingMargin", true);
+  }
+});
+$("queryForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (!busy && config) {
+    if (mode === "demo") loadDemo();
+    else if (config.liveEnabled) fetchLive();
+  }
+});
+document.querySelectorAll("nav a").forEach((a) =>
+  a.addEventListener("click", () => {
+    document
+      .querySelectorAll("nav a")
+      .forEach((link) => link.classList.toggle("selected", link === a));
+  }),
+);
+translate();
+try {
+  const [configResponse, demoResponse] = await Promise.all([
+    fetch("/api/config"),
+    fetch("/api/demo"),
+  ]);
+  if (!configResponse.ok || !demoResponse.ok) throw new Error();
+  config = await configResponse.json();
+  companies = await demoResponse.json();
+  translate();
+  loadDemo();
+} catch {
+  notice("network", true);
+}
