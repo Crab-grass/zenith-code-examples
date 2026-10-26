@@ -98,6 +98,13 @@ class QuarterlyTests(unittest.TestCase):
         self.assertIn('Q4 unavailable', svg)
         self.assertEqual(svg, (ROOT / 'assets' / 'quarterly-sales.svg').read_text(encoding='utf-8'))
 
+    def test_english_preview_has_english_labels_and_is_reproducible(self):
+        svg = chart.chart_svg(chart.standalone_quarters(self.rows), lang="en")
+        self.assertIn('Q2: 45 − 20 = 25 (JPY 100 million)', svg)
+        self.assertIn('Missing Q4 is not zero.', svg)
+        self.assertNotRegex(svg, r'[\u3040-\u30ff\u3400-\u9fff]')
+        self.assertEqual(svg, (ROOT / 'assets' / 'quarterly-sales.en.svg').read_text(encoding='utf-8'))
+
 
 if __name__ == '__main__':
     unittest.main()

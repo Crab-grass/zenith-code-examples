@@ -22,7 +22,7 @@ ZENITH Code provides Japanese end-of-day stock prices under formal exchange agre
 
 ### Build this before signing up
 
-![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27, in JPY 100 million.](assets/quarterly-sales.svg)
+![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27, in JPY 100 million.](assets/quarterly-sales.en.svg)
 
 **A runnable example using fictional data.** Follow the [code and explanation](docs/learning.md) to read periods and units, then generate this chart. For real data, use the API examples below.
 

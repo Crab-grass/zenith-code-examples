@@ -36,12 +36,12 @@ The concept is matched by namespace URI and local name, not the literal prefix. 
 ## Lesson 4: turn cumulative sales into standalone quarters
 
 ```sh
-python3 python/quarterly_chart.py
+python3 python/quarterly_chart.py --lang en
 ```
 
-The [chart script](../python/quarterly_chart.py) reads [three synthetic cumulative actuals](../learning/quarterly-sales.json) and writes `output/quarterly-sales.svg`. Open that file in a browser or image viewer.
+The [chart script](../python/quarterly_chart.py) reads [three synthetic cumulative actuals](../learning/quarterly-sales.json) and writes `output/quarterly-sales.en.svg`. Open that file in a browser or image viewer.
 
-![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27. Unit: JPY 100 million. Q4 unavailable.](../assets/quarterly-sales.svg)
+![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27. Unit: JPY 100 million. Q4 unavailable.](../assets/quarterly-sales.en.svg)
 
 | Quarter | Cumulative | Standalone | Unit |
 | --- | ---: | ---: | --- |
