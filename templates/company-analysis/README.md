@@ -78,3 +78,5 @@ Choose **Cool**, **Pop**, or **Dark** at the top. Themes change colors, card sha
 Open **Which APIs build this page?** for example requests and the data-to-display flow. Each card, chart, table and provenance section has **API behind this view**, explaining its endpoint, response fields, units and missing-data handling. The performance chart explanation follows the selected metric. Opening an explanation sends no request.
 
 Customize `body[data-theme]` and CSS variables in `style.css`; edit translations and `renderApiHelp()` in `app.mjs` for explanations. Data fetching is shared across themes.
+
+Data mode and company selection sit directly below the page title. The API overview uses two endpoint cards and a data-to-display flow. Select controls retain native keyboard and mobile behavior, with a shared chevron inset 16px from the right edge.
