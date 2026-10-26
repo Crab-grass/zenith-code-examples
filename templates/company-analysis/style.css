@@ -1819,3 +1819,54 @@ body[data-theme="dark"] .source-row p,
     min-width: 124px;
   }
 }
+
+/* Data source tabs sit above the panel. Label, select and action share one row. */
+.data-mode-switch {
+  width: fit-content;
+  margin: 0 0 12px;
+}
+#queryForm {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin: 0;
+}
+#queryForm .field {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+#queryForm .field label {
+  margin: 0;
+  line-height: 1.6;
+}
+#queryForm select,
+#queryForm input,
+#queryForm .primary {
+  height: 44px;
+  min-height: 44px;
+  margin: 0;
+}
+#queryForm .primary {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+@media (max-width: 620px) {
+  .data-mode-switch {
+    width: 100%;
+  }
+  #queryForm {
+    gap: 8px;
+  }
+  #queryForm .field {
+    grid-template-columns: 76px minmax(0, 1fr);
+    gap: 8px;
+  }
+  #queryForm .field label {
+    font-size: 12px;
+  }
+}
