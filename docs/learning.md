@@ -4,6 +4,13 @@
 
 Start with TDnet, then move on to EDINET. These exercises use **authored, synthetic fixtures**, not actual filings or API responses. No account, API key, network access or extra packages are required. Run commands from the repository root with Python 3.9+.
 
+If you have not cloned the repository yet, start here. Otherwise, use your existing checkout.
+
+```sh
+git clone https://github.com/Crab-grass/zenith-code-examples.git
+cd zenith-code-examples
+```
+
 ## Lesson 3: read a fact together with its context and unit
 
 ```sh
