@@ -70,3 +70,11 @@ The browser cannot request arbitrary upstream URLs. The local server validates H
 Code is MIT-licensed; that does not grant rights to API data. Follow [display rights](https://zenithcode.net/en/docs/display-rights) and [terms](https://zenithcode.net/en/terms). Do not publish screenshots or outputs containing restricted live data.
 
 Continue with the [TDnet lessons](../../docs/learning.md) or [agent-assisted setup](../../docs/agent-start.md).
+
+## Explore styles and API mappings
+
+Choose **Cool**, **Pop**, or **Cute** at the top. Themes change colors, card shapes, figure sizes, chart layout and spacing while keeping the same data. Switching themes sends no API requests. Your choice survives language/company changes within the page; reloading resets it to Cool.
+
+Open **Which APIs build this page?** for example requests and the data-to-display flow. Each card, chart, table and provenance section has **API behind this view**, explaining its endpoint, response fields, units and missing-data handling. The performance chart explanation follows the selected metric. Opening an explanation sends no request.
+
+Customize `body[data-theme]` and CSS variables in `style.css`; edit translations and `renderApiHelp()` in `app.mjs` for explanations. Data fetching is shared across themes.

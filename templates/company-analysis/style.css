@@ -780,3 +780,296 @@ footer {
     gap: 6px;
   }
 }
+
+/* Shared controls and per-view API explanations. */
+:root {
+  --bar-soft: #bce9f2;
+}
+.theme-picker {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 18px;
+}
+.theme-picker h2 {
+  margin: 0;
+  font-size: 17px;
+}
+#themeNote {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.theme-options {
+  display: flex;
+  gap: 10px;
+}
+.theme-options button {
+  min-width: 122px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: white;
+  color: var(--ink);
+  text-align: left;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 3px 8px;
+}
+.theme-options button > span:not(.swatch) {
+  font-weight: 700;
+}
+.theme-options small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-size: 11px;
+}
+.theme-options button[aria-pressed="true"] {
+  border-color: var(--accent);
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  align-self: center;
+}
+.swatch.cool {
+  background: linear-gradient(135deg, #0b1326 50%, #087d98 50%);
+}
+.swatch.pop {
+  background: linear-gradient(135deg, #6542c4 50%, #ffce57 50%);
+}
+.swatch.cute {
+  background: linear-gradient(135deg, #e9b6d1 50%, #b7dbd0 50%);
+}
+.api-overview {
+  margin-bottom: 20px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: white;
+}
+.api-overview > summary {
+  padding: 14px 18px;
+  font-weight: 650;
+  color: var(--accent);
+  cursor: pointer;
+}
+.api-overview-body {
+  padding: 0 18px 16px;
+  font-size: 13px;
+}
+.api-overview-body > code {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  background: var(--surface);
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+.api-flow {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.api-flow li {
+  background: var(--surface);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.api-panel {
+  margin: 0 20px 18px;
+}
+.api-help {
+  margin-top: 12px;
+  font-size: 12px;
+}
+.api-help > summary {
+  color: var(--accent);
+  cursor: pointer;
+  padding: 6px 0;
+}
+.api-help-body {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+}
+.api-help-body p {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--ink);
+}
+.api-help-body h4 {
+  margin: 12px 0 5px;
+  font-size: 12px;
+}
+.api-help code {
+  overflow-wrap: anywhere;
+  font-size: 11px;
+}
+.kpi.price .api-help > summary {
+  color: #d9faff;
+}
+/* Pop: colorful tiles, bigger figures and equally weighted charts. */
+body[data-theme="pop"] {
+  --navy: #30205c;
+  --ink: #2b2242;
+  --muted: #6b5c7a;
+  --accent: #6942bd;
+  --bar-soft: #d8c5fa;
+  --surface: #f8f5ff;
+  --line: #e6dcf3;
+}
+body[data-theme="pop"] .kpi {
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 23px;
+}
+body[data-theme="pop"] .kpi:nth-child(1) {
+  background: #fff1b5;
+}
+body[data-theme="pop"] .kpi:nth-child(2) {
+  background: #e9dfff;
+}
+body[data-theme="pop"] .kpi:nth-child(3) {
+  background: #d8f1eb;
+}
+body[data-theme="pop"] .kpi strong {
+  font-size: 34px;
+  font-weight: 800;
+}
+body[data-theme="pop"] .charts {
+  grid-template-columns: 1fr 1fr;
+}
+body[data-theme="pop"] .panel {
+  border-radius: 16px;
+  border-width: 2px;
+}
+body[data-theme="pop"] .page-heading h1 {
+  font-weight: 850;
+}
+/* Cute: centered workspace, generous spacing, soft rounded surfaces. */
+body[data-theme="cute"] {
+  --navy: #58394e;
+  --ink: #513e4b;
+  --muted: #796672;
+  --accent: #a04776;
+  --bar-soft: #efcbdc;
+  --surface: #fcf6f8;
+  --line: #eddde5;
+}
+body[data-theme="cute"] .sidebar {
+  display: none;
+}
+body[data-theme="cute"] .shell {
+  margin-left: 0;
+}
+body[data-theme="cute"] .mobile-brand {
+  display: inline;
+  font-weight: 700;
+}
+body[data-theme="cute"] main {
+  max-width: 1200px;
+}
+body[data-theme="cute"] .panel,
+body[data-theme="cute"] .kpi {
+  border-radius: 24px;
+  box-shadow: 0 5px 20px #58394e06;
+}
+body[data-theme="cute"] .kpi {
+  padding: 24px;
+  border-top: 5px solid #e7c3d5;
+}
+body[data-theme="cute"] .kpi:nth-child(2) {
+  border-top-color: #b9d8ca;
+}
+body[data-theme="cute"] .kpi:nth-child(3) {
+  border-top-color: #d6c8eb;
+}
+body[data-theme="cute"] .kpi.price {
+  border-top-color: #58394e;
+}
+body[data-theme="cute"] .control-panel,
+body[data-theme="cute"] .api-overview {
+  border-radius: 20px;
+}
+body[data-theme="cute"] .charts {
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+}
+body[data-theme="cute"] .primary {
+  border-radius: 20px;
+}
+body[data-theme="cute"] .theme-options button {
+  border-radius: 18px;
+}
+body[data-theme="cute"] .reading {
+  background: #f2eef6;
+}
+body[data-theme="pop"] .mode-tabs button[aria-pressed="true"],
+body[data-theme="cute"] .mode-tabs button[aria-pressed="true"] {
+  background: var(--surface);
+  color: var(--accent);
+}
+body[data-theme="pop"] td:last-child,
+body[data-theme="cute"] td:last-child {
+  color: var(--accent);
+  background: var(--surface);
+}
+@media (max-width: 1150px) {
+  .theme-picker {
+    align-items: start;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+@media (max-width: 620px) {
+  .theme-picker,
+  .theme-options {
+    width: 100%;
+  }
+  .theme-options {
+    gap: 8px;
+  }
+  .theme-options button {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 8px;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    font-size: 13px;
+  }
+  .theme-options small {
+    font-size: 10px;
+  }
+  body[data-theme="pop"] .kpi,
+  body[data-theme="cute"] .kpi {
+    padding: 16px 14px;
+  }
+  body[data-theme="pop"] .kpi strong {
+    font-size: 28px;
+  }
+  body[data-theme="pop"] .charts,
+  body[data-theme="cute"] .charts {
+    grid-template-columns: 1fr;
+  }
+  .api-panel {
+    margin-left: 18px;
+    margin-right: 18px;
+  }
+  .api-flow {
+    flex-direction: column;
+  }
+}
+/* Price cards are dark; their expanded help surface is light. */
+.kpi.price .api-help-body p {
+  color: var(--ink);
+}

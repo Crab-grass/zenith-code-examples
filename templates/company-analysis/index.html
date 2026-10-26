@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/style.css" />
     <script type="module" src="/app.mjs"></script>
   </head>
-  <body>
+  <body data-theme="cool">
     <a class="skip" href="#overview">Skip to content</a>
     <aside class="sidebar">
       <a
@@ -74,6 +74,47 @@
             ><i></i><span data-i18n="private"></span
           ></span>
         </section>
+        <section class="theme-picker" aria-labelledby="themeTitle">
+          <div>
+            <p class="eyebrow">MAKE IT YOURS</p>
+            <h2 id="themeTitle" data-i18n="themeTitle"></h2>
+            <p id="themeNote" data-i18n="themeNote"></p>
+          </div>
+          <div class="theme-options" role="group" aria-labelledby="themeTitle">
+            <button type="button" data-theme-choice="cool" aria-pressed="true">
+              <span class="swatch cool" aria-hidden="true"></span
+              ><span data-i18n="cool"></span
+              ><small data-i18n="coolNote"></small>
+            </button>
+            <button type="button" data-theme-choice="pop" aria-pressed="false">
+              <span class="swatch pop" aria-hidden="true"></span
+              ><span data-i18n="pop"></span><small data-i18n="popNote"></small>
+            </button>
+            <button type="button" data-theme-choice="cute" aria-pressed="false">
+              <span class="swatch cute" aria-hidden="true"></span
+              ><span data-i18n="cute"></span
+              ><small data-i18n="cuteNote"></small>
+            </button>
+          </div>
+        </section>
+        <details class="api-overview">
+          <summary data-i18n="apiOverview"></summary>
+          <div class="api-overview-body">
+            <p data-i18n="apiIntro"></p>
+            <ol class="api-flow">
+              <li data-i18n="flowFetch"></li>
+              <li data-i18n="flowShape"></li>
+              <li data-i18n="flowDisplay"></li>
+            </ol>
+            <code>GET https://api.zenithcode.net/stable/quote?symbol=7203</code>
+            <code
+              >GET
+              https://api.zenithcode.net/stable/income-statement?symbol=7203&amp;period=annual&amp;limit=3</code
+            >
+            <p data-i18n="apiExample"></p>
+            <p data-i18n="apiPrivacy"></p>
+          </div>
+        </details>
         <section class="control-panel" aria-label="Data selection">
           <div class="mode-tabs" role="group" aria-label="Data source">
             <button id="demoMode" aria-pressed="true" data-i18n="demo"></button
@@ -137,20 +178,24 @@
             <article class="kpi">
               <p data-i18n="revenue"></p>
               <strong id="revenue"></strong><small id="revenuePeriod"></small>
+              <div data-api="revenue"></div>
             </article>
             <article class="kpi">
               <p data-i18n="operatingIncome"></p>
               <strong id="operatingIncome"></strong
               ><small id="operatingPeriod"></small>
+              <div data-api="operatingIncome"></div>
             </article>
             <article class="kpi">
               <p data-i18n="operatingMargin"></p>
               <strong id="operatingMargin"></strong
               ><small data-i18n="reportedMargin"></small>
+              <div data-api="operatingMargin"></div>
             </article>
             <article class="kpi price">
               <p data-i18n="price"></p>
               <strong id="price"></strong><small id="priceDate"></small>
+              <div data-api="quote"></div>
             </article>
           </section>
           <section class="charts">
@@ -176,6 +221,7 @@
                 </div>
               </div>
               <div id="barChart" class="chart"></div>
+              <div class="api-panel" data-api="metric"></div>
             </article>
             <article class="panel chart-panel">
               <div class="panel-heading">
@@ -186,6 +232,7 @@
                 <span class="unit">%</span>
               </div>
               <div id="marginChart" class="chart"></div>
+              <div class="api-panel" data-api="operatingMargin"></div>
             </article>
           </section>
           <section class="panel table-panel" id="financials">
@@ -205,6 +252,7 @@
               <table id="financialTable"></table>
             </div>
             <p class="table-note" data-i18n="periodNote"></p>
+            <div class="api-panel" data-api="table"></div>
           </section>
           <section class="bottom-grid" id="sources">
             <article class="panel">
@@ -214,6 +262,7 @@
                   <h3 data-i18n="sources"></h3>
                 </div>
               </div>
+              <div class="api-panel" data-api="provenance"></div>
               <div id="sourceList"></div>
             </article>
             <article class="panel reading">

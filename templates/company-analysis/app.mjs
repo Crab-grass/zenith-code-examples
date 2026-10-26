@@ -2,6 +2,39 @@ import { normalize, finite, axis, money, percent } from "./model.mjs";
 const $ = (id) => document.getElementById(id);
 const texts = {
   ja: {
+    themeTitle: "見た目を選ぶ",
+    themeNote: "数字はそのまま。自分の用途に合うスタイルへ。",
+    cool: "クール",
+    pop: "ポップ",
+    cute: "キュート",
+    coolNote: "端正な分析画面",
+    popNote: "大きな数字と彩り",
+    cuteNote: "柔らかく、ゆったり",
+    apiOverview: "この画面は、どのAPIで作れる？",
+    apiIntro:
+      "実データ接続では、株価と損益計算書の2つのAPIを使います。今のデモは同じ構造の架空データです。",
+    flowFetch: "① APIから取得",
+    flowShape: "② 期間・単位を整える",
+    flowDisplay: "③ カード・グラフ・表へ",
+    apiExample:
+      "上のURLは証券コード7203のリクエスト例です。この説明を開いても通信は発生しません。デモの企業とは対応しません。",
+    apiPrivacy:
+      "実データは取得ボタンを押したときだけ最大2リクエスト。APIキーはローカルサーバーが保持します。スタイル・言語・グラフの切り替えでは再取得しません。",
+    apiDetail: "使っているAPI",
+    apiFields: "使う項目",
+    apiTransform: "画面への変換",
+    apiDemo: "デモでは架空データを使用。以下は実データ接続時の対応です。",
+    apiMoney:
+      "fiscalPeriodで決算期を並べ、金額を1億で割って表示。欠損は「—」、赤字は負の値のまま表示します。",
+    apiMargin:
+      "APIの比率を100倍して%表示（0.125 → 12.5%）。欠損部分の線はつなぎません。",
+    apiQuote:
+      "priceを円、priceDateを株価の日付として表示。リアルタイム株価ではなく直近終値です。",
+    apiTable:
+      "最新3通期までを取得し、古い期から並べます。金額は円、利益率は%。会計基準・期間日数も併記します。",
+    apiProvenance:
+      "各期のprovenanceをそのまま表示。訂正情報・項目別出典が返る場合も確認できます。独自のXBRL解析はこの画面では行いません。",
+
     overview: "企業の概要",
     financials: "財務データ",
     sources: "データの出典",
@@ -88,6 +121,40 @@ const texts = {
     mixed: "複数の出典",
   },
   en: {
+    themeTitle: "Choose your style",
+    themeNote: "Same numbers. A workspace that feels like yours.",
+    cool: "Cool",
+    pop: "Pop",
+    cute: "Cute",
+    coolNote: "Focused & precise",
+    popNote: "Bold & colorful",
+    cuteNote: "Soft & spacious",
+    apiOverview: "Which APIs build this page?",
+    apiIntro:
+      "Live mode uses two APIs: stock quotes and income statements. The demo uses fictional data with the same structure.",
+    flowFetch: "1. Fetch API data",
+    flowShape: "2. Format periods & units",
+    flowDisplay: "3. Cards, charts & tables",
+    apiExample:
+      "These are example requests for securities code 7203, not the fictional demo companies. Opening this explanation sends no request.",
+    apiPrivacy:
+      "Only the fetch button sends up to two live requests. Your local server holds the API key. Changing styles, language or chart metrics never refetches data.",
+    apiDetail: "API behind this view",
+    apiFields: "Response fields",
+    apiTransform: "How it becomes this view",
+    apiDemo:
+      "Demo uses fictional data. This mapping applies when connecting live data.",
+    apiMoney:
+      "Order by fiscalPeriod and divide JPY amounts by 100 million. Missing values stay unavailable; losses remain negative.",
+    apiMargin:
+      "Multiply the API ratio by 100 for percent (0.125 → 12.5%). Do not connect lines across missing values.",
+    apiQuote:
+      "Show price in JPY and priceDate as its date. This is the latest closing price, not a real-time quote.",
+    apiTable:
+      "Fetch up to three latest full fiscal years and sort oldest first. Amounts are JPY; margins are %. Include accounting basis and period length.",
+    apiProvenance:
+      "Display each period’s provenance as returned, including amendments and field sources when provided. This page does not parse XBRL itself.",
+
     overview: "Company overview",
     financials: "Financial data",
     sources: "Data sources",
@@ -242,6 +309,7 @@ function translate() {
     ),
   );
   $("company").value = selection || "0";
+  renderApiHelp();
   controls();
   notice(statusKey, $("status").classList.contains("error"));
   if (current) render();
@@ -319,6 +387,77 @@ async function fetchLive() {
     controls();
   }
 }
+// Explanations are local UI only; never fetch data here.
+function renderApiHelp() {
+  document.querySelectorAll("[data-api]").forEach((host) => {
+    const open = host.querySelector("details")?.open ?? false;
+    const kind = host.dataset.api;
+    const field = kind === "metric" ? $("metric").value : kind;
+    const quote = kind === "quote";
+    const fields = quote
+      ? "price · priceDate"
+      : kind === "table"
+        ? "fiscalPeriod · revenue · operatingIncome · netIncome · operatingMargin · fiscalPeriodDays · accountingStandard"
+        : kind === "provenance"
+          ? "fiscalPeriod · provenance · updatedAt"
+          : `fiscalPeriod · ${field}`;
+    const detail = node("details", undefined, { class: "api-help" });
+    detail.open = open;
+    detail.append(node("summary", t("apiDetail")));
+    const body = node("div", undefined, { class: "api-help-body" });
+    body.append(
+      node("p", t("apiDemo")),
+      node(
+        "code",
+        quote
+          ? "GET /stable/quote?symbol={symbol}"
+          : "GET /stable/income-statement?symbol={symbol}&period=annual&limit=3",
+      ),
+      node("h4", t("apiFields")),
+      node("code", fields),
+      node("h4", t("apiTransform")),
+      node(
+        "p",
+        t(
+          quote
+            ? "apiQuote"
+            : kind === "table"
+              ? "apiTable"
+              : kind === "provenance"
+                ? "apiProvenance"
+                : field === "operatingMargin"
+                  ? "apiMargin"
+                  : "apiMoney",
+        ),
+      ),
+    );
+    detail.append(body);
+    host.replaceChildren(detail);
+  });
+}
+function setTheme(theme) {
+  document.body.dataset.theme = theme;
+  document
+    .querySelectorAll("[data-theme-choice]")
+    .forEach((button) =>
+      button.setAttribute(
+        "aria-pressed",
+        String(button.dataset.themeChoice === theme),
+      ),
+    );
+  // Layout widths change between themes; redraw using the existing snapshot.
+  if (current) {
+    chart("barChart", $("metric").value);
+    chart("marginChart", "operatingMargin", true);
+  }
+}
+document
+  .querySelectorAll("[data-theme-choice]")
+  .forEach((button) =>
+    button.addEventListener("click", () =>
+      setTheme(button.dataset.themeChoice),
+    ),
+  );
 function svgElement(tag, attrs = {}, text) {
   const el = document.createElementNS("http://www.w3.org/2000/svg", tag);
   for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
@@ -379,7 +518,7 @@ function chart(target, field, line = false) {
           x: left - 10,
           y: yy + 4,
           "text-anchor": "end",
-          fill: "#74859b",
+          fill: "var(--muted)",
           "font-size": 11,
         },
         new Intl.NumberFormat(lang, { maximumFractionDigits: 1 }).format(tick),
@@ -404,7 +543,7 @@ function chart(target, field, line = false) {
             x2: x(i),
             y1: y(scaled[i - 1]),
             y2: y(scaled[i]),
-            stroke: "#128ca5",
+            stroke: "var(--accent)",
             "stroke-width": 3,
           }),
         );
@@ -421,7 +560,7 @@ function chart(target, field, line = false) {
             cy: y(v),
             r: 5,
             fill: "#fff",
-            stroke: "#128ca5",
+            stroke: "var(--accent)",
             "stroke-width": 3,
           }),
         );
@@ -435,7 +574,11 @@ function chart(target, field, line = false) {
             height: Math.max(0, Math.abs(y(v) - y(0))),
             rx: 4,
             fill:
-              v < 0 ? "#e3a8ad" : i === rows.length - 1 ? "#138aa6" : "#bce9f2",
+              v < 0
+                ? "#e3a8ad"
+                : i === rows.length - 1
+                  ? "var(--accent)"
+                  : "var(--bar-soft)",
           }),
         );
       }
@@ -446,7 +589,7 @@ function chart(target, field, line = false) {
             x: xx,
             y: Math.max(top - 10, y(v) - 12),
             "text-anchor": "middle",
-            fill: v < 0 ? "#9d444b" : "#214b60",
+            fill: v < 0 ? "#9d444b" : "var(--ink)",
             "font-size": 14,
             "font-weight": 650,
           },
@@ -461,7 +604,7 @@ function chart(target, field, line = false) {
             x: xx,
             y: bottom - 12,
             "text-anchor": "middle",
-            fill: "#74859b",
+            fill: "var(--muted)",
             "font-size": 12,
           },
           t("missing"),
@@ -474,7 +617,7 @@ function chart(target, field, line = false) {
           x: xx,
           y: bottom + 26,
           "text-anchor": "middle",
-          fill: "#718198",
+          fill: "var(--muted)",
           "font-size": 12,
         },
         row.fiscalPeriod,
@@ -620,6 +763,7 @@ $("demoMode").addEventListener("click", () => switchMode("demo"));
 $("liveMode").addEventListener("click", () => switchMode("live"));
 $("metric").addEventListener("change", () => {
   if (current) chart("barChart", $("metric").value);
+  renderApiHelp();
 });
 window.addEventListener("resize", () => {
   if (current) {

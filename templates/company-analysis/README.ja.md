@@ -77,3 +77,11 @@ python3 templates/company-analysis/server.py --live
 [TDnet③・④の学習コード](../../docs/learning.ja.md) → [TDnet解析ガイド](https://zenithcode.net/learn/tdnet-xbrl) → [EDINET解析ガイド](https://zenithcode.net/learn/edinet-xbrl)
 
 エージェントに設定を手伝ってもらう場合は、[利用開始ガイド](../../docs/agent-start.md)を利用できます。
+
+## 見た目とAPIの対応を確認する
+
+画面上部で「クール」「ポップ」「キュート」を切り替えられます。配色だけでなく、カードの形・数字の大きさ・グラフの配置・余白が変わります。同じデータを使い、切り替えによるAPI通信はありません。言語や企業を変えてもスタイルは維持し、ページ再読み込み時はクールに戻ります。
+
+「この画面は、どのAPIで作れる？」で2つのリクエスト例と処理の流れを確認できます。各カード・グラフ・表・出典の「使っているAPI」には、エンドポイント、レスポンスの項目、単位変換や欠損値の扱いを記載しています。業績グラフの説明は選択中の指標に追従します。説明を開いてもAPIは呼びません。
+
+見た目は`style.css`の`body[data-theme]`とCSS変数、説明は`app.mjs`の翻訳・`renderApiHelp()`で変更できます。金融データの取得処理は共通です。
