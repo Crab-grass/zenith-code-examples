@@ -1870,3 +1870,50 @@ body[data-theme="dark"] .source-row p,
     font-size: 12px;
   }
 }
+
+/* A visible button boundary and a check distinguish selection without color alone. */
+body .data-mode-switch {
+  padding: 0;
+  gap: 8px;
+  background: transparent;
+}
+body .data-mode-switch button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #7a8ca2;
+  background: var(--panel-surface);
+  color: var(--ink);
+  border-radius: 4px;
+  box-shadow: none;
+}
+body .data-mode-switch button::before {
+  content: "";
+  width: 10px;
+  height: 6px;
+  border-left: 2px solid transparent;
+  border-bottom: 2px solid transparent;
+  transform: translateY(-2px) rotate(-45deg);
+  flex: 0 0 10px;
+}
+body[data-theme] .data-mode-switch button[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+body[data-theme="dark"] .data-mode-switch button[aria-pressed="true"] {
+  color: #17220a;
+}
+body .data-mode-switch button[aria-pressed="true"]::before {
+  border-color: currentColor;
+}
+body .data-mode-switch button[aria-pressed="false"]:hover {
+  border-color: var(--accent);
+  background: var(--inset-surface);
+}
+body .data-mode-switch button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
