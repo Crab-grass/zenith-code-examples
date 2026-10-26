@@ -1,5 +1,9 @@
 # ZENITH Code examples
 
+[![ZENITH Code service overview: Japanese earnings, prices and filings, with coverage figures.](assets/zenith-code-overview.webp)](https://zenithcode.net/en)
+
+Service screenshot as of 2026-10-26. Select the image to visit the website.
+
 **Japanese stock prices and company financials, through one API.**
 
 [日本語](README.ja.md) · [Website](https://zenithcode.net/en) · [API docs](https://zenithcode.net/en/docs) · [Get an API key](https://zenithcode.net/en/sign-up) · [Business enquiries](https://zenithcode.net/en/contact-sales)
@@ -8,7 +12,29 @@ Official, runnable Python and JavaScript examples from Crabgrass Inc., the opera
 
 ZENITH Code provides Japanese end-of-day stock prices under formal exchange agreements, alongside normalized company financials and as-reported financial statement hierarchies. Use the same securities code and API key to retrieve prices and financials for your own analysis. Prices are **end-of-day, not real-time**.
 
-## Start here
+## Choose your starting point
+
+| Goal | Start here | Account |
+| --- | --- | --- |
+| Read a financial fact and build a chart | [TDnet lessons 3 and 4](docs/learning.md) | No account or extra packages |
+| Retrieve real prices and financials | **[Create an account and get an API key →](https://zenithcode.net/en/sign-up)** | Required |
+| Ask an agent to help with setup | [Copyable prompt and setup guide](docs/agent-start.md) | Required for real data |
+
+### Build this before signing up
+
+![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27, in JPY 100 million.](assets/quarterly-sales.en.svg)
+
+**A runnable example using fictional data.** Follow the [code and explanation](docs/learning.md) to read periods and units, then generate this chart. For real data, use the API examples below.
+
+### Learn on the service website
+
+Start with TDnet, then continue to EDINET. These guides are currently in Japanese.
+
+1. [TDnet XBRL analysis guide](https://zenithcode.net/learn/tdnet-xbrl): earnings releases, periods and units.
+2. [EDINET XBRL analysis guide](https://zenithcode.net/learn/edinet-xbrl): statutory filings, taxonomies and statement hierarchies.
+3. [Choosing a financial data API](https://zenithcode.net/learn/financial-data-api-selection): deciding what to parse yourself and where to use an API.
+
+## Start here: real data
 
 1. Create a [ZENITH Code account](https://zenithcode.net/en/sign-up), review and accept the applicable data terms, and create an API key in your dashboard. A Free plan is available; check [current pricing and access](https://zenithcode.net/en/pricing).
 2. Clone this repository:

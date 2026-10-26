@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+<title id="title">Cumulative to standalone quarterly sales</title>
+<desc id="desc">Synthetic data in JPY 100 million. Cumulative: 20, 45, 72. Standalone: 20, 25, 27. Q4 unavailable.</desc>
+<rect width="960" height="720" rx="18" fill="#0b1326"/>
+<g font-family="system-ui, sans-serif" fill="#e1edff">
+<text x="40" y="53" font-size="28" font-weight="700">From cumulative to standalone quarterly sales</text>
+<text x="40" y="87" font-size="18" fill="#b8cbdc">Synthetic learning data · Unit: JPY 100 million</text>
+<text x="76" y="150" font-size="24" font-weight="700">Cumulative</text>
+<text x="76" y="181" font-size="17" fill="#b8cbdc">Total since the fiscal year began</text>
+<path d="M 76 470 h 330" stroke="#30425c"/>
+<text x="64" y="476" text-anchor="end" font-size="16" fill="#b8cbdc">0</text>
+<path d="M 76 414 h 330" stroke="#30425c"/>
+<text x="64" y="420" text-anchor="end" font-size="16" fill="#b8cbdc">20</text>
+<path d="M 76 358 h 330" stroke="#30425c"/>
+<text x="64" y="364" text-anchor="end" font-size="16" fill="#b8cbdc">40</text>
+<path d="M 76 302 h 330" stroke="#30425c"/>
+<text x="64" y="308" text-anchor="end" font-size="16" fill="#b8cbdc">60</text>
+<path d="M 76 246 h 330" stroke="#30425c"/>
+<text x="64" y="252" text-anchor="end" font-size="16" fill="#b8cbdc">80</text>
+<rect x="101" y="414" width="48" height="56" rx="5" fill="#c3f5ff"/>
+<text x="125" y="398" text-anchor="middle" font-size="25" font-weight="700">20</text>
+<text x="125" y="501" text-anchor="middle" font-size="18">Q1</text>
+<rect x="181" y="344" width="48" height="126" rx="5" fill="#c3f5ff"/>
+<text x="205" y="328" text-anchor="middle" font-size="25" font-weight="700">45</text>
+<text x="205" y="501" text-anchor="middle" font-size="18">Q2</text>
+<rect x="261" y="268.4" width="48" height="201.6" rx="5" fill="#c3f5ff"/>
+<text x="285" y="252.4" text-anchor="middle" font-size="25" font-weight="700">72</text>
+<text x="285" y="501" text-anchor="middle" font-size="18">Q3</text>
+<text x="365" y="440" text-anchor="middle" font-size="17" fill="#b8cbdc">N/A</text>
+<text x="365" y="501" text-anchor="middle" font-size="18">Q4</text>
+<text x="536" y="150" font-size="24" font-weight="700">Standalone</text>
+<text x="536" y="181" font-size="17" fill="#b8cbdc">Sales for each three-month period</text>
+<path d="M 536 470 h 330" stroke="#30425c"/>
+<text x="524" y="476" text-anchor="end" font-size="16" fill="#b8cbdc">0</text>
+<path d="M 536 414 h 330" stroke="#30425c"/>
+<text x="524" y="420" text-anchor="end" font-size="16" fill="#b8cbdc">20</text>
+<path d="M 536 358 h 330" stroke="#30425c"/>
+<text x="524" y="364" text-anchor="end" font-size="16" fill="#b8cbdc">40</text>
+<path d="M 536 302 h 330" stroke="#30425c"/>
+<text x="524" y="308" text-anchor="end" font-size="16" fill="#b8cbdc">60</text>
+<path d="M 536 246 h 330" stroke="#30425c"/>
+<text x="524" y="252" text-anchor="end" font-size="16" fill="#b8cbdc">80</text>
+<rect x="561" y="414" width="48" height="56" rx="5" fill="#00d9ed"/>
+<text x="585" y="398" text-anchor="middle" font-size="25" font-weight="700">20</text>
+<text x="585" y="501" text-anchor="middle" font-size="18">Q1</text>
+<rect x="641" y="400" width="48" height="70" rx="5" fill="#00d9ed"/>
+<text x="665" y="384" text-anchor="middle" font-size="25" font-weight="700">25</text>
+<text x="665" y="501" text-anchor="middle" font-size="18">Q2</text>
+<rect x="721" y="394.4" width="48" height="75.6" rx="5" fill="#00d9ed"/>
+<text x="745" y="378.4" text-anchor="middle" font-size="25" font-weight="700">27</text>
+<text x="745" y="501" text-anchor="middle" font-size="18">Q3</text>
+<text x="825" y="440" text-anchor="middle" font-size="17" fill="#b8cbdc">N/A</text>
+<text x="825" y="501" text-anchor="middle" font-size="18">Q4</text>
+<rect x="40" y="540" width="880" height="92" rx="10" fill="#15283d" stroke="#3e6a80"/>
+<text x="480" y="586" text-anchor="middle" dominant-baseline="central" font-size="29" font-weight="700">Q2: 45 − 20 = 25 (JPY 100 million)</text>
+<text x="40" y="672" font-size="18" fill="#b8cbdc">Missing Q4 is not zero. A full-year forecast cannot yield Q4 actuals.</text>
+</g></svg>

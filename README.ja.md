@@ -1,5 +1,9 @@
 # ZENITH Code サンプルコード
 
+[![ZENITH Codeのサービス画面。日本企業の株価・財務・開示データの提供内容と収録規模。](assets/zenith-code-overview.webp)](https://zenithcode.net)
+
+サービス画面は2026年10月26日時点。画像をクリックすると公式サイトが開きます。
+
 **日本株の株価と企業財務を、1つのAPIで。**
 
 [English](README.md) · [公式サイト](https://zenithcode.net) · [ドキュメント](https://zenithcode.net/docs) · [APIキーを取得](https://zenithcode.net/sign-up) · [法人のご相談](https://zenithcode.net/contact-sales)
@@ -8,7 +12,29 @@ ZENITH Codeを運営する株式会社Crabgrassの公式Python・JavaScriptサ�
 
 ZENITH Codeは、取引所との正式な契約に基づく日本株の株価に加え、標準化した財務数値と、決算書の階層を残した全科目のデータを提供します。同じ証券コード・APIキーで株価と財務を取得し、ご自身の分析に利用できます。株価は**終値ベースの日次データで、リアルタイムではありません**。
 
-## 最初の実行
+## まず何を試しますか？
+
+| やりたいこと | 入口 | 登録 |
+| --- | --- | --- |
+| 数値の読み方とグラフを試す | [TDnet③・④の学習サンプル](docs/learning.ja.md) | 不要・追加パッケージ不要 |
+| 実際の株価・財務を取得する | **[会員登録してAPIキーを取得 →](https://zenithcode.net/sign-up)** | 必要 |
+| エージェントに設定を手伝ってもらう | [コピーして使える依頼文と手順](docs/agent-start.md) | 学習は不要、実データは必要 |
+
+### 登録前に、こんなグラフを作れます
+
+![架空の売上高。累計20・45・72億円を、単独20・25・27億円に変換するグラフ。](assets/quarterly-sales.svg)
+
+**架空データによる学習用の完成例です。** [コードと解説](docs/learning.ja.md)から、期間・単位を読む練習とグラフ作成ができます。実データのAPIサンプルは下の手順で利用します。
+
+### サービス内の解説記事
+
+TDnetを先に学び、その後EDINETへ進みます。
+
+1. [TDnet解析ガイド](https://zenithcode.net/learn/tdnet-xbrl)：決算短信とXBRL、期間・単位の読み方。
+2. [EDINET解析ガイド](https://zenithcode.net/learn/edinet-xbrl)：法定開示とタクソノミ・階層構造。
+3. [財務データAPIの選び方](https://zenithcode.net/learn/financial-data-api-selection)：解析を自作する範囲とAPI活用の考え方。
+
+## 最初の実行：実データ
 
 1. [会員登録](https://zenithcode.net/sign-up)し、適用されるデータ利用条件を確認・同意したうえで、ダッシュボードからAPIキーを作ります。Freeプランがあります。[最新の料金・利用範囲](https://zenithcode.net/pricing)をご確認ください。
 2. このリポジトリを取得します。
