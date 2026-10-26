@@ -20,6 +20,14 @@ ZENITH Code provides Japanese end-of-day stock prices under formal exchange agre
 | Retrieve real prices and financials | **[Create an account and get an API key →](https://zenithcode.net/en/sign-up)** | Required |
 | Ask an agent to help with setup | [Copyable prompt and setup guide](docs/agent-start.md) | Required for real data |
 
+### A working company analysis workspace
+
+![Company analysis workspace. All company names, stock prices and financial figures shown are fictional.](assets/company-analysis-en.png)
+
+Choose a sample company, explore revenue and profit charts, inspect the financial table and follow data provenance. Start without an account, then connect private live data locally after signing up. Includes English/Japanese interfaces, a responsive layout and **Cool / Pop / Dark** styles. Open **API behind this view** on a card, chart or table to see the endpoint, response fields and formatting rules.
+
+**[Run and customize the template →](templates/company-analysis/README.md)**
+
 ### Build this before signing up
 
 ![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27, in JPY 100 million.](assets/quarterly-sales.en.svg)

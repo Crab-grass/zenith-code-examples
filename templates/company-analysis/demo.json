@@ -1,0 +1,166 @@
+[
+  {
+    "name": {
+      "ja": "架空精密工業",
+      "en": "Example Precision"
+    },
+    "industry": "precision",
+    "mode": "demo",
+    "snapshot": {
+      "symbol": "DEMO-A",
+      "retrievedAt": "2026-10-26T00:00:00Z",
+      "annualFinancials": [
+        {
+          "symbol": "DEMO-A",
+          "fiscalPeriod": "2026-03",
+          "period": "FY",
+          "accountingStandard": "JGAAP",
+          "fiscalPeriodDays": 365,
+          "revenue": 15800000000,
+          "operatingIncome": 1980000000,
+          "netIncome": 1390000000,
+          "operatingMargin": 0.12531645569620253,
+          "updatedAt": "2026-05-15T06:00:00Z",
+          "provenance": {
+            "source": "synthetic",
+            "docId": "demo-DEMO-A-2026",
+            "announcedAt": "2026-05-15T06:00:00Z",
+            "sourceUrl": null,
+            "archiveUrl": null
+          }
+        },
+        {
+          "symbol": "DEMO-A",
+          "fiscalPeriod": "2025-03",
+          "period": "FY",
+          "accountingStandard": "JGAAP",
+          "fiscalPeriodDays": 365,
+          "revenue": 13400000000,
+          "operatingIncome": 1420000000,
+          "netIncome": 980000000,
+          "operatingMargin": 0.10597014925373134,
+          "updatedAt": "2025-05-15T06:00:00Z",
+          "provenance": {
+            "source": "synthetic",
+            "docId": "demo-DEMO-A-2025",
+            "announcedAt": "2025-05-15T06:00:00Z",
+            "sourceUrl": null,
+            "archiveUrl": null
+          }
+        },
+        {
+          "symbol": "DEMO-A",
+          "fiscalPeriod": "2024-03",
+          "period": "FY",
+          "accountingStandard": "JGAAP",
+          "fiscalPeriodDays": 366,
+          "revenue": 11600000000,
+          "operatingIncome": 950000000,
+          "netIncome": 670000000,
+          "operatingMargin": 0.08189655172413793,
+          "updatedAt": "2024-05-15T06:00:00Z",
+          "provenance": {
+            "source": "synthetic",
+            "docId": "demo-DEMO-A-2024",
+            "announcedAt": "2024-05-15T06:00:00Z",
+            "sourceUrl": null,
+            "archiveUrl": null
+          }
+        }
+      ],
+      "latestClose": [
+        {
+          "symbol": "DEMO-A",
+          "price": 2480,
+          "priceDate": "2026-10-23",
+          "changePct1d": 0.012,
+          "marketCap": null,
+          "assetType": "EQUITY",
+          "updatedAt": "2026-10-23T08:00:00Z"
+        }
+      ]
+    }
+  },
+  {
+    "name": {
+      "ja": "架空クラウド",
+      "en": "Example Cloud"
+    },
+    "industry": "software",
+    "mode": "demo",
+    "snapshot": {
+      "symbol": "DEMO-B",
+      "retrievedAt": "2026-10-26T00:00:00Z",
+      "annualFinancials": [
+        {
+          "symbol": "DEMO-B",
+          "fiscalPeriod": "2026-03",
+          "period": "FY",
+          "accountingStandard": "JGAAP",
+          "fiscalPeriodDays": 365,
+          "revenue": 7600000000,
+          "operatingIncome": 610000000,
+          "netIncome": 430000000,
+          "operatingMargin": 0.08026315789473684,
+          "updatedAt": "2026-05-15T06:00:00Z",
+          "provenance": {
+            "source": "synthetic",
+            "docId": "demo-DEMO-B-2026",
+            "announcedAt": "2026-05-15T06:00:00Z",
+            "sourceUrl": null,
+            "archiveUrl": null
+          }
+        },
+        {
+          "symbol": "DEMO-B",
+          "fiscalPeriod": "2025-03",
+          "period": "FY",
+          "accountingStandard": "JGAAP",
+          "fiscalPeriodDays": 365,
+          "revenue": 5800000000,
+          "operatingIncome": null,
+          "netIncome": -90000000,
+          "operatingMargin": null,
+          "updatedAt": "2025-05-15T06:00:00Z",
+          "provenance": {
+            "source": "synthetic",
+            "docId": "demo-DEMO-B-2025",
+            "announcedAt": "2025-05-15T06:00:00Z",
+            "sourceUrl": null,
+            "archiveUrl": null
+          }
+        },
+        {
+          "symbol": "DEMO-B",
+          "fiscalPeriod": "2024-03",
+          "period": "FY",
+          "accountingStandard": "JGAAP",
+          "fiscalPeriodDays": 366,
+          "revenue": 4200000000,
+          "operatingIncome": -420000000,
+          "netIncome": -510000000,
+          "operatingMargin": -0.1,
+          "updatedAt": "2024-05-15T06:00:00Z",
+          "provenance": {
+            "source": "synthetic",
+            "docId": "demo-DEMO-B-2024",
+            "announcedAt": "2024-05-15T06:00:00Z",
+            "sourceUrl": null,
+            "archiveUrl": null
+          }
+        }
+      ],
+      "latestClose": [
+        {
+          "symbol": "DEMO-B",
+          "price": 1620,
+          "priceDate": "2026-10-23",
+          "changePct1d": 0.012,
+          "marketCap": null,
+          "assetType": "EQUITY",
+          "updatedAt": "2026-10-23T08:00:00Z"
+        }
+      ]
+    }
+  }
+]
