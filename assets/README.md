@@ -7,4 +7,4 @@
 
 The code licence does not grant rights to trademarks or third-party content. See the repository README for data terms.
 
-- `company-analysis-ja.png` / `company-analysis-en.png`: browser screenshots of the local company analysis template. All financial figures and company names are synthetic; no real API responses are shown.
+- `company-analysis-ja.png` / `company-analysis-en.png`: language-matched browser screenshots of the local company analysis template in Dark style. All financial figures and company names are synthetic; no real API responses are shown.

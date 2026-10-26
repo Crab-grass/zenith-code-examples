@@ -24,7 +24,7 @@ ZENITH Code provides Japanese end-of-day stock prices under formal exchange agre
 
 ![Company analysis workspace. All company names, stock prices and financial figures shown are fictional.](assets/company-analysis-en.png)
 
-Choose a sample company, explore revenue and profit charts, inspect the financial table and follow data provenance. Start without an account, then connect private live data locally after signing up. Includes English/Japanese interfaces and a responsive layout.
+Choose a sample company, explore revenue and profit charts, inspect the financial table and follow data provenance. Start without an account, then connect private live data locally after signing up. Includes English/Japanese interfaces, a responsive layout and **Cool / Pop / Dark** styles. Open **API behind this view** on a card, chart or table to see the endpoint, response fields and formatting rules.
 
 **[Run and customize the template →](templates/company-analysis/README.md)**
 
