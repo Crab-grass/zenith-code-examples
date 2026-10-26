@@ -2,6 +2,17 @@ import { normalize, finite, axis, money, percent } from "./model.mjs";
 const $ = (id) => document.getElementById(id);
 const texts = {
   ja: {
+    apiCaption: "取得するデータと、グラフになるまでの流れを確認。",
+    apiQuoteTitle: "株価データ",
+    apiQuotePurpose: "直近終値と、その株価が属する日付。",
+    apiFinancialTitle: "財務データ",
+    apiFinancialPurpose: "最新3通期までの業績・利益率と、データの出典。",
+    apiInput: "リクエスト条件",
+    apiBase: "共通の接続先",
+    flowFetchNote: "株価と損益計算書の2つのAPI。",
+    flowShapeNote: "期間順に並べ、円・億円・%を使い分け。",
+    flowDisplayNote: "同じデータから、数値・推移・出典を表示。",
+
     themeTitle: "見た目を選ぶ",
     themeNote: "数字はそのまま。自分の用途に合うスタイルへ。",
     cool: "クール",
@@ -13,11 +24,11 @@ const texts = {
     apiOverview: "この画面は、どのAPIで作れる？",
     apiIntro:
       "実データ接続では、株価と損益計算書の2つのAPIを使います。今のデモは同じ構造の架空データです。",
-    flowFetch: "① APIから取得",
-    flowShape: "② 期間・単位を整える",
-    flowDisplay: "③ カード・グラフ・表へ",
+    flowFetch: "APIから取得",
+    flowShape: "期間・単位を整える",
+    flowDisplay: "画面へ表示",
     apiExample:
-      "上のURLは証券コード7203のリクエスト例です。この説明を開いても通信は発生しません。デモの企業とは対応しません。",
+      "上の条件は証券コード7203のリクエスト例です。この説明を開いても通信は発生しません。デモの企業とは対応しません。",
     apiPrivacy:
       "実データは取得ボタンを押したときだけ最大2リクエスト。APIキーはローカルサーバーが保持します。スタイル・言語・グラフの切り替えでは再取得しません。",
     apiDetail: "使っているAPI",
@@ -121,6 +132,18 @@ const texts = {
     mixed: "複数の出典",
   },
   en: {
+    apiCaption: "Explore the data sources and how they become this dashboard.",
+    apiQuoteTitle: "Stock price data",
+    apiQuotePurpose: "The latest closing price and its trading date.",
+    apiFinancialTitle: "Financial data",
+    apiFinancialPurpose:
+      "Up to three full fiscal years, margins and source information.",
+    apiInput: "Request parameters",
+    apiBase: "API base URL",
+    flowFetchNote: "Two APIs: quotes and income statements.",
+    flowShapeNote: "Sort periods and format JPY, JPY 100 million and percentages.",
+    flowDisplayNote: "One dataset for figures, trends and sources.",
+
     themeTitle: "Choose your style",
     themeNote: "Same numbers. A workspace that feels like yours.",
     cool: "Cool",
@@ -132,9 +155,9 @@ const texts = {
     apiOverview: "Which APIs build this page?",
     apiIntro:
       "Live mode uses two APIs: stock quotes and income statements. The demo uses fictional data with the same structure.",
-    flowFetch: "1. Fetch API data",
-    flowShape: "2. Format periods & units",
-    flowDisplay: "3. Cards, charts & tables",
+    flowFetch: "Fetch API data",
+    flowShape: "Format periods & units",
+    flowDisplay: "Build the view",
     apiExample:
       "These are example requests for securities code 7203, not the fictional demo companies. Opening this explanation sends no request.",
     apiPrivacy:

@@ -22,13 +22,42 @@
       <div class="workspace-label">RESEARCH WORKSPACE</div>
       <nav aria-label="Workspace">
         <a href="#overview" class="selected"
-          ><span aria-hidden="true">▦</span><span data-i18n="overview"></span
+          ><span aria-hidden="true"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" /></svg></span
+          ><span data-i18n="overview"></span
         ></a>
         <a href="#financials"
-          ><span aria-hidden="true">▤</span><span data-i18n="financials"></span
+          ><span aria-hidden="true"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path d="M4 5h16v14H4zM4 10h16M10 5v14M4 14h16" /></svg></span
+          ><span data-i18n="financials"></span
         ></a>
         <a href="#sources"
-          ><span aria-hidden="true">◇</span><span data-i18n="sources"></span
+          ><span aria-hidden="true"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+            >
+              <path
+                d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"
+              /></svg></span
+          ><span data-i18n="sources"></span
         ></a>
       </nav>
       <div class="sidebar-bottom">
@@ -74,47 +103,6 @@
             ><i></i><span data-i18n="private"></span
           ></span>
         </section>
-        <section class="theme-picker" aria-labelledby="themeTitle">
-          <div>
-            <p class="eyebrow">MAKE IT YOURS</p>
-            <h2 id="themeTitle" data-i18n="themeTitle"></h2>
-            <p id="themeNote" data-i18n="themeNote"></p>
-          </div>
-          <div class="theme-options" role="group" aria-labelledby="themeTitle">
-            <button type="button" data-theme-choice="cool" aria-pressed="true">
-              <span class="swatch cool" aria-hidden="true"></span
-              ><span data-i18n="cool"></span
-              ><small data-i18n="coolNote"></small>
-            </button>
-            <button type="button" data-theme-choice="pop" aria-pressed="false">
-              <span class="swatch pop" aria-hidden="true"></span
-              ><span data-i18n="pop"></span><small data-i18n="popNote"></small>
-            </button>
-            <button type="button" data-theme-choice="dark" aria-pressed="false">
-              <span class="swatch dark" aria-hidden="true"></span
-              ><span data-i18n="dark"></span
-              ><small data-i18n="darkNote"></small>
-            </button>
-          </div>
-        </section>
-        <details class="api-overview">
-          <summary data-i18n="apiOverview"></summary>
-          <div class="api-overview-body">
-            <p data-i18n="apiIntro"></p>
-            <ol class="api-flow">
-              <li data-i18n="flowFetch"></li>
-              <li data-i18n="flowShape"></li>
-              <li data-i18n="flowDisplay"></li>
-            </ol>
-            <code>GET https://api.zenithcode.net/stable/quote?symbol=7203</code>
-            <code
-              >GET
-              https://api.zenithcode.net/stable/income-statement?symbol=7203&amp;period=annual&amp;limit=3</code
-            >
-            <p data-i18n="apiExample"></p>
-            <p data-i18n="apiPrivacy"></p>
-          </div>
-        </details>
         <section class="control-panel" aria-label="Data selection">
           <div class="mode-tabs" role="group" aria-label="Data source">
             <button id="demoMode" aria-pressed="true" data-i18n="demo"></button
@@ -126,8 +114,8 @@
           </div>
           <form id="queryForm">
             <div id="demoField" class="field">
-              <label for="company" data-i18n="company"></label
-              ><select id="company"></select>
+              <label for="company" data-i18n="company"></label>
+              <div class="select-wrap"><select id="company"></select></div>
             </div>
             <div id="liveField" class="field" hidden>
               <label for="symbol" data-i18n="symbol"></label
@@ -163,6 +151,131 @@
           ></a>
         </section>
         <div id="status" class="notice" role="status" aria-live="polite"></div>
+        <section class="theme-picker" aria-labelledby="themeTitle">
+          <div>
+            <p class="eyebrow">APPEARANCE</p>
+            <h2 id="themeTitle" data-i18n="themeTitle"></h2>
+            <p id="themeNote" data-i18n="themeNote"></p>
+          </div>
+          <div class="theme-options" role="group" aria-labelledby="themeTitle">
+            <button type="button" data-theme-choice="cool" aria-pressed="true">
+              <span class="swatch cool" aria-hidden="true"></span
+              ><span data-i18n="cool"></span
+              ><small data-i18n="coolNote"></small>
+            </button>
+            <button type="button" data-theme-choice="pop" aria-pressed="false">
+              <span class="swatch pop" aria-hidden="true"></span
+              ><span data-i18n="pop"></span><small data-i18n="popNote"></small>
+            </button>
+            <button type="button" data-theme-choice="dark" aria-pressed="false">
+              <span class="swatch dark" aria-hidden="true"></span
+              ><span data-i18n="dark"></span
+              ><small data-i18n="darkNote"></small>
+            </button>
+          </div>
+        </section>
+        <details class="api-overview">
+          <summary>
+            <span class="api-overview-icon" aria-hidden="true"
+              ><svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16" /></svg
+            ></span>
+            <span class="api-overview-copy"
+              ><span class="eyebrow">BEHIND THE DATA</span
+              ><span class="api-overview-title" data-i18n="apiOverview"></span
+              ><span class="api-overview-caption" data-i18n="apiCaption"></span
+            ></span>
+            <span class="api-count">2 APIs</span
+            ><span class="disclosure-chevron" aria-hidden="true"></span>
+          </summary>
+          <div class="api-overview-body">
+            <p class="api-intro" data-i18n="apiIntro"></p>
+            <div class="endpoint-grid">
+              <article class="endpoint-card">
+                <div class="endpoint-heading">
+                  <span class="endpoint-number">01</span>
+                  <h3 data-i18n="apiQuoteTitle"></h3>
+                </div>
+                <p data-i18n="apiQuotePurpose"></p>
+                <div class="endpoint-code">
+                  <span class="http-method">GET</span><code>/stable/quote</code>
+                </div>
+                <dl>
+                  <div>
+                    <dt data-i18n="apiInput"></dt>
+                    <dd><code>symbol=7203</code></dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="apiFields"></dt>
+                    <dd><code>price · priceDate</code></dd>
+                  </div>
+                </dl>
+              </article>
+              <article class="endpoint-card">
+                <div class="endpoint-heading">
+                  <span class="endpoint-number">02</span>
+                  <h3 data-i18n="apiFinancialTitle"></h3>
+                </div>
+                <p data-i18n="apiFinancialPurpose"></p>
+                <div class="endpoint-code">
+                  <span class="http-method">GET</span
+                  ><code>/stable/income-statement</code>
+                </div>
+                <dl>
+                  <div>
+                    <dt data-i18n="apiInput"></dt>
+                    <dd><code>symbol=7203 · period=annual · limit=3</code></dd>
+                  </div>
+                  <div>
+                    <dt data-i18n="apiFields"></dt>
+                    <dd>
+                      <code
+                        >revenue · operatingIncome · netIncome · operatingMargin
+                        · provenance</code
+                      >
+                    </dd>
+                  </div>
+                </dl>
+              </article>
+            </div>
+            <p class="api-base">
+              <span data-i18n="apiBase"></span
+              ><code>https://api.zenithcode.net</code>
+            </p>
+            <ol class="api-flow">
+              <li>
+                <span class="flow-number">01</span>
+                <div>
+                  <strong data-i18n="flowFetch"></strong>
+                  <p data-i18n="flowFetchNote"></p>
+                </div>
+              </li>
+              <li>
+                <span class="flow-number">02</span>
+                <div>
+                  <strong data-i18n="flowShape"></strong>
+                  <p data-i18n="flowShapeNote"></p>
+                </div>
+              </li>
+              <li>
+                <span class="flow-number">03</span>
+                <div>
+                  <strong data-i18n="flowDisplay"></strong>
+                  <p data-i18n="flowDisplayNote"></p>
+                </div>
+              </li>
+            </ol>
+            <div class="api-footnote">
+              <p data-i18n="apiExample"></p>
+              <p data-i18n="apiPrivacy"></p>
+            </div>
+          </div>
+        </details>
         <div id="dashboard" hidden>
           <section class="company-heading">
             <div>
@@ -206,18 +319,22 @@
                   <h3 data-i18n="trend"></h3>
                 </div>
                 <div class="chart-controls">
-                  <label for="metric" class="sr-only" data-i18n="metric"></label
-                  ><select id="metric">
-                    <option value="revenue" data-i18n="revenue"></option>
-                    <option
-                      value="operatingIncome"
-                      data-i18n="operatingIncome"
-                    ></option>
-                    <option
-                      value="netIncome"
-                      data-i18n="netIncome"
-                    ></option></select
-                  ><span class="unit" data-i18n="amountUnit"></span>
+                  <label
+                    for="metric"
+                    class="sr-only"
+                    data-i18n="metric"
+                  ></label>
+                  <div class="select-wrap">
+                    <select id="metric">
+                      <option value="revenue" data-i18n="revenue"></option>
+                      <option
+                        value="operatingIncome"
+                        data-i18n="operatingIncome"
+                      ></option>
+                      <option value="netIncome" data-i18n="netIncome"></option>
+                    </select>
+                  </div>
+                  <span class="unit" data-i18n="amountUnit"></span>
                 </div>
               </div>
               <div id="barChart" class="chart"></div>
