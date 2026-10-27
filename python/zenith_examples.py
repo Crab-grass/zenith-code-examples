@@ -2,11 +2,13 @@
 import argparse
 import csv
 import getpass
+import hashlib
 import json
 import math
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -15,9 +17,10 @@ from pathlib import Path
 
 BASE_URL = "https://api.zenithcode.net/stable"
 MODES = ("snapshot", "history", "financials", "full", "trend", "compare", "search", "statements",
-         "metrics", "peers")
-DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers")
-CSV_MODES = ("trend", "compare", "statements", "metrics", "peers")
+         "metrics", "peers", "dividends", "earnings")
+DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers", "dividends", "earnings")
+CSV_MODES = ("trend", "compare", "statements", "metrics", "peers", "dividends", "earnings")
+DEFAULT_LIMITS = {"peers": 10, "dividends": 40, "earnings": 200}
 DEMO_FILE = Path(__file__).resolve().parents[1] / "learning" / "demo-api.json"
 SYMBOL = re.compile(r"[0-9A-Z]{4,5}(?:\.T)?")
 CSV_FIELDS = ("symbol", "fiscalPeriod", "period", "accountingStandard", "fiscalPeriodDays",
@@ -29,6 +32,10 @@ METRIC_FIELDS = ("symbol", "fiscalPeriod", "period", "accountingStandard", "roe"
                  "priceDate", "closePrice", "per", "pbr", "dividendYield", "source", "docId")
 PEER_FIELDS = ("role", "symbol", "nameEn", "nameJa", "sector", "marketCap", "per", "pbr", "psr",
                "evToEbitda", "roe", "roa", "dividendYield", "changePctYtd", "marketCapRank", "sectorCount")
+DIVIDEND_FIELDS = ("symbol", "periodEndDate", "periodType", "dividendType", "forecastOrActual", "amount",
+                   "rawAmount", "exDividendDate", "paymentDate", "announcementDate", "dataSource")
+EARNINGS_FIELDS = ("symbol", "reportDate", "fiscalDate", "beforeAfterMarket", "actualEps", "estimateEps",
+                   "surpriseRate")
 STATEMENTS = (("incomeStatements", "/income-statement"),
               ("balanceSheets", "/balance-sheet-statement"),
               ("cashFlows", "/cash-flow-statement"))
@@ -75,6 +82,40 @@ def request_rows(path, params, api_key, opener=None):
     return data
 
 
+def cache_key(path, params):
+    """Same string in Python and JavaScript, so both can share one cache folder."""
+    query = urllib.parse.urlencode(sorted((k, str(v)) for k, v in params.items()))
+    return hashlib.sha256((path + "?" + query).encode("utf-8")).hexdigest()
+
+
+def cached(requester, folder, ttl_hours=24, stats=None):
+    """Reuse saved responses for identical requests to save quota.
+
+    The API key is not part of the key or the file. Errors are never cached.
+    Files contain API data: keep the folder private (output/ is ignored by Git).
+    """
+    stats = stats if stats is not None else {}
+
+    def get(path, params, api_key):
+        file = os.path.join(folder, cache_key(path, params) + ".json")
+        try:
+            with open(file, encoding="utf-8") as saved_file:
+                saved = json.load(saved_file)
+            if saved["path"] == path and time.time() - saved["savedAt"] < ttl_hours * 3600:
+                stats["reused"] = stats.get("reused", 0) + 1
+                return saved["rows"]
+        except (OSError, ValueError, KeyError, TypeError):
+            pass
+        rows = requester(path, params, api_key)
+        os.makedirs(folder, exist_ok=True)
+        with open(file, "w", encoding="utf-8") as saved_file:
+            json.dump({"path": path, "params": params, "savedAt": time.time(), "rows": rows},
+                      saved_file, ensure_ascii=False)
+        stats["requested"] = stats.get("requested", 0) + 1
+        return rows
+    return get
+
+
 def demo_requester(path, params, api_key=None):
     """Answer like the API from synthetic data. No network and no key."""
     data = json.loads(DEMO_FILE.read_text(encoding="utf-8"))
@@ -84,6 +125,10 @@ def demo_requester(path, params, api_key=None):
         return hits[:params["limit"]]
     if path not in data:
         raise ZenithError("Demo data covers %s only." % ", ".join(DEMO_MODES))
+    if path == "/earnings-calendar":
+        rows = [r for r in data[path] if (not params.get("from") or r["reportDate"] >= params["from"])
+                and (not params.get("to") or r["reportDate"] <= params["to"])]
+        return rows[:params["limit"]]
     if path == "/peers":
         rows = data[path].get(params["symbol"], [])
         return rows[:1 + params["limit"]] + rows[-1:] if len(rows) > params["limit"] + 2 else rows
@@ -146,10 +191,38 @@ def comparison_notes(companies):
     return common, notes
 
 
+def _date_range(start, end, max_days, label):
+    try:
+        first, last = date.fromisoformat(start), date.fromisoformat(end)
+    except (TypeError, ValueError):
+        raise ZenithError("%s requires --from and --to as YYYY-MM-DD." % label) from None
+    if first > last or (last - first).days > max_days:
+        raise ZenithError("For %s, choose an ordered range of at most %d days." % (label, max_days))
+
+
+def _codes(symbols):
+    codes = [code.strip() for code in (symbols or "").split(",") if code.strip()]
+    if not all(SYMBOL.fullmatch(code) for code in codes):
+        raise ZenithError("Use securities codes such as 7203 or 130A.")
+    return codes
+
+
 def run_example(mode, symbol, api_key, start=None, end=None, requester=request_rows,
-                symbols=None, years=5, query=None, limit=10):
+                symbols=None, years=5, query=None, limit=None):
     if mode not in MODES:
         raise ZenithError("Choose " + ", ".join(MODES[:-1]) + " or " + MODES[-1] + ".")
+    limit = DEFAULT_LIMITS.get(mode, 10) if limit is None else limit
+    if mode == "earnings":
+        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 500:
+            raise ZenithError("Earnings --limit must be between 1 and 500.")
+        params = {"limit": limit}
+        if start or end:
+            _date_range(start, end, 93, "earnings")
+            params.update({"from": start, "to": end})
+        codes = _codes(symbols)
+        rows = requester("/earnings-calendar", params, api_key)
+        return {"retrievedAt": datetime.now(timezone.utc).isoformat(), "symbols": codes or None,
+                "earnings": [r for r in rows if not codes or r.get("symbol") in codes]}
     if mode == "search":
         query = (query or "").strip()
         if not 2 <= len(query) <= 100:
@@ -157,11 +230,9 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
         return {"query": query, "retrievedAt": datetime.now(timezone.utc).isoformat(),
                 "companies": requester("/search-name", {"query": query, "limit": 10}, api_key)}
     if mode == "compare":
-        codes = [code.strip() for code in (symbols or "").split(",") if code.strip()]
+        codes = _codes(symbols)
         if not 2 <= len(codes) <= 4 or len(set(codes)) != len(codes):
             raise ZenithError("Compare requires 2 to 4 different codes, e.g. --symbols 7203,7267.")
-        if not all(SYMBOL.fullmatch(code) for code in codes):
-            raise ZenithError("Use securities codes such as 7203 or 130A.")
         result = {"symbols": codes, "retrievedAt": datetime.now(timezone.utc).isoformat()}
         companies = {code: margin_rows(requester("/income-statement", {
             "symbol": code, "period": "annual", "limit": 3,
@@ -187,6 +258,10 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
         if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 30:
             raise ZenithError("Peers --limit must be between 1 and 30.")
         result["peers"] = requester("/peers", {"symbol": symbol, "limit": limit}, api_key)
+    elif mode == "dividends":
+        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 100:
+            raise ZenithError("Dividends --limit must be between 1 and 100.")
+        result["dividends"] = requester("/dividends", {"symbol": symbol, "limit": limit}, api_key)
     elif mode == "trend":
         if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
             raise ZenithError("Trend --years must be between 1 and 10.")
@@ -194,12 +269,7 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
             "symbol": symbol, "period": "annual", "limit": years,
         }, api_key))
     elif mode == "history":
-        try:
-            first, last = date.fromisoformat(start), date.fromisoformat(end)
-        except (TypeError, ValueError):
-            raise ZenithError("History requires --from and --to as YYYY-MM-DD.") from None
-        if first > last or (last - first).days > 365:
-            raise ZenithError("For this example, choose an ordered range of at most 365 days.")
+        _date_range(start, end, 365, "history")
         result["dailyPrices"] = requester("/historical-price-eod", {
             "symbol": symbol, "from": start, "to": end,
         }, api_key)
@@ -245,6 +315,10 @@ def table_rows(result):
     """(fields, rows) for --csv. retrievedAt is kept on every row."""
     if "annualTrend" in result:
         fields, rows = CSV_FIELDS, result["annualTrend"]
+    elif "earnings" in result:
+        fields, rows = EARNINGS_FIELDS, result["earnings"]
+    elif "dividends" in result:
+        fields, rows = DIVIDEND_FIELDS, result["dividends"]
     elif "companies" in result and "symbols" in result:
         fields, rows = CSV_FIELDS, [r for company in result["companies"].values() for r in company]
     elif "annualMetrics" in result:
@@ -274,16 +348,21 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=MODES)
     parser.add_argument("--symbol", default="7203")
-    parser.add_argument("--symbols", help="compare: 2-4 codes separated by commas")
+    parser.add_argument("--symbols", help="compare: 2-4 codes; earnings: optional filter (comma separated)")
     parser.add_argument("--query", help="search: part of a Japanese or English company name")
     parser.add_argument("--demo", action="store_true",
                         help="search/trend/compare/statements with synthetic data; no key or network")
     parser.add_argument("--years", type=int,
                         help="trend/metrics (default 5), statements (default 3): 1-10 fiscal years")
-    parser.add_argument("--limit", type=int, default=10, help="peers: 1-30 peers, excluding the target and the sector median")
+    parser.add_argument("--limit", type=int,
+                        help="peers: 1-30 peers excluding target and median (default 10); "
+                             "dividends: 1-100 (default 40); earnings: 1-500 (default 200)")
+    parser.add_argument("--cache", metavar="DIR",
+                        help="reuse identical responses saved in DIR, e.g. output/cache (saves quota)")
+    parser.add_argument("--cache-hours", type=float, default=24, help="how long saved responses stay fresh")
     parser.add_argument("--from", dest="start")
     parser.add_argument("--to", dest="end")
-    parser.add_argument("--csv", help="trend/compare: also write a local CSV file")
+    parser.add_argument("--csv", help="also write a local CSV file (%s)" % ", ".join(CSV_MODES))
     args = parser.parse_args()
     if args.csv and args.mode not in CSV_MODES:
         parser.error("--csv is available for %s." % ", ".join(CSV_MODES))
@@ -303,10 +382,16 @@ def main():
                 raise ZenithError("Set ZENITH_API_KEY or run interactively to enter your key. "
                                   "To try without a key, add --demo.")
             print("Local/private use: do not publish API responses or API keys.", file=sys.stderr)
+        stats = {}
+        if args.cache:
+            requester = cached(requester, args.cache, args.cache_hours, stats)
         data = run_example(args.mode, args.symbol, key, args.start, args.end, requester,
                            symbols=args.symbols, years=args.years, query=args.query, limit=args.limit)
         if args.demo:
             data["demo"] = True
+        if args.cache:
+            print("Cache: %d reused, %d requested." % (stats.get("reused", 0), stats.get("requested", 0)),
+                  file=sys.stderr)
         if args.csv:
             write_csv(args.csv, *table_rows(data))
             print("Wrote %s. Keep it private." % args.csv, file=sys.stderr)

@@ -1,12 +1,14 @@
 // Local examples for Node.js 22+. No third-party dependencies.
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const BASE_URL = 'https://api.zenithcode.net/stable';
-export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers'];
-export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers'];
-export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers'];
+export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers', 'dividends', 'earnings'];
+export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings'];
+export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings'];
+const DEFAULT_LIMITS = { peers: 10, dividends: 40, earnings: 200 };
 const DEMO_FILE = fileURLToPath(new URL('../learning/demo-api.json', import.meta.url));
 const SYMBOL = /^[0-9A-Z]{4,5}(?:\.T)?$/;
 export const CSV_FIELDS = ['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'fiscalPeriodDays',
@@ -17,6 +19,9 @@ export const METRIC_FIELDS = ['symbol', 'fiscalPeriod', 'period', 'accountingSta
   'priceDate', 'closePrice', 'per', 'pbr', 'dividendYield', 'source', 'docId'];
 export const PEER_FIELDS = ['role', 'symbol', 'nameEn', 'nameJa', 'sector', 'marketCap', 'per', 'pbr', 'psr',
   'evToEbitda', 'roe', 'roa', 'dividendYield', 'changePctYtd', 'marketCapRank', 'sectorCount'];
+export const DIVIDEND_FIELDS = ['symbol', 'periodEndDate', 'periodType', 'dividendType', 'forecastOrActual', 'amount',
+  'rawAmount', 'exDividendDate', 'paymentDate', 'announcementDate', 'dataSource'];
+export const EARNINGS_FIELDS = ['symbol', 'reportDate', 'fiscalDate', 'beforeAfterMarket', 'actualEps', 'estimateEps', 'surpriseRate'];
 const STATEMENTS = [['incomeStatements', '/income-statement'], ['balanceSheets', '/balance-sheet-statement'], ['cashFlows', '/cash-flow-statement']];
 const ROW_META = new Set(['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'updatedAt', 'provenance', 'fiscalPeriodDays']);
 
@@ -58,6 +63,32 @@ function parseDate(value) {
   return Number.isFinite(date) && new Date(date).toISOString().slice(0, 10) === value ? date : NaN;
 }
 
+// Same string in Python and JavaScript, so both can share one cache folder.
+export function cacheKey(path, params) {
+  const query = new URLSearchParams(Object.entries(params).map(([k, v]) => [k, String(v)]).sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0)));
+  return createHash('sha256').update(`${path}?${query}`).digest('hex');
+}
+
+// Reuse saved responses for identical requests to save quota. The API key is not
+// part of the key or the file. Errors are never cached. Keep the folder private.
+export function cached(requester, folder, ttlHours = 24, stats = {}) {
+  return async (path, params, apiKey) => {
+    const file = join(folder, `${cacheKey(path, params)}.json`);
+    try {
+      const saved = JSON.parse(readFileSync(file, 'utf8'));
+      if (saved.path === path && Date.now() / 1000 - saved.savedAt < ttlHours * 3600) {
+        stats.reused = (stats.reused ?? 0) + 1;
+        return saved.rows;
+      }
+    } catch { /* not saved yet, unreadable or expired */ }
+    const rows = await requester(path, params, apiKey);
+    mkdirSync(folder, { recursive: true });
+    writeFileSync(file, JSON.stringify({ path, params, savedAt: Date.now() / 1000, rows }));
+    stats.requested = (stats.requested ?? 0) + 1;
+    return rows;
+  };
+}
+
 // Answer like the API from synthetic data. No network and no key.
 export async function demoRequester(path, params) {
   const data = JSON.parse(readFileSync(DEMO_FILE, 'utf8'));
@@ -66,6 +97,9 @@ export async function demoRequester(path, params) {
     return data[path].filter(h => h.nameEn.toLowerCase().includes(query) || h.nameJa.toLowerCase().includes(query)).slice(0, params.limit);
   }
   if (!(path in data)) throw new Error(`Demo data covers ${DEMO_MODES.join(', ')} only.`);
+  if (path === '/earnings-calendar') {
+    return data[path].filter(r => (!params.from || r.reportDate >= params.from) && (!params.to || r.reportDate <= params.to)).slice(0, params.limit);
+  }
   if (path === '/peers') {
     const rows = data[path][params.symbol] ?? [];
     return rows.length > params.limit + 2 ? [...rows.slice(0, 1 + params.limit), rows.at(-1)] : rows;
@@ -123,19 +157,43 @@ export function comparisonNotes(companies) {
   return { common, notes };
 }
 
+function checkRange(start, end, maxDays, label) {
+  const first = parseDate(start), last = parseDate(end);
+  if (!Number.isFinite(first) || !Number.isFinite(last)) throw new Error(`${label} requires --from and --to as YYYY-MM-DD.`);
+  if (first > last || last - first > maxDays * 86400000) throw new Error(`For ${label}, choose an ordered range of at most ${maxDays} days.`);
+}
+
+function codesFrom(symbols) {
+  const codes = (symbols ?? '').split(',').map(code => code.trim()).filter(Boolean);
+  if (!codes.every(code => SYMBOL.test(code))) throw new Error('Use securities codes such as 7203 or 130A.');
+  return codes;
+}
+
 export async function runExample(mode, symbol, apiKey, start, end, requester = requestRows, options = {}) {
   if (!MODES.includes(mode)) throw new Error(`Choose ${MODES.slice(0, -1).join(', ')} or ${MODES.at(-1)}.`);
+  const limit = options.limit ?? DEFAULT_LIMITS[mode] ?? 10;
+  if (mode === 'earnings') {
+    if (!Number.isInteger(limit) || limit < 1 || limit > 500) throw new Error('Earnings --limit must be between 1 and 500.');
+    const params = { limit };
+    if (start || end) {
+      checkRange(start, end, 93, 'earnings');
+      Object.assign(params, { from: start, to: end });
+    }
+    const codes = codesFrom(options.symbols);
+    const rows = await requester('/earnings-calendar', params, apiKey);
+    return { retrievedAt: new Date().toISOString(), symbols: codes.length ? codes : null,
+      earnings: rows.filter(r => !codes.length || codes.includes(r.symbol)) };
+  }
   if (mode === 'search') {
     const query = (options.query ?? '').trim();
     if (query.length < 2 || query.length > 100) throw new Error('Search requires --query with 2 to 100 characters, e.g. --query Toyota.');
     return { query, retrievedAt: new Date().toISOString(), companies: await requester('/search-name', { query, limit: 10 }, apiKey) };
   }
   if (mode === 'compare') {
-    const codes = (options.symbols ?? '').split(',').map(code => code.trim()).filter(Boolean);
+    const codes = codesFrom(options.symbols);
     if (codes.length < 2 || codes.length > 4 || new Set(codes).size !== codes.length) {
       throw new Error('Compare requires 2 to 4 different codes, e.g. --symbols 7203,7267.');
     }
-    if (!codes.every(code => SYMBOL.test(code))) throw new Error('Use securities codes such as 7203 or 130A.');
     const result = { symbols: codes, retrievedAt: new Date().toISOString(), companies: {} };
     for (const code of codes) {
       result.companies[code] = marginRows(await requester('/income-statement', { symbol: code, period: 'annual', limit: 3 }, apiKey));
@@ -157,8 +215,10 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
     const years = options.years ?? 5;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Metrics --years must be between 1 and 10.');
     result.annualMetrics = await requester('/key-metrics', { symbol, period: 'annual', limit: years }, apiKey);
+  } else if (mode === 'dividends') {
+    if (!Number.isInteger(limit) || limit < 1 || limit > 100) throw new Error('Dividends --limit must be between 1 and 100.');
+    result.dividends = await requester('/dividends', { symbol, limit }, apiKey);
   } else if (mode === 'peers') {
-    const limit = options.limit ?? 10;
     if (!Number.isInteger(limit) || limit < 1 || limit > 30) throw new Error('Peers --limit must be between 1 and 30.');
     result.peers = await requester('/peers', { symbol, limit }, apiKey);
   } else if (mode === 'trend') {
@@ -166,9 +226,7 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Trend --years must be between 1 and 10.');
     result.annualTrend = marginRows(await requester('/income-statement', { symbol, period: 'annual', limit: years }, apiKey));
   } else if (mode === 'history') {
-    const first = parseDate(start), last = parseDate(end);
-    if (!Number.isFinite(first) || !Number.isFinite(last)) throw new Error('History requires --from and --to as YYYY-MM-DD.');
-    if (first > last || last - first > 365 * 86400000) throw new Error('For this example, choose an ordered range of at most 365 days.');
+    checkRange(start, end, 365, 'history');
     result.dailyPrices = await requester('/historical-price-eod', { symbol, from: start, to: end }, apiKey);
   } else if (mode === 'full') {
     result.asReportedStatements = await requester('/financial-statement-full', { symbol, quarter: 'FY' }, apiKey);
@@ -208,6 +266,8 @@ export function statementsTable(result) {
 export function tableRows(result) {
   let fields, rows;
   if (result.annualTrend) [fields, rows] = [CSV_FIELDS, result.annualTrend];
+  else if (result.earnings) [fields, rows] = [EARNINGS_FIELDS, result.earnings];
+  else if (result.dividends) [fields, rows] = [DIVIDEND_FIELDS, result.dividends];
   else if (result.companies && result.symbols) [fields, rows] = [CSV_FIELDS, Object.values(result.companies).flat()];
   else if (result.annualMetrics) [fields, rows] = [METRIC_FIELDS, result.annualMetrics.map(r => flatten(r, METRIC_FIELDS))];
   else if (result.peers) [fields, rows] = [PEER_FIELDS, result.peers.map(r => flatten(r, PEER_FIELDS))];
@@ -230,7 +290,7 @@ export function toCsv({ fields, rows }) {
 
 async function main(args) {
   if (!args.length || args.includes('--help')) {
-    console.log(`node javascript/zenith-examples.mjs <${MODES.join('|')}> [--symbol 7203] [--from YYYY-MM-DD --to YYYY-MM-DD] [--years 5] [--symbols 7203,7267] [--query Toyota] [--limit 10] [--csv out.csv] [--demo]`);
+    console.log(`node javascript/zenith-examples.mjs <${MODES.join('|')}> [--symbol 7203] [--from YYYY-MM-DD --to YYYY-MM-DD] [--years 5] [--symbols 7203,7267] [--query Toyota] [--limit 10] [--csv out.csv] [--cache output/cache] [--cache-hours 24] [--demo]`);
     return;
   }
   const [mode, ...rest] = args;
@@ -238,7 +298,7 @@ async function main(args) {
   const pairs = rest.filter(arg => arg !== '--demo');
   const options = {};
   for (let i = 0; i < pairs.length; i += 2) {
-    if (!['--symbol', '--symbols', '--query', '--years', '--limit', '--from', '--to', '--csv'].includes(pairs[i]) || !pairs[i + 1] || pairs[i + 1].startsWith('--') || pairs[i] in options) {
+    if (!['--symbol', '--symbols', '--query', '--years', '--limit', '--from', '--to', '--csv', '--cache', '--cache-hours'].includes(pairs[i]) || !pairs[i + 1] || pairs[i + 1].startsWith('--') || pairs[i] in options) {
       throw new Error('Invalid arguments. Run with --help.');
     }
     options[pairs[i]] = pairs[i + 1];
@@ -256,9 +316,12 @@ async function main(args) {
     if (!key?.trim()) throw new Error('Set ZENITH_API_KEY in your environment. To try without a key, add --demo.');
     console.error('Local/private use: do not publish API responses or API keys.');
   }
+  const stats = {};
+  if (options['--cache']) requester = cached(requester, options['--cache'], Number(options['--cache-hours'] ?? 24), stats);
   const data = await runExample(mode, options['--symbol'] ?? '7203', key, options['--from'], options['--to'], requester,
     { symbols: options['--symbols'], years, query: options['--query'], limit });
   if (demo) data.demo = true;
+  if (options['--cache']) console.error(`Cache: ${stats.reused ?? 0} reused, ${stats.requested ?? 0} requested.`);
   if (options['--csv']) {
     mkdirSync(dirname(options['--csv']), { recursive: true });
     writeFileSync(options['--csv'], toCsv(tableRows(data)));
