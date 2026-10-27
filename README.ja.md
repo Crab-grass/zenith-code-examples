@@ -72,6 +72,8 @@ PythonとJavaScriptは同じコマンドに対応します。
 | `history` | 指定期間の日足四本値・出来高・調整後終値 | 1回／10 |
 | `financials` | 出典付きの通期損益計算書、最大3期 | 1回／1 |
 | `full` | 直近通期の全科目財務・階層 | 1回／10 |
+| `trend` | 通期の売上高・営業利益の推移と営業利益率（計算値とAPIの値を照合）、最大10期 | 1回／1 |
+| `compare` | 2〜4社の直近3通期を並べ、共通の決算期と、会計基準・期間の長さの違いを表示 | 社数分／社数分 |
 
 *2026年10月25日の公開OpenAPI仕様で確認。APIトークンはサービスの利用枠の単位で、LLMのトークンとは別です。最新のプラン・上限が適用されます。結果が0件なら空配列のまま返します。実行時は契約プランの利用枠を消費する場合があります。追加トークンの購入や自動リトライは行いません。
 
@@ -81,7 +83,11 @@ PythonとJavaScriptは同じコマンドに対応します。
 python3 python/zenith_examples.py financials --symbol 6758
 python3 python/zenith_examples.py history --symbol 7203 --from 2026-09-01 --to 2026-09-30
 python3 python/zenith_examples.py full --symbol 7203
+python3 python/zenith_examples.py trend --symbol 7203 --years 5 --csv output/trend-7203.csv
+python3 python/zenith_examples.py compare --symbols 7203,7267 --csv output/compare.csv
 ```
+
+`trend`と`compare`は、利益率を円単位の金額から計算し直し、APIの`operatingMargin`と照合します（`match`／`mismatch`／`apiMissing`／`notCalculated`など）。欠損を0で埋めたり、決算期が違う会社どうしを勝手に組み合わせたりはしません。`compare`は、会計基準や決算期間の長さが違う場合に`notes`で知らせます。`--csv`を付けると、取得日時と書類IDを行ごとに残したCSV（UTF-8・BOM付き）も保存します。`output/`はGitの追跡対象外です。
 
 環境変数`ZENITH_API_KEY`がある場合は、対話入力せずに利用します。
 
@@ -101,10 +107,16 @@ node javascript/zenith-examples.mjs snapshot --symbol 7203
 node javascript/zenith-examples.mjs financials --symbol 6758
 node javascript/zenith-examples.mjs history --symbol 7203 --from 2026-09-01 --to 2026-09-30
 node javascript/zenith-examples.mjs full --symbol 7203
+node javascript/zenith-examples.mjs trend --symbol 7203 --years 5 --csv output/trend-7203.csv
+node javascript/zenith-examples.mjs compare --symbols 7203,7267
 unset ZENITH_API_KEY
 ```
 
 ローカル・サーバー側で使うコードです。ブラウザに配るJavaScriptへAPIキーを埋め込まないでください。他のシェルでは、その環境の安全な設定方法で`ZENITH_API_KEY`を設定してください。`.env`はGitの追跡対象外ですが、このサンプルは**`.env`を自動で読み込みません**。
+
+## Qiitaの連載と実践コード
+
+TDnet解析・EDINET解析・ZENITH Code実践の各記事と、このリポジトリのコードの対応を[連載とコードの対応表](docs/series.ja.md)にまとめています。実践①・②の記事に載せたPythonコードは[practice](practice/README.ja.md)フォルダにあり、記事を開かなくても実行できます。
 
 ## データを読むとき
 

@@ -7,3 +7,7 @@ node_modules/
 output/
 *.log
 .DS_Store
+# Practice outputs contain API data; keep them local.
+practice/*.json
+practice/*.png
+practice/*.csv

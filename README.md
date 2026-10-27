@@ -72,6 +72,8 @@ Both implementations support the same commands:
 | `history` | Daily OHLCV and adjusted close for a specified range | 1 / 10 |
 | `financials` | Up to three annual income statements with provenance | 1 / 1 |
 | `full` | Latest full-year as-reported statements, including hierarchy | 1 / 10 |
+| `trend` | Annual revenue, operating income and operating margin (recalculated and checked against the API), up to 10 years | 1 / 1 |
+| `compare` | Latest three fiscal years for 2–4 companies, with shared periods and differing standards or period lengths | 1 per company / 1 per company |
 
 *Checked against the public OpenAPI specification on 2026-10-25. API tokens are service quota units, not LLM tokens. Current plan permissions and limits apply. An empty result is kept as an empty array, not invented data. API usage may consume your plan's included quota. These examples do not purchase extra tokens or retry automatically.
 
@@ -81,7 +83,11 @@ Both implementations support the same commands:
 python3 python/zenith_examples.py financials --symbol 6758
 python3 python/zenith_examples.py history --symbol 7203 --from 2026-09-01 --to 2026-09-30
 python3 python/zenith_examples.py full --symbol 7203
+python3 python/zenith_examples.py trend --symbol 7203 --years 5 --csv output/trend-7203.csv
+python3 python/zenith_examples.py compare --symbols 7203,7267 --csv output/compare.csv
 ```
+
+`trend` and `compare` recalculate operating margin from JPY amounts and check it against the API's `operatingMargin` (`match`, `mismatch`, `apiMissing`, `notCalculated` and so on). They never fill gaps with zero or pair companies whose fiscal periods differ. `compare` adds `notes` when accounting standards or period lengths differ. `--csv` also writes a UTF-8 (BOM) CSV with retrieval time and document ID on every row. `output/` is ignored by Git.
 
 If `ZENITH_API_KEY` is already set, the script uses it instead of prompting.
 
@@ -101,10 +107,16 @@ node javascript/zenith-examples.mjs snapshot --symbol 7203
 node javascript/zenith-examples.mjs financials --symbol 6758
 node javascript/zenith-examples.mjs history --symbol 7203 --from 2026-09-01 --to 2026-09-30
 node javascript/zenith-examples.mjs full --symbol 7203
+node javascript/zenith-examples.mjs trend --symbol 7203 --years 5 --csv output/trend-7203.csv
+node javascript/zenith-examples.mjs compare --symbols 7203,7267
 unset ZENITH_API_KEY
 ```
 
 Use these as local/server-side examples. Do not embed your API key in browser JavaScript. On other shells, set `ZENITH_API_KEY` using your environment's secure configuration. `.env` files are ignored by Git but are **not automatically loaded** by these scripts.
+
+## Qiita series and practice code
+
+The [article-to-code map](docs/series.md) links each Japanese Qiita article (TDnet analysis, EDINET analysis and ZENITH Code practice) to the code here. The Python programs from practice lessons 1–2 are in the [practice](practice/README.md) folder and run without the articles.
 
 ## Understand the data
 
