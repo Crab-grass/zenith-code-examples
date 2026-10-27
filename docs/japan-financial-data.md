@@ -63,6 +63,10 @@ ZENITH Code combines releases and statutory filings. Each row has `provenance` w
 
 Current data is not a point-in-time dataset. For backtests, check publication timing and corrections before assuming a value was known on a given date.
 
+## Sectors
+
+Japanese listed companies are classified into the **33 Tokyo Stock Exchange sectors** (4-digit codes such as `3700`, transportation equipment). `peers` compares a company with same-sector companies of similar size, and `benchmark` places its PER, PBR, ROE and growth within the sector quartiles. Sector statistics exclude outliers such as a negative PER, so `benchmark` marks such company values instead of ranking them.
+
 ## Units, dates and currency
 
 - Amounts are **full yen** (not thousands or millions of yen).

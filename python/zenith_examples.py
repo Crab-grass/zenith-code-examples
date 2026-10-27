@@ -17,9 +17,11 @@ from pathlib import Path
 
 BASE_URL = "https://api.zenithcode.net/stable"
 MODES = ("snapshot", "history", "financials", "full", "trend", "compare", "search", "statements",
-         "metrics", "peers", "dividends", "earnings", "quarters")
-DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers", "dividends", "earnings", "quarters")
-CSV_MODES = ("trend", "compare", "statements", "metrics", "peers", "dividends", "earnings", "quarters")
+         "metrics", "peers", "dividends", "earnings", "quarters", "health", "benchmark")
+DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers", "dividends", "earnings", "quarters",
+              "health", "benchmark")
+CSV_MODES = ("trend", "compare", "statements", "metrics", "peers", "dividends", "earnings", "quarters",
+             "health", "benchmark")
 DEFAULT_LIMITS = {"peers": 10, "dividends": 40, "earnings": 200}
 DEMO_FILE = Path(__file__).resolve().parents[1] / "learning" / "demo-api.json"
 SYMBOL = re.compile(r"[0-9A-Z]{4,5}(?:\.T)?")
@@ -41,6 +43,19 @@ QUARTER_FIELDS = ("symbol", "fiscalYearEnd", "quarter", "quarterEnd", "accountin
                   "revenue", "operatingIncome", "netIncome", "operatingMargin",
                   "cumulativeRevenue", "cumulativeOperatingIncome", "cumulativeNetIncome",
                   "status", "docId", "previousDocId")
+HEALTH_FIELDS = ("symbol", "fiscalPeriod", "accountingStandard", "totalAssets", "ownersEquity", "equityRatio",
+                 "apiEquityRatio", "equityRatioCheck", "currentRatio", "interestBearingDebt",
+                 "netInterestBearingDebt", "debtToEquity", "cashAndCashEquivalents", "operatingCashFlow",
+                 "investingCashFlow", "freeCashFlow", "flags", "balanceSheetDocId", "cashFlowDocId")
+# (metric, where the company value comes from, outlier rule used by /industry-benchmarks)
+BENCHMARK_METRICS = (("per", "profile", lambda v: v <= 0), ("pbr", "profile", lambda v: v <= 0),
+                     ("dividendYield", "profile", lambda v: v <= 0 or v > 1),
+                     ("marketCap", "profile", lambda v: v <= 0),
+                     ("roe", "keyMetrics", lambda v: v > 1), ("roa", "keyMetrics", lambda v: v > 1),
+                     ("revenueCagr3y", "keyMetricsLatest", lambda v: False),
+                     ("epsCagr3y", "keyMetricsLatest", lambda v: False))
+BENCHMARK_FIELDS = ("symbol", "sector", "metric", "value", "basis", "sectorQ1", "sectorMedian", "sectorQ3",
+                    "sectorCount", "position")
 STATEMENTS = (("incomeStatements", "/income-statement"),
               ("balanceSheets", "/balance-sheet-statement"),
               ("cashFlows", "/cash-flow-statement"))
@@ -134,6 +149,8 @@ def demo_requester(path, params, api_key=None):
         rows = [r for r in data[path] if (not params.get("from") or r["reportDate"] >= params["from"])
                 and (not params.get("to") or r["reportDate"] <= params["to"])]
         return rows[:params["limit"]]
+    if path == "/industry-benchmarks":
+        return data[path].get(params.get("sector", "ALL"), [])
     if path == "/peers":
         rows = data[path].get(params["symbol"], [])
         return rows[:1 + params["limit"]] + rows[-1:] if len(rows) > params["limit"] + 2 else rows
@@ -142,7 +159,7 @@ def demo_requester(path, params, api_key=None):
         rows = [r for r in rows if r.get("period") == "FY"]
     elif params.get("period") == "quarter":
         rows = [r for r in rows if str(r.get("period", "")).startswith("Q")]
-    return rows[:params["limit"]]
+    return rows[:params.get("limit", len(rows))]
 
 
 def _number(value):
@@ -240,6 +257,90 @@ def standalone_quarters(rows):
     return result
 
 
+def _ratio(top, bottom):
+    return top / bottom if _number(top) and _number(bottom) and bottom > 0 else None
+
+
+def health_rows(balance_sheets, cash_flows):
+    """Balance-sheet strength and cash generation by fiscal year, oldest first.
+
+    Ratios are recalculated from yen amounts; the API equity ratio is compared,
+    not overwritten. `flags` only describes the numbers (for example negative
+    free cash flow); it is not a rating.
+    """
+    flows = {r.get("fiscalPeriod"): r for r in cash_flows}
+    result = []
+    for bs in sorted(balance_sheets, key=lambda r: str(r.get("fiscalPeriod") or "")):
+        cf = flows.get(bs.get("fiscalPeriod"), {})
+        equity, assets = bs.get("ownersEquity"), bs.get("totalAssets")
+        ratio, api = _ratio(equity, assets), bs.get("equityRatio")
+        if ratio is None or not _number(api):
+            check = "notChecked"
+        else:
+            check = "match" if math.isclose(ratio, api, rel_tol=1e-6, abs_tol=1e-9) else "mismatch"
+        ocf, icf = cf.get("operatingCashFlow"), cf.get("investingCashFlow")
+        fcf = cf.get("freeCashFlow")
+        if fcf is None and _number(ocf) and _number(icf):
+            fcf = ocf + icf
+        flags = []
+        if _number(equity) and equity <= 0:
+            flags.append("nonPositiveEquity")
+        if _number(ocf) and ocf < 0:
+            flags.append("negativeOperatingCashFlow")
+        if _number(fcf) and fcf < 0:
+            flags.append("negativeFreeCashFlow")
+        if not cf:
+            flags.append("cashFlowMissing")
+        result.append({
+            "symbol": bs.get("symbol"), "fiscalPeriod": bs.get("fiscalPeriod"),
+            "accountingStandard": bs.get("accountingStandard"),
+            "totalAssets": assets, "ownersEquity": equity, "equityRatio": ratio,
+            "apiEquityRatio": api, "equityRatioCheck": check,
+            "currentRatio": _ratio(bs.get("totalCurrentAssets"), bs.get("totalCurrentLiabilities")),
+            "interestBearingDebt": bs.get("interestBearingDebt"),
+            "netInterestBearingDebt": bs.get("netInterestBearingDebt"),
+            "debtToEquity": _ratio(bs.get("interestBearingDebt"), equity),
+            "cashAndCashEquivalents": bs.get("cashAndCashEquivalents"),
+            "operatingCashFlow": ocf, "investingCashFlow": icf, "freeCashFlow": fcf,
+            "flags": ";".join(flags),
+            "balanceSheetDocId": (bs.get("provenance") or {}).get("docId"),
+            "cashFlowDocId": (cf.get("provenance") or {}).get("docId"),
+        })
+    return result
+
+
+def benchmark_rows(symbol, profile, key_metrics, latest, benchmarks):
+    """Place the company within its TSE 33-sector quartiles, metric by metric."""
+    sector = profile.get("sector")
+    bench = next((b for b in benchmarks if b.get("sector") == sector), {})
+    sources = {"profile": (profile, "price date %s" % profile.get("priceDate")),
+               "keyMetrics": (key_metrics, "fiscal period %s" % key_metrics.get("fiscalPeriod")),
+               "keyMetricsLatest": (latest, "latest annual, updated %s" % latest.get("updatedAt"))}
+    rows = []
+    for metric, source, outlier in BENCHMARK_METRICS:
+        row, basis = sources[source]
+        value = row.get(metric)
+        q1, median, q3 = (bench.get(metric + part) for part in ("Q1", "Median", "Q3"))
+        if not _number(value):
+            position = "noValue"
+        elif outlier(value):
+            position = "excludedLikeBenchmark"  # the sector statistics drop such values too
+        elif not all(_number(v) for v in (q1, median, q3)):
+            position = "noBenchmark"
+        elif value < q1:
+            position = "belowQ1"
+        elif value < median:
+            position = "Q1toMedian"
+        elif value <= q3:
+            position = "medianToQ3"
+        else:
+            position = "aboveQ3"
+        rows.append({"symbol": symbol, "sector": sector, "metric": metric, "value": value, "basis": basis,
+                     "sectorQ1": q1, "sectorMedian": median, "sectorQ3": q3,
+                     "sectorCount": bench.get(metric + "Count"), "position": position})
+    return rows
+
+
 def comparison_notes(companies):
     """Explain why rows may not be comparable instead of silently pairing them."""
     periods = [{r["fiscalPeriod"] for r in rows} for rows in companies.values()]
@@ -329,6 +430,22 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
         if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 30:
             raise ZenithError("Peers --limit must be between 1 and 30.")
         result["peers"] = requester("/peers", {"symbol": symbol, "limit": limit}, api_key)
+    elif mode == "health":
+        if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
+            raise ZenithError("Health --years must be between 1 and 10.")
+        params = {"symbol": symbol, "period": "annual", "limit": years}
+        result["health"] = health_rows(requester("/balance-sheet-statement", params, api_key),
+                                       requester("/cash-flow-statement", params, api_key))
+    elif mode == "benchmark":
+        profile = (requester("/profile", {"symbol": symbol}, api_key) or [{}])[0]
+        if not profile.get("sector"):
+            raise ZenithError("No TSE sector for this code (for example an ETF); benchmark needs one.")
+        key_metrics = (requester("/key-metrics", {"symbol": symbol, "period": "annual", "limit": 1}, api_key) or [{}])[0]
+        latest = (requester("/key-metrics-latest", {"symbol": symbol}, api_key) or [{}])[0]
+        benchmarks = requester("/industry-benchmarks", {"sector": profile["sector"]}, api_key)
+        result.update({"sector": profile["sector"], "sectorName": next(
+            (b.get("sectorEn") for b in benchmarks if b.get("sector") == profile["sector"]), None)})
+        result["benchmark"] = benchmark_rows(symbol, profile, key_metrics, latest, benchmarks)
     elif mode == "quarters":
         if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
             raise ZenithError("Quarters --years must be between 1 and 10.")
@@ -394,6 +511,10 @@ def table_rows(result):
         fields, rows = CSV_FIELDS, result["annualTrend"]
     elif "earnings" in result:
         fields, rows = EARNINGS_FIELDS, result["earnings"]
+    elif "health" in result:
+        fields, rows = HEALTH_FIELDS, result["health"]
+    elif "benchmark" in result:
+        fields, rows = BENCHMARK_FIELDS, result["benchmark"]
     elif "quarters" in result:
         fields, rows = QUARTER_FIELDS, result["quarters"]
     elif "dividends" in result:

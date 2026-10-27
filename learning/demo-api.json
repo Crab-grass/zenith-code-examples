@@ -501,7 +501,11 @@
     "netAssets": 677376000000,
     "ownersEquity": 677376000000,
     "cashAndCashEquivalents": 138240000000,
-    "equityRatio": 0.42
+    "equityRatio": 0.42,
+    "totalCurrentAssets": 725760000000,
+    "totalCurrentLiabilities": 483840000000,
+    "interestBearingDebt": 322560000000,
+    "netInterestBearingDebt": 184320000000
    },
    {
     "symbol": "DEMOA",
@@ -518,7 +522,11 @@
     "netAssets": 625086000000,
     "ownersEquity": 625086000000,
     "cashAndCashEquivalents": 130680000000,
-    "equityRatio": 0.41
+    "equityRatio": 0.41,
+    "totalCurrentAssets": 686070000000,
+    "totalCurrentLiabilities": 457380000000,
+    "interestBearingDebt": 304920000000,
+    "netInterestBearingDebt": 174240000000
    },
    {
     "symbol": "DEMOA",
@@ -535,7 +543,11 @@
     "netAssets": 574560000000,
     "ownersEquity": 574560000000,
     "cashAndCashEquivalents": 123120000000,
-    "equityRatio": 0.4
+    "equityRatio": 0.4,
+    "totalCurrentAssets": 646380000000,
+    "totalCurrentLiabilities": 430920000000,
+    "interestBearingDebt": 287280000000,
+    "netInterestBearingDebt": 164160000000
    },
    {
     "symbol": "DEMOA",
@@ -552,7 +564,11 @@
     "netAssets": 525798000000,
     "ownersEquity": 525798000000,
     "cashAndCashEquivalents": 115560000000,
-    "equityRatio": 0.39
+    "equityRatio": 0.39,
+    "totalCurrentAssets": 606690000000,
+    "totalCurrentLiabilities": 404460000000,
+    "interestBearingDebt": 269640000000,
+    "netInterestBearingDebt": 154080000000
    },
    {
     "symbol": "DEMOA",
@@ -569,7 +585,11 @@
     "netAssets": 478800000000,
     "ownersEquity": 478800000000,
     "cashAndCashEquivalents": 108000000000,
-    "equityRatio": 0.38
+    "equityRatio": 0.38,
+    "totalCurrentAssets": 567000000000,
+    "totalCurrentLiabilities": 378000000000,
+    "interestBearingDebt": 252000000000,
+    "netInterestBearingDebt": 144000000000
    }
   ],
   "DEMOB": [
@@ -588,7 +608,11 @@
     "netAssets": 225791999999,
     "ownersEquity": 225791999999,
     "cashAndCashEquivalents": 46080000000,
-    "equityRatio": 0.4199999999989211
+    "equityRatio": 0.4199999999989211,
+    "totalCurrentAssets": 241920000000,
+    "totalCurrentLiabilities": 161280000000,
+    "interestBearingDebt": 107520000000,
+    "netInterestBearingDebt": 61440000000
    },
    {
     "symbol": "DEMOB",
@@ -605,7 +629,11 @@
     "netAssets": 208361999999,
     "ownersEquity": 208361999999,
     "cashAndCashEquivalents": 43560000000,
-    "equityRatio": 0.409999999998839
+    "equityRatio": 0.409999999998839,
+    "totalCurrentAssets": 228690000000,
+    "totalCurrentLiabilities": 152460000000,
+    "interestBearingDebt": 101640000000,
+    "netInterestBearingDebt": 58080000000
    },
    {
     "symbol": "DEMOB",
@@ -622,7 +650,11 @@
     "netAssets": 191520000000,
     "ownersEquity": 191520000000,
     "cashAndCashEquivalents": 41040000000,
-    "equityRatio": 0.4
+    "equityRatio": 0.4,
+    "totalCurrentAssets": 215460000000,
+    "totalCurrentLiabilities": 143640000000,
+    "interestBearingDebt": 95760000000,
+    "netInterestBearingDebt": 54720000000
    },
    {
     "symbol": "DEMOB",
@@ -639,7 +671,11 @@
     "netAssets": 175266000000,
     "ownersEquity": 175266000000,
     "cashAndCashEquivalents": 38520000000,
-    "equityRatio": 0.39
+    "equityRatio": 0.39,
+    "totalCurrentAssets": 202230000000,
+    "totalCurrentLiabilities": 134820000000,
+    "interestBearingDebt": 89880000000,
+    "netInterestBearingDebt": 51360000000
    },
    {
     "symbol": "DEMOB",
@@ -656,7 +692,11 @@
     "netAssets": 159600000000,
     "ownersEquity": 159600000000,
     "cashAndCashEquivalents": 36000000000,
-    "equityRatio": 0.38
+    "equityRatio": 0.38,
+    "totalCurrentAssets": 189000000000,
+    "totalCurrentLiabilities": 126000000000,
+    "interestBearingDebt": 84000000000,
+    "netInterestBearingDebt": 48000000000
    }
   ],
   "DEMOC": [
@@ -675,7 +715,11 @@
     "netAssets": 90552000000,
     "ownersEquity": 90552000000,
     "cashAndCashEquivalents": 18480000000,
-    "equityRatio": 0.42
+    "equityRatio": 0.42,
+    "totalCurrentAssets": 97020000000,
+    "totalCurrentLiabilities": 64680000000,
+    "interestBearingDebt": 43120000000,
+    "netInterestBearingDebt": 24640000000
    },
    {
     "symbol": "DEMOC",
@@ -692,7 +736,11 @@
     "netAssets": 83230000000,
     "ownersEquity": 83230000000,
     "cashAndCashEquivalents": 17400000000,
-    "equityRatio": 0.41
+    "equityRatio": 0.41,
+    "totalCurrentAssets": 91350000000,
+    "totalCurrentLiabilities": 60900000000,
+    "interestBearingDebt": 40600000000,
+    "netInterestBearingDebt": 23200000000
    },
    {
     "symbol": "DEMOC",
@@ -709,7 +757,11 @@
     "netAssets": 76720000000,
     "ownersEquity": 76720000000,
     "cashAndCashEquivalents": 16440000000,
-    "equityRatio": 0.4
+    "equityRatio": 0.4,
+    "totalCurrentAssets": 86310000000,
+    "totalCurrentLiabilities": 57540000000,
+    "interestBearingDebt": 38360000000,
+    "netInterestBearingDebt": 21920000000
    },
    {
     "symbol": "DEMOC",
@@ -726,7 +778,11 @@
     "netAssets": 69888000000,
     "ownersEquity": 69888000000,
     "cashAndCashEquivalents": 15360000000,
-    "equityRatio": 0.39
+    "equityRatio": 0.39,
+    "totalCurrentAssets": 80640000000,
+    "totalCurrentLiabilities": 53760000000,
+    "interestBearingDebt": 35840000000,
+    "netInterestBearingDebt": 20480000000
    },
    {
     "symbol": "DEMOC",
@@ -743,7 +799,11 @@
     "netAssets": 63840000000,
     "ownersEquity": 63840000000,
     "cashAndCashEquivalents": 14400000000,
-    "equityRatio": 0.38
+    "equityRatio": 0.38,
+    "totalCurrentAssets": 75600000000,
+    "totalCurrentLiabilities": 50400000000,
+    "interestBearingDebt": 33600000000,
+    "netInterestBearingDebt": 19200000000
    }
   ]
  },
@@ -2153,6 +2213,314 @@
     "dividendType": "interim",
     "forecastOrActual": "actual",
     "dataSource": "synthetic"
+   }
+  ]
+ },
+ "/profile": {
+  "DEMOA": [
+   {
+    "symbol": "DEMOA",
+    "nameJa": "デモ自動車株式会社",
+    "nameEn": "Demo Motors Co., Ltd.",
+    "currency": "JPY",
+    "exchange": "DEMO",
+    "exchangeFullName": "Demo exchange (synthetic)",
+    "isin": null,
+    "sector": "DEMO-01",
+    "website": null,
+    "descriptionJa": "架空の会社です。",
+    "descriptionEn": "A fictional company for demo data.",
+    "country": "JP",
+    "isEtf": false,
+    "assetType": "stock",
+    "price": 685,
+    "priceDate": "2026-10-23",
+    "marketCap": 1027500000000,
+    "per": 13.0,
+    "pbr": 1.52,
+    "dividendYield": 0.023065693430656935
+   }
+  ],
+  "DEMOB": [
+   {
+    "symbol": "DEMOB",
+    "nameJa": "デモ電機ホールディングス株式会社",
+    "nameEn": "Demo Electronics Holdings, Inc.",
+    "currency": "JPY",
+    "exchange": "DEMO",
+    "exchangeFullName": "Demo exchange (synthetic)",
+    "isin": null,
+    "sector": "DEMO-01",
+    "website": null,
+    "descriptionJa": "架空の会社です。",
+    "descriptionEn": "A fictional company for demo data.",
+    "country": "JP",
+    "isEtf": false,
+    "assetType": "stock",
+    "price": 1205,
+    "priceDate": "2026-10-23",
+    "marketCap": 361500000000,
+    "per": 17.0,
+    "pbr": 1.6,
+    "dividendYield": 0.01767634854771784
+   }
+  ],
+  "DEMOC": [
+   {
+    "symbol": "DEMOC",
+    "nameJa": "デモ食品株式会社",
+    "nameEn": "Demo Foods Corporation",
+    "currency": "JPY",
+    "exchange": "DEMO",
+    "exchangeFullName": "Demo exchange (synthetic)",
+    "isin": null,
+    "sector": "DEMO-02",
+    "website": null,
+    "descriptionJa": "架空の会社です。",
+    "descriptionEn": "A fictional company for demo data.",
+    "country": "JP",
+    "isEtf": false,
+    "assetType": "stock",
+    "price": 1263,
+    "priceDate": "2026-10-23",
+    "marketCap": 113670000000,
+    "per": 21.0,
+    "pbr": 1.26,
+    "dividendYield": 0.014251781472684086
+   }
+  ]
+ },
+ "/key-metrics-latest": {
+  "DEMOA": [
+   {
+    "symbol": "DEMOA",
+    "priceDate": "2026-10-23",
+    "per": 13.0,
+    "pbr": 1.52,
+    "dividendYield": 0.023065693430656935,
+    "annualDividend": 15.8,
+    "progressiveDividendYears": 4,
+    "revenueCagr3y": 0.13294442059228162,
+    "epsCagr3y": 0.08016432151640918,
+    "updatedAt": "2026-10-23 18:00:00"
+   }
+  ],
+  "DEMOB": [
+   {
+    "symbol": "DEMOB",
+    "priceDate": "2026-10-23",
+    "per": 17.0,
+    "pbr": 1.6,
+    "dividendYield": 0.01767634854771784,
+    "annualDividend": 21.3,
+    "progressiveDividendYears": 4,
+    "revenueCagr3y": 0.06155393369914508,
+    "epsCagr3y": 0.11064001909320176,
+    "updatedAt": "2026-10-23 18:00:00"
+   }
+  ],
+  "DEMOC": [
+   {
+    "symbol": "DEMOC",
+    "priceDate": "2026-10-23",
+    "per": 21.0,
+    "pbr": 1.26,
+    "dividendYield": 0.014251781472684086,
+    "annualDividend": 18.0,
+    "progressiveDividendYears": 4,
+    "revenueCagr3y": 0.09618166465849898,
+    "epsCagr3y": 0.11866414129787217,
+    "updatedAt": "2026-10-23 18:00:00"
+   }
+  ]
+ },
+ "/industry-benchmarks": {
+  "DEMO-01": [
+   {
+    "sector": "ALL",
+    "sectorJa": "全業種（架空）",
+    "sectorEn": "All sectors (synthetic)",
+    "count": 3000,
+    "perCount": 3000,
+    "perQ1": 10.0,
+    "perMedian": 14.0,
+    "perQ3": 19.0,
+    "pbrCount": 3000,
+    "pbrQ1": 0.8,
+    "pbrMedian": 1.2,
+    "pbrQ3": 1.8,
+    "psrCount": 3000,
+    "psrQ1": 0.4,
+    "psrMedian": 0.8,
+    "psrQ3": 1.5,
+    "evToEbitdaCount": 3000,
+    "evToEbitdaQ1": 5.0,
+    "evToEbitdaMedian": 7.5,
+    "evToEbitdaQ3": 10.0,
+    "roeCount": 3000,
+    "roeQ1": 0.05,
+    "roeMedian": 0.08,
+    "roeQ3": 0.11,
+    "roaCount": 3000,
+    "roaQ1": 0.02,
+    "roaMedian": 0.035,
+    "roaQ3": 0.05,
+    "dividendYieldCount": 3000,
+    "dividendYieldQ1": 0.015,
+    "dividendYieldMedian": 0.025,
+    "dividendYieldQ3": 0.035,
+    "marketCapCount": 3000,
+    "marketCapQ1": 30000000000.0,
+    "marketCapMedian": 120000000000.0,
+    "marketCapQ3": 600000000000.0,
+    "revenueCagr3yCount": 3000,
+    "revenueCagr3yQ1": 0.0,
+    "revenueCagr3yMedian": 0.04,
+    "revenueCagr3yQ3": 0.08,
+    "epsCagr3yCount": 3000,
+    "epsCagr3yQ1": -0.05,
+    "epsCagr3yMedian": 0.05,
+    "epsCagr3yQ3": 0.12
+   },
+   {
+    "sector": "DEMO-01",
+    "sectorJa": "デモ製造業（架空）",
+    "sectorEn": "Demo manufacturing (synthetic)",
+    "count": 120,
+    "perCount": 120,
+    "perQ1": 10.0,
+    "perMedian": 14.0,
+    "perQ3": 19.0,
+    "pbrCount": 120,
+    "pbrQ1": 0.8,
+    "pbrMedian": 1.2,
+    "pbrQ3": 1.8,
+    "psrCount": 120,
+    "psrQ1": 0.4,
+    "psrMedian": 0.8,
+    "psrQ3": 1.5,
+    "evToEbitdaCount": 120,
+    "evToEbitdaQ1": 5.0,
+    "evToEbitdaMedian": 7.5,
+    "evToEbitdaQ3": 10.0,
+    "roeCount": 120,
+    "roeQ1": 0.05,
+    "roeMedian": 0.08,
+    "roeQ3": 0.11,
+    "roaCount": 120,
+    "roaQ1": 0.02,
+    "roaMedian": 0.035,
+    "roaQ3": 0.05,
+    "dividendYieldCount": 120,
+    "dividendYieldQ1": 0.015,
+    "dividendYieldMedian": 0.025,
+    "dividendYieldQ3": 0.035,
+    "marketCapCount": 120,
+    "marketCapQ1": 30000000000.0,
+    "marketCapMedian": 120000000000.0,
+    "marketCapQ3": 600000000000.0,
+    "revenueCagr3yCount": 120,
+    "revenueCagr3yQ1": 0.0,
+    "revenueCagr3yMedian": 0.04,
+    "revenueCagr3yQ3": 0.08,
+    "epsCagr3yCount": 120,
+    "epsCagr3yQ1": -0.05,
+    "epsCagr3yMedian": 0.05,
+    "epsCagr3yQ3": 0.12
+   }
+  ],
+  "DEMO-02": [
+   {
+    "sector": "ALL",
+    "sectorJa": "全業種（架空）",
+    "sectorEn": "All sectors (synthetic)",
+    "count": 3000,
+    "perCount": 3000,
+    "perQ1": 10.0,
+    "perMedian": 14.0,
+    "perQ3": 19.0,
+    "pbrCount": 3000,
+    "pbrQ1": 0.8,
+    "pbrMedian": 1.2,
+    "pbrQ3": 1.8,
+    "psrCount": 3000,
+    "psrQ1": 0.4,
+    "psrMedian": 0.8,
+    "psrQ3": 1.5,
+    "evToEbitdaCount": 3000,
+    "evToEbitdaQ1": 5.0,
+    "evToEbitdaMedian": 7.5,
+    "evToEbitdaQ3": 10.0,
+    "roeCount": 3000,
+    "roeQ1": 0.05,
+    "roeMedian": 0.08,
+    "roeQ3": 0.11,
+    "roaCount": 3000,
+    "roaQ1": 0.02,
+    "roaMedian": 0.035,
+    "roaQ3": 0.05,
+    "dividendYieldCount": 3000,
+    "dividendYieldQ1": 0.015,
+    "dividendYieldMedian": 0.025,
+    "dividendYieldQ3": 0.035,
+    "marketCapCount": 3000,
+    "marketCapQ1": 30000000000.0,
+    "marketCapMedian": 120000000000.0,
+    "marketCapQ3": 600000000000.0,
+    "revenueCagr3yCount": 3000,
+    "revenueCagr3yQ1": 0.0,
+    "revenueCagr3yMedian": 0.04,
+    "revenueCagr3yQ3": 0.08,
+    "epsCagr3yCount": 3000,
+    "epsCagr3yQ1": -0.05,
+    "epsCagr3yMedian": 0.05,
+    "epsCagr3yQ3": 0.12
+   },
+   {
+    "sector": "DEMO-02",
+    "sectorJa": "デモ食料品（架空）",
+    "sectorEn": "Demo foods (synthetic)",
+    "count": 4,
+    "perCount": 4,
+    "perQ1": 9.0,
+    "perMedian": 13.299999999999999,
+    "perQ3": 20.900000000000002,
+    "pbrCount": 4,
+    "pbrQ1": 0.7200000000000001,
+    "pbrMedian": 1.14,
+    "pbrQ3": 1.9800000000000002,
+    "psrCount": 4,
+    "psrQ1": 0.36000000000000004,
+    "psrMedian": 0.76,
+    "psrQ3": 1.6500000000000001,
+    "evToEbitdaCount": 4,
+    "evToEbitdaQ1": 4.5,
+    "evToEbitdaMedian": 7.125,
+    "evToEbitdaQ3": 11.0,
+    "roeCount": 4,
+    "roeQ1": 0.045000000000000005,
+    "roeMedian": 0.076,
+    "roeQ3": 0.12100000000000001,
+    "roaCount": 4,
+    "roaQ1": 0.018000000000000002,
+    "roaMedian": 0.03325,
+    "roaQ3": 0.05500000000000001,
+    "dividendYieldCount": 4,
+    "dividendYieldQ1": 0.0135,
+    "dividendYieldMedian": 0.02375,
+    "dividendYieldQ3": 0.038500000000000006,
+    "marketCapCount": 4,
+    "marketCapQ1": 27000000000.0,
+    "marketCapMedian": 114000000000.0,
+    "marketCapQ3": 660000000000.0,
+    "revenueCagr3yCount": 4,
+    "revenueCagr3yQ1": 0.0,
+    "revenueCagr3yMedian": 0.038,
+    "revenueCagr3yQ3": 0.08800000000000001,
+    "epsCagr3yCount": 4,
+    "epsCagr3yQ1": -0.045000000000000005,
+    "epsCagr3yMedian": 0.0475,
+    "epsCagr3yQ3": 0.132
    }
   ]
  }

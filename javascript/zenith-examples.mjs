@@ -5,9 +5,11 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const BASE_URL = 'https://api.zenithcode.net/stable';
-export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters'];
-export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters'];
-export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters'];
+export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters', 'health', 'benchmark'];
+export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters',
+  'health', 'benchmark'];
+export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters',
+  'health', 'benchmark'];
 const DEFAULT_LIMITS = { peers: 10, dividends: 40, earnings: 200 };
 const DEMO_FILE = fileURLToPath(new URL('../learning/demo-api.json', import.meta.url));
 const SYMBOL = /^[0-9A-Z]{4,5}(?:\.T)?$/;
@@ -27,6 +29,17 @@ export const QUARTER_FIELDS = ['symbol', 'fiscalYearEnd', 'quarter', 'quarterEnd
   'revenue', 'operatingIncome', 'netIncome', 'operatingMargin',
   'cumulativeRevenue', 'cumulativeOperatingIncome', 'cumulativeNetIncome',
   'status', 'docId', 'previousDocId'];
+export const HEALTH_FIELDS = ['symbol', 'fiscalPeriod', 'accountingStandard', 'totalAssets', 'ownersEquity', 'equityRatio',
+  'apiEquityRatio', 'equityRatioCheck', 'currentRatio', 'interestBearingDebt',
+  'netInterestBearingDebt', 'debtToEquity', 'cashAndCashEquivalents', 'operatingCashFlow',
+  'investingCashFlow', 'freeCashFlow', 'flags', 'balanceSheetDocId', 'cashFlowDocId'];
+// [metric, where the company value comes from, outlier rule used by /industry-benchmarks]
+const BENCHMARK_METRICS = [['per', 'profile', v => v <= 0], ['pbr', 'profile', v => v <= 0],
+  ['dividendYield', 'profile', v => v <= 0 || v > 1], ['marketCap', 'profile', v => v <= 0],
+  ['roe', 'keyMetrics', v => v > 1], ['roa', 'keyMetrics', v => v > 1],
+  ['revenueCagr3y', 'keyMetricsLatest', () => false], ['epsCagr3y', 'keyMetricsLatest', () => false]];
+export const BENCHMARK_FIELDS = ['symbol', 'sector', 'metric', 'value', 'basis', 'sectorQ1', 'sectorMedian', 'sectorQ3',
+  'sectorCount', 'position'];
 const STATEMENTS = [['incomeStatements', '/income-statement'], ['balanceSheets', '/balance-sheet-statement'], ['cashFlows', '/cash-flow-statement']];
 const ROW_META = new Set(['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'updatedAt', 'provenance', 'fiscalPeriodDays']);
 
@@ -105,6 +118,7 @@ export async function demoRequester(path, params) {
   if (path === '/earnings-calendar') {
     return data[path].filter(r => (!params.from || r.reportDate >= params.from) && (!params.to || r.reportDate <= params.to)).slice(0, params.limit);
   }
+  if (path === '/industry-benchmarks') return data[path][params.sector ?? 'ALL'] ?? [];
   if (path === '/peers') {
     const rows = data[path][params.symbol] ?? [];
     return rows.length > params.limit + 2 ? [...rows.slice(0, 1 + params.limit), rows.at(-1)] : rows;
@@ -112,7 +126,7 @@ export async function demoRequester(path, params) {
   let rows = data[path][params.symbol] ?? [];
   if (params.period === 'annual') rows = rows.filter(r => r.period === 'FY');
   else if (params.period === 'quarter') rows = rows.filter(r => String(r.period ?? '').startsWith('Q'));
-  return rows.slice(0, params.limit);
+  return rows.slice(0, params.limit ?? rows.length);
 }
 
 const isNumber = value => typeof value === 'number' && Number.isFinite(value);
@@ -194,6 +208,64 @@ export function standaloneQuarters(rows) {
   return result;
 }
 
+const ratio = (top, bottom) => (isNumber(top) && isNumber(bottom) && bottom > 0 ? top / bottom : null);
+
+// Balance-sheet strength and cash generation by fiscal year, oldest first. Ratios are
+// recalculated from yen amounts; flags only describe the numbers and are not a rating.
+export function healthRows(balanceSheets, cashFlows) {
+  const flows = new Map(cashFlows.map(r => [r.fiscalPeriod, r]));
+  return [...balanceSheets].sort((a, b) => String(a.fiscalPeriod ?? '').localeCompare(String(b.fiscalPeriod ?? ''))).map(bs => {
+    const cf = flows.get(bs.fiscalPeriod) ?? null;
+    const equity = bs.ownersEquity ?? null, assets = bs.totalAssets ?? null;
+    const equityRatio = ratio(equity, assets), api = bs.equityRatio ?? null;
+    const check = equityRatio === null || !isNumber(api) ? 'notChecked'
+      : Math.abs(equityRatio - api) <= Math.max(1e-6 * Math.max(Math.abs(equityRatio), Math.abs(api)), 1e-9) ? 'match' : 'mismatch';
+    const ocf = cf?.operatingCashFlow ?? null, icf = cf?.investingCashFlow ?? null;
+    let fcf = cf?.freeCashFlow ?? null;
+    if (fcf === null && isNumber(ocf) && isNumber(icf)) fcf = ocf + icf;
+    const flags = [];
+    if (isNumber(equity) && equity <= 0) flags.push('nonPositiveEquity');
+    if (isNumber(ocf) && ocf < 0) flags.push('negativeOperatingCashFlow');
+    if (isNumber(fcf) && fcf < 0) flags.push('negativeFreeCashFlow');
+    if (!cf) flags.push('cashFlowMissing');
+    return {
+      symbol: bs.symbol ?? null, fiscalPeriod: bs.fiscalPeriod ?? null, accountingStandard: bs.accountingStandard ?? null,
+      totalAssets: assets, ownersEquity: equity, equityRatio, apiEquityRatio: api, equityRatioCheck: check,
+      currentRatio: ratio(bs.totalCurrentAssets, bs.totalCurrentLiabilities),
+      interestBearingDebt: bs.interestBearingDebt ?? null, netInterestBearingDebt: bs.netInterestBearingDebt ?? null,
+      debtToEquity: ratio(bs.interestBearingDebt, equity), cashAndCashEquivalents: bs.cashAndCashEquivalents ?? null,
+      operatingCashFlow: ocf, investingCashFlow: icf, freeCashFlow: fcf, flags: flags.join(';'),
+      balanceSheetDocId: bs.provenance?.docId ?? null, cashFlowDocId: cf?.provenance?.docId ?? null,
+    };
+  });
+}
+
+// Place the company within its TSE 33-sector quartiles, metric by metric.
+export function benchmarkRows(symbol, profile, keyMetrics, latest, benchmarks) {
+  const sector = profile.sector ?? null;
+  const bench = benchmarks.find(b => b.sector === sector) ?? {};
+  const sources = {
+    profile: [profile, `price date ${profile.priceDate}`],
+    keyMetrics: [keyMetrics, `fiscal period ${keyMetrics.fiscalPeriod}`],
+    keyMetricsLatest: [latest, `latest annual, updated ${latest.updatedAt}`],
+  };
+  return BENCHMARK_METRICS.map(([metric, source, outlier]) => {
+    const [row, basis] = sources[source];
+    const value = row[metric] ?? null;
+    const [q1, median, q3] = ['Q1', 'Median', 'Q3'].map(part => bench[metric + part] ?? null);
+    let position;
+    if (!isNumber(value)) position = 'noValue';
+    else if (outlier(value)) position = 'excludedLikeBenchmark';
+    else if (![q1, median, q3].every(isNumber)) position = 'noBenchmark';
+    else if (value < q1) position = 'belowQ1';
+    else if (value < median) position = 'Q1toMedian';
+    else if (value <= q3) position = 'medianToQ3';
+    else position = 'aboveQ3';
+    return { symbol, sector, metric, value, basis, sectorQ1: q1, sectorMedian: median, sectorQ3: q3,
+      sectorCount: bench[`${metric}Count`] ?? null, position };
+  });
+}
+
 // Explain why rows may not be comparable instead of silently pairing them.
 export function comparisonNotes(companies) {
   const sets = Object.values(companies).map(rows => new Set(rows.map(r => r.fiscalPeriod)));
@@ -273,6 +345,21 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
     const years = options.years ?? 5;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Metrics --years must be between 1 and 10.');
     result.annualMetrics = await requester('/key-metrics', { symbol, period: 'annual', limit: years }, apiKey);
+  } else if (mode === 'health') {
+    const years = options.years ?? 5;
+    if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Health --years must be between 1 and 10.');
+    const params = { symbol, period: 'annual', limit: years };
+    result.health = healthRows(await requester('/balance-sheet-statement', params, apiKey),
+      await requester('/cash-flow-statement', params, apiKey));
+  } else if (mode === 'benchmark') {
+    const profile = (await requester('/profile', { symbol }, apiKey))[0] ?? {};
+    if (!profile.sector) throw new Error('No TSE sector for this code (for example an ETF); benchmark needs one.');
+    const keyMetrics = (await requester('/key-metrics', { symbol, period: 'annual', limit: 1 }, apiKey))[0] ?? {};
+    const latest = (await requester('/key-metrics-latest', { symbol }, apiKey))[0] ?? {};
+    const benchmarks = await requester('/industry-benchmarks', { sector: profile.sector }, apiKey);
+    result.sector = profile.sector;
+    result.sectorName = benchmarks.find(b => b.sector === profile.sector)?.sectorEn ?? null;
+    result.benchmark = benchmarkRows(symbol, profile, keyMetrics, latest, benchmarks);
   } else if (mode === 'quarters') {
     const years = options.years ?? 2;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Quarters --years must be between 1 and 10.');
@@ -330,6 +417,8 @@ export function tableRows(result) {
   let fields, rows;
   if (result.annualTrend) [fields, rows] = [CSV_FIELDS, result.annualTrend];
   else if (result.earnings) [fields, rows] = [EARNINGS_FIELDS, result.earnings];
+  else if (result.health) [fields, rows] = [HEALTH_FIELDS, result.health];
+  else if (result.benchmark) [fields, rows] = [BENCHMARK_FIELDS, result.benchmark];
   else if (result.quarters) [fields, rows] = [QUARTER_FIELDS, result.quarters];
   else if (result.dividends) [fields, rows] = [DIVIDEND_FIELDS, result.dividends];
   else if (result.companies && result.symbols) [fields, rows] = [CSV_FIELDS, Object.values(result.companies).flat()];

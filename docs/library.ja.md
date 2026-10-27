@@ -31,6 +31,8 @@ trend = run_example("trend", "DEMOA", "demo", requester=demo_requester)
 | `run_example("metrics", code, key, years=5)` | `annualMetrics`：ROE・ROA・利益率・EPS・BPS・PER・PBRなど |
 | `run_example("peers", code, key, limit=10)` | `peers`：対象・同業他社・業種中央値 |
 | `run_example("quarters", code, key, years=2)` | `quarters`：累計から直した単独の四半期と`status` |
+| `run_example("health", code, key, years=5)` | `health`：自己資本比率・流動比率・有利子負債比率・FCF・目印 |
+| `run_example("benchmark", code, key)` | `benchmark`：指標ごとの業種内の位置 |
 | `run_example("dividends", code, key, limit=40)` | `dividends`：年間合計と各回の配当、予想と実績 |
 | `run_example("earnings", "", key, "2026-11-01", "2026-11-30", symbols="7203")` | `earnings`：決算発表日とEPSの予想との差 |
 
@@ -53,7 +55,7 @@ wide = pd.DataFrame(rows, columns=fields).set_index(["statement", "item"])
 
 ### グラフ
 
-`python/chart_svg.py`で、`trend`・`compare`の結果から追加パッケージなしにSVGを作れます。`--lang ja`で日本語の見出しになります。
+`python/chart_svg.py`で、`trend`・`compare`・`quarters`・`health`の結果から追加パッケージなしにSVGを作れます。`--lang ja`で日本語の見出しになります。
 
 ```sh
 python3 python/zenith_examples.py trend --symbol DEMOB --demo > output/trend.json

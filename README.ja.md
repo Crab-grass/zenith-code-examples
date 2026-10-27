@@ -80,6 +80,8 @@ PythonとJavaScriptは同じコマンドに対応します。
 | `metrics` | ROE・ROA・ROIC・利益率・自己資本比率・EPS・BPS・配当・PER・PBRを決算期ごとに（既定5期） | 1回／1 |
 | `peers` | 同じ業種で時価総額が近い会社と、収益性・バリュエーション、業種中央値 | 1回／10 |
 | `quarters` | 累計で開示される四半期の売上高・営業利益・純利益を単独の四半期に直し、四半期ごとに状態を表示（既定2年） | 1回／1 |
+| `health` | 自己資本比率（計算し直してAPIと照合）・流動比率・有利子負債比率・ネット有利子負債・フリー・キャッシュ・フローの推移と、数値の状態を示す目印 | 2回／2 |
+| `benchmark` | PER・PBR・配当利回り・時価総額・ROE・ROA・3年成長率が、東証33業種の四分位のどこにあるか | 4回／13 |
 | `dividends` | 1株当たり配当の履歴と会社予想（既定40行） | 1回／1 |
 | `earnings` | 決算発表の予定日と発表済みのEPS・予想との差。最大93日、`--symbols`で絞り込み | 1回／1 |
 
@@ -98,6 +100,8 @@ python3 python/zenith_examples.py statements --symbol 7203 --csv output/statemen
 python3 python/zenith_examples.py metrics --symbol 7203 --csv output/metrics-7203.csv
 python3 python/zenith_examples.py peers --symbol 7203 --limit 5
 python3 python/zenith_examples.py quarters --symbol 7203 --years 3 --csv output/quarters-7203.csv
+python3 python/zenith_examples.py health --symbol 7203 --csv output/health-7203.csv
+python3 python/zenith_examples.py benchmark --symbol 7203
 python3 python/zenith_examples.py dividends --symbol 7203 --csv output/dividends-7203.csv
 python3 python/zenith_examples.py earnings --from 2026-11-01 --to 2026-11-30 --symbols 7203,7267
 ```
@@ -106,11 +110,13 @@ python3 python/zenith_examples.py earnings --from 2026-11-01 --to 2026-11-30 --s
 
 日本の第2・第3四半期の損益は期首からの累計です。`quarters`は、同じ決算年度・同じ会計基準で期間の長さも想定どおりのときだけ、前の累計を差し引きます（第4四半期＝通期−第3四半期累計）。条件を満たさない場合は空欄のままにし、`status`に理由（`missingPrevious`・`missingValue`・`standardChanged`・`irregularPeriod`）を入れます。開示された累計値も並べて残します。
 
+`health`の`negativeFreeCashFlow`などの目印は数値の状態を示すもので、評価ではありません。`benchmark`は業種内の位置（`belowQ1`・`Q1toMedian`・`medianToQ3`・`aboveQ3`）を、各値の基準日・決算期と一緒に返します。業種の統計から除かれる値（マイナスのPERなど）は`excludedLikeBenchmark`とします。
+
 `dividends`には年間合計の行（`dividendType: annual`）と各回の配当（`interim`・`final`など）の両方が入ります。足し合わせないでください。`forecastOrActual`で会社予想と実績を区別できます。
 
 `--csv`は`snapshot`・`history`・`financials`・`full`・`search`以外のコマンドで使えます。`statements`は、科目ごとの行・決算期ごとの列の1つの表になり、各表の先頭に会計基準と書類IDが入ります。
 
-`trend`・`compare`の結果を保存すれば、追加パッケージなしでSVGのグラフにできます（`--lang ja`で日本語表示）。
+`trend`・`compare`・`quarters`・`health`の結果を保存すれば、追加パッケージなしでSVGのグラフにできます（`--lang ja`で日本語表示）。
 
 ```sh
 python3 python/zenith_examples.py trend --symbol 7203 > output/trend-7203.json
@@ -119,7 +125,7 @@ python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg --la
 
 自分のコード・pandas・Jupyterから使う方法は[ライブラリとして使う](docs/library.ja.md)にまとめています。
 
-`search`・`trend`・`compare`・`statements`・`metrics`・`peers`・`quarters`・`dividends`・`earnings`に`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
+`snapshot`・`history`・`financials`・`full`以外のコマンドに`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
 
 `trend`と`compare`は、利益率を円単位の金額から計算し直し、APIの`operatingMargin`と照合します（`match`／`mismatch`／`apiMissing`／`notCalculated`など）。欠損を0で埋めたり、決算期が違う会社どうしを勝手に組み合わせたりはしません。`compare`は、会計基準や決算期間の長さが違う場合に`notes`で知らせます。`--csv`を付けると、取得日時と書類IDを行ごとに残したCSV（UTF-8・BOM付き）も保存します。`output/`はGitの追跡対象外です。
 
