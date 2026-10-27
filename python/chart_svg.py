@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Draw a dependency-free SVG chart from saved `trend` or `compare` output.
+"""Draw a dependency-free SVG chart from saved `trend`, `compare`, `quarters` or `health` output.
 
     python3 python/zenith_examples.py trend --symbol 7203 > output/trend.json
     python3 python/chart_svg.py output/trend.json -o output/trend.svg
@@ -24,12 +24,20 @@ TEXT = {
            "compare": "Operating margin by company (%)", "fy": "Fiscal years ending", "na": "n/a",
            "periods": "Fiscal years: {0}",
            "source": "Source: ZENITH Code API · retrieved {0} (UTC)", "demo": "Demo data: fictional companies and values",
-           "trillion": "JPY trillion", "billion": "JPY billion", "basis": "Basis: {0}"},
+           "trillion": "JPY trillion", "billion": "JPY billion", "basis": "Basis: {0}",
+           "quarters": "{0}: standalone quarters", "quarterRevenue": "Revenue per quarter",
+           "quarterNote": "Q2–Q4 = cumulative figure minus the previous one; gaps are not estimated",
+           "health": "{0}: equity ratio and free cash flow", "equityRatio": "Equity ratio (%)",
+           "fcf": "Free cash flow"},
     "ja": {"revenue": "売上高", "margin": "営業利益率（%）", "trend": "{0}：売上高と営業利益率",
            "compare": "企業別の営業利益率（%）", "fy": "決算期", "na": "欠損",
            "periods": "決算期：{0}",
            "source": "出典：ZENITH Code API ／ 取得日 {0}（UTC）", "demo": "デモデータ：架空の企業・数値",
-           "trillion": "兆円", "billion": "億円", "basis": "会計基準：{0}"},
+           "trillion": "兆円", "billion": "億円", "basis": "会計基準：{0}",
+           "quarters": "{0}：四半期単独の推移", "quarterRevenue": "四半期の売上高",
+           "quarterNote": "第2〜第4四半期は累計値から前の累計値を差し引いた値。欠損は推測しません",
+           "health": "{0}：自己資本比率とフリー・キャッシュ・フロー", "equityRatio": "自己資本比率（%）",
+           "fcf": "フリー・キャッシュ・フロー"},
 }
 
 
@@ -47,6 +55,8 @@ def scale(values, top, height):
     low, high = min(0, min(present)), max(0, max(present))
     span = (high - low) or 1
     high += span * 0.15
+    if low < 0:
+        low -= span * 0.15  # room for labels under negative bars
     return lambda v: top + height * (high - v) / (high - low)
 
 
@@ -95,23 +105,67 @@ def line(x0, width, top, height, labels, values, color, na):
     return out
 
 
+def yen_scale(values, t):
+    big = max([abs(v) for v in values if number(v)] or [0]) >= 1e12
+    unit, div = (t["trillion"], 1e12) if big else (t["billion"], 1e8 if t is TEXT["ja"] else 1e9)
+    fmt = (lambda v: "%.2f" % v) if div == 1e12 else (lambda v: "{:,.0f}".format(v))
+    return unit, div, fmt
+
+
+def heading(label, unit, t):
+    return label + (("（%s）" if t is TEXT["ja"] else " (%s)") % unit if unit else "")
+
+
+def two_panels(title, subtitle, labels, bar_label, bar_values, line_label, line_values, t, short_labels=None):
+    """Yen bars on top, a ratio line below; both share the x labels."""
+    unit, div, fmt = yen_scale(bar_values, t)
+    axis = short_labels or labels
+    body = [text(32, 40, title, 20, INK, weight="bold"), text(32, 62, subtitle, 12, MUTED),
+            text(32, 100, heading(bar_label, unit, t), 13, INK, weight="bold")]
+    body += bars(48, WIDTH - 80, 112, 120, axis, [[v / div if number(v) else None for v in bar_values]],
+                 COLORS, fmt, t["na"])
+    body.append(text(32, 290, line_label, 13, INK, weight="bold"))
+    body += line(48, WIDTH - 80, 302, 110, axis, line_values, COLORS[0], t["na"])
+    return body, 500
+
+
+def basis(rows, t):
+    return t["basis"].format(", ".join(sorted({str(r.get("accountingStandard") or "?").upper() for r in rows})))
+
+
 def render_trend(data, t):
     rows = data["annualTrend"]
     if not rows:
         raise ValueError("The trend result has no rows.")
     labels = [r["fiscalPeriod"] for r in rows]
-    revenues = [r.get("revenue") for r in rows]
-    big = max([abs(v) for v in revenues if number(v)] or [0]) >= 1e12
-    unit, div = (t["trillion"], 1e12) if big else (t["billion"], 1e8 if t is TEXT["ja"] else 1e9)
-    standards = sorted({str(r.get("accountingStandard") or "?").upper() for r in rows})
-    body = [text(32, 40, t["trend"].format(data.get("symbol", "")), 20, INK, weight="bold"),
-            text(32, 62, "%s %s – %s · %s" % (t["fy"], labels[0], labels[-1], t["basis"].format(", ".join(standards))), 12, MUTED),
-            text(32, 100, (t["revenue"] + ("（%s）" if t is TEXT["ja"] else " (%s)")) % unit, 13, INK, weight="bold")]
-    body += bars(48, WIDTH - 80, 112, 120, labels, [[v / div if number(v) else None for v in revenues]],
-                 COLORS, lambda v: "%.2f" % v if div == 1e12 else "{:,.0f}".format(v), t["na"])
-    body.append(text(32, 290, t["margin"], 13, INK, weight="bold"))
-    body += line(48, WIDTH - 80, 302, 110, labels, [r.get("calculatedMargin") for r in rows], COLORS[0], t["na"])
-    return body, 500
+    return two_panels(t["trend"].format(data.get("symbol", "")),
+                      "%s %s – %s · %s" % (t["fy"], labels[0], labels[-1], basis(rows, t)),
+                      labels, t["revenue"], [r.get("revenue") for r in rows],
+                      t["margin"], [r.get("calculatedMargin") for r in rows], t)
+
+
+def render_quarters(data, t):
+    rows = data["quarters"]
+    if not rows:
+        raise ValueError("The quarters result has no rows.")
+    labels = ["%s %s" % (r["fiscalYearEnd"], r["quarter"]) for r in rows]
+    short = [r["quarter"] if i and r["quarter"] != "Q1" else "%s %s" % (r["fiscalYearEnd"][:4], r["quarter"])
+             for i, r in enumerate(rows)]
+    return two_panels(t["quarters"].format(data.get("symbol", "")), "%s · %s" % (t["quarterNote"], basis(rows, t)),
+                      labels, t["quarterRevenue"], [r.get("revenue") for r in rows],
+                      t["margin"], [r.get("operatingMargin") for r in rows], t, short)
+
+
+def render_health(data, t):
+    rows = data["health"]
+    if not rows:
+        raise ValueError("The health result has no rows.")
+    labels = [r["fiscalPeriod"] for r in rows]
+    body, height = two_panels(t["health"].format(data.get("symbol", "")),
+                              "%s %s – %s · %s" % (t["fy"], labels[0], labels[-1], basis(rows, t)),
+                              labels, t["fcf"], [r.get("freeCashFlow") for r in rows],
+                              t["equityRatio"], [r.get("equityRatio") for r in rows], t)
+    return body, height
 
 
 def render_compare(data, t):
@@ -140,10 +194,14 @@ def render(data, lang="en"):
     t = TEXT[lang]
     if "annualTrend" in data:
         body, height = render_trend(data, t)
+    elif "quarters" in data:
+        body, height = render_quarters(data, t)
+    elif "health" in data:
+        body, height = render_health(data, t)
     elif "companies" in data and "commonFiscalPeriods" in data:
         body, height = render_compare(data, t)
     else:
-        raise ValueError("Use JSON saved from the trend or compare command.")
+        raise ValueError("Use JSON saved from the trend, compare, quarters or health command.")
     footer = [t["source"].format(str(data.get("retrievedAt", ""))[:10])]
     if data.get("demo"):
         footer.insert(0, t["demo"])
@@ -156,7 +214,7 @@ def render(data, lang="en"):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("input", help="JSON saved from trend or compare")
+    parser.add_argument("input", help="JSON saved from trend, compare, quarters or health")
     parser.add_argument("-o", "--output", required=True, help="SVG file to write")
     parser.add_argument("--lang", choices=sorted(TEXT), default="en")
     args = parser.parse_args()

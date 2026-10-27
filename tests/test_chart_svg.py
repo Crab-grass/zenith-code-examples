@@ -45,3 +45,16 @@ class ChartTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MoreChartTests(unittest.TestCase):
+    def test_quarters_and_health_charts(self):
+        quarters = run_example("quarters", "DEMOC", "demo", requester=demo_requester, years=1)
+        svg = render(quarters)
+        ET.fromstring(svg)
+        self.assertEqual(svg.count(">n/a<"), 4)  # Q2 and Q3 revenue and margin are gaps
+        health = run_example("health", "DEMOC", "demo", requester=demo_requester)
+        svg = render(health, "ja")
+        ET.fromstring(svg)
+        self.assertIn("自己資本比率", svg)
+        self.assertIn(">-6<", svg)  # the negative free cash flow is drawn below zero

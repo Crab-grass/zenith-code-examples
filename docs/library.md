@@ -31,6 +31,8 @@ trend = run_example("trend", "DEMOA", "demo", requester=demo_requester)
 | `run_example("metrics", code, key, years=5)` | `annualMetrics`: ROE, ROA, margins, EPS, BPS, PER, PBR and more |
 | `run_example("peers", code, key, limit=10)` | `peers`: target, same-sector peers, sector median |
 | `run_example("quarters", code, key, years=2)` | `quarters`: standalone quarters derived from year-to-date figures, with `status` |
+| `run_example("health", code, key, years=5)` | `health`: equity ratio, current ratio, debt-to-equity, free cash flow, flags |
+| `run_example("benchmark", code, key)` | `benchmark`: sector quartile position per metric |
 | `run_example("dividends", code, key, limit=40)` | `dividends`: annual totals and individual payments, forecasts and actuals |
 | `run_example("earnings", "", key, "2026-11-01", "2026-11-30", symbols="7203")` | `earnings`: report dates and EPS surprise |
 
@@ -58,7 +60,7 @@ wide.loc["incomeStatements"].head()
 
 ### Charts
 
-`python/chart_svg.py` draws an SVG from saved `trend` or `compare` output without extra packages:
+`python/chart_svg.py` draws an SVG from saved `trend`, `compare`, `quarters` or `health` output without extra packages:
 
 ```sh
 python3 python/zenith_examples.py trend --symbol DEMOB --demo > output/trend.json
