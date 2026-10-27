@@ -30,6 +30,7 @@ trend = run_example("trend", "DEMOA", "demo", requester=demo_requester)
 | `run_example("statements", code, key, years=3)` | `incomeStatements`・`balanceSheets`・`cashFlows` |
 | `run_example("metrics", code, key, years=5)` | `annualMetrics`：ROE・ROA・利益率・EPS・BPS・PER・PBRなど |
 | `run_example("peers", code, key, limit=10)` | `peers`：対象・同業他社・業種中央値 |
+| `run_example("quarters", code, key, years=2)` | `quarters`：累計から直した単独の四半期と`status` |
 | `run_example("dividends", code, key, limit=40)` | `dividends`：年間合計と各回の配当、予想と実績 |
 | `run_example("earnings", "", key, "2026-11-01", "2026-11-30", symbols="7203")` | `earnings`：決算発表日とEPSの予想との差 |
 

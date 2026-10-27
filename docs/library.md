@@ -30,6 +30,7 @@ trend = run_example("trend", "DEMOA", "demo", requester=demo_requester)
 | `run_example("statements", code, key, years=3)` | `incomeStatements`, `balanceSheets`, `cashFlows` |
 | `run_example("metrics", code, key, years=5)` | `annualMetrics`: ROE, ROA, margins, EPS, BPS, PER, PBR and more |
 | `run_example("peers", code, key, limit=10)` | `peers`: target, same-sector peers, sector median |
+| `run_example("quarters", code, key, years=2)` | `quarters`: standalone quarters derived from year-to-date figures, with `status` |
 | `run_example("dividends", code, key, limit=40)` | `dividends`: annual totals and individual payments, forecasts and actuals |
 | `run_example("earnings", "", key, "2026-11-01", "2026-11-30", symbols="7203")` | `earnings`: report dates and EPS surprise |
 

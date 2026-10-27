@@ -38,16 +38,61 @@
      "source": "synthetic",
      "docId": "DEMOA-2025-03"
     },
-    "revenue": 1152000000000,
-    "operatingIncome": 115200000000,
+    "revenue": 1400400000000,
+    "operatingIncome": 137040000000,
     "ordinaryIncome": null,
     "extraordinaryIncome": null,
     "extraordinaryLoss": null,
     "pretaxIncome": 112896000000,
-    "netIncome": 79027200000,
-    "operatingMargin": 0.1,
+    "netIncome": 96840000000,
+    "operatingMargin": 0.09785775492716367,
     "ordinaryMargin": null,
-    "netMargin": 0.0686
+    "netMargin": 0.06915167095115682
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2024-12",
+    "period": "Q3",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 274,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2024-12-Q3"
+    },
+    "revenue": 1050000000000,
+    "operatingIncome": 108000000000,
+    "netIncome": 78000000000,
+    "operatingMargin": 0.10285714285714286
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2024-09",
+    "period": "Q2",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 182,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2024-09-Q2"
+    },
+    "revenue": 690000000000,
+    "operatingIncome": 71000000000,
+    "netIncome": 51000000000,
+    "operatingMargin": 0.10289855072463767
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2024-06",
+    "period": "Q1",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 91,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2024-06-Q1"
+    },
+    "revenue": 340000000000,
+    "operatingIncome": 35000000000,
+    "netIncome": 25000000000,
+    "operatingMargin": 0.10294117647058823
    },
    {
     "symbol": "DEMOA",
@@ -59,16 +104,61 @@
      "source": "synthetic",
      "docId": "DEMOA-2024-03"
     },
-    "revenue": 1089000000000,
-    "operatingIncome": 128500000000,
+    "revenue": 1293900000000,
+    "operatingIncome": 154270000000,
     "ordinaryIncome": null,
     "extraordinaryIncome": null,
     "extraordinaryLoss": null,
     "pretaxIncome": 126322000000,
-    "netIncome": 88425400000,
-    "operatingMargin": 0.1179981634527089,
+    "netIncome": 107750000000,
+    "operatingMargin": 0.11922868846124121,
     "ordinaryMargin": null,
-    "netMargin": 0.08119871441689623
+    "netMargin": 0.08327536903933844
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2023-12",
+    "period": "Q3",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 274,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2023-12-Q3"
+    },
+    "revenue": 945000000000,
+    "operatingIncome": 110000000000,
+    "netIncome": 78000000000,
+    "operatingMargin": 0.1164021164021164
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2023-09",
+    "period": "Q2",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 182,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2023-09-Q2"
+    },
+    "revenue": 615000000000,
+    "operatingIncome": 70000000000,
+    "netIncome": 50000000000,
+    "operatingMargin": 0.11382113821138211
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2023-06",
+    "period": "Q1",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 91,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2023-06-Q1"
+    },
+    "revenue": 300000000000,
+    "operatingIncome": 33000000000,
+    "netIncome": 24000000000,
+    "operatingMargin": 0.11
    },
    {
     "symbol": "DEMOA",
@@ -252,16 +342,61 @@
      "source": "synthetic",
      "docId": "DEMOC-2025-12"
     },
-    "revenue": 154000000000,
-    "operatingIncome": 6500000000,
+    "revenue": 168600000000,
+    "operatingIncome": 6920000000,
     "ordinaryIncome": 8040000000,
     "extraordinaryIncome": 154000000,
     "extraordinaryLoss": 308000000,
     "pretaxIncome": 7732000000,
-    "netIncome": 5412400000,
-    "operatingMargin": 0.04220779220779221,
+    "netIncome": 4600000000,
+    "operatingMargin": 0.041043890865954925,
     "ordinaryMargin": 0.05220779220779221,
-    "netMargin": 0.03514545454545454
+    "netMargin": 0.027283511269276393
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2025-09",
+    "period": "Q3",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 274,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2025-09-Q3"
+    },
+    "revenue": 123000000000,
+    "operatingIncome": 5000000000,
+    "netIncome": 3300000000,
+    "operatingMargin": 0.04065040650406504
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2025-06",
+    "period": "Q2",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 182,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2025-06-Q2"
+    },
+    "revenue": null,
+    "operatingIncome": 3200000000,
+    "netIncome": 2100000000,
+    "operatingMargin": 0.03950617283950617
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2025-03",
+    "period": "Q1",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 91,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2025-03-Q1"
+    },
+    "revenue": 40000000000,
+    "operatingIncome": 1500000000,
+    "netIncome": 1000000000,
+    "operatingMargin": 0.0375
    },
    {
     "symbol": "DEMOC",

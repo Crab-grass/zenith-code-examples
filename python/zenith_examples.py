@@ -17,9 +17,9 @@ from pathlib import Path
 
 BASE_URL = "https://api.zenithcode.net/stable"
 MODES = ("snapshot", "history", "financials", "full", "trend", "compare", "search", "statements",
-         "metrics", "peers", "dividends", "earnings")
-DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers", "dividends", "earnings")
-CSV_MODES = ("trend", "compare", "statements", "metrics", "peers", "dividends", "earnings")
+         "metrics", "peers", "dividends", "earnings", "quarters")
+DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers", "dividends", "earnings", "quarters")
+CSV_MODES = ("trend", "compare", "statements", "metrics", "peers", "dividends", "earnings", "quarters")
 DEFAULT_LIMITS = {"peers": 10, "dividends": 40, "earnings": 200}
 DEMO_FILE = Path(__file__).resolve().parents[1] / "learning" / "demo-api.json"
 SYMBOL = re.compile(r"[0-9A-Z]{4,5}(?:\.T)?")
@@ -36,6 +36,11 @@ DIVIDEND_FIELDS = ("symbol", "periodEndDate", "periodType", "dividendType", "for
                    "rawAmount", "exDividendDate", "paymentDate", "announcementDate", "dataSource")
 EARNINGS_FIELDS = ("symbol", "reportDate", "fiscalDate", "beforeAfterMarket", "actualEps", "estimateEps",
                    "surpriseRate")
+QUARTER_ITEMS = ("revenue", "operatingIncome", "netIncome")
+QUARTER_FIELDS = ("symbol", "fiscalYearEnd", "quarter", "quarterEnd", "accountingStandard",
+                  "revenue", "operatingIncome", "netIncome", "operatingMargin",
+                  "cumulativeRevenue", "cumulativeOperatingIncome", "cumulativeNetIncome",
+                  "status", "docId", "previousDocId")
 STATEMENTS = (("incomeStatements", "/income-statement"),
               ("balanceSheets", "/balance-sheet-statement"),
               ("cashFlows", "/cash-flow-statement"))
@@ -132,7 +137,12 @@ def demo_requester(path, params, api_key=None):
     if path == "/peers":
         rows = data[path].get(params["symbol"], [])
         return rows[:1 + params["limit"]] + rows[-1:] if len(rows) > params["limit"] + 2 else rows
-    return data[path].get(params["symbol"], [])[:params["limit"]]
+    rows = data[path].get(params["symbol"], [])
+    if params.get("period") == "annual":
+        rows = [r for r in rows if r.get("period") == "FY"]
+    elif params.get("period") == "quarter":
+        rows = [r for r in rows if str(r.get("period", "")).startswith("Q")]
+    return rows[:params["limit"]]
 
 
 def _number(value):
@@ -166,6 +176,67 @@ def margin_rows(rows):
             "calculatedMargin": ratio, "apiMargin": api, "marginCheck": check,
             "source": provenance.get("source"), "docId": provenance.get("docId"),
         })
+    return result
+
+
+def _add_months(period, months):
+    year, month = (int(part) for part in period.split("-"))
+    total = year * 12 + month - 1 + months
+    return "%04d-%02d" % (total // 12, total % 12 + 1)
+
+
+def standalone_quarters(rows):
+    """Turn Japanese year-to-date figures into standalone quarters.
+
+    Q2 and Q3 income-statement rows are cumulative from the start of the fiscal
+    year, and FY is the full year, so Q2 = cum Q2 - cum Q1 ... Q4 = FY - cum Q3.
+    A value is derived only when both rows exist, belong to the same fiscal year
+    and accounting standard, and cover about 3, 6, 9 or 12 months. Otherwise it
+    stays None and `status` says why; nothing is estimated or filled with zero.
+    """
+    years = {}
+    for row in rows:
+        period, kind = row.get("fiscalPeriod"), row.get("period")
+        if not period or kind not in ("Q1", "Q2", "Q3", "FY"):
+            continue
+        n = 4 if kind == "FY" else int(kind[1])
+        years.setdefault(_add_months(period, 3 * (4 - n)), {})[n] = row
+    result = []
+    for year_end in sorted(years):
+        quarters = years[year_end]
+        for n in range(1, 5):
+            row = quarters.get(n)
+            if row is None:
+                continue
+            previous = quarters.get(n - 1)
+            days = row.get("fiscalPeriodDays")
+            status = "ok"
+            if _number(days) and abs(days - 91.3 * n) > 20:
+                status = "irregularPeriod"
+            elif n > 1 and previous is None:
+                status = "missingPrevious"
+            elif n > 1 and str(previous.get("accountingStandard")).lower() != str(row.get("accountingStandard")).lower():
+                status = "standardChanged"
+            out = {"symbol": row.get("symbol"), "fiscalYearEnd": year_end, "quarter": "Q%d" % n,
+                   "quarterEnd": row.get("fiscalPeriod"), "accountingStandard": row.get("accountingStandard")}
+            for item in QUARTER_ITEMS:
+                current = row.get(item)
+                out["cumulative" + item[0].upper() + item[1:]] = current
+                if status != "ok" or not _number(current):
+                    out[item] = None
+                elif n == 1:
+                    out[item] = current
+                else:
+                    before = previous.get(item)
+                    out[item] = current - before if _number(before) else None
+            if status == "ok" and any(out[item] is None for item in QUARTER_ITEMS):
+                status = "missingValue"
+            revenue, income = out["revenue"], out["operatingIncome"]
+            out["operatingMargin"] = income / revenue if _number(revenue) and _number(income) and revenue > 0 else None
+            out["status"] = status
+            out["docId"] = (row.get("provenance") or {}).get("docId")
+            out["previousDocId"] = (previous.get("provenance") or {}).get("docId") if n > 1 and previous else None
+            result.append(out)
     return result
 
 
@@ -258,6 +329,12 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
         if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 30:
             raise ZenithError("Peers --limit must be between 1 and 30.")
         result["peers"] = requester("/peers", {"symbol": symbol, "limit": limit}, api_key)
+    elif mode == "quarters":
+        if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
+            raise ZenithError("Quarters --years must be between 1 and 10.")
+        # No period filter: Q1-Q3 (year-to-date) and FY rows are both needed.
+        rows = requester("/income-statement", {"symbol": symbol, "limit": min(40, years * 4)}, api_key)
+        result["quarters"] = standalone_quarters(rows)
     elif mode == "dividends":
         if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 100:
             raise ZenithError("Dividends --limit must be between 1 and 100.")
@@ -317,6 +394,8 @@ def table_rows(result):
         fields, rows = CSV_FIELDS, result["annualTrend"]
     elif "earnings" in result:
         fields, rows = EARNINGS_FIELDS, result["earnings"]
+    elif "quarters" in result:
+        fields, rows = QUARTER_FIELDS, result["quarters"]
     elif "dividends" in result:
         fields, rows = DIVIDEND_FIELDS, result["dividends"]
     elif "companies" in result and "symbols" in result:
@@ -369,7 +448,7 @@ def main():
     if args.demo and args.mode not in DEMO_MODES:
         parser.error("--demo is available for %s." % ", ".join(DEMO_MODES))
     if args.years is None:
-        args.years = 3 if args.mode == "statements" else 5
+        args.years = {"statements": 3, "quarters": 2}.get(args.mode, 5)
     try:
         if args.demo:
             key, requester = "demo", demo_requester
