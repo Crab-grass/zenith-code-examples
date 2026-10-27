@@ -1,0 +1,863 @@
+{
+ "_note": "Synthetic demo data for --demo. Fictional companies and values; not API output.",
+ "/search-name": [
+  {
+   "symbol": "DEMOA",
+   "nameJa": "デモ自動車株式会社",
+   "nameEn": "Demo Motors Co., Ltd.",
+   "currency": "JPY",
+   "exchange": "DEMO",
+   "exchangeFullName": "Demo exchange (synthetic)"
+  },
+  {
+   "symbol": "DEMOB",
+   "nameJa": "デモ電機ホールディングス株式会社",
+   "nameEn": "Demo Electronics Holdings, Inc.",
+   "currency": "JPY",
+   "exchange": "DEMO",
+   "exchangeFullName": "Demo exchange (synthetic)"
+  },
+  {
+   "symbol": "DEMOC",
+   "nameJa": "デモ食品株式会社",
+   "nameEn": "Demo Foods Corporation",
+   "currency": "JPY",
+   "exchange": "DEMO",
+   "exchangeFullName": "Demo exchange (synthetic)"
+  }
+ ],
+ "/income-statement": {
+  "DEMOA": [
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2025-03"
+    },
+    "revenue": 1152000000000,
+    "operatingIncome": 115200000000,
+    "ordinaryIncome": null,
+    "extraordinaryIncome": null,
+    "extraordinaryLoss": null,
+    "pretaxIncome": 112896000000,
+    "netIncome": 79027200000,
+    "operatingMargin": 0.1,
+    "ordinaryMargin": null,
+    "netMargin": 0.0686
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2024-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2024-03"
+    },
+    "revenue": 1089000000000,
+    "operatingIncome": 128500000000,
+    "ordinaryIncome": null,
+    "extraordinaryIncome": null,
+    "extraordinaryLoss": null,
+    "pretaxIncome": 126322000000,
+    "netIncome": 88425400000,
+    "operatingMargin": 0.1179981634527089,
+    "ordinaryMargin": null,
+    "netMargin": 0.08119871441689623
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2023-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2023-03"
+    },
+    "revenue": 1026000000000,
+    "operatingIncome": 74900000000,
+    "ordinaryIncome": null,
+    "extraordinaryIncome": null,
+    "extraordinaryLoss": null,
+    "pretaxIncome": 72848000000,
+    "netIncome": 50993600000,
+    "operatingMargin": 0.07300194931773879,
+    "ordinaryMargin": null,
+    "netMargin": 0.049701364522417156
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2022-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2022-03"
+    },
+    "revenue": 963000000000,
+    "operatingIncome": 91500000000,
+    "ordinaryIncome": null,
+    "extraordinaryIncome": null,
+    "extraordinaryLoss": null,
+    "pretaxIncome": 89574000000,
+    "netIncome": 62701799999,
+    "operatingMargin": 0.09501557632398754,
+    "ordinaryMargin": null,
+    "netMargin": 0.06511090342575286
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2021-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2021-03"
+    },
+    "revenue": 900000000000,
+    "operatingIncome": 72000000000,
+    "ordinaryIncome": null,
+    "extraordinaryIncome": null,
+    "extraordinaryLoss": null,
+    "pretaxIncome": 70200000000,
+    "netIncome": 49140000000,
+    "operatingMargin": 0.08,
+    "ordinaryMargin": null,
+    "netMargin": 0.0546
+   }
+  ],
+  "DEMOB": [
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2025-03"
+    },
+    "revenue": 384000000000,
+    "operatingIncome": 27300000000,
+    "ordinaryIncome": 31140000000,
+    "extraordinaryIncome": 384000000,
+    "extraordinaryLoss": 768000000,
+    "pretaxIncome": 30372000000,
+    "netIncome": 21260400000,
+    "operatingMargin": 0.07109375,
+    "ordinaryMargin": 0.08109375,
+    "netMargin": 0.055365625
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2024-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2024-03"
+    },
+    "revenue": 363000000000,
+    "operatingIncome": 24300000000,
+    "ordinaryIncome": 27930000000,
+    "extraordinaryIncome": 363000000,
+    "extraordinaryLoss": 726000000,
+    "pretaxIncome": 27204000000,
+    "netIncome": 19042800000,
+    "operatingMargin": 0.06694214876033058,
+    "ordinaryMargin": 0.07694214876033058,
+    "netMargin": 0.0524595041322314
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2023-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2023-03"
+    },
+    "revenue": null,
+    "operatingIncome": 19800000000,
+    "ordinaryIncome": 23220000000,
+    "extraordinaryIncome": 342000000,
+    "extraordinaryLoss": 684000000,
+    "pretaxIncome": 22536000000,
+    "netIncome": 15775199999,
+    "operatingMargin": 0.05789473684210526,
+    "ordinaryMargin": 0.06789473684210526,
+    "netMargin": 0.04612631578654971
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2022-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2022-03"
+    },
+    "revenue": 321000000000,
+    "operatingIncome": 19600000000,
+    "ordinaryIncome": 22810000000,
+    "extraordinaryIncome": 321000000,
+    "extraordinaryLoss": 642000000,
+    "pretaxIncome": 22168000000,
+    "netIncome": 15517599999,
+    "operatingMargin": 0.06105919003115265,
+    "ordinaryMargin": 0.07105919003115264,
+    "netMargin": 0.048341433018691586
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2021-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2021-03"
+    },
+    "revenue": 300000000000,
+    "operatingIncome": 15000000000,
+    "ordinaryIncome": 18000000000,
+    "extraordinaryIncome": 300000000,
+    "extraordinaryLoss": 600000000,
+    "pretaxIncome": 17400000000,
+    "netIncome": 12180000000,
+    "operatingMargin": 0.05,
+    "ordinaryMargin": 0.06,
+    "netMargin": 0.0406
+   }
+  ],
+  "DEMOC": [
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2025-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2025-12"
+    },
+    "revenue": 154000000000,
+    "operatingIncome": 6500000000,
+    "ordinaryIncome": 8040000000,
+    "extraordinaryIncome": 154000000,
+    "extraordinaryLoss": 308000000,
+    "pretaxIncome": 7732000000,
+    "netIncome": 5412400000,
+    "operatingMargin": 0.04220779220779221,
+    "ordinaryMargin": 0.05220779220779221,
+    "netMargin": 0.03514545454545454
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2024-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2024-12"
+    },
+    "revenue": 145000000000,
+    "operatingIncome": 4300000000,
+    "ordinaryIncome": 5750000000,
+    "extraordinaryIncome": 145000000,
+    "extraordinaryLoss": 290000000,
+    "pretaxIncome": 5460000000,
+    "netIncome": 3821999999,
+    "operatingMargin": 0.029655172413793104,
+    "ordinaryMargin": 0.039655172413793106,
+    "netMargin": 0.02635862068275862
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2023-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2023-12"
+    },
+    "revenue": 137000000000,
+    "operatingIncome": -1400000000,
+    "ordinaryIncome": -30000000,
+    "extraordinaryIncome": 137000000,
+    "extraordinaryLoss": 274000000,
+    "pretaxIncome": -304000000,
+    "netIncome": -212800000,
+    "operatingMargin": -0.010218978102189781,
+    "ordinaryMargin": -0.00021897810218978101,
+    "netMargin": -0.0015532846715328467
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2022-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2022-12"
+    },
+    "revenue": 128000000000,
+    "operatingIncome": 4500000000,
+    "ordinaryIncome": 5780000000,
+    "extraordinaryIncome": 128000000,
+    "extraordinaryLoss": 256000000,
+    "pretaxIncome": 5524000000,
+    "netIncome": 3866799999,
+    "operatingMargin": 0.03515625,
+    "ordinaryMargin": 0.04515625,
+    "netMargin": 0.0302093749921875
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2021-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2021-12"
+    },
+    "revenue": 120000000000,
+    "operatingIncome": 4800000000,
+    "ordinaryIncome": 6000000000,
+    "extraordinaryIncome": 120000000,
+    "extraordinaryLoss": 240000000,
+    "pretaxIncome": 5760000000,
+    "netIncome": 4031999999,
+    "operatingMargin": 0.04,
+    "ordinaryMargin": 0.05,
+    "netMargin": 0.033599999991666664
+   }
+  ]
+ },
+ "/balance-sheet-statement": {
+  "DEMOA": [
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2025-03"
+    },
+    "totalAssets": 1612800000000,
+    "totalLiabilities": 935424000000,
+    "netAssets": 677376000000,
+    "ownersEquity": 677376000000,
+    "cashAndCashEquivalents": 138240000000,
+    "equityRatio": 0.42
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2024-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2024-03"
+    },
+    "totalAssets": 1524600000000,
+    "totalLiabilities": 899514000000,
+    "netAssets": 625086000000,
+    "ownersEquity": 625086000000,
+    "cashAndCashEquivalents": 130680000000,
+    "equityRatio": 0.41
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2023-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2023-03"
+    },
+    "totalAssets": 1436400000000,
+    "totalLiabilities": 861840000000,
+    "netAssets": 574560000000,
+    "ownersEquity": 574560000000,
+    "cashAndCashEquivalents": 123120000000,
+    "equityRatio": 0.4
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2022-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2022-03"
+    },
+    "totalAssets": 1348200000000,
+    "totalLiabilities": 822402000000,
+    "netAssets": 525798000000,
+    "ownersEquity": 525798000000,
+    "cashAndCashEquivalents": 115560000000,
+    "equityRatio": 0.39
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2021-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2021-03"
+    },
+    "totalAssets": 1260000000000,
+    "totalLiabilities": 781200000000,
+    "netAssets": 478800000000,
+    "ownersEquity": 478800000000,
+    "cashAndCashEquivalents": 108000000000,
+    "equityRatio": 0.38
+   }
+  ],
+  "DEMOB": [
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2025-03"
+    },
+    "totalAssets": 537599999999,
+    "totalLiabilities": 311808000000,
+    "netAssets": 225791999999,
+    "ownersEquity": 225791999999,
+    "cashAndCashEquivalents": 46080000000,
+    "equityRatio": 0.4199999999989211
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2024-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2024-03"
+    },
+    "totalAssets": 508199999999,
+    "totalLiabilities": 299838000000,
+    "netAssets": 208361999999,
+    "ownersEquity": 208361999999,
+    "cashAndCashEquivalents": 43560000000,
+    "equityRatio": 0.409999999998839
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2023-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2023-03"
+    },
+    "totalAssets": 478800000000,
+    "totalLiabilities": 287280000000,
+    "netAssets": 191520000000,
+    "ownersEquity": 191520000000,
+    "cashAndCashEquivalents": 41040000000,
+    "equityRatio": 0.4
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2022-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2022-03"
+    },
+    "totalAssets": 449400000000,
+    "totalLiabilities": 274134000000,
+    "netAssets": 175266000000,
+    "ownersEquity": 175266000000,
+    "cashAndCashEquivalents": 38520000000,
+    "equityRatio": 0.39
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2021-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2021-03"
+    },
+    "totalAssets": 420000000000,
+    "totalLiabilities": 260400000000,
+    "netAssets": 159600000000,
+    "ownersEquity": 159600000000,
+    "cashAndCashEquivalents": 36000000000,
+    "equityRatio": 0.38
+   }
+  ],
+  "DEMOC": [
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2025-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2025-12"
+    },
+    "totalAssets": 215600000000,
+    "totalLiabilities": 125048000000,
+    "netAssets": 90552000000,
+    "ownersEquity": 90552000000,
+    "cashAndCashEquivalents": 18480000000,
+    "equityRatio": 0.42
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2024-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2024-12"
+    },
+    "totalAssets": 203000000000,
+    "totalLiabilities": 119770000000,
+    "netAssets": 83230000000,
+    "ownersEquity": 83230000000,
+    "cashAndCashEquivalents": 17400000000,
+    "equityRatio": 0.41
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2023-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2023-12"
+    },
+    "totalAssets": 191800000000,
+    "totalLiabilities": 115080000000,
+    "netAssets": 76720000000,
+    "ownersEquity": 76720000000,
+    "cashAndCashEquivalents": 16440000000,
+    "equityRatio": 0.4
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2022-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2022-12"
+    },
+    "totalAssets": 179200000000,
+    "totalLiabilities": 109312000000,
+    "netAssets": 69888000000,
+    "ownersEquity": 69888000000,
+    "cashAndCashEquivalents": 15360000000,
+    "equityRatio": 0.39
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2021-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2021-12"
+    },
+    "totalAssets": 168000000000,
+    "totalLiabilities": 104160000000,
+    "netAssets": 63840000000,
+    "ownersEquity": 63840000000,
+    "cashAndCashEquivalents": 14400000000,
+    "equityRatio": 0.38
+   }
+  ]
+ },
+ "/cash-flow-statement": {
+  "DEMOA": [
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2025-03"
+    },
+    "operatingCashFlow": 138240000000,
+    "investingCashFlow": -92160000000,
+    "financingCashFlow": -34560000000,
+    "cashAtEndOfPeriod": 138240000000,
+    "freeCashFlow": 46080000000
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2024-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2024-03"
+    },
+    "operatingCashFlow": 154200000000,
+    "investingCashFlow": -102800000000,
+    "financingCashFlow": -38550000000,
+    "cashAtEndOfPeriod": 130680000000,
+    "freeCashFlow": 51400000000
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2023-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2023-03"
+    },
+    "operatingCashFlow": 89880000000,
+    "investingCashFlow": -59920000000,
+    "financingCashFlow": -22470000000,
+    "cashAtEndOfPeriod": 123120000000,
+    "freeCashFlow": 29960000000
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2022-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2022-03"
+    },
+    "operatingCashFlow": 109800000000,
+    "investingCashFlow": -73200000000,
+    "financingCashFlow": -27450000000,
+    "cashAtEndOfPeriod": 115560000000,
+    "freeCashFlow": 36600000000
+   },
+   {
+    "symbol": "DEMOA",
+    "fiscalPeriod": "2021-03",
+    "period": "FY",
+    "accountingStandard": "ifrs",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOA-2021-03"
+    },
+    "operatingCashFlow": 86400000000,
+    "investingCashFlow": -57600000000,
+    "financingCashFlow": -21600000000,
+    "cashAtEndOfPeriod": 108000000000,
+    "freeCashFlow": 28800000000
+   }
+  ],
+  "DEMOB": [
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2025-03"
+    },
+    "operatingCashFlow": 32760000000,
+    "investingCashFlow": -21840000000,
+    "financingCashFlow": -8190000000,
+    "cashAtEndOfPeriod": 46080000000,
+    "freeCashFlow": 10920000000
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2024-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2024-03"
+    },
+    "operatingCashFlow": 29160000000,
+    "investingCashFlow": -19440000000,
+    "financingCashFlow": -7290000000,
+    "cashAtEndOfPeriod": 43560000000,
+    "freeCashFlow": 9720000000
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2023-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2023-03"
+    },
+    "operatingCashFlow": 23760000000,
+    "investingCashFlow": -15840000000,
+    "financingCashFlow": -5940000000,
+    "cashAtEndOfPeriod": 41040000000,
+    "freeCashFlow": 7920000000
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2022-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2022-03"
+    },
+    "operatingCashFlow": 23520000000,
+    "investingCashFlow": -15680000000,
+    "financingCashFlow": -5880000000,
+    "cashAtEndOfPeriod": 38520000000,
+    "freeCashFlow": 7840000000
+   },
+   {
+    "symbol": "DEMOB",
+    "fiscalPeriod": "2021-03",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOB-2021-03"
+    },
+    "operatingCashFlow": 18000000000,
+    "investingCashFlow": -12000000000,
+    "financingCashFlow": -4500000000,
+    "cashAtEndOfPeriod": 36000000000,
+    "freeCashFlow": 6000000000
+   }
+  ],
+  "DEMOC": [
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2025-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2025-12"
+    },
+    "operatingCashFlow": 7800000000,
+    "investingCashFlow": -5200000000,
+    "financingCashFlow": -1950000000,
+    "cashAtEndOfPeriod": 18480000000,
+    "freeCashFlow": 2600000000
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2024-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 366,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2024-12"
+    },
+    "operatingCashFlow": 5160000000,
+    "investingCashFlow": -3440000000,
+    "financingCashFlow": -1290000000,
+    "cashAtEndOfPeriod": 17400000000,
+    "freeCashFlow": 1720000000
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2023-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2023-12"
+    },
+    "operatingCashFlow": -1680000000,
+    "investingCashFlow": 1120000000,
+    "financingCashFlow": 420000000,
+    "cashAtEndOfPeriod": 16440000000,
+    "freeCashFlow": -560000000
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2022-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2022-12"
+    },
+    "operatingCashFlow": 5400000000,
+    "investingCashFlow": -3600000000,
+    "financingCashFlow": -1350000000,
+    "cashAtEndOfPeriod": 15360000000,
+    "freeCashFlow": 1800000000
+   },
+   {
+    "symbol": "DEMOC",
+    "fiscalPeriod": "2021-12",
+    "period": "FY",
+    "accountingStandard": "jgaap",
+    "fiscalPeriodDays": 365,
+    "provenance": {
+     "source": "synthetic",
+     "docId": "DEMOC-2021-12"
+    },
+    "operatingCashFlow": 5760000000,
+    "investingCashFlow": -3840000000,
+    "financingCashFlow": -1440000000,
+    "cashAtEndOfPeriod": 14400000000,
+    "freeCashFlow": 1920000000
+   }
+  ]
+ }
+}

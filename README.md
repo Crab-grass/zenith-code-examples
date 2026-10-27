@@ -16,6 +16,8 @@ ZENITH Code provides Japanese end-of-day stock prices under formal exchange agre
 
 | Goal | Start here | Account |
 | --- | --- | --- |
+| Try every analysis command with fictional data | `python3 python/zenith_examples.py compare --symbols DEMOA,DEMOB --demo` | No account or network |
+| Learn how Japanese filings differ (fiscal years, ordinary income, cumulative quarters) | [Guide for international developers](docs/japan-financial-data.md) | Not required |
 | Read a financial fact and build a chart | [TDnet lessons 3 and 4](docs/learning.md) | No account or extra packages |
 | Retrieve real prices and financials | **[Create an account and get an API key →](https://zenithcode.net/en/sign-up)** | Required |
 | Ask an agent to help with setup | [Copyable prompt and setup guide](docs/agent-start.md) | Required for real data |
@@ -74,6 +76,8 @@ Both implementations support the same commands:
 | `full` | Latest full-year as-reported statements, including hierarchy | 1 / 10 |
 | `trend` | Annual revenue, operating income and operating margin (recalculated and checked against the API), up to 10 years | 1 / 1 |
 | `compare` | Latest three fiscal years for 2–4 companies, with shared periods and differing standards or period lengths | 1 per company / 1 per company |
+| `search` | Find securities codes by part of an English or Japanese company name | 1 / 1 |
+| `statements` | Income statement, balance sheet and cash-flow statement, annual, up to 10 years (default 3) | 3 / 3 |
 
 *Checked against the public OpenAPI specification on 2026-10-25. API tokens are service quota units, not LLM tokens. Current plan permissions and limits apply. An empty result is kept as an empty array, not invented data. API usage may consume your plan's included quota. These examples do not purchase extra tokens or retry automatically.
 
@@ -85,7 +89,11 @@ python3 python/zenith_examples.py history --symbol 7203 --from 2026-09-01 --to 2
 python3 python/zenith_examples.py full --symbol 7203
 python3 python/zenith_examples.py trend --symbol 7203 --years 5 --csv output/trend-7203.csv
 python3 python/zenith_examples.py compare --symbols 7203,7267 --csv output/compare.csv
+python3 python/zenith_examples.py search --query Toyota
+python3 python/zenith_examples.py statements --symbol 7203
 ```
+
+Add `--demo` to `search`, `trend`, `compare` or `statements` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
 
 `trend` and `compare` recalculate operating margin from JPY amounts and check it against the API's `operatingMargin` (`match`, `mismatch`, `apiMissing`, `notCalculated` and so on). They never fill gaps with zero or pair companies whose fiscal periods differ. `compare` adds `notes` when accounting standards or period lengths differ. `--csv` also writes a UTF-8 (BOM) CSV with retrieval time and document ID on every row. `output/` is ignored by Git.
 
@@ -109,6 +117,8 @@ node javascript/zenith-examples.mjs history --symbol 7203 --from 2026-09-01 --to
 node javascript/zenith-examples.mjs full --symbol 7203
 node javascript/zenith-examples.mjs trend --symbol 7203 --years 5 --csv output/trend-7203.csv
 node javascript/zenith-examples.mjs compare --symbols 7203,7267
+node javascript/zenith-examples.mjs search --query Toyota
+node javascript/zenith-examples.mjs statements --symbol 7203 --demo
 unset ZENITH_API_KEY
 ```
 
