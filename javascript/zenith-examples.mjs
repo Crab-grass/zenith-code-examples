@@ -4,12 +4,21 @@ import { dirname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const BASE_URL = 'https://api.zenithcode.net/stable';
-export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements'];
-export const DEMO_MODES = ['search', 'trend', 'compare', 'statements'];
+export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers'];
+export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers'];
+export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers'];
 const DEMO_FILE = fileURLToPath(new URL('../learning/demo-api.json', import.meta.url));
 const SYMBOL = /^[0-9A-Z]{4,5}(?:\.T)?$/;
 export const CSV_FIELDS = ['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'fiscalPeriodDays',
   'revenue', 'operatingIncome', 'calculatedMargin', 'apiMargin', 'marginCheck', 'source', 'docId'];
+export const METRIC_FIELDS = ['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'roe', 'roa', 'roic',
+  'operatingMargin', 'netMargin', 'equityRatio', 'financialLeverage', 'payoutRatio',
+  'eps', 'bps', 'dividendPerShare', 'freeCashFlow', 'interestBearingDebt',
+  'priceDate', 'closePrice', 'per', 'pbr', 'dividendYield', 'source', 'docId'];
+export const PEER_FIELDS = ['role', 'symbol', 'nameEn', 'nameJa', 'sector', 'marketCap', 'per', 'pbr', 'psr',
+  'evToEbitda', 'roe', 'roa', 'dividendYield', 'changePctYtd', 'marketCapRank', 'sectorCount'];
+const STATEMENTS = [['incomeStatements', '/income-statement'], ['balanceSheets', '/balance-sheet-statement'], ['cashFlows', '/cash-flow-statement']];
+const ROW_META = new Set(['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'updatedAt', 'provenance', 'fiscalPeriodDays']);
 
 export async function requestRows(path, params, apiKey, fetchImpl = fetch) {
   if (!apiKey?.trim()) throw new Error('Set ZENITH_API_KEY in your environment.');
@@ -57,6 +66,10 @@ export async function demoRequester(path, params) {
     return data[path].filter(h => h.nameEn.toLowerCase().includes(query) || h.nameJa.toLowerCase().includes(query)).slice(0, params.limit);
   }
   if (!(path in data)) throw new Error(`Demo data covers ${DEMO_MODES.join(', ')} only.`);
+  if (path === '/peers') {
+    const rows = data[path][params.symbol] ?? [];
+    return rows.length > params.limit + 2 ? [...rows.slice(0, 1 + params.limit), rows.at(-1)] : rows;
+  }
   return (data[path][params.symbol] ?? []).slice(0, params.limit);
 }
 
@@ -137,9 +150,17 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
   if (mode === 'statements') {
     const years = options.years ?? 3;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Statements --years must be between 1 and 10.');
-    for (const [key, path] of [['incomeStatements', '/income-statement'], ['balanceSheets', '/balance-sheet-statement'], ['cashFlows', '/cash-flow-statement']]) {
+    for (const [key, path] of STATEMENTS) {
       result[key] = await requester(path, { symbol, period: 'annual', limit: years }, apiKey);
     }
+  } else if (mode === 'metrics') {
+    const years = options.years ?? 5;
+    if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Metrics --years must be between 1 and 10.');
+    result.annualMetrics = await requester('/key-metrics', { symbol, period: 'annual', limit: years }, apiKey);
+  } else if (mode === 'peers') {
+    const limit = options.limit ?? 10;
+    if (!Number.isInteger(limit) || limit < 1 || limit > 30) throw new Error('Peers --limit must be between 1 and 30.');
+    result.peers = await requester('/peers', { symbol, limit }, apiKey);
   } else if (mode === 'trend') {
     const years = options.years ?? 5;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Trend --years must be between 1 and 10.');
@@ -158,18 +179,48 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
   return result;
 }
 
-// Rows for --csv: trend and compare only. retrievedAt is kept on every row.
+function flatten(row, fields) {
+  const provenance = row.provenance && typeof row.provenance === 'object' ? row.provenance : {};
+  const extra = { source: provenance.source ?? null, docId: provenance.docId ?? null };
+  return Object.fromEntries(fields.map(f => [f, f in row ? row[f] : extra[f] ?? null]));
+}
+
+// Wide table: one row per line item, one column per fiscal period (oldest first).
+export function statementsTable(result) {
+  const periods = [...new Set(STATEMENTS.flatMap(([key]) => (result[key] ?? []).map(r => r.fiscalPeriod).filter(Boolean)))].sort();
+  const rows = [];
+  for (const [key] of STATEMENTS) {
+    const list = result[key] ?? [];
+    const byPeriod = new Map(list.map(r => [r.fiscalPeriod, r]));
+    const items = [];
+    for (const r of list) for (const k of Object.keys(r)) if (!ROW_META.has(k) && !items.includes(k)) items.push(k);
+    const getters = [['accountingStandard', r => r.accountingStandard], ['docId', r => r.provenance?.docId], ...items.map(i => [i, r => r[i]])];
+    for (const [item, get] of getters) {
+      const row = { statement: key, item };
+      for (const p of periods) row[p] = byPeriod.has(p) ? get(byPeriod.get(p)) ?? null : null;
+      rows.push(row);
+    }
+  }
+  return { fields: ['statement', 'item', ...periods], rows };
+}
+
+// { fields, rows } for --csv. retrievedAt is kept on every row.
 export function tableRows(result) {
-  let rows;
-  if (result.annualTrend) rows = result.annualTrend;
-  else if (result.companies) rows = Object.values(result.companies).flat();
-  else throw new Error('--csv is available for trend and compare.');
-  return rows.map(row => ({ ...row, retrievedAt: result.retrievedAt }));
+  let fields, rows;
+  if (result.annualTrend) [fields, rows] = [CSV_FIELDS, result.annualTrend];
+  else if (result.companies && result.symbols) [fields, rows] = [CSV_FIELDS, Object.values(result.companies).flat()];
+  else if (result.annualMetrics) [fields, rows] = [METRIC_FIELDS, result.annualMetrics.map(r => flatten(r, METRIC_FIELDS))];
+  else if (result.peers) [fields, rows] = [PEER_FIELDS, result.peers.map(r => flatten(r, PEER_FIELDS))];
+  else if (result.incomeStatements) ({ fields, rows } = statementsTable(result));
+  else throw new Error(`--csv is available for ${CSV_MODES.join(', ')}.`);
+  return {
+    fields: [...fields, 'retrievedAt'],
+    rows: rows.map(row => ({ ...Object.fromEntries(fields.map(f => [f, row[f] ?? null])), retrievedAt: result.retrievedAt })),
+  };
 }
 
 // UTF-8 with BOM so spreadsheet software detects it. Empty cells mean missing, not zero.
-export function toCsv(rows) {
-  const fields = [...CSV_FIELDS, 'retrievedAt'];
+export function toCsv({ fields, rows }) {
   const cell = value => {
     const text = value === null || value === undefined ? '' : String(value);
     return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
@@ -179,7 +230,7 @@ export function toCsv(rows) {
 
 async function main(args) {
   if (!args.length || args.includes('--help')) {
-    console.log('node javascript/zenith-examples.mjs <snapshot|history|financials|full|trend|compare|search|statements> [--symbol 7203] [--from YYYY-MM-DD --to YYYY-MM-DD] [--years 5] [--symbols 7203,7267] [--query Toyota] [--csv out.csv] [--demo]');
+    console.log(`node javascript/zenith-examples.mjs <${MODES.join('|')}> [--symbol 7203] [--from YYYY-MM-DD --to YYYY-MM-DD] [--years 5] [--symbols 7203,7267] [--query Toyota] [--limit 10] [--csv out.csv] [--demo]`);
     return;
   }
   const [mode, ...rest] = args;
@@ -187,14 +238,15 @@ async function main(args) {
   const pairs = rest.filter(arg => arg !== '--demo');
   const options = {};
   for (let i = 0; i < pairs.length; i += 2) {
-    if (!['--symbol', '--symbols', '--query', '--years', '--from', '--to', '--csv'].includes(pairs[i]) || !pairs[i + 1] || pairs[i + 1].startsWith('--') || pairs[i] in options) {
+    if (!['--symbol', '--symbols', '--query', '--years', '--limit', '--from', '--to', '--csv'].includes(pairs[i]) || !pairs[i + 1] || pairs[i + 1].startsWith('--') || pairs[i] in options) {
       throw new Error('Invalid arguments. Run with --help.');
     }
     options[pairs[i]] = pairs[i + 1];
   }
-  if (options['--csv'] && !['trend', 'compare'].includes(mode)) throw new Error('--csv is available for trend and compare.');
+  if (options['--csv'] && !CSV_MODES.includes(mode)) throw new Error(`--csv is available for ${CSV_MODES.join(', ')}.`);
   if (demo && !DEMO_MODES.includes(mode)) throw new Error(`--demo is available for ${DEMO_MODES.join(', ')}.`);
   const years = options['--years'] === undefined ? undefined : Number(options['--years']);
+  const limit = options['--limit'] === undefined ? undefined : Number(options['--limit']);
   let key = 'demo', requester = demoRequester;
   if (demo) {
     console.error('Demo mode: fictional companies and values. No API request is made.');
@@ -205,7 +257,7 @@ async function main(args) {
     console.error('Local/private use: do not publish API responses or API keys.');
   }
   const data = await runExample(mode, options['--symbol'] ?? '7203', key, options['--from'], options['--to'], requester,
-    { symbols: options['--symbols'], years, query: options['--query'] });
+    { symbols: options['--symbols'], years, query: options['--query'], limit });
   if (demo) data.demo = true;
   if (options['--csv']) {
     mkdirSync(dirname(options['--csv']), { recursive: true });

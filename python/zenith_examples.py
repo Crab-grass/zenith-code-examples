@@ -14,13 +14,25 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 BASE_URL = "https://api.zenithcode.net/stable"
-MODES = ("snapshot", "history", "financials", "full", "trend", "compare", "search", "statements")
-DEMO_MODES = ("search", "trend", "compare", "statements")
+MODES = ("snapshot", "history", "financials", "full", "trend", "compare", "search", "statements",
+         "metrics", "peers")
+DEMO_MODES = ("search", "trend", "compare", "statements", "metrics", "peers")
+CSV_MODES = ("trend", "compare", "statements", "metrics", "peers")
 DEMO_FILE = Path(__file__).resolve().parents[1] / "learning" / "demo-api.json"
 SYMBOL = re.compile(r"[0-9A-Z]{4,5}(?:\.T)?")
 CSV_FIELDS = ("symbol", "fiscalPeriod", "period", "accountingStandard", "fiscalPeriodDays",
               "revenue", "operatingIncome", "calculatedMargin", "apiMargin", "marginCheck",
               "source", "docId")
+METRIC_FIELDS = ("symbol", "fiscalPeriod", "period", "accountingStandard", "roe", "roa", "roic",
+                 "operatingMargin", "netMargin", "equityRatio", "financialLeverage", "payoutRatio",
+                 "eps", "bps", "dividendPerShare", "freeCashFlow", "interestBearingDebt",
+                 "priceDate", "closePrice", "per", "pbr", "dividendYield", "source", "docId")
+PEER_FIELDS = ("role", "symbol", "nameEn", "nameJa", "sector", "marketCap", "per", "pbr", "psr",
+               "evToEbitda", "roe", "roa", "dividendYield", "changePctYtd", "marketCapRank", "sectorCount")
+STATEMENTS = (("incomeStatements", "/income-statement"),
+              ("balanceSheets", "/balance-sheet-statement"),
+              ("cashFlows", "/cash-flow-statement"))
+ROW_META = {"symbol", "fiscalPeriod", "period", "accountingStandard", "updatedAt", "provenance", "fiscalPeriodDays"}
 
 
 class ZenithError(Exception):
@@ -72,6 +84,9 @@ def demo_requester(path, params, api_key=None):
         return hits[:params["limit"]]
     if path not in data:
         raise ZenithError("Demo data covers %s only." % ", ".join(DEMO_MODES))
+    if path == "/peers":
+        rows = data[path].get(params["symbol"], [])
+        return rows[:1 + params["limit"]] + rows[-1:] if len(rows) > params["limit"] + 2 else rows
     return data[path].get(params["symbol"], [])[:params["limit"]]
 
 
@@ -132,7 +147,7 @@ def comparison_notes(companies):
 
 
 def run_example(mode, symbol, api_key, start=None, end=None, requester=request_rows,
-                symbols=None, years=5, query=None):
+                symbols=None, years=5, query=None, limit=10):
     if mode not in MODES:
         raise ZenithError("Choose " + ", ".join(MODES[:-1]) + " or " + MODES[-1] + ".")
     if mode == "search":
@@ -160,10 +175,18 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
     if mode == "statements":
         if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
             raise ZenithError("Statements --years must be between 1 and 10.")
-        for key, path in (("incomeStatements", "/income-statement"),
-                          ("balanceSheets", "/balance-sheet-statement"),
-                          ("cashFlows", "/cash-flow-statement")):
+        for key, path in STATEMENTS:
             result[key] = requester(path, {"symbol": symbol, "period": "annual", "limit": years}, api_key)
+    elif mode == "metrics":
+        if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
+            raise ZenithError("Metrics --years must be between 1 and 10.")
+        result["annualMetrics"] = requester("/key-metrics", {
+            "symbol": symbol, "period": "annual", "limit": years,
+        }, api_key)
+    elif mode == "peers":
+        if isinstance(limit, bool) or not isinstance(limit, int) or not 1 <= limit <= 30:
+            raise ZenithError("Peers --limit must be between 1 and 30.")
+        result["peers"] = requester("/peers", {"symbol": symbol, "limit": limit}, api_key)
     elif mode == "trend":
         if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
             raise ZenithError("Trend --years must be between 1 and 10.")
@@ -193,24 +216,56 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
     return result
 
 
+def _flatten(row, fields):
+    provenance = row.get("provenance") if isinstance(row.get("provenance"), dict) else {}
+    extra = {"source": provenance.get("source"), "docId": provenance.get("docId")}
+    return {f: row.get(f, extra.get(f)) for f in fields}
+
+
+def statements_table(result):
+    """Wide table: one row per line item, one column per fiscal period (oldest first)."""
+    periods = sorted({r.get("fiscalPeriod") for key, _ in STATEMENTS for r in result.get(key, [])
+                      if r.get("fiscalPeriod")})
+    rows = []
+    for key, _ in STATEMENTS:
+        by_period = {r.get("fiscalPeriod"): r for r in result.get(key, [])}
+        items = []
+        for r in result.get(key, []):
+            items += [k for k in r if k not in ROW_META and k not in items]
+        meta = [("accountingStandard", lambda r: r.get("accountingStandard")),
+                ("docId", lambda r: (r.get("provenance") or {}).get("docId"))]
+        for item, get in meta + [(i, (lambda name: lambda r: r.get(name))(i)) for i in items]:
+            row = {"statement": key, "item": item}
+            row.update({p: get(by_period[p]) if p in by_period else None for p in periods})
+            rows.append(row)
+    return ["statement", "item"] + periods, rows
+
+
 def table_rows(result):
-    """Rows for --csv: trend and compare only. retrievedAt is kept on every row."""
+    """(fields, rows) for --csv. retrievedAt is kept on every row."""
     if "annualTrend" in result:
-        rows = result["annualTrend"]
-    elif "companies" in result:
-        rows = [r for company in result["companies"].values() for r in company]
+        fields, rows = CSV_FIELDS, result["annualTrend"]
+    elif "companies" in result and "symbols" in result:
+        fields, rows = CSV_FIELDS, [r for company in result["companies"].values() for r in company]
+    elif "annualMetrics" in result:
+        fields, rows = METRIC_FIELDS, [_flatten(r, METRIC_FIELDS) for r in result["annualMetrics"]]
+    elif "peers" in result:
+        fields, rows = PEER_FIELDS, [_flatten(r, PEER_FIELDS) for r in result["peers"]]
+    elif "incomeStatements" in result:
+        fields, rows = statements_table(result)
     else:
-        raise ZenithError("--csv is available for trend and compare.")
-    return [dict(r, retrievedAt=result["retrievedAt"]) for r in rows]
+        raise ZenithError("--csv is available for %s." % ", ".join(CSV_MODES))
+    fields = tuple(fields) + ("retrievedAt",)
+    return fields, [dict({f: r.get(f) for f in fields[:-1]}, retrievedAt=result["retrievedAt"]) for r in rows]
 
 
-def write_csv(path, rows):
+def write_csv(path, fields, rows):
     # utf-8-sig lets spreadsheet software detect UTF-8. Empty cells mean missing, not zero.
     folder = os.path.dirname(path)
     if folder:
         os.makedirs(folder, exist_ok=True)
     with open(path, "w", encoding="utf-8-sig", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=CSV_FIELDS + ("retrievedAt",))
+        writer = csv.DictWriter(file, fieldnames=fields)
         writer.writeheader()
         writer.writerows(rows)
 
@@ -223,13 +278,15 @@ def main():
     parser.add_argument("--query", help="search: part of a Japanese or English company name")
     parser.add_argument("--demo", action="store_true",
                         help="search/trend/compare/statements with synthetic data; no key or network")
-    parser.add_argument("--years", type=int, help="trend (default 5) / statements (default 3): 1-10 fiscal years")
+    parser.add_argument("--years", type=int,
+                        help="trend/metrics (default 5), statements (default 3): 1-10 fiscal years")
+    parser.add_argument("--limit", type=int, default=10, help="peers: 1-30 peers, excluding the target and the sector median")
     parser.add_argument("--from", dest="start")
     parser.add_argument("--to", dest="end")
     parser.add_argument("--csv", help="trend/compare: also write a local CSV file")
     args = parser.parse_args()
-    if args.csv and args.mode not in ("trend", "compare"):
-        parser.error("--csv is available for trend and compare.")
+    if args.csv and args.mode not in CSV_MODES:
+        parser.error("--csv is available for %s." % ", ".join(CSV_MODES))
     if args.demo and args.mode not in DEMO_MODES:
         parser.error("--demo is available for %s." % ", ".join(DEMO_MODES))
     if args.years is None:
@@ -247,11 +304,11 @@ def main():
                                   "To try without a key, add --demo.")
             print("Local/private use: do not publish API responses or API keys.", file=sys.stderr)
         data = run_example(args.mode, args.symbol, key, args.start, args.end, requester,
-                           symbols=args.symbols, years=args.years, query=args.query)
+                           symbols=args.symbols, years=args.years, query=args.query, limit=args.limit)
         if args.demo:
             data["demo"] = True
         if args.csv:
-            write_csv(args.csv, table_rows(data))
+            write_csv(args.csv, *table_rows(data))
             print("Wrote %s. Keep it private." % args.csv, file=sys.stderr)
         print(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False))
     except ZenithError as error:

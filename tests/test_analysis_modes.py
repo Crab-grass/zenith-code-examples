@@ -80,7 +80,7 @@ class CsvTests(unittest.TestCase):
                              requester=lambda *a: [row("DEMO", "2001-03", None, 1, None), row("DEMO", "2002-03", 100, 10, 0.1)])
         with tempfile.TemporaryDirectory() as folder:
             path = Path(folder) / "out.csv"
-            write_csv(path, table_rows(result))
+            write_csv(path, *table_rows(result))
             self.assertTrue(path.read_bytes().startswith(b"\xef\xbb\xbf"))
             with path.open(encoding="utf-8-sig", newline="") as file:
                 rows = list(csv.DictReader(file))

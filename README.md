@@ -78,6 +78,8 @@ Both implementations support the same commands:
 | `compare` | Latest three fiscal years for 2–4 companies, with shared periods and differing standards or period lengths | 1 per company / 1 per company |
 | `search` | Find securities codes by part of an English or Japanese company name | 1 / 1 |
 | `statements` | Income statement, balance sheet and cash-flow statement, annual, up to 10 years (default 3) | 3 / 3 |
+| `metrics` | ROE, ROA, ROIC, margins, equity ratio, EPS, BPS, dividends, PER, PBR by fiscal year (default 5) | 1 / 1 |
+| `peers` | Same-sector companies closest in market cap, with valuation and profitability, plus the sector median | 1 / 10 |
 
 *Checked against the public OpenAPI specification on 2026-10-25. API tokens are service quota units, not LLM tokens. Current plan permissions and limits apply. An empty result is kept as an empty array, not invented data. API usage may consume your plan's included quota. These examples do not purchase extra tokens or retry automatically.
 
@@ -90,10 +92,23 @@ python3 python/zenith_examples.py full --symbol 7203
 python3 python/zenith_examples.py trend --symbol 7203 --years 5 --csv output/trend-7203.csv
 python3 python/zenith_examples.py compare --symbols 7203,7267 --csv output/compare.csv
 python3 python/zenith_examples.py search --query Toyota
-python3 python/zenith_examples.py statements --symbol 7203
+python3 python/zenith_examples.py statements --symbol 7203 --csv output/statements-7203.csv
+python3 python/zenith_examples.py metrics --symbol 7203 --csv output/metrics-7203.csv
+python3 python/zenith_examples.py peers --symbol 7203 --limit 5
 ```
 
-Add `--demo` to `search`, `trend`, `compare` or `statements` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
+`--csv` works with `trend`, `compare`, `statements`, `metrics` and `peers`. For `statements` it writes one wide table: a row per line item and a column per fiscal year, with the accounting standard and document ID at the top of each statement.
+
+Draw an SVG chart from saved `trend` or `compare` output, with no extra packages (`--lang ja` for Japanese labels):
+
+```sh
+python3 python/zenith_examples.py trend --symbol 7203 > output/trend-7203.json
+python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg
+```
+
+To call these functions from your own code, pandas or Jupyter, see [use as a library](docs/library.md).
+
+Add `--demo` to `search`, `trend`, `compare`, `statements`, `metrics` or `peers` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
 
 `trend` and `compare` recalculate operating margin from JPY amounts and check it against the API's `operatingMargin` (`match`, `mismatch`, `apiMissing`, `notCalculated` and so on). They never fill gaps with zero or pair companies whose fiscal periods differ. `compare` adds `notes` when accounting standards or period lengths differ. `--csv` also writes a UTF-8 (BOM) CSV with retrieval time and document ID on every row. `output/` is ignored by Git.
 

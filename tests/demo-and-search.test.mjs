@@ -34,3 +34,26 @@ test('demo data answers every demo mode without a network', async () => {
   assert.deepEqual(statements.cashFlows.map(r => r.fiscalPeriod), ['2025-12', '2024-12']);
   await assert.rejects(demoRequester('/quote', { symbol: 'DEMOA', limit: 1 }));
 });
+
+test('metrics and peers requests, bounds and demo order', async () => {
+  const calls = [];
+  const requester = async (...args) => { calls.push(args); return []; };
+  await runExample('metrics', 'DEMO', 'test-only', undefined, undefined, requester, { years: 4 });
+  await runExample('peers', 'DEMO', 'test-only', undefined, undefined, requester, { limit: 5 });
+  assert.deepEqual(calls, [['/key-metrics', { symbol: 'DEMO', period: 'annual', limit: 4 }, 'test-only'], ['/peers', { symbol: 'DEMO', limit: 5 }, 'test-only']]);
+  for (const limit of [0, 31, 1.5]) await assert.rejects(runExample('peers', 'DEMO', 'test-only', undefined, undefined, requester, { limit }));
+  const peers = await runExample('peers', 'DEMOB', 'demo', undefined, undefined, demoRequester, { limit: 1 });
+  assert.deepEqual(peers.peers.map(r => r.role), ['target', 'peer', 'sector-median']);
+});
+
+test('wide statements CSV keeps gaps and document IDs', async () => {
+  const { tableRows } = await import('../javascript/zenith-examples.mjs');
+  const statements = await runExample('statements', 'DEMOB', 'demo', undefined, undefined, demoRequester, { years: 3 });
+  const { fields, rows } = tableRows(statements);
+  assert.deepEqual(fields, ['statement', 'item', '2023-03', '2024-03', '2025-03', 'retrievedAt']);
+  assert.equal(rows.find(r => r.item === 'revenue')['2023-03'], null);
+  assert.equal(rows.find(r => r.item === 'docId')['2025-03'], 'DEMOB-2025-03');
+  const metrics = tableRows(await runExample('metrics', 'DEMOA', 'demo', undefined, undefined, demoRequester, { years: 2 }));
+  assert.equal(metrics.rows[0].docId, 'DEMOA-2025-03');
+  assert.equal(metrics.rows[0].roic, null);
+});
