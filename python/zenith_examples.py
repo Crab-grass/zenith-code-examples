@@ -1,7 +1,9 @@
 """Local examples for ZENITH Code. Python 3.9+, standard library only."""
 import argparse
+import csv
 import getpass
 import json
+import math
 import os
 import re
 import sys
@@ -11,6 +13,11 @@ import urllib.request
 from datetime import date, datetime, timezone
 
 BASE_URL = "https://api.zenithcode.net/stable"
+MODES = ("snapshot", "history", "financials", "full", "trend", "compare")
+SYMBOL = re.compile(r"[0-9A-Z]{4,5}(?:\.T)?")
+CSV_FIELDS = ("symbol", "fiscalPeriod", "period", "accountingStandard", "fiscalPeriodDays",
+              "revenue", "operatingIncome", "calculatedMargin", "apiMargin", "marginCheck",
+              "source", "docId")
 
 
 class ZenithError(Exception):
@@ -53,13 +60,89 @@ def request_rows(path, params, api_key, opener=None):
     return data
 
 
-def run_example(mode, symbol, api_key, start=None, end=None, requester=request_rows):
-    if not re.fullmatch(r"[0-9A-Z]{4,5}(?:\.T)?", symbol):
+def _number(value):
+    return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def margin_rows(rows):
+    """Oldest first, with operating income / revenue recalculated from yen amounts.
+
+    Missing values stay None: they are never replaced with 0. The API ratio is
+    compared, not overwritten, so a mismatch remains visible.
+    """
+    result = []
+    for row in sorted(rows, key=lambda r: str(r.get("fiscalPeriod") or "")):
+        revenue, income, api = row.get("revenue"), row.get("operatingIncome"), row.get("operatingMargin")
+        ratio = income / revenue if _number(revenue) and _number(income) and revenue > 0 else None
+        if ratio is None:
+            check = "notCalculated"
+        elif api is None:
+            check = "apiMissing"
+        elif not _number(api):
+            check = "apiInvalid"
+        else:
+            check = "match" if math.isclose(ratio, api, rel_tol=1e-9, abs_tol=1e-12) else "mismatch"
+        provenance = row.get("provenance") if isinstance(row.get("provenance"), dict) else {}
+        result.append({
+            "symbol": row.get("symbol"), "fiscalPeriod": row.get("fiscalPeriod"),
+            "period": row.get("period"), "accountingStandard": row.get("accountingStandard"),
+            "fiscalPeriodDays": row.get("fiscalPeriodDays"),
+            "revenue": revenue, "operatingIncome": income,
+            "calculatedMargin": ratio, "apiMargin": api, "marginCheck": check,
+            "source": provenance.get("source"), "docId": provenance.get("docId"),
+        })
+    return result
+
+
+def comparison_notes(companies):
+    """Explain why rows may not be comparable instead of silently pairing them."""
+    periods = [{r["fiscalPeriod"] for r in rows} for rows in companies.values()]
+    common = sorted(set.intersection(*periods)) if periods else []
+    notes = []
+    if not common:
+        notes.append("No fiscal period is shared by every company. Fiscal year ends may differ; "
+                     "state your own pairing rule before comparing.")
+    for period in common:
+        rows = [r for company in companies.values() for r in company if r["fiscalPeriod"] == period]
+        standards = {str(r["accountingStandard"]).upper() for r in rows}
+        if len(standards) > 1:
+            notes.append("%s: accounting standards differ (%s)." % (period, ", ".join(sorted(standards))))
+        days = [r["fiscalPeriodDays"] for r in rows if _number(r["fiscalPeriodDays"])]
+        if days and max(days) - min(days) > 7:
+            notes.append("%s: period lengths differ (%s days); check for an irregular fiscal year."
+                         % (period, "/".join(str(int(d)) for d in days)))
+        if any(r["calculatedMargin"] is None for r in rows):
+            notes.append("%s: at least one margin could not be calculated from the amounts." % period)
+    return common, notes
+
+
+def run_example(mode, symbol, api_key, start=None, end=None, requester=request_rows,
+                symbols=None, years=5):
+    if mode not in MODES:
+        raise ZenithError("Choose " + ", ".join(MODES[:-1]) + " or " + MODES[-1] + ".")
+    if mode == "compare":
+        codes = [code.strip() for code in (symbols or "").split(",") if code.strip()]
+        if not 2 <= len(codes) <= 4 or len(set(codes)) != len(codes):
+            raise ZenithError("Compare requires 2 to 4 different codes, e.g. --symbols 7203,7267.")
+        if not all(SYMBOL.fullmatch(code) for code in codes):
+            raise ZenithError("Use securities codes such as 7203 or 130A.")
+        result = {"symbols": codes, "retrievedAt": datetime.now(timezone.utc).isoformat()}
+        companies = {code: margin_rows(requester("/income-statement", {
+            "symbol": code, "period": "annual", "limit": 3,
+        }, api_key)) for code in codes}
+        result["companies"] = companies
+        result["commonFiscalPeriods"], result["notes"] = comparison_notes(companies)
+        return result
+    if not SYMBOL.fullmatch(symbol):
         raise ZenithError("Use a securities code such as 7203 or 130A.")
-    if mode not in ("snapshot", "history", "financials", "full"):
-        raise ZenithError("Choose snapshot, history, financials or full.")
     result = {"symbol": symbol, "retrievedAt": datetime.now(timezone.utc).isoformat()}
-    if mode == "history":
+    if mode == "trend":
+        if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:
+            raise ZenithError("Trend --years must be between 1 and 10.")
+        result["annualTrend"] = margin_rows(requester("/income-statement", {
+            "symbol": symbol, "period": "annual", "limit": years,
+        }, api_key))
+    elif mode == "history":
         try:
             first, last = date.fromisoformat(start), date.fromisoformat(end)
         except (TypeError, ValueError):
@@ -82,13 +165,40 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
     return result
 
 
+def table_rows(result):
+    """Rows for --csv: trend and compare only. retrievedAt is kept on every row."""
+    if "annualTrend" in result:
+        rows = result["annualTrend"]
+    elif "companies" in result:
+        rows = [r for company in result["companies"].values() for r in company]
+    else:
+        raise ZenithError("--csv is available for trend and compare.")
+    return [dict(r, retrievedAt=result["retrievedAt"]) for r in rows]
+
+
+def write_csv(path, rows):
+    # utf-8-sig lets spreadsheet software detect UTF-8. Empty cells mean missing, not zero.
+    folder = os.path.dirname(path)
+    if folder:
+        os.makedirs(folder, exist_ok=True)
+    with open(path, "w", encoding="utf-8-sig", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=CSV_FIELDS + ("retrievedAt",))
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=["snapshot", "history", "financials", "full"])
+    parser.add_argument("mode", choices=MODES)
     parser.add_argument("--symbol", default="7203")
+    parser.add_argument("--symbols", help="compare: 2-4 codes separated by commas")
+    parser.add_argument("--years", type=int, default=5, help="trend: 1-10 fiscal years")
     parser.add_argument("--from", dest="start")
     parser.add_argument("--to", dest="end")
+    parser.add_argument("--csv", help="trend/compare: also write a local CSV file")
     args = parser.parse_args()
+    if args.csv and args.mode not in ("trend", "compare"):
+        parser.error("--csv is available for trend and compare.")
     try:
         key = os.environ.get("ZENITH_API_KEY", "")
         if not key and sys.stdin.isatty():
@@ -96,7 +206,11 @@ def main():
         if not key.strip():
             raise ZenithError("Set ZENITH_API_KEY or run interactively to enter your key.")
         print("Local/private use: do not publish API responses or API keys.", file=sys.stderr)
-        data = run_example(args.mode, args.symbol, key, args.start, args.end)
+        data = run_example(args.mode, args.symbol, key, args.start, args.end,
+                           symbols=args.symbols, years=args.years)
+        if args.csv:
+            write_csv(args.csv, table_rows(data))
+            print("Wrote %s. Keep it private." % args.csv, file=sys.stderr)
         print(json.dumps(data, ensure_ascii=False, indent=2, allow_nan=False))
     except ZenithError as error:
         print(str(error), file=sys.stderr)
