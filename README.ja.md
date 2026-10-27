@@ -79,6 +79,8 @@ PythonとJavaScriptは同じコマンドに対応します。
 | `statements` | 損益計算書・貸借対照表・キャッシュ・フロー計算書の通期、最大10期（既定3期） | 3回／3 |
 | `metrics` | ROE・ROA・ROIC・利益率・自己資本比率・EPS・BPS・配当・PER・PBRを決算期ごとに（既定5期） | 1回／1 |
 | `peers` | 同じ業種で時価総額が近い会社と、収益性・バリュエーション、業種中央値 | 1回／10 |
+| `dividends` | 1株当たり配当の履歴と会社予想（既定40行） | 1回／1 |
+| `earnings` | 決算発表の予定日と発表済みのEPS・予想との差。最大93日、`--symbols`で絞り込み | 1回／1 |
 
 *2026年10月25日の公開OpenAPI仕様で確認。APIトークンはサービスの利用枠の単位で、LLMのトークンとは別です。最新のプラン・上限が適用されます。結果が0件なら空配列のまま返します。実行時は契約プランの利用枠を消費する場合があります。追加トークンの購入や自動リトライは行いません。
 
@@ -94,9 +96,15 @@ python3 python/zenith_examples.py search --query トヨタ
 python3 python/zenith_examples.py statements --symbol 7203 --csv output/statements-7203.csv
 python3 python/zenith_examples.py metrics --symbol 7203 --csv output/metrics-7203.csv
 python3 python/zenith_examples.py peers --symbol 7203 --limit 5
+python3 python/zenith_examples.py dividends --symbol 7203 --csv output/dividends-7203.csv
+python3 python/zenith_examples.py earnings --from 2026-11-01 --to 2026-11-30 --symbols 7203,7267
 ```
 
-`--csv`は`trend`・`compare`・`statements`・`metrics`・`peers`で使えます。`statements`は、科目ごとの行・決算期ごとの列の1つの表になり、各表の先頭に会計基準と書類IDが入ります。
+**試行錯誤しても利用枠を減らさない。** どのコマンドにも`--cache output/cache`を付けられます。24時間以内（`--cache-hours`で変更）の同じ取得は、APIを呼ばずに保存した結果を使います。APIキーは保存せず、エラーも保存しません。PythonとJavaScriptで同じ保存ファイルを使えます。中身はAPIのデータなので非公開で扱ってください（`output/`はGitの追跡対象外です）。
+
+`dividends`には年間合計の行（`dividendType: annual`）と各回の配当（`interim`・`final`など）の両方が入ります。足し合わせないでください。`forecastOrActual`で会社予想と実績を区別できます。
+
+`--csv`は`trend`・`compare`・`statements`・`metrics`・`peers`・`dividends`・`earnings`で使えます。`statements`は、科目ごとの行・決算期ごとの列の1つの表になり、各表の先頭に会計基準と書類IDが入ります。
 
 `trend`・`compare`の結果を保存すれば、追加パッケージなしでSVGのグラフにできます（`--lang ja`で日本語表示）。
 
@@ -107,7 +115,7 @@ python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg --la
 
 自分のコード・pandas・Jupyterから使う方法は[ライブラリとして使う](docs/library.ja.md)にまとめています。
 
-`search`・`trend`・`compare`・`statements`・`metrics`・`peers`に`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
+`search`・`trend`・`compare`・`statements`・`metrics`・`peers`・`dividends`・`earnings`に`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
 
 `trend`と`compare`は、利益率を円単位の金額から計算し直し、APIの`operatingMargin`と照合します（`match`／`mismatch`／`apiMissing`／`notCalculated`など）。欠損を0で埋めたり、決算期が違う会社どうしを勝手に組み合わせたりはしません。`compare`は、会計基準や決算期間の長さが違う場合に`notes`で知らせます。`--csv`を付けると、取得日時と書類IDを行ごとに残したCSV（UTF-8・BOM付き）も保存します。`output/`はGitの追跡対象外です。
 
