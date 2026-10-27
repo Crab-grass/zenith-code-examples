@@ -1,10 +1,12 @@
 // Local examples for Node.js 22+. No third-party dependencies.
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const BASE_URL = 'https://api.zenithcode.net/stable';
-export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare'];
+export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements'];
+export const DEMO_MODES = ['search', 'trend', 'compare', 'statements'];
+const DEMO_FILE = fileURLToPath(new URL('../learning/demo-api.json', import.meta.url));
 const SYMBOL = /^[0-9A-Z]{4,5}(?:\.T)?$/;
 export const CSV_FIELDS = ['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'fiscalPeriodDays',
   'revenue', 'operatingIncome', 'calculatedMargin', 'apiMargin', 'marginCheck', 'source', 'docId'];
@@ -45,6 +47,17 @@ function parseDate(value) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value ?? '')) return NaN;
   const date = Date.parse(`${value}T00:00:00Z`);
   return Number.isFinite(date) && new Date(date).toISOString().slice(0, 10) === value ? date : NaN;
+}
+
+// Answer like the API from synthetic data. No network and no key.
+export async function demoRequester(path, params) {
+  const data = JSON.parse(readFileSync(DEMO_FILE, 'utf8'));
+  if (path === '/search-name') {
+    const query = params.query.toLowerCase();
+    return data[path].filter(h => h.nameEn.toLowerCase().includes(query) || h.nameJa.toLowerCase().includes(query)).slice(0, params.limit);
+  }
+  if (!(path in data)) throw new Error(`Demo data covers ${DEMO_MODES.join(', ')} only.`);
+  return (data[path][params.symbol] ?? []).slice(0, params.limit);
 }
 
 const isNumber = value => typeof value === 'number' && Number.isFinite(value);
@@ -99,6 +112,11 @@ export function comparisonNotes(companies) {
 
 export async function runExample(mode, symbol, apiKey, start, end, requester = requestRows, options = {}) {
   if (!MODES.includes(mode)) throw new Error(`Choose ${MODES.slice(0, -1).join(', ')} or ${MODES.at(-1)}.`);
+  if (mode === 'search') {
+    const query = (options.query ?? '').trim();
+    if (query.length < 2 || query.length > 100) throw new Error('Search requires --query with 2 to 100 characters, e.g. --query Toyota.');
+    return { query, retrievedAt: new Date().toISOString(), companies: await requester('/search-name', { query, limit: 10 }, apiKey) };
+  }
   if (mode === 'compare') {
     const codes = (options.symbols ?? '').split(',').map(code => code.trim()).filter(Boolean);
     if (codes.length < 2 || codes.length > 4 || new Set(codes).size !== codes.length) {
@@ -116,7 +134,13 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
   }
   if (!SYMBOL.test(symbol)) throw new Error('Use a securities code such as 7203 or 130A.');
   const result = { symbol, retrievedAt: new Date().toISOString() };
-  if (mode === 'trend') {
+  if (mode === 'statements') {
+    const years = options.years ?? 3;
+    if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Statements --years must be between 1 and 10.');
+    for (const [key, path] of [['incomeStatements', '/income-statement'], ['balanceSheets', '/balance-sheet-statement'], ['cashFlows', '/cash-flow-statement']]) {
+      result[key] = await requester(path, { symbol, period: 'annual', limit: years }, apiKey);
+    }
+  } else if (mode === 'trend') {
     const years = options.years ?? 5;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Trend --years must be between 1 and 10.');
     result.annualTrend = marginRows(await requester('/income-statement', { symbol, period: 'annual', limit: years }, apiKey));
@@ -155,24 +179,34 @@ export function toCsv(rows) {
 
 async function main(args) {
   if (!args.length || args.includes('--help')) {
-    console.log('node javascript/zenith-examples.mjs <snapshot|history|financials|full|trend|compare> [--symbol 7203] [--from YYYY-MM-DD --to YYYY-MM-DD] [--years 5] [--symbols 7203,7267] [--csv out.csv]');
+    console.log('node javascript/zenith-examples.mjs <snapshot|history|financials|full|trend|compare|search|statements> [--symbol 7203] [--from YYYY-MM-DD --to YYYY-MM-DD] [--years 5] [--symbols 7203,7267] [--query Toyota] [--csv out.csv] [--demo]');
     return;
   }
   const [mode, ...rest] = args;
+  const demo = rest.includes('--demo');
+  const pairs = rest.filter(arg => arg !== '--demo');
   const options = {};
-  for (let i = 0; i < rest.length; i += 2) {
-    if (!['--symbol', '--symbols', '--years', '--from', '--to', '--csv'].includes(rest[i]) || !rest[i + 1] || rest[i + 1].startsWith('--') || rest[i] in options) {
+  for (let i = 0; i < pairs.length; i += 2) {
+    if (!['--symbol', '--symbols', '--query', '--years', '--from', '--to', '--csv'].includes(pairs[i]) || !pairs[i + 1] || pairs[i + 1].startsWith('--') || pairs[i] in options) {
       throw new Error('Invalid arguments. Run with --help.');
     }
-    options[rest[i]] = rest[i + 1];
+    options[pairs[i]] = pairs[i + 1];
   }
   if (options['--csv'] && !['trend', 'compare'].includes(mode)) throw new Error('--csv is available for trend and compare.');
+  if (demo && !DEMO_MODES.includes(mode)) throw new Error(`--demo is available for ${DEMO_MODES.join(', ')}.`);
   const years = options['--years'] === undefined ? undefined : Number(options['--years']);
-  const key = process.env.ZENITH_API_KEY;
-  if (!key?.trim()) throw new Error('Set ZENITH_API_KEY in your environment.');
-  console.error('Local/private use: do not publish API responses or API keys.');
-  const data = await runExample(mode, options['--symbol'] ?? '7203', key, options['--from'], options['--to'], requestRows,
-    { symbols: options['--symbols'], years });
+  let key = 'demo', requester = demoRequester;
+  if (demo) {
+    console.error('Demo mode: fictional companies and values. No API request is made.');
+  } else {
+    key = process.env.ZENITH_API_KEY;
+    requester = requestRows;
+    if (!key?.trim()) throw new Error('Set ZENITH_API_KEY in your environment. To try without a key, add --demo.');
+    console.error('Local/private use: do not publish API responses or API keys.');
+  }
+  const data = await runExample(mode, options['--symbol'] ?? '7203', key, options['--from'], options['--to'], requester,
+    { symbols: options['--symbols'], years, query: options['--query'] });
+  if (demo) data.demo = true;
   if (options['--csv']) {
     mkdirSync(dirname(options['--csv']), { recursive: true });
     writeFileSync(options['--csv'], toCsv(tableRows(data)));
