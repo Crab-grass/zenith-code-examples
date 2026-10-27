@@ -57,6 +57,7 @@ The code in the `practice` folder is the same as the code printed in lessons 1â€
 
 ## Going further
 
+- **Everything at once**: `python3 python/report.py --symbol <code> --out output/report` writes a one-page report with charts. See the [recipes](recipes.md) for task-by-task commands.
 - **Same analysis for another company**: `trend --symbol <code>` calculates and checks margins and writes CSV without editing the article code.
 - **Use an AI assistant**: [MCP guide](mcp.md), [start with an agent](agent-start.md).
 - **Choose fields**: [Choosing a financial data API](https://zenithcode.net/learn/financial-data-api-selection) (Japanese), [API docs](https://zenithcode.net/en/docs).

@@ -63,6 +63,7 @@ wide.loc["incomeStatements"].head()
 `python/chart_svg.py` draws an SVG from saved `trend`, `compare`, `quarters` or `health` output without extra packages:
 
 ```sh
+mkdir -p output
 python3 python/zenith_examples.py trend --symbol DEMOB --demo > output/trend.json
 python3 python/chart_svg.py output/trend.json -o output/trend.svg
 python3 python/chart_svg.py output/trend.json -o output/trend-ja.svg --lang ja

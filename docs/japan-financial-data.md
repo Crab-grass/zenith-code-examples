@@ -8,6 +8,7 @@ Japanese disclosures follow conventions that differ from US or European filings.
 python3 python/zenith_examples.py search --query motors --demo
 python3 python/zenith_examples.py statements --symbol DEMOA --demo
 python3 python/zenith_examples.py compare --symbols DEMOA,DEMOB --demo
+python3 python/report.py --symbol DEMOA --demo --out output/report-demo
 ```
 
 ## Find a company
@@ -83,7 +84,8 @@ Stock prices and TDnet documents cannot be displayed or redistributed to third p
 
 1. [Create an account and an API key](https://zenithcode.net/en/sign-up) (a Free plan is available).
 2. Replace `--demo` with a real code: `search --query <name>`, then `statements --symbol <code>`.
-3. Chart one company with the [practice code](../practice/README.md), or start the [company analysis template](../templates/company-analysis/README.md).
-4. Use the API from an AI assistant with the [MCP guide](mcp.md).
+3. Write a one-page report: `python3 python/report.py --symbol <code> --cache output/cache --out output/report`. The [recipes](recipes.md) list a command for each common task.
+4. Chart one company with the [practice code](../practice/README.md), or start the [company analysis template](../templates/company-analysis/README.md).
+5. Use the API from an AI assistant with the [MCP guide](mcp.md).
 
 This page summarizes common conventions for analysis code. It is not accounting or investment advice; check the company's own disclosures for authoritative definitions.

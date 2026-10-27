@@ -17,6 +17,8 @@ ZENITH Code provides Japanese end-of-day stock prices under formal exchange agre
 | Goal | Start here | Account |
 | --- | --- | --- |
 | Try every analysis command with fictional data | `python3 python/zenith_examples.py compare --symbols DEMOA,DEMOB --demo` | No account or network |
+| Get a one-page company report with charts | `python3 python/report.py --symbol DEMOA --demo --out output/report-demo` | Not required for demo data |
+| Find the right command for a task | [Recipes](docs/recipes.md) | Not required for demo data |
 | Learn how Japanese filings differ (fiscal years, ordinary income, cumulative quarters) | [Guide for international developers](docs/japan-financial-data.md) | Not required |
 | Read a financial fact and build a chart | [TDnet lessons 3 and 4](docs/learning.md) | No account or extra packages |
 | Retrieve real prices and financials | **[Create an account and get an API key →](https://zenithcode.net/en/sign-up)** | Required |
@@ -120,11 +122,18 @@ Japanese Q2 and Q3 income statements are year-to-date. `quarters` subtracts the 
 Draw an SVG chart from saved `trend`, `compare`, `quarters` or `health` output, with no extra packages (`--lang ja` for Japanese labels):
 
 ```sh
+mkdir -p output
 python3 python/zenith_examples.py trend --symbol 7203 > output/trend-7203.json
 python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg
 ```
 
-To call these functions from your own code, pandas or Jupyter, see [use as a library](docs/library.md).
+To call these functions from your own code, pandas or Jupyter, see [use as a library](docs/library.md). For task-by-task commands, see the [recipes](docs/recipes.md).
+
+**One-page report.** `python/report.py` combines `trend`, `quarters`, `health`, `benchmark` and `dividends` into `report.md` with SVG charts and the document IDs behind the numbers (about 10 requests / 19 tokens; `--lang ja` for Japanese; add `--cache output/cache` to rerun without using quota):
+
+```sh
+python3 python/report.py --symbol 7203 --cache output/cache --out output/report-7203
+```
 
 Add `--demo` to any command except `snapshot`, `history`, `financials` and `full` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
 

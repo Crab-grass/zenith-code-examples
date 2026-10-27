@@ -58,6 +58,7 @@ wide = pd.DataFrame(rows, columns=fields).set_index(["statement", "item"])
 `python/chart_svg.py`で、`trend`・`compare`・`quarters`・`health`の結果から追加パッケージなしにSVGを作れます。`--lang ja`で日本語の見出しになります。
 
 ```sh
+mkdir -p output
 python3 python/zenith_examples.py trend --symbol DEMOB --demo > output/trend.json
 python3 python/chart_svg.py output/trend.json -o output/trend.svg --lang ja
 ```

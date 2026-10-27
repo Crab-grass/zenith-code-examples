@@ -180,6 +180,7 @@ export function standaloneQuarters(rows) {
   const result = [];
   for (const yearEnd of [...years.keys()].sort()) {
     const quarters = years.get(yearEnd);
+    if (Object.keys(quarters).join() === '4') continue; // only a full-year row: no quarters
     for (let n = 1; n <= 4; n += 1) {
       const row = quarters[n];
       if (!row) continue;
@@ -357,8 +358,10 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
     const keyMetrics = (await requester('/key-metrics', { symbol, period: 'annual', limit: 1 }, apiKey))[0] ?? {};
     const latest = (await requester('/key-metrics-latest', { symbol }, apiKey))[0] ?? {};
     const benchmarks = await requester('/industry-benchmarks', { sector: profile.sector }, apiKey);
+    const sectorRow = benchmarks.find(b => b.sector === profile.sector) ?? {};
     result.sector = profile.sector;
-    result.sectorName = benchmarks.find(b => b.sector === profile.sector)?.sectorEn ?? null;
+    result.sectorName = sectorRow.sectorEn ?? null;
+    result.sectorNameJa = sectorRow.sectorJa ?? null;
     result.benchmark = benchmarkRows(symbol, profile, keyMetrics, latest, benchmarks);
   } else if (mode === 'quarters') {
     const years = options.years ?? 2;

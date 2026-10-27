@@ -210,6 +210,7 @@ def standalone_quarters(rows):
     A value is derived only when both rows exist, belong to the same fiscal year
     and accounting standard, and cover about 3, 6, 9 or 12 months. Otherwise it
     stays None and `status` says why; nothing is estimated or filled with zero.
+    Fiscal years with only a full-year row are skipped: they have no quarters.
     """
     years = {}
     for row in rows:
@@ -221,6 +222,8 @@ def standalone_quarters(rows):
     result = []
     for year_end in sorted(years):
         quarters = years[year_end]
+        if set(quarters) == {4}:
+            continue
         for n in range(1, 5):
             row = quarters.get(n)
             if row is None:
@@ -443,8 +446,9 @@ def run_example(mode, symbol, api_key, start=None, end=None, requester=request_r
         key_metrics = (requester("/key-metrics", {"symbol": symbol, "period": "annual", "limit": 1}, api_key) or [{}])[0]
         latest = (requester("/key-metrics-latest", {"symbol": symbol}, api_key) or [{}])[0]
         benchmarks = requester("/industry-benchmarks", {"sector": profile["sector"]}, api_key)
-        result.update({"sector": profile["sector"], "sectorName": next(
-            (b.get("sectorEn") for b in benchmarks if b.get("sector") == profile["sector"]), None)})
+        sector_row = next((b for b in benchmarks if b.get("sector") == profile["sector"]), {})
+        result.update({"sector": profile["sector"], "sectorName": sector_row.get("sectorEn"),
+                       "sectorNameJa": sector_row.get("sectorJa")})
         result["benchmark"] = benchmark_rows(symbol, profile, key_metrics, latest, benchmarks)
     elif mode == "quarters":
         if isinstance(years, bool) or not isinstance(years, int) or not 1 <= years <= 10:

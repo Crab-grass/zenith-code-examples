@@ -57,6 +57,7 @@
 
 ## 記事より先に進みたいとき
 
+- **まとめて見る**：`python3 python/report.py --symbol <証券コード> --out output/report --lang ja`で、グラフ付きの1社分のレポートを作れます。目的別の手順は[レシピ集](recipes.ja.md)にあります。
 - **他の企業で同じ分析をする**：`trend --symbol <証券コード>`。記事のコードを書き換えずに、利益率の計算・APIとの照合・CSV出力まで行えます。
 - **AIに手伝ってもらう**：[MCP接続ガイド](mcp.md)、[エージェントと利用を始める](agent-start.md)。
 - **使う項目を選ぶ**：[財務データAPIの選び方](https://zenithcode.net/learn/financial-data-api-selection)、[APIドキュメント](https://zenithcode.net/docs)。

@@ -17,6 +17,8 @@ ZENITH Codeは、取引所との正式な契約に基づく日本株の株価に
 | やりたいこと | 入口 | 登録 |
 | --- | --- | --- |
 | 分析コマンドを架空のデータで試す | `python3 python/zenith_examples.py compare --symbols DEMOA,DEMOB --demo` | 不要・通信なし |
+| グラフ付きの1社分のレポートを作る | `python3 python/report.py --symbol DEMOA --demo --out output/report-demo --lang ja` | デモは不要 |
+| やりたいことからコマンドを探す | [レシピ集](docs/recipes.ja.md) | デモは不要 |
 | 数値の読み方とグラフを試す | [TDnet③・④の学習サンプル](docs/learning.ja.md) | 不要・追加パッケージ不要 |
 | 実際の株価・財務を取得する | **[会員登録してAPIキーを取得 →](https://zenithcode.net/sign-up)** | 必要 |
 | エージェントに設定を手伝ってもらう | [コピーして使える依頼文と手順](docs/agent-start.md) | 学習は不要、実データは必要 |
@@ -119,11 +121,18 @@ python3 python/zenith_examples.py earnings --from 2026-11-01 --to 2026-11-30 --s
 `trend`・`compare`・`quarters`・`health`の結果を保存すれば、追加パッケージなしでSVGのグラフにできます（`--lang ja`で日本語表示）。
 
 ```sh
+mkdir -p output
 python3 python/zenith_examples.py trend --symbol 7203 > output/trend-7203.json
 python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg --lang ja
 ```
 
-自分のコード・pandas・Jupyterから使う方法は[ライブラリとして使う](docs/library.ja.md)にまとめています。
+自分のコード・pandas・Jupyterから使う方法は[ライブラリとして使う](docs/library.ja.md)に、目的別の手順は[レシピ集](docs/recipes.ja.md)にまとめています。
+
+**1社分のレポート。** `python/report.py`は`trend`・`quarters`・`health`・`benchmark`・`dividends`をまとめ、SVGのグラフと数値の元になった書類IDを添えた`report.md`を作ります（約10回の取得・19トークン。`--cache output/cache`を付ければ再実行で利用枠を使いません）。
+
+```sh
+python3 python/report.py --symbol 7203 --cache output/cache --out output/report-7203 --lang ja
+```
 
 `snapshot`・`history`・`financials`・`full`以外のコマンドに`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
 
