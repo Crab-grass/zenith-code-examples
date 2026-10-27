@@ -5,9 +5,9 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 export const BASE_URL = 'https://api.zenithcode.net/stable';
-export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers', 'dividends', 'earnings'];
-export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings'];
-export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings'];
+export const MODES = ['snapshot', 'history', 'financials', 'full', 'trend', 'compare', 'search', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters'];
+export const DEMO_MODES = ['search', 'trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters'];
+export const CSV_MODES = ['trend', 'compare', 'statements', 'metrics', 'peers', 'dividends', 'earnings', 'quarters'];
 const DEFAULT_LIMITS = { peers: 10, dividends: 40, earnings: 200 };
 const DEMO_FILE = fileURLToPath(new URL('../learning/demo-api.json', import.meta.url));
 const SYMBOL = /^[0-9A-Z]{4,5}(?:\.T)?$/;
@@ -22,6 +22,11 @@ export const PEER_FIELDS = ['role', 'symbol', 'nameEn', 'nameJa', 'sector', 'mar
 export const DIVIDEND_FIELDS = ['symbol', 'periodEndDate', 'periodType', 'dividendType', 'forecastOrActual', 'amount',
   'rawAmount', 'exDividendDate', 'paymentDate', 'announcementDate', 'dataSource'];
 export const EARNINGS_FIELDS = ['symbol', 'reportDate', 'fiscalDate', 'beforeAfterMarket', 'actualEps', 'estimateEps', 'surpriseRate'];
+const QUARTER_ITEMS = ['revenue', 'operatingIncome', 'netIncome'];
+export const QUARTER_FIELDS = ['symbol', 'fiscalYearEnd', 'quarter', 'quarterEnd', 'accountingStandard',
+  'revenue', 'operatingIncome', 'netIncome', 'operatingMargin',
+  'cumulativeRevenue', 'cumulativeOperatingIncome', 'cumulativeNetIncome',
+  'status', 'docId', 'previousDocId'];
 const STATEMENTS = [['incomeStatements', '/income-statement'], ['balanceSheets', '/balance-sheet-statement'], ['cashFlows', '/cash-flow-statement']];
 const ROW_META = new Set(['symbol', 'fiscalPeriod', 'period', 'accountingStandard', 'updatedAt', 'provenance', 'fiscalPeriodDays']);
 
@@ -104,7 +109,10 @@ export async function demoRequester(path, params) {
     const rows = data[path][params.symbol] ?? [];
     return rows.length > params.limit + 2 ? [...rows.slice(0, 1 + params.limit), rows.at(-1)] : rows;
   }
-  return (data[path][params.symbol] ?? []).slice(0, params.limit);
+  let rows = data[path][params.symbol] ?? [];
+  if (params.period === 'annual') rows = rows.filter(r => r.period === 'FY');
+  else if (params.period === 'quarter') rows = rows.filter(r => String(r.period ?? '').startsWith('Q'));
+  return rows.slice(0, params.limit);
 }
 
 const isNumber = value => typeof value === 'number' && Number.isFinite(value);
@@ -134,6 +142,56 @@ export function marginRows(rows) {
       source: provenance.source ?? null, docId: provenance.docId ?? null,
     };
   });
+}
+
+function addMonths(period, months) {
+  const [year, month] = period.split('-').map(Number);
+  const total = year * 12 + month - 1 + months;
+  return `${String(Math.floor(total / 12)).padStart(4, '0')}-${String(total % 12 + 1).padStart(2, '0')}`;
+}
+
+// Turn Japanese year-to-date figures into standalone quarters: Q2 = cum Q2 - cum Q1,
+// ..., Q4 = FY - cum Q3. Derived only for the same fiscal year and standard and
+// about 3/6/9/12 months; otherwise null with a status. Nothing is estimated.
+export function standaloneQuarters(rows) {
+  const years = new Map();
+  for (const row of rows) {
+    const { fiscalPeriod: period, period: kind } = row;
+    if (!period || !['Q1', 'Q2', 'Q3', 'FY'].includes(kind)) continue;
+    const n = kind === 'FY' ? 4 : Number(kind[1]);
+    const end = addMonths(period, 3 * (4 - n));
+    if (!years.has(end)) years.set(end, {});
+    years.get(end)[n] = row;
+  }
+  const result = [];
+  for (const yearEnd of [...years.keys()].sort()) {
+    const quarters = years.get(yearEnd);
+    for (let n = 1; n <= 4; n += 1) {
+      const row = quarters[n];
+      if (!row) continue;
+      const previous = quarters[n - 1];
+      const days = row.fiscalPeriodDays;
+      let status = 'ok';
+      if (isNumber(days) && Math.abs(days - 91.3 * n) > 20) status = 'irregularPeriod';
+      else if (n > 1 && !previous) status = 'missingPrevious';
+      else if (n > 1 && String(previous.accountingStandard).toLowerCase() !== String(row.accountingStandard).toLowerCase()) status = 'standardChanged';
+      const out = { symbol: row.symbol ?? null, fiscalYearEnd: yearEnd, quarter: `Q${n}`, quarterEnd: row.fiscalPeriod, accountingStandard: row.accountingStandard ?? null };
+      for (const item of QUARTER_ITEMS) {
+        const current = row[item] ?? null;
+        out[`cumulative${item[0].toUpperCase()}${item.slice(1)}`] = current;
+        if (status !== 'ok' || !isNumber(current)) out[item] = null;
+        else if (n === 1) out[item] = current;
+        else out[item] = isNumber(previous[item]) ? current - previous[item] : null;
+      }
+      if (status === 'ok' && QUARTER_ITEMS.some(item => out[item] === null)) status = 'missingValue';
+      out.operatingMargin = isNumber(out.revenue) && isNumber(out.operatingIncome) && out.revenue > 0 ? out.operatingIncome / out.revenue : null;
+      out.status = status;
+      out.docId = row.provenance?.docId ?? null;
+      out.previousDocId = n > 1 && previous ? previous.provenance?.docId ?? null : null;
+      result.push(out);
+    }
+  }
+  return result;
 }
 
 // Explain why rows may not be comparable instead of silently pairing them.
@@ -215,6 +273,11 @@ export async function runExample(mode, symbol, apiKey, start, end, requester = r
     const years = options.years ?? 5;
     if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Metrics --years must be between 1 and 10.');
     result.annualMetrics = await requester('/key-metrics', { symbol, period: 'annual', limit: years }, apiKey);
+  } else if (mode === 'quarters') {
+    const years = options.years ?? 2;
+    if (!Number.isInteger(years) || years < 1 || years > 10) throw new Error('Quarters --years must be between 1 and 10.');
+    // No period filter: Q1-Q3 (year-to-date) and FY rows are both needed.
+    result.quarters = standaloneQuarters(await requester('/income-statement', { symbol, limit: Math.min(40, years * 4) }, apiKey));
   } else if (mode === 'dividends') {
     if (!Number.isInteger(limit) || limit < 1 || limit > 100) throw new Error('Dividends --limit must be between 1 and 100.');
     result.dividends = await requester('/dividends', { symbol, limit }, apiKey);
@@ -267,6 +330,7 @@ export function tableRows(result) {
   let fields, rows;
   if (result.annualTrend) [fields, rows] = [CSV_FIELDS, result.annualTrend];
   else if (result.earnings) [fields, rows] = [EARNINGS_FIELDS, result.earnings];
+  else if (result.quarters) [fields, rows] = [QUARTER_FIELDS, result.quarters];
   else if (result.dividends) [fields, rows] = [DIVIDEND_FIELDS, result.dividends];
   else if (result.companies && result.symbols) [fields, rows] = [CSV_FIELDS, Object.values(result.companies).flat()];
   else if (result.annualMetrics) [fields, rows] = [METRIC_FIELDS, result.annualMetrics.map(r => flatten(r, METRIC_FIELDS))];

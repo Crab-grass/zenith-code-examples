@@ -80,6 +80,7 @@ Both implementations support the same commands:
 | `statements` | Income statement, balance sheet and cash-flow statement, annual, up to 10 years (default 3) | 3 / 3 |
 | `metrics` | ROE, ROA, ROIC, margins, equity ratio, EPS, BPS, dividends, PER, PBR by fiscal year (default 5) | 1 / 1 |
 | `peers` | Same-sector companies closest in market cap, with valuation and profitability, plus the sector median | 1 / 10 |
+| `quarters` | Standalone quarterly revenue, operating income and net income derived from Japanese year-to-date figures, with a status per quarter (default 2 years) | 1 / 1 |
 | `dividends` | Dividend history per share, including company forecasts (default 40 rows) | 1 / 1 |
 | `earnings` | Scheduled and reported earnings dates with EPS surprise, up to 93 days; filter with `--symbols` | 1 / 1 |
 
@@ -97,15 +98,18 @@ python3 python/zenith_examples.py search --query Toyota
 python3 python/zenith_examples.py statements --symbol 7203 --csv output/statements-7203.csv
 python3 python/zenith_examples.py metrics --symbol 7203 --csv output/metrics-7203.csv
 python3 python/zenith_examples.py peers --symbol 7203 --limit 5
+python3 python/zenith_examples.py quarters --symbol 7203 --years 3 --csv output/quarters-7203.csv
 python3 python/zenith_examples.py dividends --symbol 7203 --csv output/dividends-7203.csv
 python3 python/zenith_examples.py earnings --from 2026-11-01 --to 2026-11-30 --symbols 7203,7267
 ```
 
 **Save quota while you iterate.** Add `--cache output/cache` to any command: identical requests within 24 hours (`--cache-hours`) reuse the saved response instead of calling the API again. The API key is never saved, errors are not cached, and Python and JavaScript share the same cache files. The files contain API data, so keep them private (`output/` is ignored by Git).
 
+Japanese Q2 and Q3 income statements are year-to-date. `quarters` subtracts the previous cumulative figure (Q4 = full year − Q3) only when both rows share the fiscal year and accounting standard and cover the expected months. Otherwise the value stays empty and `status` says why (`missingPrevious`, `missingValue`, `standardChanged`, `irregularPeriod`); the reported cumulative figures are kept alongside.
+
 `dividends` returns both annual totals (`dividendType: annual`) and each payment (`interim`, `final` and so on): do not add them together. `forecastOrActual` separates company forecasts from paid dividends.
 
-`--csv` works with `trend`, `compare`, `statements`, `metrics`, `peers`, `dividends` and `earnings`. For `statements` it writes one wide table: a row per line item and a column per fiscal year, with the accounting standard and document ID at the top of each statement.
+`--csv` works with every command except `snapshot`, `history`, `financials`, `full` and `search`. For `statements` it writes one wide table: a row per line item and a column per fiscal year, with the accounting standard and document ID at the top of each statement.
 
 Draw an SVG chart from saved `trend` or `compare` output, with no extra packages (`--lang ja` for Japanese labels):
 
@@ -116,7 +120,7 @@ python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg
 
 To call these functions from your own code, pandas or Jupyter, see [use as a library](docs/library.md).
 
-Add `--demo` to `search`, `trend`, `compare`, `statements`, `metrics`, `peers`, `dividends` or `earnings` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
+Add `--demo` to `search`, `trend`, `compare`, `statements`, `metrics`, `peers`, `quarters`, `dividends` or `earnings` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
 
 `trend` and `compare` recalculate operating margin from JPY amounts and check it against the API's `operatingMargin` (`match`, `mismatch`, `apiMissing`, `notCalculated` and so on). They never fill gaps with zero or pair companies whose fiscal periods differ. `compare` adds `notes` when accounting standards or period lengths differ. `--csv` also writes a UTF-8 (BOM) CSV with retrieval time and document ID on every row. `output/` is ignored by Git.
 

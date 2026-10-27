@@ -28,7 +28,7 @@ Companies are identified by a **securities code**, not a ticker made of letters.
 
 ## Quarters are cumulative
 
-`period` is `Q1`, `Q2`, `Q3` or `FY`. Income statement and cash-flow amounts for **Q2 and Q3 are year-to-date totals**, as published in Japan. Subtract the previous cumulative value to get a standalone quarter; check that both values come from the same fiscal year and basis. See the [TDnet lessons](learning.md) for a worked example with fictional data.
+`period` is `Q1`, `Q2`, `Q3` or `FY`. Income statement and cash-flow amounts for **Q2 and Q3 are year-to-date totals**, as published in Japan. Subtract the previous cumulative value to get a standalone quarter; check that both values come from the same fiscal year and basis. The `quarters` command does this for revenue, operating income and net income and reports a status when it cannot (`quarters --symbol DEMOC --demo` shows a gap). See the [TDnet lessons](learning.md) for a worked example with fictional data.
 
 The examples request `period=annual` explicitly to avoid mixing quarters into annual trends.
 
