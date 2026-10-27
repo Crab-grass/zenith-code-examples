@@ -69,3 +69,48 @@ class DemoTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MetricsPeersStatementsCsvTests(unittest.TestCase):
+    def test_metrics_and_peers_requests(self):
+        requester = Mock(return_value=[])
+        run_example("metrics", "DEMO", "test-only", requester=requester, years=4)
+        requester.assert_called_with("/key-metrics", {"symbol": "DEMO", "period": "annual", "limit": 4}, "test-only")
+        run_example("peers", "DEMO", "test-only", requester=requester, limit=5)
+        requester.assert_called_with("/peers", {"symbol": "DEMO", "limit": 5}, "test-only")
+        for kwargs in [{"years": 0}, {"years": 11}]:
+            with self.assertRaises(ZenithError):
+                run_example("metrics", "DEMO", "test-only", requester=Mock(), **kwargs)
+        for limit in [0, 31, True]:
+            with self.assertRaises(ZenithError):
+                run_example("peers", "DEMO", "test-only", requester=Mock(), limit=limit)
+
+    def test_demo_peers_keep_target_first_and_median_last(self):
+        rows = run_example("peers", "DEMOB", "demo", requester=demo_requester, limit=1)["peers"]
+        self.assertEqual([r["role"] for r in rows], ["target", "peer", "sector-median"])
+        self.assertIsNone(rows[-1]["symbol"])
+
+    def test_csv_tables_for_metrics_peers_and_statements(self):
+        from zenith_examples import table_rows
+        metrics = run_example("metrics", "DEMOA", "demo", requester=demo_requester, years=2)
+        fields, rows = table_rows(metrics)
+        self.assertEqual(fields[:2], ("symbol", "fiscalPeriod"))
+        self.assertEqual(rows[0]["docId"], "DEMOA-2025-03")  # flattened from provenance
+        self.assertIsNone(rows[0]["roic"])  # missing stays empty
+        fields, rows = table_rows(run_example("peers", "DEMOA", "demo", requester=demo_requester))
+        self.assertEqual(rows[-1]["role"], "sector-median")
+        statements = run_example("statements", "DEMOB", "demo", requester=demo_requester, years=3)
+        fields, rows = table_rows(statements)
+        self.assertEqual(fields, ("statement", "item", "2023-03", "2024-03", "2025-03", "retrievedAt"))
+        revenue = next(r for r in rows if r["item"] == "revenue")
+        self.assertIsNone(revenue["2023-03"])  # the demo's deliberate gap is not filled
+        self.assertEqual(next(r for r in rows if r["item"] == "docId")["2025-03"], "DEMOB-2025-03")
+        self.assertEqual({r["statement"] for r in rows}, {"incomeStatements", "balanceSheets", "cashFlows"})
+
+    def test_statements_table_marks_missing_periods(self):
+        from zenith_examples import statements_table
+        fields, rows = statements_table({
+            "incomeStatements": [{"fiscalPeriod": "2001-03", "revenue": 1, "provenance": {"docId": "A"}}],
+            "balanceSheets": [{"fiscalPeriod": "2002-03", "totalAssets": 2}], "cashFlows": []})
+        self.assertEqual(fields, ["statement", "item", "2001-03", "2002-03"])
+        self.assertIsNone(next(r for r in rows if r["item"] == "revenue")["2002-03"])

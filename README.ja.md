@@ -77,6 +77,8 @@ PythonとJavaScriptは同じコマンドに対応します。
 | `compare` | 2〜4社の直近3通期を並べ、共通の決算期と、会計基準・期間の長さの違いを表示 | 社数分／社数分 |
 | `search` | 社名の一部（日本語・英語）から証券コードを探す | 1回／1 |
 | `statements` | 損益計算書・貸借対照表・キャッシュ・フロー計算書の通期、最大10期（既定3期） | 3回／3 |
+| `metrics` | ROE・ROA・ROIC・利益率・自己資本比率・EPS・BPS・配当・PER・PBRを決算期ごとに（既定5期） | 1回／1 |
+| `peers` | 同じ業種で時価総額が近い会社と、収益性・バリュエーション、業種中央値 | 1回／10 |
 
 *2026年10月25日の公開OpenAPI仕様で確認。APIトークンはサービスの利用枠の単位で、LLMのトークンとは別です。最新のプラン・上限が適用されます。結果が0件なら空配列のまま返します。実行時は契約プランの利用枠を消費する場合があります。追加トークンの購入や自動リトライは行いません。
 
@@ -89,10 +91,23 @@ python3 python/zenith_examples.py full --symbol 7203
 python3 python/zenith_examples.py trend --symbol 7203 --years 5 --csv output/trend-7203.csv
 python3 python/zenith_examples.py compare --symbols 7203,7267 --csv output/compare.csv
 python3 python/zenith_examples.py search --query トヨタ
-python3 python/zenith_examples.py statements --symbol 7203
+python3 python/zenith_examples.py statements --symbol 7203 --csv output/statements-7203.csv
+python3 python/zenith_examples.py metrics --symbol 7203 --csv output/metrics-7203.csv
+python3 python/zenith_examples.py peers --symbol 7203 --limit 5
 ```
 
-`search`・`trend`・`compare`・`statements`に`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
+`--csv`は`trend`・`compare`・`statements`・`metrics`・`peers`で使えます。`statements`は、科目ごとの行・決算期ごとの列の1つの表になり、各表の先頭に会計基準と書類IDが入ります。
+
+`trend`・`compare`の結果を保存すれば、追加パッケージなしでSVGのグラフにできます（`--lang ja`で日本語表示）。
+
+```sh
+python3 python/zenith_examples.py trend --symbol 7203 > output/trend-7203.json
+python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg --lang ja
+```
+
+自分のコード・pandas・Jupyterから使う方法は[ライブラリとして使う](docs/library.ja.md)にまとめています。
+
+`search`・`trend`・`compare`・`statements`・`metrics`・`peers`に`--demo`を付けると、同梱の架空企業（`DEMOA`・`DEMOB`・`DEMOC`）で、APIキーも通信もなしに試せます。欠損値、IFRSと日本基準の会社、12月決算の会社を含めているので、各コマンドがそれらをどう知らせるかを確認できます。
 
 `trend`と`compare`は、利益率を円単位の金額から計算し直し、APIの`operatingMargin`と照合します（`match`／`mismatch`／`apiMissing`／`notCalculated`など）。欠損を0で埋めたり、決算期が違う会社どうしを勝手に組み合わせたりはしません。`compare`は、会計基準や決算期間の長さが違う場合に`notes`で知らせます。`--csv`を付けると、取得日時と書類IDを行ごとに残したCSV（UTF-8・BOM付き）も保存します。`output/`はGitの追跡対象外です。
 
