@@ -36,7 +36,7 @@ class ServerTests(unittest.TestCase):
             return response.status,json.loads(data) if 'json' in response.headers.get('Content-Type','') else data,response.headers
     def headers(self):return {'Content-Type':'application/json','Origin':self.base,'X-Local-Token':self.token}
     def test_static_and_demo_are_self_contained_and_never_fetch(self):
-        for path in ['/','/app.mjs','/style.css','/model.mjs','/api/demo']:
+        for path in ['/','/app.mjs','/style.css','/workspace.css','/model.mjs','/api/demo']:
             status,data,headers=self.get(path);self.assertEqual(status,200)
             self.assertEqual(headers['Cache-Control'],'no-store')
             self.assertIn("connect-src 'self'",headers['Content-Security-Policy'])
