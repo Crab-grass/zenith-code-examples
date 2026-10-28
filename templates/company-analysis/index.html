@@ -7,6 +7,7 @@
     <title>Company Analysis · ZENITH Code</title>
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/workspace.css" />
     <script type="module" src="/app.mjs"></script>
   </head>
   <body data-theme="cool">
@@ -79,6 +80,7 @@
           ><span data-i18n="breadcrumb"></span>
         </div>
         <div class="top-actions">
+          <button id="customize" class="secondary" data-i18n="customize"></button>
           <a
             id="guideLink"
             href="https://zenithcode.net/learn/tdnet-xbrl"
@@ -285,8 +287,9 @@
                 ><span id="standardBadge"></span>
               </div>
             </div>
-            <p id="asOf"></p>
+            <div class="period-control"><label for="reviewPeriod" data-i18n="reviewPeriod"></label><div class="select-wrap"><select id="reviewPeriod"></select></div></div>
           </section>
+          <p id="asOf" class="as-of"></p>
           <section class="kpis" aria-label="Key figures">
             <article class="kpi">
               <p data-i18n="revenue"></p>
@@ -311,7 +314,8 @@
               <div data-api="quote"></div>
             </article>
           </section>
-          <section class="charts">
+          <div class="analysis-tabs" aria-label="Sections"><a href="#trendSection" data-i18n="trend"></a><a href="#comparison" data-i18n="comparison"></a><a href="#financials" data-i18n="financials"></a><a href="#sources" data-i18n="sources"></a></div>
+          <section class="charts" id="trendSection">
             <article class="panel chart-panel">
               <div class="panel-heading">
                 <div>
@@ -352,14 +356,21 @@
               <div class="api-panel" data-api="operatingMargin"></div>
             </article>
           </section>
+          <section class="panel comparison-panel" id="comparison">
+            <div class="panel-heading"><div><p class="eyebrow">COMPANY COMPARISON</p><h3 data-i18n="comparison"></h3></div><span class="section-number">02</span></div>
+            <div class="compare-toolbar"><div class="field"><label for="peerCompany" data-i18n="peerCompany"></label><div class="select-wrap" id="peerDemoField"><select id="peerCompany"></select></div><input id="peerSymbol" aria-label="Comparison symbol" placeholder="6758" maxlength="7" hidden /></div><button id="compareLoad" class="secondary" data-i18n="compareLoad" hidden></button><label class="compare-period" for="compareYear" data-i18n="comparePeriod"></label><div class="select-wrap"><select id="compareYear"></select></div></div>
+            <p id="compareStatus" class="compare-status" role="status"></p><div id="comparisonCards" class="comparison-cards"></div>
+            <p class="table-note" data-i18n="compareCaution"></p>
+          </section>
           <section class="panel table-panel" id="financials">
             <div class="panel-heading">
               <div>
                 <p class="eyebrow">FINANCIAL STATEMENTS</p>
                 <h3 data-i18n="financials"></h3>
               </div>
-              <span class="unit" data-i18n="fullYen"></span>
+              <button class="secondary" id="exportCsv" data-i18n="exportCsv"></button>
             </div>
+            <p class="table-unit" data-i18n="fullYen"></p>
             <div
               class="table-scroll"
               tabindex="0"
@@ -394,6 +405,7 @@
             </article>
           </section>
         </div>
+        <dialog id="preferences" aria-labelledby="preferencesTitle"><div class="dialog-heading"><div><p class="eyebrow">YOUR WORKSPACE</p><h2 id="preferencesTitle" data-i18n="customize"></h2></div><button id="closePreferences" class="secondary" data-i18n="close"></button></div><div id="themeSlot"></div><div class="preference-options"><label><input type="checkbox" id="showComparison" checked /><span data-i18n="showComparison"></span></label><label><input type="checkbox" id="showHelp" /><span data-i18n="showHelp"></span></label><label><input type="checkbox" id="compactView" /><span data-i18n="compactView"></span></label><p data-i18n="preferencesNote"></p></div></dialog>
         <footer>
           <span>ZENITH Code · Company Analysis Template</span
           ><a

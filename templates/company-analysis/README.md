@@ -80,3 +80,13 @@ Open **Which APIs build this page?** for example requests and the data-to-displa
 Customize `body[data-theme]` and CSS variables in `style.css`; edit translations and `renderApiHelp()` in `app.mjs` for explanations. Data fetching is shared across themes.
 
 Data mode and company selection sit directly below the page title. The API overview uses two endpoint cards and a data-to-display flow. Select controls retain native keyboard and mobile behavior, with a shared chevron inset 16px from the right edge.
+
+## Research workspace preview
+
+Select a reporting period to update financial KPIs and the highlighted table column. Quotes retain their own latest-close date. Compare two companies over a common fiscal period, with checks for accounting standard and duration. These checks do not adjust for sector or business mix. Live comparison requires a separate explicit load (up to two API requests).
+
+Year-over-year growth requires adjacent annual periods, a matching fiscal month and standard, and ordinary annual duration. Amount growth is omitted for missing, zero or negative prior values. Margin changes use percentage points.
+
+Export the financial table as CSV (JPY amounts, ratios as fractions, missing values as blank cells). Data-use conditions still apply. Customize themes, comparison visibility, inline API help and density. Only display preferences are saved in browser storage.
+
+This review uses synthetic data; live API integration still needs end-to-end verification.

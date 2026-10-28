@@ -62,3 +62,27 @@ test("units, percentages and missing values render consistently", () => {
   }
   assert.equal(money(0), "0");
 });
+
+import { comparisonConditions, changeRate } from '../templates/company-analysis/model.mjs';
+test('comparison flags unknown or incompatible reporting metadata', () => {
+  const a=normalize(samples[0].snapshot).years.at(-1),b=normalize(samples[1].snapshot).years.at(-1);
+  assert.equal(comparisonConditions(a,b),true);
+  for(const patch of [{fiscalPeriod:'2025-03'},{accountingStandard:'IFRS'},{accountingStandard:null},{fiscalPeriodDays:180},{fiscalPeriodDays:null},{period:'Q4'}])assert.equal(comparisonConditions(a,{...b,...patch}),false);
+});
+test('growth does not invent rates for missing, zero, negative or incomparable bases', () => {
+  const rows=normalize(samples[0].snapshot).years;
+  assert.ok(Math.abs(changeRate(rows[2],rows[1],'revenue')-0.1791044776119403)<1e-9);
+  for(const patch of [{revenue:0},{revenue:-1},{revenue:null},{fiscalPeriod:'2023-03'},{fiscalPeriod:'2025-12'},{accountingStandard:'IFRS'},{fiscalPeriodDays:180}])assert.equal(changeRate(rows[2],{...rows[1],...patch},'revenue'),null);
+  assert.equal(changeRate(rows[2],null,'revenue'),null);
+  assert.equal(changeRate({...rows[2],operatingMargin:.1},{...rows[1],operatingMargin:-.1},'operatingMargin'),.2);
+});
+import { chartAxis } from '../templates/company-analysis/model.mjs';
+test('chart uses readable ticks and retains zero, losses and headroom',()=>{
+  assert.deepEqual(chartAxis([116,134,158]).ticks,[0,100,200]);
+  for(const values of [[-4.2,null,6.1],[0,0],[null],[-9,-4]]){
+    const result=chartAxis(values);
+    assert.ok(result.max>result.min);
+    assert.ok(result.ticks.includes(0));
+    for(const n of values.filter(v=>v!==null))assert.ok(n>=result.min&&n<=result.max);
+  }
+});

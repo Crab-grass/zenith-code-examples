@@ -1,7 +1,31 @@
-import { normalize, finite, axis, money, percent } from "./model.mjs";
+import { normalize, finite, axis, money, percent, comparisonConditions, changeRate, chartAxis } from "./model.mjs";
 const $ = (id) => document.getElementById(id);
 const texts = {
   ja: {
+    customize: "表示をカスタマイズ",
+    close: "閉じる",
+    reviewPeriod: "対象決算期",
+    comparison: "企業比較",
+    peerCompany: "比較する企業",
+    compareLoad: "比較データを取得",
+    comparePeriod: "共通の決算期",
+    compareCaution: "決算期・会計基準・期間日数を確認。業種や事業構成の違いを調整した比較ではありません。",
+    exportCsv: "表をCSVで保存",
+    showComparison: "企業比較を表示",
+    showHelp: "各カードにAPIの説明を表示",
+    compactView: "コンパクト表示",
+    preferencesNote: "表示設定だけをこのブラウザに保存します。企業データやAPIキーは保存しません。",
+    yearChange: "前期比",
+    notComparable: "前期比較なし",
+    conditionsMatch: "決算期・会計基準・期間日数が一致",
+    conditionsDiffer: "比較条件に差異・不明点あり",
+    noCommonPeriod: "共通の決算期がありません。",
+    peerPrompt: "比較する証券コードを入力して取得してください。1回につき最大2リクエスト。",
+    sameCompany: "別の企業を指定してください。",
+    peerLoading: "比較データを取得しています…",
+    sampleComparison: "架空企業の比較例",
+    currentCompany: "選択中の企業",
+    noValue: "未開示・未取得",
     apiCaption: "取得するデータと、グラフになるまでの流れを確認。",
     apiQuoteTitle: "株価データ",
     apiQuotePurpose: "直近終値と、その株価が属する日付。",
@@ -132,6 +156,30 @@ const texts = {
     mixed: "複数の出典",
   },
   en: {
+    customize: "Customize view",
+    close: "Close",
+    reviewPeriod: "Reporting period",
+    comparison: "Company comparison",
+    peerCompany: "Compare with",
+    compareLoad: "Load comparison",
+    comparePeriod: "Common period",
+    compareCaution: "Check reporting periods, standards and duration. Sector and business mix differences are not adjusted.",
+    exportCsv: "Export table CSV",
+    showComparison: "Show company comparison",
+    showHelp: "Show API details on each card",
+    compactView: "Compact layout",
+    preferencesNote: "Only display preferences are saved in this browser. Company data and API keys are not stored.",
+    yearChange: "vs. prior year",
+    notComparable: "No prior-period comparison",
+    conditionsMatch: "Period, standard and duration match",
+    conditionsDiffer: "Comparison conditions differ or are unknown",
+    noCommonPeriod: "No common reporting period.",
+    peerPrompt: "Enter a comparison symbol and load. Up to 2 requests per load.",
+    sameCompany: "Choose a different company.",
+    peerLoading: "Loading comparison…",
+    sampleComparison: "Synthetic comparison",
+    currentCompany: "Selected company",
+    noValue: "Not disclosed / unavailable",
     apiCaption: "Explore the data sources and how they become this dashboard.",
     apiQuoteTitle: "Stock price data",
     apiQuotePurpose: "The latest closing price and its trading date.",
@@ -276,6 +324,7 @@ let mode = "demo",
   currentName = null,
   busy = false,
   statusKey = "demoNotice";
+let peer = null, selectedPeriod = "", peerBusy = false;
 const t = (key) => texts[lang][key] ?? key;
 function node(tag, text, attrs = {}) {
   const el = document.createElement(tag);
@@ -338,6 +387,7 @@ function translate() {
   if (current) render();
 }
 function controls() {
+  document.body.dataset.mode = mode;
   $("demoMode").setAttribute("aria-pressed", String(mode === "demo"));
   $("liveMode").setAttribute("aria-pressed", String(mode === "live"));
   $("demoField").hidden = mode !== "demo";
@@ -347,15 +397,18 @@ function controls() {
     ? t("loading")
     : t(mode === "demo" ? "loadDemo" : "loadLive");
   $("load").disabled =
-    busy || (mode === "live" && !config?.liveEnabled) || !config;
+    busy || peerBusy || (mode === "live" && !config?.liveEnabled) || !config;
   for (const id of ["demoMode", "liveMode", "company", "symbol"])
-    $(id).disabled = busy;
+    $(id).disabled = busy || peerBusy;
+  $("compareLoad").disabled = busy || peerBusy || !config?.liveEnabled;
+  $("peerSymbol").disabled = busy || peerBusy;
   $("requestNote").textContent = t(
     mode === "demo" ? "demoRequest" : "liveRequest",
   );
 }
 function switchMode(next) {
   mode = next;
+  peer = null; selectedPeriod = "";
   current = null;
   currentName = null;
   $("dashboard").hidden = true;
@@ -399,6 +452,7 @@ async function fetchLive() {
     });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error);
+    peer = null;
     current = normalize(result.snapshot);
     currentName = null;
     notice("liveNotice");
@@ -497,15 +551,15 @@ function chart(target, field, line = false) {
     return;
   }
   const w = Math.max(300, Math.min(line ? 410 : 580, box.clientWidth - 32)),
-    h = 250,
-    left = 48,
-    right = w - 24,
-    top = 32,
-    bottom = 205;
+    h = 218,
+    left = 42,
+    right = w - 12,
+    top = 28,
+    bottom = 180;
   const scaled = values.map((v) =>
       v === null ? null : v * (line ? 100 : 1e-8),
     ),
-    bounds = axis(scaled),
+    bounds = chartAxis(scaled),
     y = (v) =>
       bottom - ((v - bounds.min) / (bounds.max - bounds.min)) * (bottom - top),
     x = (i) => left + ((right - left) * (i + 0.5)) / rows.length;
@@ -521,9 +575,8 @@ function chart(target, field, line = false) {
       `${t(field)}: ${rows.map((r, i) => `${r.fiscalPeriod} ${scaled[i] === null ? t("missing") : line ? percent(values[i], lang) : money(values[i], lang, true)}`).join(", ")} (${line ? "%" : t("amountUnit")})`,
     ),
   );
-  for (let i = 0; i < 4; i++) {
-    const tick = bounds.min + ((bounds.max - bounds.min) * i) / 3,
-      yy = y(tick);
+  for (const tick of bounds.ticks) {
+    const yy = y(tick);
     svg.append(
       svgElement("line", {
         x1: left,
@@ -538,9 +591,9 @@ function chart(target, field, line = false) {
       svgElement(
         "text",
         {
-          x: left - 10,
+          x: 0,
           y: yy + 4,
-          "text-anchor": "end",
+          "text-anchor": "start",
           fill: "var(--muted)",
           "font-size": 11,
         },
@@ -599,7 +652,7 @@ function chart(target, field, line = false) {
             fill:
               v < 0
                 ? "#e3a8ad"
-                : i === rows.length - 1
+                : row.fiscalPeriod === selectedPeriod
                   ? "var(--accent)"
                   : "var(--bar-soft)",
           }),
@@ -613,7 +666,7 @@ function chart(target, field, line = false) {
             y: Math.max(top - 10, !line && v < 0 ? y(0) - 12 : y(v) - 12),
             "text-anchor": "middle",
             fill: v < 0 ? "var(--negative-text)" : "var(--ink)",
-            "font-size": 14,
+            "font-size": 12,
             "font-weight": 650,
           },
           line ? percent(values[i], lang) : money(values[i], lang, true),
@@ -651,8 +704,11 @@ function chart(target, field, line = false) {
 }
 function render() {
   $("dashboard").hidden = false;
+  if (!current.years.some(r => r.fiscalPeriod === selectedPeriod)) selectedPeriod = current.years.at(-1)?.fiscalPeriod ?? "";
+  $("reviewPeriod").replaceChildren(...[...current.years].reverse().map(r => node("option", `${r.fiscalPeriod} FY`, {value:r.fiscalPeriod})));
+  $("reviewPeriod").value = selectedPeriod;
   const years = current.years,
-    latest = years.at(-1),
+    latest = years.find(r => r.fiscalPeriod === selectedPeriod) ?? years.at(-1),
     quote = current.quote;
   setText(
     "companyName",
@@ -734,10 +790,19 @@ function render() {
     body.append(row);
   }
   table.append(body);
+  table.querySelectorAll("tr").forEach(row => [...row.children].forEach((cell,i)=>cell.classList.toggle("selected-period",i > 0 && years[i-1]?.fiscalPeriod===selectedPeriod)));
   if (!years.length) {
     const row = node("tr");
     row.append(node("td", t("noData")));
     body.replaceChildren(row);
+  }
+  for (const field of ["revenue", "operatingIncome", "operatingMargin"]) {
+    const host = $(field).closest(".kpi");
+    host.querySelector(".kpi-change")?.remove();
+    const previous = years[years.indexOf(latest)-1];
+    const rate = changeRate(latest, previous, field);
+    const change = node("div", rate === null ? t("notComparable") : `${rate > 0 ? "+" : ""}${field === "operatingMargin" ? (rate*100).toFixed(1) + " pt" : percent(rate,lang)} ${t("yearChange")}`, {class:"kpi-change"});
+    host.append(change);
   }
   const list = $("sourceList");
   list.replaceChildren();
@@ -746,7 +811,7 @@ function render() {
       el = node("div", undefined, { class: "source-row" }),
       heading = node("div", undefined, { class: "source-top" });
     heading.append(
-      node("strong", `${row.fiscalPeriod} FY`),
+      node("strong", `${row.fiscalPeriod} FY${row.fiscalPeriod === selectedPeriod ? " •" : ""}`),
       node(
         "span",
         prov?.source === "synthetic"
@@ -763,6 +828,11 @@ function render() {
         `${t("updated")}: ${fmtDate(row.updatedAt)}${prov?.amended ? " · " + t("amended") : ""}`,
       ),
     );
+    const sourceMeta = node("dl", undefined, {class:"source-meta"});
+    for (const [label, value] of [[lang === "ja" ? "書類ID" : "Document ID", prov?.docId], [lang === "ja" ? "発表日時" : "Announced", prov?.announcedAt ? fmtDate(prov.announcedAt) : null]]) {
+      const group = node("div"); group.append(node("dt",label),node("dd",value || "—")); sourceMeta.append(group);
+    }
+    el.append(sourceMeta);
     const details = node("details");
     details.append(
       node("summary", t("sourceDetail")),
@@ -773,6 +843,7 @@ function render() {
   });
   if (!years.length)
     list.append(node("p", t("noData"), { class: "source-row" }));
+  renderComparison();
 }
 $("ja").addEventListener("click", () => {
   lang = "ja";
@@ -796,7 +867,7 @@ window.addEventListener("resize", () => {
 });
 $("queryForm").addEventListener("submit", (event) => {
   event.preventDefault();
-  if (!busy && config) {
+  if (!busy && !peerBusy && config) {
     if (mode === "demo") loadDemo();
     else if (config.liveEnabled) fetchLive();
   }
@@ -808,6 +879,7 @@ document.querySelectorAll("nav a").forEach((a) =>
       .forEach((link) => link.classList.toggle("selected", link === a));
   }),
 );
+initializeWorkspace();
 translate();
 try {
   const [configResponse, demoResponse] = await Promise.all([
@@ -821,4 +893,98 @@ try {
   loadDemo();
 } catch {
   notice("network", true);
+}
+
+function renderComparison() {
+  const demo = mode === "demo";
+  $("peerDemoField").hidden = !demo;
+  $("peerSymbol").hidden = demo;
+  $("compareLoad").hidden = demo;
+  let other, otherName;
+  if (demo) {
+    const old = $("peerCompany").value;
+    const available = companies.map((c,i)=>({c,i})).filter(({c})=>c.snapshot.symbol!==current.symbol);
+    $("peerCompany").replaceChildren(...available.map(({c,i})=>node("option",c.name[lang],{value:String(i)})));
+    if (available.some(({i})=>String(i)===old)) $("peerCompany").value=old;
+    const c = companies[Number($("peerCompany").value)];
+    other = c ? normalize(c.snapshot) : null;
+    otherName = c?.name[lang];
+  } else { other=peer; otherName=peer?.symbol; }
+  const common = other ? current.years.filter(a=>other.years.some(b=>b.fiscalPeriod===a.fiscalPeriod)) : [];
+  const oldPeriod = $("compareYear").value;
+  $("compareYear").replaceChildren(...[...common].reverse().map(r=>node("option",`${r.fiscalPeriod} FY`,{value:r.fiscalPeriod})));
+  if (common.some(r=>r.fiscalPeriod===oldPeriod)) $("compareYear").value=oldPeriod;
+  $("compareYear").disabled=!common.length;
+  const host=$("comparisonCards"); host.replaceChildren();
+  if (!other || !common.length) { setText("compareStatus", t(other?"noCommonPeriod":"peerPrompt")); return; }
+  const a=current.years.find(r=>r.fiscalPeriod===$("compareYear").value),b=other.years.find(r=>r.fiscalPeriod===$("compareYear").value);
+  const match=comparisonConditions(a,b);
+  setText("compareStatus",`${match ? "✓ " : "! "}${t(match?"conditionsMatch":"conditionsDiffer")} · ${a.accountingStandard||"—"} / ${b.accountingStandard||"—"} · ${a.fiscalPeriodDays??"—"} / ${b.fiscalPeriodDays??"—"} ${lang === "ja" ? "日" : "days"}${demo ? " · "+t("sampleComparison") : ""}`);
+  $("compareStatus").classList.toggle("mismatch",!match);
+  for(const field of ["revenue","operatingIncome","operatingMargin"]) {
+    const card=node("article",undefined,{class:"comparison-card"});
+    card.append(node("h4",t(field)));
+    const values=[finite(a[field]),finite(b[field])],bounds=axis(values),zero=(0-bounds.min)/(bounds.max-bounds.min)*260;
+    [a,b].forEach((row,i)=>{
+      const val=finite(row[field]);
+      const heading=node("div",undefined,{class:"compare-value"});
+      heading.append(node("span",i===0?(currentName?.[lang]??current.symbol):otherName),node("strong",field==="operatingMargin"?percent(val,lang):money(val,lang,true)+ (val===null?"":" "+t("hundredMillion"))));
+      card.append(heading);
+      const bar=svgElement("svg",{viewBox:"0 0 260 12",preserveAspectRatio:"none",class:"comparison-bar","aria-hidden":"true"});
+      bar.append(svgElement("rect",{x:0,y:0,width:260,height:12,rx:2,fill:"var(--inset-surface)"}));
+      if(val!==null) {const end=(val-bounds.min)/(bounds.max-bounds.min)*260;bar.append(svgElement("rect",{x:Math.min(zero,end),y:1,width:Math.abs(end-zero),height:10,rx:2,fill:i===0?"var(--accent)":"var(--peer)"}));}
+      bar.append(svgElement("line",{x1:zero,x2:zero,y1:0,y2:12,stroke:"var(--muted)"})); card.append(bar);
+    });
+    host.append(card);
+  }
+}
+async function fetchPeer() {
+  if(busy||peerBusy||!config?.liveEnabled||!current) return;
+  const symbol=$("peerSymbol").value.trim().toUpperCase();
+  if(!/^[0-9A-Z]{4,5}(\.T)?$/.test(symbol)){setText("compareStatus",t("invalid_symbol"));return;}
+  if(symbol.replace(/\.T$/,"")===current.symbol.replace(/\.T$/,"")){setText("compareStatus",t("sameCompany"));return;}
+  peer=null;peerBusy=true;controls();setText("compareStatus",t("peerLoading"));$("comparisonCards").replaceChildren();
+  try {
+    const response=await fetch("/api/snapshot",{method:"POST",headers:{"Content-Type":"application/json","X-Local-Token":config.requestToken},body:JSON.stringify({symbol})});
+    const result=await response.json();if(!response.ok)throw Error(result.error);
+    peer=normalize(result.snapshot);renderComparison();
+  } catch(error) {peer=null;setText("compareStatus",texts.en[error.message]?t(error.message):t("network"));}
+  finally{peerBusy=false;controls();}
+}
+function initializeWorkspace() {
+  // Keep API guidance accessible without pushing the analytical content below it.
+  const guide=document.querySelector(".api-overview");
+  document.querySelector("footer").before(guide);
+  $("themeSlot").append(document.querySelector(".theme-picker"));
+  document.querySelectorAll(".analysis-tabs a").forEach((link,index)=>{
+    if(index===0)link.setAttribute("aria-current","location");
+    link.addEventListener("click",()=>document.querySelectorAll(".analysis-tabs a").forEach(a=>a===link?a.setAttribute("aria-current","location"):a.removeAttribute("aria-current")));
+  });
+  $("customize").addEventListener("click",()=>$("preferences").showModal());
+  $("closePreferences").addEventListener("click",()=>$("preferences").close());
+  $("reviewPeriod").addEventListener("change",()=>{selectedPeriod=$("reviewPeriod").value;render();});
+  $("peerCompany").addEventListener("change",renderComparison);
+  $("compareYear").addEventListener("change",renderComparison);
+  $("compareLoad").addEventListener("click",fetchPeer);
+  const apply = () => {
+    $("comparison").hidden=!$("showComparison").checked;
+    document.querySelector('a[href="#comparison"]').hidden=!$("showComparison").checked;
+    document.body.classList.toggle("show-api-help",$("showHelp").checked);
+    document.body.classList.toggle("compact",$("compactView").checked);
+    if(current){chart("barChart",$("metric").value);chart("marginChart","operatingMargin",true);}
+  };
+  const save=()=>{try{localStorage.setItem("zenith-research-display",JSON.stringify({theme:document.body.dataset.theme,comparison:$("showComparison").checked,help:$("showHelp").checked,compact:$("compactView").checked}));}catch{/* Storage may be unavailable in private mode. */}};
+  try{const pref=JSON.parse(localStorage.getItem("zenith-research-display")||"null");if(pref){if(["cool","pop","dark"].includes(pref.theme))setTheme(pref.theme);for(const [id,key]of [["showComparison","comparison"],["showHelp","help"],["compactView","compact"]])if(typeof pref[key]==="boolean")$(id).checked=pref[key];}}catch{/* Use defaults when saved preferences are invalid. */}
+  for(const id of ["showComparison","showHelp","compactView"])$(id).addEventListener("change",()=>{apply();save();});
+  document.querySelectorAll("[data-theme-choice]").forEach(b=>b.addEventListener("click",save));
+  apply();
+  $("exportCsv").addEventListener("click",()=>{
+    if(!current)return;
+    const fields=["symbol","fiscalPeriod","period","revenue","operatingIncome","netIncome","operatingMargin","fiscalPeriodDays","accountingStandard"];
+    const escape=value=>'"'+(typeof value === "string" ? value.replace(/^[=+@\t\r-]/,"'$&") : String(value??"")).replaceAll('"','""')+'"';
+    const rows=[fields,...current.years.map(r=>fields.map(f=>r[f]))];
+    const blob=new Blob(["\uFEFF"+rows.map(r=>r.map(escape).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8"});
+    const url=URL.createObjectURL(blob),a=node("a",undefined,{href:url,download:`${mode}-${current.symbol.replace(/[^A-Z0-9.-]/gi,"")}-annual.csv`});
+    a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  });
 }
