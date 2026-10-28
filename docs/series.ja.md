@@ -44,9 +44,9 @@
 
 | 回 | 扱う内容 | このリポジトリで |
 | --- | --- | --- |
-| ① | 売上高・営業利益を取得し、グラフにする | [practice01_fetch.py・practice01_plot.py](../practice/README.ja.md) |
-| ② | 営業利益率を計算し、APIの値と照合する | [practice02_margin.py](../practice/README.ja.md) |
-| ③ | 2社の比較条件を揃える | `compare --symbols 7203,7267`で、共通の決算期と、会計基準・期間の長さの違いを確認 |
+| ① | [売上高・営業利益を取得し、グラフにする](https://qiita.com/Sohei-Taniguchi-CG/items/b9b8b1580ba30b6b06c3) | [practice01_fetch.py・practice01_plot.py](../practice/README.ja.md) |
+| ② | [営業利益率を計算し、APIの値と照合する](https://qiita.com/Sohei-Taniguchi-CG/items/0b2d22511a6cddf5ae7d) | [practice02_margin.py](../practice/README.ja.md) |
+| ③ | [2社の比較条件を揃える](https://qiita.com/Sohei-Taniguchi-CG/items/c74edd2c330a69bc9dac) | `compare --symbols 7203,7267`で、共通の決算期と、会計基準・期間の長さの違いを確認 |
 | ④ | サンプルデータでブラウザ画面を動かす | [企業・決算分析テンプレート](../templates/company-analysis/README.ja.md)を架空データで起動 |
 | ⑤ | 財務表と出典を結び付ける | 同テンプレートの財務表と「出典情報を確認」 |
 | ⑥ | 決算期と前期比を扱う | 同テンプレート（期間の選択と前期比は、記事の公開に合わせて追加します） |

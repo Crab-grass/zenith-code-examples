@@ -44,9 +44,9 @@ Build a personal company analysis page showing trends, operating margin, peer co
 
 | # | Topic | In this repository |
 | --- | --- | --- |
-| 1 | Fetch and chart revenue and operating income | [practice01_fetch.py, practice01_plot.py](../practice/README.md) |
-| 2 | Calculate operating margin and check it against the API | [practice02_margin.py](../practice/README.md) |
-| 3 | Align conditions before comparing two companies | `compare --symbols 7203,7267` reports shared periods and differing standards or period lengths |
+| 1 | [Fetch and chart revenue and operating income](https://qiita.com/Sohei-Taniguchi-CG/items/b9b8b1580ba30b6b06c3) (Japanese) | [practice01_fetch.py, practice01_plot.py](../practice/README.md) |
+| 2 | [Calculate operating margin and check it against the API](https://qiita.com/Sohei-Taniguchi-CG/items/0b2d22511a6cddf5ae7d) (Japanese) | [practice02_margin.py](../practice/README.md) |
+| 3 | [Align conditions before comparing two companies](https://qiita.com/Sohei-Taniguchi-CG/items/c74edd2c330a69bc9dac) (Japanese) | `compare --symbols 7203,7267` reports shared periods and differing standards or period lengths |
 | 4 | Run the browser page with sample data | Start the [company analysis template](../templates/company-analysis/README.md) with fictional data |
 | 5 | Link the financial table to its sources | The template's financial table and provenance view |
 | 6 | Fiscal periods and year-on-year change | The template (period selection and year-on-year change will be added alongside the article) |

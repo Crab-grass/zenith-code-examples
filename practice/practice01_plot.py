@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
+from matplotlib.transforms import blended_transform_factory
 from matplotlib.path import Path as PlotPath
 from matplotlib.patches import PathPatch
 
@@ -51,7 +52,7 @@ def draw(rows, retrieved_at, output):
     specs = [("revenue", "売上高" if jp else "Revenue", "#007d8a", .47),
              ("operatingIncome", "営業利益" if jp else "Operating income", "#486580", .16)]
     for field, label, color, bottom in specs:
-        ax = fig.add_axes([.105, bottom, .835, .20])
+        ax = fig.add_axes([.14, bottom, .80, .20])
         values = [row[field] / 1_000_000_000_000 for row in rows]
         fig.text(.07, bottom + .225, label + ("（兆円）" if jp else " (JPY trillion)"),
                  fontsize=12, weight="bold", color=ink, va="bottom")
@@ -83,6 +84,13 @@ def draw(rows, retrieved_at, output):
         ax.tick_params(length=0, colors=muted, labelsize=9, pad=6)
         ax.grid(axis="y", color=grid, linewidth=.6, zorder=0)
         ax.set_axisbelow(True)
+        # 縦軸の数字も、タイトルと同じ左端から表示します。
+        ax.tick_params(axis="y", labelleft=False)
+        label_transform = blended_transform_factory(fig.transFigure, ax.transData)
+        for tick in ax.get_yticks():
+            if ax.get_ylim()[0] <= tick <= ax.get_ylim()[1]:
+                ax.text(.07, tick, f"{tick:g}", transform=label_transform,
+                        ha="left", va="center", fontsize=9, color=muted)
     date = retrieved_at[:10]
     note = (f"出典：ZENITH Code API ／ 取得日 {date}（UTC）\n上下の縦軸の目盛りは異なります。表示は小数第2位に丸めています。"
             if jp else f"Source: ZENITH Code API / Retrieved {date} (UTC)\nPanels use different y-axis scales. Labels rounded to 2 decimals.")

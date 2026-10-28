@@ -7,6 +7,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
+from matplotlib.transforms import blended_transform_factory
 from practice01_plot import select_rows
 
 
@@ -47,7 +48,7 @@ def draw(results, retrieved_at, output):
     fig.text(.07, 1 - .448 / 4.1, 'ZENITH Code / PRACTICE 02', fontsize=9, weight='bold', color=teal, va='top')
     fig.text(.07, 1 - .768 / 4.1, 'トヨタ自動車の営業利益率' if jp else 'Toyota operating margin', fontsize=18, weight='bold', color=ink, va='top')
     fig.text(.07, 1 - 1.178 / 4.1, '2021〜2025年3月期 ／ 連結・IFRS・通期' if jp else 'FY ended March 2021–2025 / Consolidated IFRS', fontsize=10, color=muted, va='top')
-    ax = fig.add_axes([.105, .23, .835, .39])
+    ax = fig.add_axes([.14, .23, .80, .39])
     values = [r['calculatedPercent'] for r in results]
     ax.plot(range(len(values)), values, color=teal, linewidth=1.8,
             marker='o', markersize=5, markerfacecolor='white', markeredgewidth=1.5)
@@ -62,6 +63,13 @@ def draw(results, retrieved_at, output):
     ax.tick_params(length=0, colors=muted, labelsize=9, pad=6)
     ax.grid(axis='y', color=grid, linewidth=.6)
     ax.set_axisbelow(True)
+    # 縦軸の数字も、タイトルと同じ左端から表示します。
+    ax.tick_params(axis='y', labelleft=False)
+    label_transform = blended_transform_factory(fig.transFigure, ax.transData)
+    for tick in ax.get_yticks():
+        if ax.get_ylim()[0] <= tick <= ax.get_ylim()[1]:
+            ax.text(.07, tick, f'{tick:g}', transform=label_transform,
+                    ha='left', va='center', fontsize=9, color=muted)
     fig.text(.07, .62, '営業利益率（%）' if jp else 'Operating margin (%)', fontsize=10, color=ink)
     note = (f"出典：ZENITH Code API ／ 取得日 {retrieved_at[:10]}（UTC）\n営業利益 ÷ 売上高 × 100。表示のみ小数第2位に丸めています。" if jp
             else f"Source: ZENITH Code API / Retrieved {retrieved_at[:10]} (UTC)\nOperating income / revenue x 100. Labels rounded to 2 decimals.")
