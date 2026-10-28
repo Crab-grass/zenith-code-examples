@@ -16,7 +16,8 @@ sys.path.insert(0, str(ROOT.parents[1] / "python"))
 from zenith_examples import ZenithError, run_example  # noqa: E402
 
 STATIC = {"/": ("index.html", "text/html"), "/app.mjs": ("app.mjs", "text/javascript"),
-          "/model.mjs": ("model.mjs", "text/javascript"), "/style.css": ("style.css", "text/css")}
+          "/model.mjs": ("model.mjs", "text/javascript"), "/style.css": ("style.css", "text/css"),
+          "/workspace.css": ("workspace.css", "text/css")}
 
 
 def make_server(port=8765, api_key="", loader=run_example):

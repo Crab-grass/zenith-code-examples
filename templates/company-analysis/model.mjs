@@ -69,3 +69,34 @@ export function percent(value, lang = "ja") {
         maximumFractionDigits: 1,
       }).format(value);
 }
+
+// Matching metadata is a necessary check, not evidence of economic comparability.
+export function comparisonConditions(a, b) {
+  return Boolean(a && b && a.period === "FY" && b.period === "FY" &&
+    a.fiscalPeriod === b.fiscalPeriod && a.accountingStandard &&
+    a.accountingStandard === b.accountingStandard &&
+    Number.isFinite(a.fiscalPeriodDays) && a.fiscalPeriodDays > 0 &&
+    a.fiscalPeriodDays === b.fiscalPeriodDays);
+}
+export function changeRate(current, previous, field) {
+  if (!current || !previous || current.period !== "FY" || previous.period !== "FY" ||
+      !current.accountingStandard || current.accountingStandard !== previous.accountingStandard ||
+      current.fiscalPeriod.slice(5) !== previous.fiscalPeriod.slice(5) ||
+      Number(current.fiscalPeriod.slice(0,4)) - Number(previous.fiscalPeriod.slice(0,4)) !== 1 ||
+      !Number.isFinite(current.fiscalPeriodDays) || !Number.isFinite(previous.fiscalPeriodDays) ||
+      current.fiscalPeriodDays < 360 || current.fiscalPeriodDays > 366 ||
+      previous.fiscalPeriodDays < 360 || previous.fiscalPeriodDays > 366) return null;
+  const a = finite(current[field]), b = finite(previous[field]);
+  if (a === null || b === null) return null;
+  if (field === "operatingMargin") return a-b;
+  return b > 0 ? (a-b)/b : null;
+}
+
+export function chartAxis(values) {
+  const {min, max} = axis(values);
+  const raw=(max-min)/3, power=10**Math.floor(Math.log10(raw));
+  const unit=[1,2,2.5,5,10].find(n=>n*power>=raw)*power;
+  const lower=Math.floor(min/unit)*unit,upper=Math.ceil(max/unit)*unit;
+  const ticks=Array.from({length:Math.round((upper-lower)/unit)+1},(_,i)=>Number((lower+i*unit).toPrecision(12)));
+  return {min:lower,max:upper,ticks};
+}
