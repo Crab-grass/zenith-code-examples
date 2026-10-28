@@ -16,6 +16,10 @@ ZENITH Code provides Japanese end-of-day stock prices under formal exchange agre
 
 | Goal | Start here | Account |
 | --- | --- | --- |
+| Try every analysis command with fictional data | `python3 python/zenith_examples.py compare --symbols DEMOA,DEMOB --demo` | No account or network |
+| Get a one-page company report with charts | `python3 python/report.py --symbol DEMOA --demo --out output/report-demo` | Not required for demo data |
+| Find the right command for a task | [Recipes](docs/recipes.md) | Not required for demo data |
+| Learn how Japanese filings differ (fiscal years, ordinary income, cumulative quarters) | [Guide for international developers](docs/japan-financial-data.md) | Not required |
 | Read a financial fact and build a chart | [TDnet lessons 3 and 4](docs/learning.md) | No account or extra packages |
 | Retrieve real prices and financials | **[Create an account and get an API key →](https://zenithcode.net/en/sign-up)** | Required |
 | Ask an agent to help with setup | [Copyable prompt and setup guide](docs/agent-start.md) | Required for real data |
@@ -72,6 +76,17 @@ Both implementations support the same commands:
 | `history` | Daily OHLCV and adjusted close for a specified range | 1 / 10 |
 | `financials` | Up to three annual income statements with provenance | 1 / 1 |
 | `full` | Latest full-year as-reported statements, including hierarchy | 1 / 10 |
+| `trend` | Annual revenue, operating income and operating margin (recalculated and checked against the API), up to 10 years | 1 / 1 |
+| `compare` | Latest three fiscal years for 2–4 companies, with shared periods and differing standards or period lengths | 1 per company / 1 per company |
+| `search` | Find securities codes by part of an English or Japanese company name | 1 / 1 |
+| `statements` | Income statement, balance sheet and cash-flow statement, annual, up to 10 years (default 3) | 3 / 3 |
+| `metrics` | ROE, ROA, ROIC, margins, equity ratio, EPS, BPS, dividends, PER, PBR by fiscal year (default 5) | 1 / 1 |
+| `peers` | Same-sector companies closest in market cap, with valuation and profitability, plus the sector median | 1 / 10 |
+| `quarters` | Standalone quarterly revenue, operating income and net income derived from Japanese year-to-date figures, with a status per quarter (default 2 years) | 1 / 1 |
+| `health` | Equity ratio (recalculated and checked), current ratio, debt-to-equity, net debt and free cash flow by fiscal year, with descriptive flags | 2 / 2 |
+| `benchmark` | Where PER, PBR, dividend yield, market cap, ROE, ROA and 3-year growth sit within the company's TSE 33-sector quartiles | 4 / 13 |
+| `dividends` | Dividend history per share, including company forecasts (default 40 rows) | 1 / 1 |
+| `earnings` | Scheduled and reported earnings dates with EPS surprise, up to 93 days; filter with `--symbols` | 1 / 1 |
 
 *Checked against the public OpenAPI specification on 2026-10-25. API tokens are service quota units, not LLM tokens. Current plan permissions and limits apply. An empty result is kept as an empty array, not invented data. API usage may consume your plan's included quota. These examples do not purchase extra tokens or retry automatically.
 
@@ -81,7 +96,48 @@ Both implementations support the same commands:
 python3 python/zenith_examples.py financials --symbol 6758
 python3 python/zenith_examples.py history --symbol 7203 --from 2026-09-01 --to 2026-09-30
 python3 python/zenith_examples.py full --symbol 7203
+python3 python/zenith_examples.py trend --symbol 7203 --years 5 --csv output/trend-7203.csv
+python3 python/zenith_examples.py compare --symbols 7203,7267 --csv output/compare.csv
+python3 python/zenith_examples.py search --query Toyota
+python3 python/zenith_examples.py statements --symbol 7203 --csv output/statements-7203.csv
+python3 python/zenith_examples.py metrics --symbol 7203 --csv output/metrics-7203.csv
+python3 python/zenith_examples.py peers --symbol 7203 --limit 5
+python3 python/zenith_examples.py quarters --symbol 7203 --years 3 --csv output/quarters-7203.csv
+python3 python/zenith_examples.py health --symbol 7203 --csv output/health-7203.csv
+python3 python/zenith_examples.py benchmark --symbol 7203
+python3 python/zenith_examples.py dividends --symbol 7203 --csv output/dividends-7203.csv
+python3 python/zenith_examples.py earnings --from 2026-11-01 --to 2026-11-30 --symbols 7203,7267
 ```
+
+**Save quota while you iterate.** Add `--cache output/cache` to any command: identical requests within 24 hours (`--cache-hours`) reuse the saved response instead of calling the API again. The API key is never saved, errors are not cached, and Python and JavaScript share the same cache files. The files contain API data, so keep them private (`output/` is ignored by Git).
+
+Japanese Q2 and Q3 income statements are year-to-date. `quarters` subtracts the previous cumulative figure (Q4 = full year − Q3) only when both rows share the fiscal year and accounting standard and cover the expected months. Otherwise the value stays empty and `status` says why (`missingPrevious`, `missingValue`, `standardChanged`, `irregularPeriod`); the reported cumulative figures are kept alongside.
+
+`health` flags such as `negativeFreeCashFlow` describe the numbers; they are not ratings. `benchmark` reports a quartile position (`belowQ1`, `Q1toMedian`, `medianToQ3`, `aboveQ3`) with the date or fiscal period behind each value, and marks values the sector statistics would exclude (for example a negative PER) as `excludedLikeBenchmark`.
+
+`dividends` returns both annual totals (`dividendType: annual`) and each payment (`interim`, `final` and so on): do not add them together. `forecastOrActual` separates company forecasts from paid dividends.
+
+`--csv` works with every command except `snapshot`, `history`, `financials`, `full` and `search`. For `statements` it writes one wide table: a row per line item and a column per fiscal year, with the accounting standard and document ID at the top of each statement.
+
+Draw an SVG chart from saved `trend`, `compare`, `quarters` or `health` output, with no extra packages (`--lang ja` for Japanese labels):
+
+```sh
+mkdir -p output
+python3 python/zenith_examples.py trend --symbol 7203 > output/trend-7203.json
+python3 python/chart_svg.py output/trend-7203.json -o output/trend-7203.svg
+```
+
+To call these functions from your own code, pandas or Jupyter, see [use as a library](docs/library.md). For task-by-task commands, see the [recipes](docs/recipes.md).
+
+**One-page report.** `python/report.py` combines `trend`, `quarters`, `health`, `benchmark` and `dividends` into `report.md` with SVG charts and the document IDs behind the numbers (about 10 requests / 19 tokens; `--lang ja` for Japanese; add `--cache output/cache` to rerun without using quota):
+
+```sh
+python3 python/report.py --symbol 7203 --cache output/cache --out output/report-7203
+```
+
+Add `--demo` to any command except `snapshot`, `history`, `financials` and `full` to use bundled fictional companies (`DEMOA`, `DEMOB`, `DEMOC`) without an API key or network request. The demo data includes a missing value, IFRS and JGAAP companies, and a December year-end, so you can see how the commands report them.
+
+`trend` and `compare` recalculate operating margin from JPY amounts and check it against the API's `operatingMargin` (`match`, `mismatch`, `apiMissing`, `notCalculated` and so on). They never fill gaps with zero or pair companies whose fiscal periods differ. `compare` adds `notes` when accounting standards or period lengths differ. `--csv` also writes a UTF-8 (BOM) CSV with retrieval time and document ID on every row. `output/` is ignored by Git.
 
 If `ZENITH_API_KEY` is already set, the script uses it instead of prompting.
 
@@ -101,10 +157,18 @@ node javascript/zenith-examples.mjs snapshot --symbol 7203
 node javascript/zenith-examples.mjs financials --symbol 6758
 node javascript/zenith-examples.mjs history --symbol 7203 --from 2026-09-01 --to 2026-09-30
 node javascript/zenith-examples.mjs full --symbol 7203
+node javascript/zenith-examples.mjs trend --symbol 7203 --years 5 --csv output/trend-7203.csv
+node javascript/zenith-examples.mjs compare --symbols 7203,7267
+node javascript/zenith-examples.mjs search --query Toyota
+node javascript/zenith-examples.mjs statements --symbol 7203 --demo
 unset ZENITH_API_KEY
 ```
 
 Use these as local/server-side examples. Do not embed your API key in browser JavaScript. On other shells, set `ZENITH_API_KEY` using your environment's secure configuration. `.env` files are ignored by Git but are **not automatically loaded** by these scripts.
+
+## Qiita series and practice code
+
+The [article-to-code map](docs/series.md) links each Japanese Qiita article (TDnet analysis, EDINET analysis and ZENITH Code practice) to the code here. The Python programs from practice lessons 1–2 are in the [practice](practice/README.md) folder and run without the articles.
 
 ## Understand the data
 
