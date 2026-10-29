@@ -3,7 +3,7 @@
  "bundles": [
   {
    "symbol": "7203",
-   "retrievedAt": "2026-10-29T03:54:29Z",
+   "retrievedAt": "2026-10-29T05:13:38Z",
    "incomeStatements": [
     {
      "symbol": "7203",
@@ -1271,7 +1271,7 @@
   },
   {
    "symbol": "9983",
-   "retrievedAt": "2026-10-29T03:54:33Z",
+   "retrievedAt": "2026-10-29T05:13:44Z",
    "incomeStatements": [
     {
      "symbol": "9983",
@@ -1390,7 +1390,7 @@
      "cashAndCashEquivalents": 1007586000000,
      "provenance": {
       "source": "tdnet",
-      "announcedAt": null,
+      "announcedAt": "2026-10-08T06:31:00Z",
       "docId": null,
       "sourceUrl": null
      }
@@ -1494,7 +1494,7 @@
      "depreciationAndAmortization": 237251000000,
      "provenance": {
       "source": "tdnet",
-      "announcedAt": null,
+      "announcedAt": "2026-10-08T06:31:00Z",
       "docId": null,
       "sourceUrl": null
      }
@@ -2136,7 +2136,7 @@
      "forecastTarget": "next-fiscal-year",
      "forecastFiscalPeriod": "2027-08",
      "accountingStandard": "ifrs",
-     "announcedAt": null,
+     "announcedAt": "2026-10-08T06:31:00Z",
      "source": "tdnet",
      "revenueForecast": 4450000000000,
      "operatingIncomeForecast": 830000000000,
@@ -2638,7 +2638,7 @@
   },
   {
    "symbol": "4452",
-   "retrievedAt": "2026-10-29T03:54:36Z",
+   "retrievedAt": "2026-10-29T05:13:47Z",
    "incomeStatements": [
     {
      "symbol": "4452",
