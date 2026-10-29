@@ -1,0 +1,3949 @@
+{
+ "placeholder": false,
+ "bundles": [
+  {
+   "symbol": "7203",
+   "retrievedAt": "2026-10-29T03:54:29Z",
+   "incomeStatements": [
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2026-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 09:44:22.122855",
+     "fiscalPeriodDays": 364,
+     "revenue": 50684952000000,
+     "operatingIncome": 3766216000000,
+     "netIncome": 3848098000000,
+     "netIncomeAttributableToOwners": 3848098000000,
+     "operatingMargin": 0.07430639373990135,
+     "netMargin": 0.07592190281644146,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2026-06-10T06:33:00Z",
+      "docId": "S100Y8NY",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:46:53.360566",
+     "fiscalPeriodDays": 364,
+     "revenue": 48036704000000,
+     "operatingIncome": 4795586000000,
+     "netIncome": 4765086000000,
+     "netIncomeAttributableToOwners": 4765086000000,
+     "operatingMargin": 0.09983170369057794,
+     "netMargin": 0.09919677253460188,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-06-18T06:30:00Z",
+      "docId": "S100VWVY",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:46:58.410873",
+     "fiscalPeriodDays": 365,
+     "revenue": 45095325000000,
+     "operatingIncome": 5352934000000,
+     "netIncome": 4944933000000,
+     "netIncomeAttributableToOwners": 4944933000000,
+     "operatingMargin": 0.11870263713588937,
+     "netMargin": 0.10965511391701911,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-06-25T06:00:00Z",
+      "docId": "S100TR7I",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TR7I"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:47:04.162907",
+     "fiscalPeriodDays": 364,
+     "revenue": 37154298000000,
+     "operatingIncome": 2725025000000,
+     "netIncome": 2451318000000,
+     "netIncomeAttributableToOwners": 2451318000000,
+     "operatingMargin": 0.07334346621217282,
+     "netMargin": 0.06597670073055882,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-06-30T05:13:00Z",
+      "docId": "S100RAR0",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RAR0"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:47:09.852569",
+     "fiscalPeriodDays": 364,
+     "revenue": 31379507000000,
+     "operatingIncome": 2995697000000,
+     "netIncome": 2850110000000,
+     "netIncomeAttributableToOwners": 2850110000000,
+     "operatingMargin": 0.09546666874020679,
+     "netMargin": 0.09082711210217548,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-06-23T06:10:00Z",
+      "docId": "S100OC13",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OC13"
+     }
+    }
+   ],
+   "balanceSheets": [
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2026-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 09:44:22.122855",
+     "fiscalPeriodDays": null,
+     "totalAssets": 105522331000000,
+     "ownersEquity": 39918854000000,
+     "equityRatio": 0.378,
+     "interestBearingDebt": 43205469000000,
+     "netInterestBearingDebt": 30545847000000,
+     "cashAndCashEquivalents": 12659622000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2026-06-10T06:33:00Z",
+      "docId": "S100Y8NY",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:46:53.360566",
+     "fiscalPeriodDays": null,
+     "totalAssets": 93601350000000,
+     "ownersEquity": 35924825000000,
+     "equityRatio": 0.384,
+     "interestBearingDebt": 38792879000000,
+     "netInterestBearingDebt": 29810475000000,
+     "cashAndCashEquivalents": 8982404000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-06-18T06:30:00Z",
+      "docId": "S100VWVY",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:46:58.410873",
+     "fiscalPeriodDays": null,
+     "totalAssets": 90114296000000,
+     "ownersEquity": 34220991000000,
+     "equityRatio": 0.38,
+     "interestBearingDebt": 36561780000000,
+     "netInterestBearingDebt": 27149720000000,
+     "cashAndCashEquivalents": 9412060000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-06-25T06:00:00Z",
+      "docId": "S100TR7I",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TR7I"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:47:04.162907",
+     "fiscalPeriodDays": null,
+     "totalAssets": 74303180000000,
+     "ownersEquity": 28338706000000,
+     "equityRatio": 0.381,
+     "interestBearingDebt": 29380273000000,
+     "netInterestBearingDebt": 21863307000000,
+     "cashAndCashEquivalents": 7516966000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-06-30T05:13:00Z",
+      "docId": "S100RAR0",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RAR0"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:47:09.852569",
+     "fiscalPeriodDays": null,
+     "totalAssets": 67688771000000,
+     "ownersEquity": 26245969000000,
+     "equityRatio": 0.388,
+     "interestBearingDebt": 26496358000000,
+     "netInterestBearingDebt": 20382703000000,
+     "cashAndCashEquivalents": 6113655000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-06-23T06:10:00Z",
+      "docId": "S100OC13",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OC13"
+     }
+    }
+   ],
+   "cashFlows": [
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2026-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 09:44:22.122855",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 5472920000000,
+     "investingCashFlow": -1520307000000,
+     "financingCashFlow": -536659000000,
+     "capitalExpenditure": null,
+     "freeCashFlow": 3952613000000,
+     "dividendsPaid": -1238974000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 2392519000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2026-06-10T06:33:00Z",
+      "docId": "S100Y8NY",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:46:53.360566",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 3696934000000,
+     "investingCashFlow": -4189736000000,
+     "financingCashFlow": 197236000000,
+     "capitalExpenditure": null,
+     "freeCashFlow": -492802000000,
+     "dividendsPaid": -1132329000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 2251233000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-06-18T06:30:00Z",
+      "docId": "S100VWVY",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:46:58.410873",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 4206373000000,
+     "investingCashFlow": -4998751000000,
+     "financingCashFlow": 2497558000000,
+     "capitalExpenditure": null,
+     "freeCashFlow": -792378000000,
+     "dividendsPaid": -880197000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 2087066000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-06-25T06:00:00Z",
+      "docId": "S100TR7I",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TR7I"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:47:04.162907",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 2955076000000,
+     "investingCashFlow": -1598890000000,
+     "financingCashFlow": -56180000000,
+     "capitalExpenditure": null,
+     "freeCashFlow": 1356186000000,
+     "dividendsPaid": -727980000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 2039904000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-06-30T05:13:00Z",
+      "docId": "S100RAR0",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RAR0"
+     }
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-03",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-09-29 11:47:09.852569",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 3722615000000,
+     "investingCashFlow": -577496000000,
+     "financingCashFlow": -2466516000000,
+     "capitalExpenditure": null,
+     "freeCashFlow": 3145119000000,
+     "dividendsPaid": -709872000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 1821880000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-06-23T06:10:00Z",
+      "docId": "S100OC13",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OC13"
+     }
+    }
+   ],
+   "segments": {
+    "current": {
+     "symbol": "7203",
+     "fiscalPeriod": "2026-03",
+     "period": "FY",
+     "docTypeCode": "120",
+     "submittedAt": "2026-06-10 06:33:00",
+     "unitMultiplier": 1000000,
+     "note": null,
+     "docId": "S100Y8NY",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+     "items": [
+      {
+       "segment": "自動車",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 45201924,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "金融",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 4819003,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "その他",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 664026,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "連結",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 50684952,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "自動車",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": 215779,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "金融",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": 38112,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "その他",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": 987387,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": -1241278,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "自動車",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 2777049,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "金融",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 851722,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "その他",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 132079,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 5366,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "連結",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 3766216,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "自動車",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 1417242,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "金融",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 920432,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "その他",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 54846,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "連結",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 2392519,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "自動車",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 2453641,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "金融",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 3511937,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "その他",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 64749,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 29452,
+       "periodEnd": "2026-03-31"
+      },
+      {
+       "segment": "連結",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 6059779,
+       "periodEnd": "2026-03-31"
+      }
+     ]
+    },
+    "previous": {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-03",
+     "period": "FY",
+     "docTypeCode": "120",
+     "submittedAt": "2025-06-18 06:30:00",
+     "unitMultiplier": 1000000,
+     "note": null,
+     "docId": "S100VWVY",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY",
+     "items": [
+      {
+       "segment": "自動車",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 42996299,
+       "periodEnd": null
+      },
+      {
+       "segment": "金融",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 4437827,
+       "periodEnd": null
+      },
+      {
+       "segment": "自動車",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": 203566,
+       "periodEnd": null
+      },
+      {
+       "segment": "金融",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": 43353,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": 844536,
+       "periodEnd": null
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の営業収益",
+       "value": -1091455,
+       "periodEnd": null
+      },
+      {
+       "segment": "自動車",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 3940278,
+       "periodEnd": null
+      },
+      {
+       "segment": "金融",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 683519,
+       "periodEnd": null
+      },
+      {
+       "segment": "自動車",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 1378107,
+       "periodEnd": null
+      },
+      {
+       "segment": "金融",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 838167,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 34958,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費",
+       "value": 2251233,
+       "periodEnd": null
+      },
+      {
+       "segment": "自動車",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 2193872,
+       "periodEnd": null
+      },
+      {
+       "segment": "金融",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 3687890,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 100941,
+       "periodEnd": null
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 8565,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出",
+       "value": 5991268,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結",
+       "metric": "net_sales_total",
+       "rawLabel": "外部顧客への営業収益",
+       "value": 48036704,
+       "periodEnd": null
+      },
+      {
+       "segment": "日本",
+       "metric": "net_sales_total",
+       "rawLabel": "所在地間の営業収益",
+       "value": 11139974,
+       "periodEnd": null
+      },
+      {
+       "segment": "北米",
+       "metric": "net_sales_total",
+       "rawLabel": "所在地間の営業収益",
+       "value": 370074,
+       "periodEnd": null
+      },
+      {
+       "segment": "欧州",
+       "metric": "net_sales_total",
+       "rawLabel": "所在地間の営業収益",
+       "value": 203437,
+       "periodEnd": null
+      },
+      {
+       "segment": "アジア",
+       "metric": "net_sales_total",
+       "rawLabel": "所在地間の営業収益",
+       "value": 1084702,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他",
+       "metric": "net_sales_total",
+       "rawLabel": "所在地間の営業収益",
+       "value": 147338,
+       "periodEnd": null
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "net_sales_total",
+       "rawLabel": "所在地間の営業収益",
+       "value": -12945525,
+       "periodEnd": null
+      },
+      {
+       "segment": "日本",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 3151123,
+       "periodEnd": null
+      },
+      {
+       "segment": "北米",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 108808,
+       "periodEnd": null
+      },
+      {
+       "segment": "欧州",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 415553,
+       "periodEnd": null
+      },
+      {
+       "segment": "アジア",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 896510,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 252626,
+       "periodEnd": null
+      },
+      {
+       "segment": "消去又は全社",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": -29033,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益",
+       "value": 4795586,
+       "periodEnd": null
+      }
+     ]
+    },
+    "previousRequested": "2025-03"
+   },
+   "forecasts": [
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2026-06",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-08-04T05:00:00Z",
+     "source": "tdnet",
+     "revenueForecast": 54000000000000,
+     "operatingIncomeForecast": 3400000000000,
+     "netIncomeForecast": 3250000000000,
+     "epsForecast": 272.17,
+     "operatingMarginForecast": 0.062963,
+     "netMarginForecast": 0.060185,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.08711075030285058,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2026-03",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2027-03",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-06-10T06:33:00Z",
+     "source": "edinet",
+     "revenueForecast": 51000000000000,
+     "operatingIncomeForecast": 3000000000000,
+     "netIncomeForecast": 3000000000000,
+     "epsForecast": 251.25,
+     "operatingMarginForecast": 0.058824,
+     "netMarginForecast": 0.058824,
+     "payoutRatioForecast": 0.3980099502,
+     "roeForecast": 0.07515245803399065,
+     "docId": "S100Y8NY",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-12",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-02-06T05:00:00Z",
+     "source": "tdnet",
+     "revenueForecast": 50000000000000,
+     "operatingIncomeForecast": 3800000000000,
+     "netIncomeForecast": 3570000000000,
+     "epsForecast": 273.91,
+     "operatingMarginForecast": 0.076,
+     "netMarginForecast": 0.0714,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09159790388075174,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-09",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-11-13T06:30:00Z",
+     "source": "edinet",
+     "revenueForecast": 49000000000000,
+     "operatingIncomeForecast": 3400000000000,
+     "netIncomeForecast": 2930000000000,
+     "epsForecast": 224.81,
+     "operatingMarginForecast": 0.069388,
+     "netMarginForecast": 0.059796,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.07814975728632463,
+     "docId": "S100WYZE",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100WYZE"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-06",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-08-07T05:00:00Z",
+     "source": "tdnet",
+     "revenueForecast": 48500000000000,
+     "operatingIncomeForecast": 3200000000000,
+     "netIncomeForecast": 2660000000000,
+     "epsForecast": 204.09,
+     "operatingMarginForecast": 0.065979,
+     "netMarginForecast": 0.054845,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.07380646551852107,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2025-03",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2026-03",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-06-18T06:30:00Z",
+     "source": "edinet",
+     "revenueForecast": 48500000000000,
+     "operatingIncomeForecast": 3800000000000,
+     "netIncomeForecast": 3100000000000,
+     "epsForecast": 237.57,
+     "operatingMarginForecast": 0.078351,
+     "netMarginForecast": 0.063918,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.08629130413300552,
+     "docId": "S100VWVY",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-12",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-02-05T04:25:00Z",
+     "source": "tdnet",
+     "revenueForecast": 47000000000000,
+     "operatingIncomeForecast": 4700000000000,
+     "netIncomeForecast": 4520000000000,
+     "epsForecast": 340.87,
+     "operatingMarginForecast": 0.1,
+     "netMarginForecast": 0.09617,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1258692777375788,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-09",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-11-13T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 46000000000000,
+     "operatingIncomeForecast": 4300000000000,
+     "netIncomeForecast": 3570000000000,
+     "epsForecast": 268.77,
+     "operatingMarginForecast": 0.093478,
+     "netMarginForecast": 0.077609,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.10387414782827525,
+     "docId": "S100UP32",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100UP32"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-06",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-08-01T04:25:00Z",
+     "source": "tdnet",
+     "revenueForecast": 46000000000000,
+     "operatingIncomeForecast": 4300000000000,
+     "netIncomeForecast": 3570000000000,
+     "epsForecast": 265.04,
+     "operatingMarginForecast": 0.093478,
+     "netMarginForecast": 0.077609,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09989438617054283,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2024-03",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2025-03",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-06-25T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 46000000000000,
+     "operatingIncomeForecast": 4300000000000,
+     "netIncomeForecast": 3570000000000,
+     "epsForecast": 264.95,
+     "operatingMarginForecast": 0.093478,
+     "netMarginForecast": 0.077609,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.10432193503689008,
+     "docId": "S100TR7I",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TR7I"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-12",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-02-13T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 43500000000000,
+     "operatingIncomeForecast": 4900000000000,
+     "netIncomeForecast": 4500000000000,
+     "epsForecast": 332.97,
+     "operatingMarginForecast": 0.112644,
+     "netMarginForecast": 0.103448,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.13819918538029513,
+     "docId": "S100STED",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100STED"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-09",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-11-10T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 43000000000000,
+     "operatingIncomeForecast": 4500000000000,
+     "netIncomeForecast": 3950000000000,
+     "epsForecast": 292.02,
+     "operatingMarginForecast": 0.104651,
+     "netMarginForecast": 0.09186,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.12385119395059346,
+     "docId": "S100S5IL",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100S5IL"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-06",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-08-10T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 38000000000000,
+     "operatingIncomeForecast": 3000000000000,
+     "netIncomeForecast": 2580000000000,
+     "epsForecast": 190.41,
+     "operatingMarginForecast": 0.078947,
+     "netMarginForecast": 0.067895,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.08506411608838399,
+     "docId": "S100RIZN",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RIZN"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2023-03",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2024-03",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-06-30T05:13:00Z",
+     "source": "edinet",
+     "revenueForecast": 38000000000000,
+     "operatingIncomeForecast": 3000000000000,
+     "netIncomeForecast": 2580000000000,
+     "epsForecast": 190.19,
+     "operatingMarginForecast": 0.078947,
+     "netMarginForecast": 0.067895,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09104155990749896,
+     "docId": "S100RAR0",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RAR0"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-12",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-02-13T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 36000000000000,
+     "operatingIncomeForecast": 2400000000000,
+     "netIncomeForecast": 2360000000000,
+     "epsForecast": 172.68,
+     "operatingMarginForecast": 0.066667,
+     "netMarginForecast": 0.065556,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.0857065295846411,
+     "docId": "S100Q71I",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Q71I"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-09",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-11-10T06:02:00Z",
+     "source": "edinet",
+     "revenueForecast": 36000000000000,
+     "operatingIncomeForecast": 2400000000000,
+     "netIncomeForecast": 2360000000000,
+     "epsForecast": 172.28,
+     "operatingMarginForecast": 0.066667,
+     "netMarginForecast": 0.065556,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.08417372715414478,
+     "docId": "S100PGKG",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100PGKG"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-06",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-08-10T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 34500000000000,
+     "operatingIncomeForecast": 2400000000000,
+     "netIncomeForecast": 2360000000000,
+     "epsForecast": 171.95,
+     "operatingMarginForecast": 0.069565,
+     "netMarginForecast": 0.068406,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.08621061882493611,
+     "docId": "S100OVS9",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OVS9"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2022-03",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2023-03",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-06-23T06:10:00Z",
+     "source": "edinet",
+     "revenueForecast": 33000000000000,
+     "operatingIncomeForecast": 2400000000000,
+     "netIncomeForecast": 2260000000000,
+     "epsForecast": 164.03,
+     "operatingMarginForecast": 0.072727,
+     "netMarginForecast": 0.068485,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.08610846107453682,
+     "docId": "S100OC13",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OC13"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2021-12",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-02-14T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 29500000000000,
+     "operatingIncomeForecast": 2800000000000,
+     "netIncomeForecast": 2490000000000,
+     "epsForecast": 179.25,
+     "operatingMarginForecast": 0.094915,
+     "netMarginForecast": 0.084407,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09984140053186195,
+     "docId": "S100NE47",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100NE47"
+    },
+    {
+     "symbol": "7203",
+     "fiscalPeriod": "2021-09",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2021-11-12T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 30000000000000,
+     "operatingIncomeForecast": 2800000000000,
+     "netIncomeForecast": 2490000000000,
+     "epsForecast": 179.13,
+     "operatingMarginForecast": 0.093333,
+     "netMarginForecast": 0.083,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.10117663962229988,
+     "docId": "S100MRVF",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100MRVF"
+    }
+   ],
+   "workforce": {
+    "symbol": "7203",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-10 06:33:00",
+    "employees": 73133,
+    "consolidatedEmployees": 390927,
+    "averageAge": 40.5,
+    "averageTenureYears": 15.1,
+    "averageAnnualSalary": 10060464,
+    "docId": "S100Y8NY",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+    "segments": [
+     {
+      "segment": "自動車事業",
+      "employees": 343952
+     },
+     {
+      "segment": "金融事業",
+      "employees": 16222
+     },
+     {
+      "segment": "その他の事業",
+      "employees": 23934
+     },
+     {
+      "segment": "全社（共通）",
+      "employees": 6819
+     }
+    ],
+    "parentSegments": [
+     {
+      "segment": "自動車事業",
+      "employees": 66018
+     },
+     {
+      "segment": "その他の事業",
+      "employees": 307
+     },
+     {
+      "segment": "全社（共通）",
+      "employees": 6808
+     }
+    ]
+   },
+   "diversity": {
+    "symbol": "7203",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-10 06:33:00",
+    "docId": "S100Y8NY",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+    "reportingCompany": {
+     "femaleManagerRatio": 0.039,
+     "maleChildcareLeaveRatio": 0.79,
+     "maleChildcareLeaveBasis": "childcare-leave",
+     "wageGapAll": 0.67,
+     "wageGapRegular": 0.668,
+     "wageGapNonRegular": 0.597
+    },
+    "subsidiaries": [
+     {
+      "name": "日野自動車㈱　(注10)",
+      "femaleManagerRatio": 0.028,
+      "maleChildcareLeaveRatio": 0.78,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.787,
+      "wageGapRegular": 0.782,
+      "wageGapNonRegular": 0.944
+     },
+     {
+      "name": "プライムプラネットエナジー＆ソリューションズ㈱",
+      "femaleManagerRatio": null,
+      "maleChildcareLeaveRatio": 0.69,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.802,
+      "wageGapRegular": 0.795,
+      "wageGapNonRegular": 0.833
+     },
+     {
+      "name": "ダイハツ工業㈱",
+      "femaleManagerRatio": 0.031,
+      "maleChildcareLeaveRatio": 0.73,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.782,
+      "wageGapRegular": 0.79,
+      "wageGapNonRegular": 0.691
+     },
+     {
+      "name": "トヨタ車体㈱",
+      "femaleManagerRatio": 0.028,
+      "maleChildcareLeaveRatio": 0.87,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.749,
+      "wageGapRegular": 0.74,
+      "wageGapNonRegular": 0.79
+     },
+     {
+      "name": "トヨタ自動車九州㈱",
+      "femaleManagerRatio": 0.034,
+      "maleChildcareLeaveRatio": 0.58,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.69,
+      "wageGapRegular": 0.69,
+      "wageGapNonRegular": 0.707
+     },
+     {
+      "name": "トヨタ自動車東日本㈱",
+      "femaleManagerRatio": 0.024,
+      "maleChildcareLeaveRatio": 0.59,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.787,
+      "wageGapRegular": 0.777,
+      "wageGapNonRegular": 0.661
+     },
+     {
+      "name": "ウーブン・バイ・トヨタ㈱",
+      "femaleManagerRatio": 0.129,
+      "maleChildcareLeaveRatio": 0.8,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.784,
+      "wageGapRegular": 0.813,
+      "wageGapNonRegular": 0.77
+     },
+     {
+      "name": "トヨタファイナンシャルサービス㈱",
+      "femaleManagerRatio": 0.149,
+      "maleChildcareLeaveRatio": 1,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.713,
+      "wageGapRegular": 0.75,
+      "wageGapNonRegular": 0.518
+     },
+     {
+      "name": "トヨタファイナンス㈱",
+      "femaleManagerRatio": 0.076,
+      "maleChildcareLeaveRatio": 0.93,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.515,
+      "wageGapRegular": 0.515,
+      "wageGapNonRegular": 0.533
+     }
+    ]
+   }
+  },
+  {
+   "symbol": "9983",
+   "retrievedAt": "2026-10-29T03:54:33Z",
+   "incomeStatements": [
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2026-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 21:32:55.212538",
+     "fiscalPeriodDays": 364,
+     "revenue": 3963389000000,
+     "operatingIncome": 743128000000,
+     "netIncome": 542516000000,
+     "netIncomeAttributableToOwners": 542516000000,
+     "operatingMargin": 0.1874981234494015,
+     "netMargin": 0.13688184530965797,
+     "provenance": {
+      "source": "tdnet",
+      "announcedAt": "2026-10-08T06:31:00Z",
+      "docId": null,
+      "sourceUrl": null
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 09:47:57.857647",
+     "fiscalPeriodDays": 364,
+     "revenue": 3400539000000,
+     "operatingIncome": 564265000000,
+     "netIncome": 433009000000,
+     "netIncomeAttributableToOwners": 433009000000,
+     "operatingMargin": 0.16593398870002668,
+     "netMargin": 0.12733540182894534,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-11-28T04:04:00Z",
+      "docId": "S100X6X6",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 365,
+     "revenue": 3103836000000,
+     "operatingIncome": 500904000000,
+     "netIncome": 371999000000,
+     "netIncomeAttributableToOwners": 371999000000,
+     "operatingMargin": 0.16138223797906848,
+     "netMargin": 0.1198513710131592,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-11-29T06:00:00Z",
+      "docId": "S100UV0T",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100UV0T"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 364,
+     "revenue": 2766557000000,
+     "operatingIncome": 381090000000,
+     "netIncome": 296229000000,
+     "netIncomeAttributableToOwners": 296229000000,
+     "operatingMargin": 0.1377488336585872,
+     "netMargin": 0.10707496718845844,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-11-30T04:01:00Z",
+      "docId": "S100SD9V",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100SD9V"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 364,
+     "revenue": 2301122000000,
+     "operatingIncome": 297325000000,
+     "netIncome": 273335000000,
+     "netIncomeAttributableToOwners": 273335000000,
+     "operatingMargin": 0.12920870775213136,
+     "netMargin": 0.11878335872674287,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-11-25T04:00:00Z",
+      "docId": "S100POPP",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100POPP"
+     }
+    }
+   ],
+   "balanceSheets": [
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2026-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 21:32:55.212538",
+     "fiscalPeriodDays": null,
+     "totalAssets": 4549464000000,
+     "ownersEquity": 2845897000000,
+     "equityRatio": 0.626,
+     "interestBearingDebt": 588358000000,
+     "netInterestBearingDebt": -419228000000,
+     "cashAndCashEquivalents": 1007586000000,
+     "provenance": {
+      "source": "tdnet",
+      "announcedAt": null,
+      "docId": null,
+      "sourceUrl": null
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 09:47:57.857647",
+     "fiscalPeriodDays": null,
+     "totalAssets": 3859353000000,
+     "ownersEquity": 2273116000000,
+     "equityRatio": 0.589,
+     "interestBearingDebt": 513500000000,
+     "netInterestBearingDebt": -379739000000,
+     "cashAndCashEquivalents": 893239000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-11-28T04:04:00Z",
+      "docId": "S100X6X6",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 3587565000000,
+     "ownersEquity": 2016536000000,
+     "equityRatio": 0.562,
+     "interestBearingDebt": 478062000000,
+     "netInterestBearingDebt": -715498000000,
+     "cashAndCashEquivalents": 1193560000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-11-29T06:00:00Z",
+      "docId": "S100UV0T",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100UV0T"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 3303694000000,
+     "ownersEquity": 1821405000000,
+     "equityRatio": 0.551,
+     "interestBearingDebt": 465649000000,
+     "netInterestBearingDebt": -437631000000,
+     "cashAndCashEquivalents": 903280000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-11-30T04:01:00Z",
+      "docId": "S100SD9V",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100SD9V"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 3183762000000,
+     "ownersEquity": 1561652000000,
+     "equityRatio": 0.491,
+     "interestBearingDebt": 480725000000,
+     "netInterestBearingDebt": -877567000000,
+     "cashAndCashEquivalents": 1358292000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-11-25T04:00:00Z",
+      "docId": "S100POPP",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100POPP"
+     }
+    }
+   ],
+   "cashFlows": [
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2026-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 21:32:55.212538",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 788587000000,
+     "investingCashFlow": -316889000000,
+     "financingCashFlow": -429065000000,
+     "capitalExpenditure": -79910000000,
+     "freeCashFlow": 471698000000,
+     "dividendsPaid": -177934000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 237251000000,
+     "provenance": {
+      "source": "tdnet",
+      "announcedAt": null,
+      "docId": null,
+      "sourceUrl": null
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 09:47:57.857647",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 580618000000,
+     "investingCashFlow": -578922000000,
+     "financingCashFlow": -339139000000,
+     "capitalExpenditure": -135535000000,
+     "freeCashFlow": 1696000000,
+     "dividendsPaid": -142630000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 216492000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-11-28T04:04:00Z",
+      "docId": "S100X6X6",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 651521000000,
+     "investingCashFlow": -82231000000,
+     "financingCashFlow": -269003000000,
+     "capitalExpenditure": -73728000000,
+     "freeCashFlow": 569290000000,
+     "dividendsPaid": -104263000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 204388000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-11-29T06:00:00Z",
+      "docId": "S100UV0T",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100UV0T"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 463216000000,
+     "investingCashFlow": -574402000000,
+     "financingCashFlow": -364562000000,
+     "capitalExpenditure": -61764000000,
+     "freeCashFlow": -111186000000,
+     "dividendsPaid": -73064000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 186872000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-11-30T04:01:00Z",
+      "docId": "S100SD9V",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100SD9V"
+     }
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-08",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 430817000000,
+     "investingCashFlow": -212226000000,
+     "financingCashFlow": -213050000000,
+     "capitalExpenditure": -51271000000,
+     "freeCashFlow": 218591000000,
+     "dividendsPaid": -53091000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 180275000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-11-25T04:00:00Z",
+      "docId": "S100POPP",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100POPP"
+     }
+    }
+   ],
+   "segments": {
+    "current": {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-08",
+     "period": "FY",
+     "docTypeCode": "120",
+     "submittedAt": "2025-11-28 04:04:00",
+     "unitMultiplier": 1000000,
+     "note": null,
+     "docId": "S100X6X6",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6",
+     "items": [
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 1026096,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 1910289,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 330701,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 131542,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "合計",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 3398629,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 1910,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "連結合計",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 3400539,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 184451,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 309319,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 30506,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": -950,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "合計",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 523327,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 253,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 40684,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "連結合計",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益又は損失(△)",
+       "value": 564265,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 187125,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 309026,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 31948,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": -1487,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "合計",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 526613,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 253,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 123707,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "連結合計",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 650574,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 51913,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 99192,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 19999,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 8954,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "合計",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 180060,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 452,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 35980,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "連結合計",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 216492,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 866,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 439,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 215,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 2308,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "合計",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 3829,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 4,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "連結合計",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 3833,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入益(注3)",
+       "value": -3189,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入益(注3)",
+       "value": -12,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入益(注3)",
+       "value": -32,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "合計",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入益(注3)",
+       "value": -3235,
+       "periodEnd": "2025-08-31"
+      },
+      {
+       "segment": "連結合計",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入益(注3)",
+       "value": -3235,
+       "periodEnd": "2025-08-31"
+      }
+     ]
+    },
+    "previous": {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-08",
+     "period": "FY",
+     "docTypeCode": "120",
+     "submittedAt": "2024-11-29 06:00:00",
+     "unitMultiplier": 1000000,
+     "note": null,
+     "docId": "S100UV0T",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100UV0T",
+     "items": [
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 932227,
+       "periodEnd": null
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 1711833,
+       "periodEnd": null
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 319162,
+       "periodEnd": null
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 138837,
+       "periodEnd": null
+      },
+      {
+       "segment": "合計",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 3102060,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 1776,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結合計",
+       "metric": "net_sales_total",
+       "rawLabel": "売上収益",
+       "value": 3103836,
+       "periodEnd": null
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 170544,
+       "periodEnd": null
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 285295,
+       "periodEnd": null
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 33975,
+       "periodEnd": null
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": -671,
+       "periodEnd": null
+      },
+      {
+       "segment": "合計",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 489143,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 355,
+       "periodEnd": null
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 67701,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結合計",
+       "metric": "segment_profit",
+       "rawLabel": "セグメント利益又は損失(△)(税引前利益)",
+       "value": 557201,
+       "periodEnd": null
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 50754,
+       "periodEnd": null
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 92658,
+       "periodEnd": null
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 19280,
+       "periodEnd": null
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 8303,
+       "periodEnd": null
+      },
+      {
+       "segment": "合計",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 170996,
+       "periodEnd": null
+      },
+      {
+       "segment": "その他(注1)",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 406,
+       "periodEnd": null
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 32984,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結合計",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費等",
+       "value": 204388,
+       "periodEnd": null
+      },
+      {
+       "segment": "調整額(注2)",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 276,
+       "periodEnd": null
+      },
+      {
+       "segment": "国内ユニクロ事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入(注3)",
+       "value": -425,
+       "periodEnd": null
+      },
+      {
+       "segment": "海外ユニクロ事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入(注3)",
+       "value": -3273,
+       "periodEnd": null
+      },
+      {
+       "segment": "ジーユー事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入(注3)",
+       "value": -306,
+       "periodEnd": null
+      },
+      {
+       "segment": "グローバルブランド事業",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入(注3)",
+       "value": -73,
+       "periodEnd": null
+      },
+      {
+       "segment": "合計",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入(注3)",
+       "value": -4079,
+       "periodEnd": null
+      },
+      {
+       "segment": "連結合計",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失戻入(注3)",
+       "value": -4079,
+       "periodEnd": null
+      }
+     ]
+    },
+    "previousRequested": "2024-08"
+   },
+   "forecasts": [
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2026-08",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2027-08",
+     "accountingStandard": "ifrs",
+     "announcedAt": null,
+     "source": "tdnet",
+     "revenueForecast": 4450000000000,
+     "operatingIncomeForecast": 830000000000,
+     "netIncomeForecast": 560000000000,
+     "epsForecast": 1825.06,
+     "operatingMarginForecast": 0.186517,
+     "netMarginForecast": 0.125843,
+     "payoutRatioForecast": 0.4931344723,
+     "roeForecast": 0.19677451432711726,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2026-05",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-07-09T06:31:00Z",
+     "source": "tdnet",
+     "revenueForecast": 3970000000000,
+     "operatingIncomeForecast": 730000000000,
+     "netIncomeForecast": 500000000000,
+     "epsForecast": 1629.54,
+     "operatingMarginForecast": 0.183879,
+     "netMarginForecast": 0.125945,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.18325476590669693,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2026-02",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-04-10T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 3900000000000,
+     "operatingIncomeForecast": 700000000000,
+     "netIncomeForecast": 480000000000,
+     "epsForecast": 1564.39,
+     "operatingMarginForecast": 0.179487,
+     "netMarginForecast": 0.123077,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1823388836529772,
+     "docId": "S100XXP2",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XXP2"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-11",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-01-08T06:31:00Z",
+     "source": "tdnet",
+     "revenueForecast": 3800000000000,
+     "operatingIncomeForecast": 650000000000,
+     "netIncomeForecast": 450000000000,
+     "epsForecast": 1466.64,
+     "operatingMarginForecast": 0.171053,
+     "netMarginForecast": 0.118421,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.17970470922180673,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-08",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2026-08",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-11-28T04:04:00Z",
+     "source": "edinet",
+     "revenueForecast": 3750000000000,
+     "operatingIncomeForecast": 610000000000,
+     "netIncomeForecast": 435000000000,
+     "epsForecast": 1417.92,
+     "operatingMarginForecast": 0.162667,
+     "netMarginForecast": 0.116,
+     "payoutRatioForecast": 0.4513653803,
+     "roeForecast": 0.1913672685423885,
+     "docId": "S100X6X6",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-05",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-07-10T06:31:00Z",
+     "source": "tdnet",
+     "revenueForecast": 3400000000000,
+     "operatingIncomeForecast": 545000000000,
+     "netIncomeForecast": 410000000000,
+     "epsForecast": 1336.51,
+     "operatingMarginForecast": 0.160294,
+     "netMarginForecast": 0.120588,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1938561776289971,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2025-02",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-04-11T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 3400000000000,
+     "operatingIncomeForecast": 545000000000,
+     "netIncomeForecast": 410000000000,
+     "epsForecast": 1336.51,
+     "operatingMarginForecast": 0.160294,
+     "netMarginForecast": 0.120588,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.18667742414294575,
+     "docId": "S100VKW4",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VKW4"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-11",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-01-09T06:31:00Z",
+     "source": "tdnet",
+     "revenueForecast": 3400000000000,
+     "operatingIncomeForecast": 530000000000,
+     "netIncomeForecast": 385000000000,
+     "epsForecast": 1255.14,
+     "operatingMarginForecast": 0.155882,
+     "netMarginForecast": 0.113235,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.17996431564712598,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-08",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2025-08",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-11-29T06:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 3400000000000,
+     "operatingIncomeForecast": 530000000000,
+     "netIncomeForecast": 385000000000,
+     "epsForecast": 1255.14,
+     "operatingMarginForecast": 0.155882,
+     "netMarginForecast": 0.113235,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1909214613574962,
+     "docId": "S100UV0T",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100UV0T"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-05",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-07-12T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 3070000000000,
+     "operatingIncomeForecast": 475000000000,
+     "netIncomeForecast": 365000000000,
+     "epsForecast": 1190.09,
+     "operatingMarginForecast": 0.154723,
+     "netMarginForecast": 0.118893,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.17072700704798505,
+     "docId": "S100U0UJ",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100U0UJ"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2024-02",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-07-05T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 3030000000000,
+     "operatingIncomeForecast": 450000000000,
+     "netIncomeForecast": 320000000000,
+     "epsForecast": 1043.39,
+     "operatingMarginForecast": 0.148515,
+     "netMarginForecast": 0.105611,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1593734233859581,
+     "docId": "S100TZQH",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TZQH"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-11",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-01-12T04:01:00Z",
+     "source": "edinet",
+     "revenueForecast": 3050000000000,
+     "operatingIncomeForecast": 450000000000,
+     "netIncomeForecast": 310000000000,
+     "epsForecast": 1010.99,
+     "operatingMarginForecast": 0.147541,
+     "netMarginForecast": 0.101639,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1646972943422229,
+     "docId": "S100SL8T",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100SL8T"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-08",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2024-08",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-11-30T04:01:00Z",
+     "source": "edinet",
+     "revenueForecast": 3050000000000,
+     "operatingIncomeForecast": 450000000000,
+     "netIncomeForecast": 310000000000,
+     "epsForecast": 1010.99,
+     "operatingMarginForecast": 0.147541,
+     "netMarginForecast": 0.101639,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.17019828099736192,
+     "docId": "S100SD9V",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100SD9V"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-05",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-07-14T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 2730000000000,
+     "operatingIncomeForecast": 370000000000,
+     "netIncomeForecast": 260000000000,
+     "epsForecast": 847.96,
+     "operatingMarginForecast": 0.135531,
+     "netMarginForecast": 0.095238,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1534013806124255,
+     "docId": "S100RE30",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RE30"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2023-02",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-04-14T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 2680000000000,
+     "operatingIncomeForecast": 360000000000,
+     "netIncomeForecast": 240000000000,
+     "epsForecast": 782.76,
+     "operatingMarginForecast": 0.134328,
+     "netMarginForecast": 0.089552,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.149796464054466,
+     "docId": "S100QLHR",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100QLHR"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-11",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-01-13T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 2650000000000,
+     "operatingIncomeForecast": 350000000000,
+     "netIncomeForecast": 230000000000,
+     "epsForecast": 2251.15,
+     "operatingMarginForecast": 0.132075,
+     "netMarginForecast": 0.086792,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.14693331016471864,
+     "docId": "S100PXX5",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100PXX5"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-08",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2023-08",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-11-25T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 2650000000000,
+     "operatingIncomeForecast": 350000000000,
+     "netIncomeForecast": 230000000000,
+     "epsForecast": 2251.15,
+     "operatingMarginForecast": 0.132075,
+     "netMarginForecast": 0.086792,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.14727993176456727,
+     "docId": "S100POPP",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100POPP"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-05",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-07-15T04:01:00Z",
+     "source": "edinet",
+     "revenueForecast": 2250000000000,
+     "operatingIncomeForecast": 290000000000,
+     "netIncomeForecast": 250000000000,
+     "epsForecast": 2447.02,
+     "operatingMarginForecast": 0.128889,
+     "netMarginForecast": 0.111111,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1735514527992114,
+     "docId": "S100OPVR",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OPVR"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2022-02",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-04-14T06:02:00Z",
+     "source": "edinet",
+     "revenueForecast": 2200000000000,
+     "operatingIncomeForecast": 270000000000,
+     "netIncomeForecast": 190000000000,
+     "epsForecast": 1859.85,
+     "operatingMarginForecast": 0.122727,
+     "netMarginForecast": 0.086364,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.14912557472211627,
+     "docId": "S100NVPJ",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100NVPJ"
+    },
+    {
+     "symbol": "9983",
+     "fiscalPeriod": "2021-11",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-01-14T04:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 2200000000000,
+     "operatingIncomeForecast": 270000000000,
+     "netIncomeForecast": 175000000000,
+     "epsForecast": 1713.26,
+     "operatingMarginForecast": 0.122727,
+     "netMarginForecast": 0.079545,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.14370683149429647,
+     "docId": "S100N7OQ",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100N7OQ"
+    }
+   ],
+   "workforce": {
+    "symbol": "9983",
+    "fiscalPeriod": "2025-08",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-11-28 04:04:00",
+    "employees": 1572,
+    "consolidatedEmployees": 59522,
+    "averageAge": 38.42,
+    "averageTenureYears": 5.75,
+    "averageAnnualSalary": 12506000,
+    "docId": "S100X6X6",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6",
+    "segments": [
+     {
+      "segment": "国内ユニクロ事業",
+      "employees": 12116
+     },
+     {
+      "segment": "海外ユニクロ事業",
+      "employees": 36161
+     },
+     {
+      "segment": "ジーユー事業",
+      "employees": 5513
+     },
+     {
+      "segment": "グローバルブランド事業",
+      "employees": 2922
+     },
+     {
+      "segment": "その他",
+      "employees": 1238
+     },
+     {
+      "segment": "全社（共通）",
+      "employees": 1572
+     }
+    ],
+    "parentSegments": []
+   },
+   "diversity": {
+    "symbol": "9983",
+    "fiscalPeriod": "2025-08",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-11-28 04:04:00",
+    "docId": "S100X6X6",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100X6X6",
+    "reportingCompany": {
+     "femaleManagerRatio": 0.216,
+     "maleChildcareLeaveRatio": 0.75,
+     "maleChildcareLeaveBasis": "childcare-leave",
+     "wageGapAll": 0.606,
+     "wageGapRegular": 0.651,
+     "wageGapNonRegular": 0.519
+    },
+    "subsidiaries": [
+     {
+      "name": "(株)ユニクロ",
+      "femaleManagerRatio": 0.336,
+      "maleChildcareLeaveRatio": 0.694,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.806,
+      "wageGapRegular": 0.625,
+      "wageGapNonRegular": 1.067
+     },
+     {
+      "name": "(株)ジーユー",
+      "femaleManagerRatio": 0.303,
+      "maleChildcareLeaveRatio": 0.762,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.897,
+      "wageGapRegular": 0.778,
+      "wageGapNonRegular": 1.155
+     },
+     {
+      "name": "(株)リンク・セオリー・ジャパン",
+      "femaleManagerRatio": 0.585,
+      "maleChildcareLeaveRatio": 0,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.76,
+      "wageGapRegular": 0.778,
+      "wageGapNonRegular": 0.757
+     },
+     {
+      "name": "(株)プラステ",
+      "femaleManagerRatio": 0.263,
+      "maleChildcareLeaveRatio": null,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.752,
+      "wageGapRegular": 0.717,
+      "wageGapNonRegular": 1.314
+     },
+     {
+      "name": "(株)イノベーションファクトリー",
+      "femaleManagerRatio": 0,
+      "maleChildcareLeaveRatio": 1,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.827,
+      "wageGapRegular": 0.905,
+      "wageGapNonRegular": 0.875
+     }
+    ]
+   }
+  },
+  {
+   "symbol": "4452",
+   "retrievedAt": "2026-10-29T03:54:36Z",
+   "incomeStatements": [
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 09:44:22.122855",
+     "fiscalPeriodDays": 364,
+     "revenue": 1688633000000,
+     "operatingIncome": 164069000000,
+     "netIncome": 120081000000,
+     "netIncomeAttributableToOwners": 120081000000,
+     "operatingMargin": 0.09716083956667908,
+     "netMargin": 0.0711113664129506,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2026-03-25T00:14:00Z",
+      "docId": "S100XT6G",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 365,
+     "revenue": 1628448000000,
+     "operatingIncome": 146644000000,
+     "netIncome": 107767000000,
+     "netIncomeAttributableToOwners": 107767000000,
+     "operatingMargin": 0.09005138635068483,
+     "netMargin": 0.06617773487394132,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-03-21T07:29:00Z",
+      "docId": "S100VFNW",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VFNW"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 364,
+     "revenue": 1532579000000,
+     "operatingIncome": 60035000000,
+     "netIncome": 43870000000,
+     "netIncomeAttributableToOwners": 43870000000,
+     "operatingMargin": 0.039172532052181325,
+     "netMargin": 0.02862495179693836,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-03-22T06:26:00Z",
+      "docId": "S100T2ZS",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100T2ZS"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 364,
+     "revenue": 1551059000000,
+     "operatingIncome": 110071000000,
+     "netIncome": 86038000000,
+     "netIncomeAttributableToOwners": 86038000000,
+     "operatingMargin": 0.0709650632245453,
+     "netMargin": 0.05547048822772054,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-03-24T06:01:00Z",
+      "docId": "S100QFPL",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100QFPL"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2021-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": 364,
+     "revenue": 1418768000000,
+     "operatingIncome": 143510000000,
+     "netIncome": 109636000000,
+     "netIncomeAttributableToOwners": 109636000000,
+     "operatingMargin": 0.10115113958025554,
+     "netMargin": 0.07727549535935403,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-03-25T05:54:00Z",
+      "docId": "S100NQCA",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100NQCA"
+     }
+    }
+   ],
+   "balanceSheets": [
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 09:44:22.122855",
+     "fiscalPeriodDays": null,
+     "totalAssets": 1875054000000,
+     "ownersEquity": 1064077000000,
+     "equityRatio": 0.567,
+     "interestBearingDebt": 243142000000,
+     "netInterestBearingDebt": -80140000000,
+     "cashAndCashEquivalents": 323282000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2026-03-25T00:14:00Z",
+      "docId": "S100XT6G",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 1867237000000,
+     "ownersEquity": 1066776000000,
+     "equityRatio": 0.571,
+     "interestBearingDebt": 245328000000,
+     "netInterestBearingDebt": -112385000000,
+     "cashAndCashEquivalents": 357713000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-03-21T07:29:00Z",
+      "docId": "S100VFNW",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VFNW"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 1769746000000,
+     "ownersEquity": 983658000000,
+     "equityRatio": 0.556,
+     "interestBearingDebt": 261072000000,
+     "netInterestBearingDebt": -30591000000,
+     "cashAndCashEquivalents": 291663000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-03-22T06:26:00Z",
+      "docId": "S100T2ZS",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100T2ZS"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 1726350000000,
+     "ownersEquity": 972061000000,
+     "equityRatio": 0.563,
+     "interestBearingDebt": 262890000000,
+     "netInterestBearingDebt": -5358000000,
+     "cashAndCashEquivalents": 268248000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-03-24T06:01:00Z",
+      "docId": "S100QFPL",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100QFPL"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2021-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "totalAssets": 1704007000000,
+     "ownersEquity": 965137000000,
+     "equityRatio": 0.566,
+     "interestBearingDebt": 268682000000,
+     "netInterestBearingDebt": -67387000000,
+     "cashAndCashEquivalents": 336069000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-03-25T05:54:00Z",
+      "docId": "S100NQCA",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100NQCA"
+     }
+    }
+   ],
+   "cashFlows": [
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-28 09:44:22.122855",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 199680000000,
+     "investingCashFlow": -69767000000,
+     "financingCashFlow": -175134000000,
+     "capitalExpenditure": -61214000000,
+     "freeCashFlow": 129913000000,
+     "dividendsPaid": -71149000000,
+     "purchaseOfTreasuryStock": -80053000000,
+     "depreciationAndAmortization": 85841000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2026-03-25T00:14:00Z",
+      "docId": "S100XT6G",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 201585000000,
+     "investingCashFlow": -45902000000,
+     "financingCashFlow": -104578000000,
+     "capitalExpenditure": -57404000000,
+     "freeCashFlow": 155683000000,
+     "dividendsPaid": -70246000000,
+     "purchaseOfTreasuryStock": null,
+     "depreciationAndAmortization": 88422000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2025-03-21T07:29:00Z",
+      "docId": "S100VFNW",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VFNW"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 202481000000,
+     "investingCashFlow": -109302000000,
+     "financingCashFlow": -79983000000,
+     "capitalExpenditure": -54166000000,
+     "freeCashFlow": 93179000000,
+     "dividendsPaid": -69339000000,
+     "purchaseOfTreasuryStock": -17000000,
+     "depreciationAndAmortization": 89595000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2024-03-22T06:26:00Z",
+      "docId": "S100T2ZS",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100T2ZS"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 130905000000,
+     "investingCashFlow": -74911000000,
+     "financingCashFlow": -139311000000,
+     "capitalExpenditure": -65520000000,
+     "freeCashFlow": 55994000000,
+     "dividendsPaid": -68931000000,
+     "purchaseOfTreasuryStock": -50035000000,
+     "depreciationAndAmortization": 89738000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2023-03-24T06:01:00Z",
+      "docId": "S100QFPL",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100QFPL"
+     }
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2021-12",
+     "period": "FY",
+     "accountingStandard": "ifrs",
+     "updatedAt": "2026-10-07 05:25:31.414432",
+     "fiscalPeriodDays": null,
+     "operatingCashFlow": 175524000000,
+     "investingCashFlow": -67232000000,
+     "financingCashFlow": -141573000000,
+     "capitalExpenditure": -59951000000,
+     "freeCashFlow": 108292000000,
+     "dividendsPaid": -67859000000,
+     "purchaseOfTreasuryStock": -51792000000,
+     "depreciationAndAmortization": 87341000000,
+     "provenance": {
+      "source": "edinet",
+      "announcedAt": "2022-03-25T05:54:00Z",
+      "docId": "S100NQCA",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100NQCA"
+     }
+    }
+   ],
+   "segments": {
+    "current": {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-12",
+     "period": "FY",
+     "docTypeCode": "120",
+     "submittedAt": "2026-03-25 00:14:00",
+     "unitMultiplier": 1000000,
+     "note": null,
+     "docId": "S100XT6G",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G",
+     "items": [
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 549333,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 432882,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 261563,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 39174,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 1282952,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 405681,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 1688633,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 1688633,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の内部売上高及び振替高(注2)",
+       "value": 45840,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の内部売上高及び振替高(注2)",
+       "value": 45840,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の内部売上高及び振替高(注2)",
+       "value": -45840,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 549333,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 432882,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 261563,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 39174,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 1282952,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 451521,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 1734473,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": -45840,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 1688633,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 81273,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 39136,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 10411,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 2254,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 133074,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 30188,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 163262,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 807,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 164069,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 30657,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 19789,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 11546,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 1397,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 63389,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 20477,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 83866,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 1975,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 85841,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 126,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 12,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 20,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 0,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 158,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 143,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 301,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 301,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 32276,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 17171,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 13409,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 1321,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 64177,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 30496,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 94673,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 6463,
+       "periodEnd": "2025-12-31"
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 101136,
+       "periodEnd": "2025-12-31"
+      }
+     ]
+    },
+    "previous": {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-12",
+     "period": "FY",
+     "docTypeCode": "120",
+     "submittedAt": "2025-03-21 07:29:00",
+     "unitMultiplier": 1000000,
+     "note": null,
+     "docId": "S100VFNW",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VFNW",
+     "items": [
+      {
+       "segment": "百万円",
+       "metric": "net_sales_external",
+       "rawLabel": "外部売上高",
+       "value": 1628448,
+       "periodEnd": null
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_intersegment",
+       "rawLabel": "セグメント間の内部売上高及び振替高(注2)",
+       "value": -45678,
+       "periodEnd": null
+      },
+      {
+       "segment": "百万円",
+       "metric": "net_sales_total",
+       "rawLabel": "売上高合計",
+       "value": 1628448,
+       "periodEnd": null
+      },
+      {
+       "segment": "百万円",
+       "metric": "segment_profit",
+       "rawLabel": "営業利益(又は損失)",
+       "value": 146644,
+       "periodEnd": null
+      },
+      {
+       "segment": "百万円",
+       "metric": "depreciation",
+       "rawLabel": "減価償却費及び償却費(注3)",
+       "value": 88422,
+       "periodEnd": null
+      },
+      {
+       "segment": "百万円",
+       "metric": "impairment_loss",
+       "rawLabel": "減損損失(注3)",
+       "value": 1813,
+       "periodEnd": null
+      },
+      {
+       "segment": "百万円",
+       "metric": "capital_expenditure",
+       "rawLabel": "資本的支出(注4)",
+       "value": 93530,
+       "periodEnd": null
+      }
+     ]
+    },
+    "previousRequested": "2024-12"
+   },
+   "forecasts": [
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2026-06",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-08-07T01:56:00Z",
+     "source": "edinet",
+     "revenueForecast": 1800000000000,
+     "operatingIncomeForecast": 190000000000,
+     "netIncomeForecast": 135000000000,
+     "epsForecast": 149.21,
+     "operatingMarginForecast": 0.105556,
+     "netMarginForecast": 0.075,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.12059504273977645,
+     "docId": "S100YV2R",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YV2R"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2026-03",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-05-12T06:30:00Z",
+     "source": "tdnet",
+     "revenueForecast": 1750000000000,
+     "operatingIncomeForecast": 182000000000,
+     "netIncomeForecast": 130000000000,
+     "epsForecast": 143.7,
+     "operatingMarginForecast": 0.104,
+     "netMarginForecast": 0.074286,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.12121619000731026,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-12",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2026-12",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2026-03-25T00:14:00Z",
+     "source": "edinet",
+     "revenueForecast": 1750000000000,
+     "operatingIncomeForecast": 182000000000,
+     "netIncomeForecast": 130000000000,
+     "epsForecast": 143.7,
+     "operatingMarginForecast": 0.104,
+     "netMarginForecast": 0.074286,
+     "payoutRatioForecast": 0.5427974948,
+     "roeForecast": 0.12217160976132366,
+     "docId": "S100XT6G",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-09",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-11-06T06:30:00Z",
+     "source": "tdnet",
+     "revenueForecast": 1690000000000,
+     "operatingIncomeForecast": 165000000000,
+     "netIncomeForecast": 121000000000,
+     "epsForecast": 262.31,
+     "operatingMarginForecast": 0.097633,
+     "netMarginForecast": 0.071598,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.11755984622006231,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-06",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-08-12T01:59:00Z",
+     "source": "edinet",
+     "revenueForecast": 1690000000000,
+     "operatingIncomeForecast": 165000000000,
+     "netIncomeForecast": 121000000000,
+     "epsForecast": 262.02,
+     "operatingMarginForecast": 0.097633,
+     "netMarginForecast": 0.071598,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.11492298735182295,
+     "docId": "S100WI4A",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100WI4A"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2025-03",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-05-08T06:30:00Z",
+     "source": "tdnet",
+     "revenueForecast": 1670000000000,
+     "operatingIncomeForecast": 160000000000,
+     "netIncomeForecast": 116000000000,
+     "epsForecast": 249.74,
+     "operatingMarginForecast": 0.095808,
+     "netMarginForecast": 0.069461,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.11275524238975015,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-12",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2025-12",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2025-03-21T07:29:00Z",
+     "source": "edinet",
+     "revenueForecast": 1670000000000,
+     "operatingIncomeForecast": 160000000000,
+     "netIncomeForecast": 116000000000,
+     "epsForecast": 249.74,
+     "operatingMarginForecast": 0.095808,
+     "netMarginForecast": 0.069461,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.10873885426743758,
+     "docId": "S100VFNW",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VFNW"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-09",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-11-07T06:30:00Z",
+     "source": "tdnet",
+     "revenueForecast": 1600000000000,
+     "operatingIncomeForecast": 140000000000,
+     "netIncomeForecast": 104000000000,
+     "epsForecast": 223.9,
+     "operatingMarginForecast": 0.0875,
+     "netMarginForecast": 0.065,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.1046263982463006,
+     "docId": null,
+     "sourceUrl": null
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-06",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-08-09T02:06:00Z",
+     "source": "edinet",
+     "revenueForecast": 1600000000000,
+     "operatingIncomeForecast": 140000000000,
+     "netIncomeForecast": 104000000000,
+     "epsForecast": 223.9,
+     "operatingMarginForecast": 0.0875,
+     "netMarginForecast": 0.065,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.0984842889150251,
+     "docId": "S100U78P",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100U78P"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2024-03",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-05-14T01:57:00Z",
+     "source": "edinet",
+     "revenueForecast": 1580000000000,
+     "operatingIncomeForecast": 130000000000,
+     "netIncomeForecast": 98000000000,
+     "epsForecast": 210.81,
+     "operatingMarginForecast": 0.082278,
+     "netMarginForecast": 0.062025,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09829291288038354,
+     "docId": "S100TEW2",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TEW2"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-12",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2024-12",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2024-03-22T06:26:00Z",
+     "source": "edinet",
+     "revenueForecast": 1580000000000,
+     "operatingIncomeForecast": 130000000000,
+     "netIncomeForecast": 98000000000,
+     "epsForecast": 210.81,
+     "operatingMarginForecast": 0.082278,
+     "netMarginForecast": 0.062025,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.0996281227825118,
+     "docId": "S100T2ZS",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100T2ZS"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-09",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-11-14T01:53:00Z",
+     "source": "edinet",
+     "revenueForecast": 1580000000000,
+     "operatingIncomeForecast": 60000000000,
+     "netIncomeForecast": 41000000000,
+     "epsForecast": 88.2,
+     "operatingMarginForecast": 0.037975,
+     "netMarginForecast": 0.025949,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.04123064422378787,
+     "docId": "S100SA96",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100SA96"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-06",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-08-10T01:55:00Z",
+     "source": "edinet",
+     "revenueForecast": 1580000000000,
+     "operatingIncomeForecast": 60000000000,
+     "netIncomeForecast": 41000000000,
+     "epsForecast": 88.2,
+     "operatingMarginForecast": 0.037975,
+     "netMarginForecast": 0.025949,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.04092768078804752,
+     "docId": "S100RNNK",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RNNK"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2023-03",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-05-12T01:56:00Z",
+     "source": "edinet",
+     "revenueForecast": 1580000000000,
+     "operatingIncomeForecast": 120000000000,
+     "netIncomeForecast": 88000000000,
+     "epsForecast": 189.31,
+     "operatingMarginForecast": 0.075949,
+     "netMarginForecast": 0.055696,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09248399396331748,
+     "docId": "S100QPZV",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100QPZV"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-12",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2023-12",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2023-03-24T06:01:00Z",
+     "source": "edinet",
+     "revenueForecast": 1580000000000,
+     "operatingIncomeForecast": 120000000000,
+     "netIncomeForecast": 88000000000,
+     "epsForecast": 189.31,
+     "operatingMarginForecast": 0.075949,
+     "netMarginForecast": 0.055696,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.09052929805845518,
+     "docId": "S100QFPL",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100QFPL"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-09",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-11-10T02:00:00Z",
+     "source": "edinet",
+     "revenueForecast": 1570000000000,
+     "operatingIncomeForecast": 145000000000,
+     "netIncomeForecast": 111000000000,
+     "epsForecast": 236.45,
+     "operatingMarginForecast": 0.092357,
+     "netMarginForecast": 0.070701,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.11274461009663533,
+     "docId": "S100PIT9",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100PIT9"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-06",
+     "period": "Q2",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-08-10T01:51:00Z",
+     "source": "edinet",
+     "revenueForecast": 1570000000000,
+     "operatingIncomeForecast": 145000000000,
+     "netIncomeForecast": 111000000000,
+     "epsForecast": 236.53,
+     "operatingMarginForecast": 0.092357,
+     "netMarginForecast": 0.070701,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.10927111245867878,
+     "docId": "S100OY5H",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100OY5H"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2022-03",
+     "period": "Q1",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-05-13T01:52:00Z",
+     "source": "edinet",
+     "revenueForecast": 1490000000000,
+     "operatingIncomeForecast": 160000000000,
+     "netIncomeForecast": 117000000000,
+     "epsForecast": 249.99,
+     "operatingMarginForecast": 0.107383,
+     "netMarginForecast": 0.078523,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.11966983399646104,
+     "docId": "S100O1D6",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100O1D6"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2021-12",
+     "period": "FY",
+     "forecastTarget": "next-fiscal-year",
+     "forecastFiscalPeriod": "2022-12",
+     "accountingStandard": "ifrs",
+     "announcedAt": "2022-03-25T05:54:00Z",
+     "source": "edinet",
+     "revenueForecast": 1490000000000,
+     "operatingIncomeForecast": 160000000000,
+     "netIncomeForecast": 117000000000,
+     "epsForecast": 246.9,
+     "operatingMarginForecast": 0.107383,
+     "netMarginForecast": 0.078523,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.12122631294831718,
+     "docId": "S100NQCA",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100NQCA"
+    },
+    {
+     "symbol": "4452",
+     "fiscalPeriod": "2021-09",
+     "period": "Q3",
+     "forecastTarget": "current-fiscal-year",
+     "forecastFiscalPeriod": null,
+     "accountingStandard": "ifrs",
+     "announcedAt": "2021-11-12T01:53:00Z",
+     "source": "edinet",
+     "revenueForecast": 1430000000000,
+     "operatingIncomeForecast": 177000000000,
+     "netIncomeForecast": 127000000000,
+     "epsForecast": 267.11,
+     "operatingMarginForecast": 0.123776,
+     "netMarginForecast": 0.088811,
+     "payoutRatioForecast": null,
+     "roeForecast": 0.13919592977948952,
+     "docId": "S100MU6E",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100MU6E"
+    }
+   ],
+   "workforce": {
+    "symbol": "4452",
+    "fiscalPeriod": "2025-12",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-03-25 00:14:00",
+    "employees": 7761,
+    "consolidatedEmployees": 31514,
+    "averageAge": 40.6,
+    "averageTenureYears": 16.7,
+    "averageAnnualSalary": 8654000,
+    "docId": "S100XT6G",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G",
+    "segments": [
+     {
+      "segment": "7,761",
+      "employees": 8654
+     },
+     {
+      "segment": "グローバルコンシューマーケア事業",
+      "employees": 5398
+     },
+     {
+      "segment": "ケミカル事業",
+      "employees": 1177
+     },
+     {
+      "segment": "全社（共通）",
+      "employees": 1186
+     }
+    ],
+    "parentSegments": []
+   },
+   "diversity": {
+    "symbol": "4452",
+    "fiscalPeriod": "2025-12",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-03-25 00:14:00",
+    "docId": "S100XT6G",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT6G",
+    "reportingCompany": {
+     "femaleManagerRatio": 0.287,
+     "maleChildcareLeaveRatio": 0.901,
+     "maleChildcareLeaveBasis": null,
+     "wageGapAll": 0.908,
+     "wageGapRegular": 0.887,
+     "wageGapNonRegular": 0.904
+    },
+    "subsidiaries": [
+     {
+      "name": "花王グループカスタマーマーケティング㈱",
+      "femaleManagerRatio": 0.206,
+      "maleChildcareLeaveRatio": 1.102,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.683,
+      "wageGapRegular": 0.635,
+      "wageGapNonRegular": 0.856
+     },
+     {
+      "name": "花王プロフェッショナル・サービス㈱",
+      "femaleManagerRatio": 0.161,
+      "maleChildcareLeaveRatio": 1.125,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.747,
+      "wageGapRegular": 0.727,
+      "wageGapNonRegular": 0.67
+     },
+     {
+      "name": "花王ロジスティクス㈱",
+      "femaleManagerRatio": 0.026,
+      "maleChildcareLeaveRatio": null,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.538,
+      "wageGapRegular": 0.833,
+      "wageGapNonRegular": 0.704
+     },
+     {
+      "name": "花王サニタリープロダクツ愛媛㈱",
+      "femaleManagerRatio": null,
+      "maleChildcareLeaveRatio": 0.833,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.776,
+      "wageGapRegular": 0.791,
+      "wageGapNonRegular": 0.779
+     },
+     {
+      "name": "花王ビューティブランズカウンセリング㈱",
+      "femaleManagerRatio": 0.738,
+      "maleChildcareLeaveRatio": null,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.516,
+      "wageGapRegular": 0.524,
+      "wageGapNonRegular": null
+     },
+     {
+      "name": "㈱エキップ",
+      "femaleManagerRatio": 0.633,
+      "maleChildcareLeaveRatio": 1,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.621,
+      "wageGapRegular": 0.619,
+      "wageGapNonRegular": 0.478
+     },
+     {
+      "name": "花王コスメプロダクツ小田原㈱",
+      "femaleManagerRatio": 0.139,
+      "maleChildcareLeaveRatio": 0.6,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.745,
+      "wageGapRegular": 0.775,
+      "wageGapNonRegular": 0.582
+     },
+     {
+      "name": "伊野紙㈱",
+      "femaleManagerRatio": 0.231,
+      "maleChildcareLeaveRatio": 1,
+      "maleChildcareLeaveBasis": null,
+      "wageGapAll": 0.795,
+      "wageGapRegular": 0.851,
+      "wageGapNonRegular": 0.881
+     }
+    ]
+   }
+  }
+ ]
+}

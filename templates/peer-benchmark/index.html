@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Peer Benchmark Board · ZENITH Code</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip" href="#report" data-i18n="skip"></a>
+    <header class="masthead">
+      <div class="masthead-inner">
+        <div class="title-block">
+          <a class="brand" href="https://zenithcode.net" target="_blank" rel="noreferrer">ZENITH <span>Code</span></a>
+          <h1><span data-i18n="title"></span><small data-i18n="titleSub"></small></h1>
+          <p class="lede" data-i18n="lede"></p>
+        </div>
+        <div class="toolbar" role="group" data-i18n-label="displayOptions">
+          <div class="seg" role="group" aria-label="Language">
+            <button type="button" id="langJa" lang="ja">JA</button>
+            <button type="button" id="langEn" lang="en">EN</button>
+          </div>
+          <button type="button" class="ghost" id="themeToggle"></button>
+          <button type="button" class="ghost" id="printButton" data-i18n="print"></button>
+          <button type="button" class="primary" id="csvButton" data-i18n="exportCsv"></button>
+        </div>
+      </div>
+    </header>
+
+    <section class="setup" aria-labelledby="setupTitle">
+      <div class="setup-head">
+        <h2 id="setupTitle" data-i18n="setupTitle"></h2>
+        <div class="seg mode" role="radiogroup" data-i18n-label="dataMode">
+          <label><input type="radio" name="mode" value="demo" checked /><span data-i18n="modeDemo"></span></label>
+          <label><input type="radio" name="mode" value="live" id="modeLive" /><span data-i18n="modeLive"></span></label>
+        </div>
+      </div>
+      <p class="setup-note" id="modeNote"></p>
+      <div class="steps">
+        <form class="step" id="targetForm" novalidate>
+          <span class="step-no">1</span>
+          <label for="targetInput" class="step-title" data-i18n="stepTarget"></label>
+          <div class="field-row">
+            <input id="targetInput" autocomplete="off" spellcheck="false" maxlength="7" inputmode="text" />
+            <button type="submit" class="ghost" id="suggestButton" data-i18n="suggest"></button>
+          </div>
+          <p class="hint" data-i18n="suggestHint"></p>
+        </form>
+        <div class="step">
+          <span class="step-no">2</span>
+          <span class="step-title" data-i18n="stepPeers"></span>
+          <ul class="picks" id="picks" aria-live="polite"></ul>
+          <form class="field-row" id="addForm" novalidate>
+            <label class="visually-hidden" for="addInput" data-i18n="addCode"></label>
+            <input id="addInput" autocomplete="off" spellcheck="false" maxlength="7" />
+            <button type="submit" class="ghost" data-i18n="add"></button>
+          </form>
+          <p class="hint" id="countHint"></p>
+        </div>
+        <div class="step">
+          <span class="step-no">3</span>
+          <span class="step-title" data-i18n="stepFetch"></span>
+          <button type="button" class="primary wide" id="fetchButton" data-i18n="fetch"></button>
+          <p class="hint" id="requestHint"></p>
+        </div>
+      </div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <main id="report" class="report" tabindex="-1">
+      <div class="sheet" id="sheet">
+        <header class="report-head">
+          <p class="eyebrow" data-i18n="eyebrow"></p>
+          <h2 id="reportTitle"></h2>
+          <p class="report-meta" id="reportMeta"></p>
+          <p class="fictional" id="fictional"></p>
+          <ol class="legend-companies" id="companyLegend"></ol>
+        </header>
+
+        <nav class="section-nav" data-i18n-label="sections">
+          <a href="#sec-profit"><b>01</b><span data-i18n="navProfit"></span></a>
+          <a href="#sec-growth"><b>02</b><span data-i18n="navGrowth"></span></a>
+          <a href="#sec-strength"><b>03</b><span data-i18n="navStrength"></span></a>
+          <a href="#sec-mix"><b>04</b><span data-i18n="navMix"></span></a>
+          <a href="#sec-people"><b>05</b><span data-i18n="navPeople"></span></a>
+          <a href="#sec-sources"><b>06</b><span data-i18n="navSources"></span></a>
+        </nav>
+
+        <div id="emptyState" class="empty-state" hidden></div>
+
+        <div id="sections">
+          <section class="block" id="sec-profit" aria-labelledby="h-profit">
+            <div class="block-head"><span class="num">01</span><div><h3 id="h-profit" data-i18n="profitTitle"></h3><p data-i18n="profitLead"></p></div></div>
+            <div class="table-wrap"><table class="grid" id="profitTable"></table></div>
+            <div class="bands" id="bands"></div>
+            <p class="foot" data-i18n="profitFoot"></p>
+          </section>
+
+          <section class="block" id="sec-growth" aria-labelledby="h-growth">
+            <div class="block-head"><span class="num">02</span><div><h3 id="h-growth" data-i18n="growthTitle"></h3><p data-i18n="growthLead"></p></div></div>
+            <p class="key"><span class="sw sw-rev"></span><span data-i18n="revenue"></span><span class="sw sw-op"></span><span data-i18n="operatingIncome"></span><span class="unit" data-i18n="unitOku"></span></p>
+            <div class="multiples" id="multiples"></div>
+            <p class="foot" data-i18n="growthFoot"></p>
+          </section>
+
+          <section class="block" id="sec-strength" aria-labelledby="h-strength">
+            <div class="block-head"><span class="num">03</span><div><h3 id="h-strength" data-i18n="strengthTitle"></h3><p data-i18n="strengthLead"></p></div></div>
+            <div class="table-wrap"><table class="grid" id="strengthTable"></table></div>
+            <p class="foot" data-i18n="strengthFoot"></p>
+          </section>
+
+          <section class="block" id="sec-mix" aria-labelledby="h-mix">
+            <div class="block-head"><span class="num">04</span><div><h3 id="h-mix" data-i18n="mixTitle"></h3><p data-i18n="mixLead"></p></div></div>
+            <p class="caution" data-i18n="mixCaution"></p>
+            <div class="mix" id="mix"></div>
+          </section>
+
+          <section class="block" id="sec-people" aria-labelledby="h-people">
+            <div class="block-head"><span class="num">05</span><div><h3 id="h-people" data-i18n="peopleTitle"></h3><p data-i18n="peopleLead"></p></div></div>
+            <div class="table-wrap"><table class="grid" id="peopleTable"></table></div>
+            <p class="foot" data-i18n="peopleFoot"></p>
+          </section>
+
+          <section class="block" id="sec-sources" aria-labelledby="h-sources">
+            <div class="block-head"><span class="num">06</span><div><h3 id="h-sources" data-i18n="sourcesTitle"></h3><p data-i18n="sourcesLead"></p></div></div>
+            <div class="table-wrap"><table class="grid compact" id="sourcesTable"></table></div>
+          </section>
+
+          <section class="block notes" id="sec-notes" aria-labelledby="h-notes">
+            <div class="block-head"><span class="num">—</span><div><h3 id="h-notes" data-i18n="notesTitle"></h3></div></div>
+            <ul id="notes"></ul>
+          </section>
+        </div>
+        <footer class="report-foot">
+          <p id="footText"></p>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

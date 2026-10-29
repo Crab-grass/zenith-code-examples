@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Company Deep-Dive · ZENITH Code</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/style.css" />
+    <script type="module" src="/app.mjs"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+    <div class="app">
+      <aside class="rail">
+        <div class="rail-top">
+          <a class="brand" href="https://zenithcode.net" target="_blank" rel="noreferrer">ZENITH <span>Code</span></a>
+          <span class="rail-label" data-i18n="workspaceLabel"></span>
+        </div>
+        <section class="entity" aria-live="polite">
+          <span id="entityBadge" class="badge demo"></span>
+          <h2 id="entityName"></h2>
+          <p id="entityMeta" class="entity-meta"></p>
+          <p id="entityProfile" class="entity-profile"></p>
+        </section>
+        <nav id="viewNav" class="view-nav" aria-label="Views"></nav>
+        <div class="rail-foot">
+          <span class="tiny" data-i18n="buildYourOwn"></span>
+          <p data-i18n="templateNote"></p>
+          <a href="https://github.com/Crab-grass/zenith-code-examples/tree/main/templates/company-deep-dive" target="_blank" rel="noreferrer" data-i18n="viewCode"></a>
+        </div>
+      </aside>
+
+      <div class="main-column">
+        <header class="toolbar">
+          <div class="crumb"><span data-i18n="crumb"></span></div>
+          <div class="mode" role="group" aria-label="Data mode">
+            <button id="demoMode" type="button" aria-pressed="true" data-i18n="demo"></button>
+            <button id="liveMode" type="button" aria-pressed="false" data-i18n="live"></button>
+          </div>
+          <form id="queryForm" class="query">
+            <label id="demoField"><span class="sr" data-i18n="company"></span><select id="company"></select></label>
+            <label id="liveField" hidden><span class="sr" data-i18n="symbol"></span><input id="symbol" inputmode="text" autocomplete="off" spellcheck="false" maxlength="7" placeholder="7203" /></label>
+            <button id="load" class="primary" type="submit"></button>
+          </form>
+          <div class="prefs">
+            <div class="lang" role="group" aria-label="Language">
+              <button id="ja" type="button">JA</button><button id="en" type="button">EN</button>
+            </div>
+            <button id="themeToggle" class="icon-button" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path class="sun" d="M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M5.6 18.4l-1.4 1.4M19.8 4.2l-1.4 1.4M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" /><path class="moon" d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" /></svg>
+            </button>
+          </div>
+        </header>
+        <div class="statusbar">
+          <p id="status" class="status" role="status"></p>
+          <p id="requestNote" class="request-note"></p>
+        </div>
+        <section id="setup" class="setup" hidden>
+          <h2 data-i18n="setupTitle"></h2>
+          <p data-i18n="setupBody"></p>
+          <code>python3 templates/company-deep-dive/server.py --live</code>
+          <p data-i18n="setupKey"></p>
+          <a id="signupLink" href="https://zenithcode.net/sign-up" target="_blank" rel="noreferrer" data-i18n="signup"></a>
+        </section>
+
+        <main id="main" tabindex="-1">
+          <div class="view-head">
+            <div>
+              <p id="viewEyebrow" class="eyebrow"></p>
+              <h1 id="viewTitle"></h1>
+              <p id="viewLead" class="lead"></p>
+            </div>
+            <button id="exportCsv" class="ghost" type="button" data-i18n="exportCsv"></button>
+          </div>
+          <div id="emptyState" class="empty-state" hidden><p data-i18n="emptyState"></p></div>
+          <div id="workspace">
+            <div id="kpis" class="kpis"></div>
+            <p id="callout" class="callout" hidden></p>
+            <div id="panels" class="panels"></div>
+            <section class="panel table-panel">
+              <header><div><h2 id="tableTitle"></h2><span id="tableUnit" class="unit-label"></span></div></header>
+              <div id="tableWrap" class="table-wrap" tabindex="0"></div>
+            </section>
+            <div class="lower">
+              <section class="panel notes">
+                <header><div><h2 data-i18n="howToRead"></h2></div></header>
+                <ul id="notes"></ul>
+              </section>
+              <section class="panel provenance">
+                <header><div><h2 data-i18n="provenance"></h2><span class="unit-label" data-i18n="provenanceNote"></span></div></header>
+                <div id="provenance"></div>
+              </section>
+            </div>
+          </div>
+        </main>
+        <footer class="footer">
+          <p data-i18n="footerNote"></p>
+          <a id="termsLink" href="https://zenithcode.net/docs/display-rights" target="_blank" rel="noreferrer" data-i18n="dataTerms"></a>
+        </footer>
+      </div>
+    </div>
+    <div id="tooltip" class="tooltip" role="presentation" hidden></div>
+  </body>
+</html>

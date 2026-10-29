@@ -1,0 +1,1283 @@
+{
+ "peers": {
+  "mode": "live",
+  "retrievedAt": "2026-10-29T03:49:56Z",
+  "target": {
+   "role": "target",
+   "symbol": "7203",
+   "nameJa": "トヨタ自動車",
+   "nameEn": "TOYOTA MOTOR CORPORATION",
+   "sector": "3700"
+  },
+  "peers": [
+   {
+    "role": "peer",
+    "symbol": "7267",
+    "nameJa": "本田技研工業",
+    "nameEn": "HONDA MOTOR CO.,LTD.",
+    "sector": "3700"
+   },
+   {
+    "role": "peer",
+    "symbol": "7269",
+    "nameJa": "スズキ",
+    "nameEn": "SUZUKI MOTOR CORPORATION",
+    "sector": "3700"
+   },
+   {
+    "role": "peer",
+    "symbol": "7270",
+    "nameJa": "ＳＵＢＡＲＵ",
+    "nameEn": "SUBARU CORPORATION",
+    "sector": "3700"
+   },
+   {
+    "role": "peer",
+    "symbol": "7261",
+    "nameJa": "マツダ",
+    "nameEn": "Mazda Motor Corporation",
+    "sector": "3700"
+   },
+   {
+    "role": "peer",
+    "symbol": "7201",
+    "nameJa": "日産自動車",
+    "nameEn": "NISSAN MOTOR CO.,LTD.",
+    "sector": "3700"
+   }
+  ]
+ },
+ "comparison": {
+  "mode": "live",
+  "retrievedAt": "2026-10-29T03:50:18Z",
+  "benchmark": {
+   "sector": "3700",
+   "sectorJa": "輸送用機器",
+   "sectorEn": "Transportation Equipment",
+   "count": 81,
+   "roeCount": 79,
+   "roeQ1": 0.032608,
+   "roeMedian": 0.056781,
+   "roeQ3": 0.099309,
+   "roaCount": 79,
+   "roaQ1": 0.016344,
+   "roaMedian": 0.035833,
+   "roaQ3": 0.051979,
+   "revenueCagr3yCount": 78,
+   "revenueCagr3yQ1": 0.022085,
+   "revenueCagr3yMedian": 0.050709,
+   "revenueCagr3yQ3": 0.085342,
+   "epsCagr3yCount": 58,
+   "epsCagr3yQ1": 0.022979,
+   "epsCagr3yMedian": 0.157993,
+   "epsCagr3yQ3": 0.328359
+  },
+  "companies": [
+   {
+    "symbol": "7203",
+    "income": [
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "revenue": 50684952000000,
+      "operatingIncome": 3766216000000,
+      "netIncome": 3848098000000,
+      "netIncomeAttributableToOwners": 3848098000000,
+      "operatingMargin": 0.07430639373990135,
+      "netMargin": 0.07592190281644146,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100Y8NY",
+       "announcedAt": "2026-06-10T06:33:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+      }
+     },
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2025-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-29 11:46:53.360566",
+      "revenue": 48036704000000,
+      "operatingIncome": 4795586000000,
+      "netIncome": 4765086000000,
+      "netIncomeAttributableToOwners": 4765086000000,
+      "operatingMargin": 0.09983170369057794,
+      "netMargin": 0.09919677253460188,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100VWVY",
+       "announcedAt": "2025-06-18T06:30:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY"
+      }
+     },
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2024-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 365,
+      "updatedAt": "2026-09-29 11:46:58.410873",
+      "revenue": 45095325000000,
+      "operatingIncome": 5352934000000,
+      "netIncome": 4944933000000,
+      "netIncomeAttributableToOwners": 4944933000000,
+      "operatingMargin": 0.11870263713588937,
+      "netMargin": 0.10965511391701911,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100TR7I",
+       "announcedAt": "2024-06-25T06:00:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TR7I"
+      }
+     },
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2023-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-29 11:47:04.162907",
+      "revenue": 37154298000000,
+      "operatingIncome": 2725025000000,
+      "netIncome": 2451318000000,
+      "netIncomeAttributableToOwners": 2451318000000,
+      "operatingMargin": 0.07334346621217282,
+      "netMargin": 0.06597670073055882,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100RAR0",
+       "announcedAt": "2023-06-30T05:13:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RAR0"
+      }
+     }
+    ],
+    "balance": [
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "totalAssets": 105522331000000,
+      "ownersEquity": 39918854000000,
+      "shareholdersEquity": 39918854000000,
+      "equityRatio": 0.378,
+      "interestBearingDebt": 43205469000000,
+      "netInterestBearingDebt": 30545847000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100Y8NY",
+       "announcedAt": "2026-06-10T06:33:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+      }
+     }
+    ],
+    "cashFlow": [
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "operatingCashFlow": 5472920000000,
+      "capitalExpenditure": null,
+      "freeCashFlow": 3952613000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100Y8NY",
+       "announcedAt": "2026-06-10T06:33:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+      }
+     }
+    ],
+    "segments": [
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100Y8NY",
+      "submittedAt": "2026-06-10 06:33:00",
+      "unitMultiplier": 1000000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+      "items": [
+       {
+        "segment": "自動車",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客への営業収益",
+        "value": 45201924
+       },
+       {
+        "segment": "金融",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客への営業収益",
+        "value": 4819003
+       },
+       {
+        "segment": "その他",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客への営業収益",
+        "value": 664026
+       },
+       {
+        "segment": "連結",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客への営業収益",
+        "value": 50684952
+       }
+      ]
+     }
+    ],
+    "workforce": [
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100Y8NY",
+      "submittedAt": "2026-06-10 06:33:00",
+      "employees": 73133,
+      "consolidatedEmployees": 390927,
+      "averageAge": 40.5,
+      "averageTenureYears": 15.1,
+      "averageAnnualSalary": 10060464,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY"
+     }
+    ],
+    "diversity": [
+     {
+      "symbol": "7203",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100Y8NY",
+      "submittedAt": "2026-06-10 06:33:00",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+      "reportingCompany": {
+       "femaleManagerRatio": 0.039,
+       "maleChildcareLeaveRatio": 0.79,
+       "maleChildcareLeaveBasis": "childcare-leave",
+       "wageGapAll": 0.67
+      }
+     }
+    ]
+   },
+   {
+    "symbol": "7267",
+    "income": [
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "revenue": 21796610000000,
+      "operatingIncome": -414346000000,
+      "netIncome": -423941000000,
+      "netIncomeAttributableToOwners": -423941000000,
+      "operatingMargin": -0.019009653336000416,
+      "netMargin": -0.0194498594047423,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YDD9",
+       "announcedAt": "2026-06-18T06:30:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9"
+      }
+     },
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2025-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-29 11:46:56.489228",
+      "revenue": 21688767000000,
+      "operatingIncome": 1213486000000,
+      "netIncome": 835837000000,
+      "netIncomeAttributableToOwners": 835837000000,
+      "operatingMargin": 0.05594997631723371,
+      "netMargin": 0.038537783175963854,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100VYOD",
+       "announcedAt": "2025-06-18T06:36:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VYOD"
+      }
+     },
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2024-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 365,
+      "updatedAt": "2026-09-29 11:47:00.803596",
+      "revenue": 20428802000000,
+      "operatingIncome": 1381977000000,
+      "netIncome": 1107174000000,
+      "netIncomeAttributableToOwners": 1107174000000,
+      "operatingMargin": 0.06764846024744868,
+      "netMargin": 0.05419671696852316,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100TNE0",
+       "announcedAt": "2024-06-19T05:36:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TNE0"
+      }
+     },
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2023-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-29 11:47:06.174883",
+      "revenue": 16907725000000,
+      "operatingIncome": 780769000000,
+      "netIncome": 651416000000,
+      "netIncomeAttributableToOwners": 651416000000,
+      "operatingMargin": 0.04617824101113544,
+      "netMargin": 0.03852771440273603,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100R1U9",
+       "announcedAt": "2023-06-23T06:00:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100R1U9"
+      }
+     }
+    ],
+    "balance": [
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "totalAssets": 33509285000000,
+      "ownersEquity": 11817512000000,
+      "shareholdersEquity": 11817512000000,
+      "equityRatio": 0.353,
+      "interestBearingDebt": 13479863000000,
+      "netInterestBearingDebt": 8361386000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YDD9",
+       "announcedAt": "2026-06-18T06:30:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9"
+      }
+     }
+    ],
+    "cashFlow": [
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "operatingCashFlow": 1135261000000,
+      "capitalExpenditure": -612065000000,
+      "freeCashFlow": 283095000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YDD9",
+       "announcedAt": "2026-06-18T06:30:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9"
+      }
+     }
+    ],
+    "segments": [
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YDD9",
+      "submittedAt": "2026-06-18 06:30:00",
+      "unitMultiplier": 1000000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9",
+      "items": [
+       {
+        "segment": "日本",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 2882484
+       },
+       {
+        "segment": "米国",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 11160904
+       },
+       {
+        "segment": "その他",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 7753222
+       },
+       {
+        "segment": "計",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 21796610
+       }
+      ]
+     }
+    ],
+    "workforce": [
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YDD9",
+      "submittedAt": "2026-06-18 06:30:00",
+      "employees": 32547,
+      "consolidatedEmployees": 195109,
+      "averageAge": 43.9,
+      "averageTenureYears": 21,
+      "averageAnnualSalary": 9326000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9"
+     }
+    ],
+    "diversity": [
+     {
+      "symbol": "7267",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YDD9",
+      "submittedAt": "2026-06-18 06:30:00",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9",
+      "reportingCompany": {
+       "femaleManagerRatio": 0.036,
+       "maleChildcareLeaveRatio": 1.168,
+       "maleChildcareLeaveBasis": "childcare-leave-and-purpose-leave",
+       "wageGapAll": 0.728
+      }
+     }
+    ]
+   },
+   {
+    "symbol": "7269",
+    "income": [
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "revenue": 6292967000000,
+      "operatingIncome": 622909000000,
+      "netIncome": 439267000000,
+      "netIncomeAttributableToOwners": 439267000000,
+      "operatingMargin": 0.09898494621058715,
+      "netMargin": 0.06980284498552114,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YYB1",
+       "announcedAt": "2026-08-25T06:15:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YYB1"
+      }
+     },
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2025-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 05:06:35.307739",
+      "revenue": 5825161000000,
+      "operatingIncome": 642851000000,
+      "netIncome": 416050000000,
+      "netIncomeAttributableToOwners": 416050000000,
+      "operatingMargin": 0.11035763646704357,
+      "netMargin": 0.07142291861117658,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100W4MT",
+       "announcedAt": "2025-06-27T05:13:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W4MT"
+      }
+     },
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2024-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 365,
+      "updatedAt": "2026-09-28 05:06:30.806543",
+      "revenue": 5374255000000,
+      "operatingIncome": 465563000000,
+      "netIncome": 267717000000,
+      "netIncomeAttributableToOwners": 267717000000,
+      "operatingMargin": 0.0866283791893016,
+      "netMargin": 0.04981471850516955,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100TRQC",
+       "announcedAt": "2024-06-27T05:25:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TRQC"
+      }
+     },
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2023-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 05:06:26.442087",
+      "revenue": 4641644000000,
+      "operatingIncome": 350551000000,
+      "netIncome": 221107000000,
+      "netIncomeAttributableToOwners": 221107000000,
+      "operatingMargin": 0.07552302589341191,
+      "netMargin": 0.047635492941724956,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100R38M",
+       "announcedAt": "2023-06-23T08:03:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100R38M"
+      }
+     }
+    ],
+    "balance": [
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "totalAssets": 6636815000000,
+      "ownersEquity": 3382084000000,
+      "shareholdersEquity": 3382083000000,
+      "equityRatio": 0.51,
+      "interestBearingDebt": 748623000000,
+      "netInterestBearingDebt": -224668000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YYB1",
+       "announcedAt": "2026-08-25T06:15:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YYB1"
+      }
+     }
+    ],
+    "cashFlow": [
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "operatingCashFlow": 717535000000,
+      "capitalExpenditure": -377403000000,
+      "freeCashFlow": 217992000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YYB1",
+       "announcedAt": "2026-08-25T06:15:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YYB1"
+      }
+     }
+    ],
+    "segments": [
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YYB1",
+      "submittedAt": "2026-08-25 06:15:00",
+      "unitMultiplier": 1000000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YYB1",
+      "items": [
+       {
+        "segment": "四輪事業",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客からの売上収益",
+        "value": 5706420
+       },
+       {
+        "segment": "二輪事業",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客からの売上収益",
+        "value": 454488
+       },
+       {
+        "segment": "マリン事業",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客からの売上収益",
+        "value": 119456
+       },
+       {
+        "segment": "その他事業",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客からの売上収益",
+        "value": 12601
+       },
+       {
+        "segment": "計",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客からの売上収益",
+        "value": 6292967
+       },
+       {
+        "segment": "合計",
+        "metric": "net_sales_total",
+        "rawLabel": "外部顧客からの売上収益",
+        "value": 6292967
+       }
+      ]
+     }
+    ],
+    "workforce": [
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YYB1",
+      "submittedAt": "2026-08-25 06:15:00",
+      "employees": 17871,
+      "consolidatedEmployees": 76889,
+      "averageAge": 41.5,
+      "averageTenureYears": 18.5,
+      "averageAnnualSalary": 8276061,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YYB1"
+     }
+    ],
+    "diversity": [
+     {
+      "symbol": "7269",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YYB1",
+      "submittedAt": "2026-08-25 06:15:00",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YYB1",
+      "reportingCompany": {
+       "femaleManagerRatio": 0.022,
+       "maleChildcareLeaveRatio": 0.732,
+       "maleChildcareLeaveBasis": "childcare-leave",
+       "wageGapAll": 0.66
+      }
+     }
+    ]
+   },
+   {
+    "symbol": "7270",
+    "income": [
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "revenue": 4784965000000,
+      "operatingIncome": 40120000000,
+      "netIncome": 90842000000,
+      "netIncomeAttributableToOwners": 90842000000,
+      "operatingMargin": 0.008384596334560441,
+      "netMargin": 0.01898488285703239,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YFKZ",
+       "announcedAt": "2026-06-22T01:44:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKZ"
+      }
+     },
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2025-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 05:07:30.038537",
+      "revenue": 4685763000000,
+      "operatingIncome": 405308000000,
+      "netIncome": 338062000000,
+      "netIncomeAttributableToOwners": 338062000000,
+      "operatingMargin": 0.08649775927634411,
+      "netMargin": 0.0721466279878005,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YF9D",
+       "announcedAt": "2026-06-22T01:36:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YF9D"
+      }
+     },
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2024-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 365,
+      "updatedAt": "2026-09-28 05:07:25.605736",
+      "revenue": 4702947000000,
+      "operatingIncome": 468198000000,
+      "netIncome": 385084000000,
+      "netIncomeAttributableToOwners": 385084000000,
+      "operatingMargin": 0.09955417315993567,
+      "netMargin": 0.08188142456208841,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100TO9E",
+       "announcedAt": "2024-06-20T04:52:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TO9E"
+      }
+     },
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2023-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 05:07:20.886422",
+      "revenue": 3774468000000,
+      "operatingIncome": 267483000000,
+      "netIncome": 200431000000,
+      "netIncomeAttributableToOwners": 200431000000,
+      "operatingMargin": 0.07086641084253463,
+      "netMargin": 0.05310178811954427,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100R15B",
+       "announcedAt": "2023-06-22T04:57:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100R15B"
+      }
+     }
+    ],
+    "balance": [
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "totalAssets": 5492301000000,
+      "ownersEquity": 2780407000000,
+      "shareholdersEquity": 2780407000000,
+      "equityRatio": 0.506,
+      "interestBearingDebt": 384500000000,
+      "netInterestBearingDebt": -620834000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YFKZ",
+       "announcedAt": "2026-06-22T01:44:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKZ"
+      }
+     }
+    ],
+    "cashFlow": [
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "ifrs",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "operatingCashFlow": 358227000000,
+      "capitalExpenditure": -234366000000,
+      "freeCashFlow": 243577000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YFKZ",
+       "announcedAt": "2026-06-22T01:44:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKZ"
+      }
+     }
+    ],
+    "segments": [
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YFKZ",
+      "submittedAt": "2026-06-22 01:44:00",
+      "unitMultiplier": 1000000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKZ",
+      "items": [
+       {
+        "segment": "日本",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 699910
+       },
+       {
+        "segment": "北米",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 3780497
+       },
+       {
+        "segment": "(うち米国)",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 3517621
+       },
+       {
+        "segment": "欧州",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 105789
+       },
+       {
+        "segment": "アジア",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 25312
+       },
+       {
+        "segment": "その他",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 173457
+       },
+       {
+        "segment": "合計",
+        "metric": "net_sales_total",
+        "rawLabel": "売上収益",
+        "value": 4784965
+       }
+      ]
+     }
+    ],
+    "workforce": [
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YFKZ",
+      "submittedAt": "2026-06-22 01:44:00",
+      "employees": 17948,
+      "consolidatedEmployees": 37542,
+      "averageAge": 40,
+      "averageTenureYears": 15.7,
+      "averageAnnualSalary": 7643520,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKZ"
+     }
+    ],
+    "diversity": [
+     {
+      "symbol": "7270",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YFKZ",
+      "submittedAt": "2026-06-22 01:44:00",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKZ",
+      "reportingCompany": {
+       "femaleManagerRatio": 0.043,
+       "maleChildcareLeaveRatio": 0.826,
+       "maleChildcareLeaveBasis": "childcare-leave",
+       "wageGapAll": 0.78
+      }
+     }
+    ]
+   },
+   {
+    "symbol": "7261",
+    "income": [
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "revenue": 4918172000000,
+      "operatingIncome": 51579000000,
+      "netIncome": 35086000000,
+      "netIncomeAttributableToOwners": 35086000000,
+      "operatingMargin": 0.010487433135726039,
+      "netMargin": 0.0071339513949491805,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YDZ1",
+       "announcedAt": "2026-06-23T00:09:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1"
+      }
+     },
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2025-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 05:02:11.144536",
+      "revenue": 5018893000000,
+      "operatingIncome": 186125000000,
+      "netIncome": 114079000000,
+      "netIncomeAttributableToOwners": 114079000000,
+      "operatingMargin": 0.037084871106038725,
+      "netMargin": 0.022729912751676514,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100VZ6C",
+       "announcedAt": "2025-06-24T07:31:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VZ6C"
+      }
+     },
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2024-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 365,
+      "updatedAt": "2026-09-28 05:02:06.765511",
+      "revenue": 4827662000000,
+      "operatingIncome": 250503000000,
+      "netIncome": 207696000000,
+      "netIncomeAttributableToOwners": 207696000000,
+      "operatingMargin": 0.05188909248410514,
+      "netMargin": 0.04302206741068451,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100TN27",
+       "announcedAt": "2024-06-26T00:06:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TN27"
+      }
+     },
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2023-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 05:02:01.811597",
+      "revenue": 3826752000000,
+      "operatingIncome": 141969000000,
+      "netIncome": 142814000000,
+      "netIncomeAttributableToOwners": 142814000000,
+      "operatingMargin": 0.037099085595303796,
+      "netMargin": 0.037319899486561975,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100R5G1",
+       "announcedAt": "2023-06-28T00:01:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100R5G1"
+      }
+     }
+    ],
+    "balance": [
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "totalAssets": 4479493000000,
+      "ownersEquity": 1905559000000,
+      "shareholdersEquity": 1497884000000,
+      "equityRatio": 0.425,
+      "interestBearingDebt": 869529000000,
+      "netInterestBearingDebt": -423633000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YDZ1",
+       "announcedAt": "2026-06-23T00:09:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1"
+      }
+     }
+    ],
+    "cashFlow": [
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "operatingCashFlow": 223000000,
+      "capitalExpenditure": -89332000000,
+      "freeCashFlow": -645000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YDZ1",
+       "announcedAt": "2026-06-23T00:09:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1"
+      }
+     }
+    ],
+    "segments": [
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YDZ1",
+      "submittedAt": "2026-06-23 00:09:00",
+      "unitMultiplier": 1000000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1",
+      "items": []
+     }
+    ],
+    "workforce": [
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YDZ1",
+      "submittedAt": "2026-06-23 00:09:00",
+      "employees": 22857,
+      "consolidatedEmployees": 47144,
+      "averageAge": 42.5,
+      "averageTenureYears": 17.7,
+      "averageAnnualSalary": 7112000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1"
+     }
+    ],
+    "diversity": [
+     {
+      "symbol": "7261",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YDZ1",
+      "submittedAt": "2026-06-23 00:09:00",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1",
+      "reportingCompany": {
+       "femaleManagerRatio": 0.058,
+       "maleChildcareLeaveRatio": 0.671,
+       "maleChildcareLeaveBasis": "childcare-leave-and-purpose-leave",
+       "wageGapAll": 0.841
+      }
+     }
+    ]
+   },
+   {
+    "symbol": "7201",
+    "income": [
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "revenue": 12007888000000,
+      "operatingIncome": 58005000000,
+      "netIncome": -533095000000,
+      "netIncomeAttributableToOwners": -533095000000,
+      "operatingMargin": 0.004830574702229068,
+      "netMargin": -0.04439540075656935,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YH2B",
+       "announcedAt": "2026-06-22T07:25:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH2B"
+      }
+     },
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2025-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 04:32:36.518366",
+      "revenue": 12633214000000,
+      "operatingIncome": 69798000000,
+      "netIncome": -670898000000,
+      "netIncomeAttributableToOwners": -670898000000,
+      "operatingMargin": 0.005524959839990046,
+      "netMargin": -0.053105884219170195,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100W2UQ",
+       "announcedAt": "2025-06-23T07:13:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W2UQ"
+      }
+     },
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2024-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 365,
+      "updatedAt": "2026-09-28 04:32:31.517671",
+      "revenue": 12685716000000,
+      "operatingIncome": 568718000000,
+      "netIncome": 426649000000,
+      "netIncomeAttributableToOwners": 426649000000,
+      "operatingMargin": 0.044831367815580926,
+      "netMargin": 0.03363223644609417,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100TXFX",
+       "announcedAt": "2024-06-28T00:44:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TXFX"
+      }
+     },
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2023-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": 364,
+      "updatedAt": "2026-09-28 04:32:25.789336",
+      "revenue": 10596695000000,
+      "operatingIncome": 377109000000,
+      "netIncome": 221900000000,
+      "netIncomeAttributableToOwners": 221900000000,
+      "operatingMargin": 0.03558741664264188,
+      "netMargin": 0.02094049135131284,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100RAD2",
+       "announcedAt": "2023-06-30T00:38:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100RAD2"
+      }
+     }
+    ],
+    "balance": [
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "totalAssets": 19812442000000,
+      "ownersEquity": 4798981000000,
+      "shareholdersEquity": 4231108000000,
+      "equityRatio": 0.242,
+      "interestBearingDebt": 8920122000000,
+      "netInterestBearingDebt": 6655321000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YH2B",
+       "announcedAt": "2026-06-22T07:25:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH2B"
+      }
+     }
+    ],
+    "cashFlow": [
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "accountingStandard": "jgaap",
+      "fiscalPeriodDays": null,
+      "updatedAt": "2026-10-28 09:44:22.122855",
+      "operatingCashFlow": 794674000000,
+      "capitalExpenditure": null,
+      "freeCashFlow": -119627000000,
+      "provenance": {
+       "source": "edinet",
+       "docId": "S100YH2B",
+       "announcedAt": "2026-06-22T07:25:00Z",
+       "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH2B"
+      }
+     }
+    ],
+    "segments": [
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YH2B",
+      "submittedAt": "2026-06-22 07:25:00",
+      "unitMultiplier": 1000000,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH2B",
+      "items": [
+       {
+        "segment": "自動車事業及び消去(百万円)",
+        "metric": "net_sales_total",
+        "rawLabel": "売上高",
+        "value": 10689886
+       },
+       {
+        "segment": "販売金融事業(百万円)",
+        "metric": "net_sales_total",
+        "rawLabel": "売上高",
+        "value": 1318002
+       },
+       {
+        "segment": "連結計(百万円)",
+        "metric": "net_sales_total",
+        "rawLabel": "売上高",
+        "value": 12007888
+       },
+       {
+        "segment": "日本",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": 2481224
+       },
+       {
+        "segment": "北米",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": 281048
+       },
+       {
+        "segment": "欧州",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": 269174
+       },
+       {
+        "segment": "アジア",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": 794785
+       },
+       {
+        "segment": "その他",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": 24594
+       },
+       {
+        "segment": "計",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": 3850825
+       },
+       {
+        "segment": "消去",
+        "metric": "net_sales_total",
+        "rawLabel": "(2)所在地間の内部売上高",
+        "value": -3850825
+       }
+      ]
+     }
+    ],
+    "workforce": [
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YH2B",
+      "submittedAt": "2026-06-22 07:25:00",
+      "employees": 23174,
+      "consolidatedEmployees": 120079,
+      "averageAge": 40.9,
+      "averageTenureYears": 14.9,
+      "averageAnnualSalary": 8571467,
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH2B"
+     }
+    ],
+    "diversity": [
+     {
+      "symbol": "7201",
+      "fiscalPeriod": "2026-03",
+      "period": "FY",
+      "docId": "S100YH2B",
+      "submittedAt": "2026-06-22 07:25:00",
+      "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YH2B",
+      "reportingCompany": {
+       "femaleManagerRatio": 0.113,
+       "maleChildcareLeaveRatio": 0.755,
+       "maleChildcareLeaveBasis": "childcare-leave",
+       "wageGapAll": 0.847
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

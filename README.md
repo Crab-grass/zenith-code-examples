@@ -32,6 +32,17 @@ Choose a sample company, explore revenue and profit charts, inspect the financia
 
 **[Run and customize the template →](templates/company-analysis/README.md)**
 
+### Dashboards for competitor and company research
+
+Two more starting points for an in-house dashboard. Both open with a saved snapshot of real ZENITH Code data (retrieval date shown on screen), so you can try them without an account. Neither shows stock prices or price-based ratios.
+
+| Template | Use it to | Look |
+| --- | --- | --- |
+| **[Peer benchmark board →](templates/peer-benchmark/README.md)** | Line up your company and up to five competitors: margins, ROE/ROA against the industry quartiles, growth, financial strength, business mix and workforce. Prints to A4 for meetings. | Bright, report-style |
+| **[Company deep-dive workspace →](templates/company-deep-dive/README.md)** | Dig into one company from four angles: segments, cash allocation, company forecasts versus results, and people. Add your own views. | Dark-first workspace |
+
+![Peer benchmark board comparing six Japanese automakers on margins, ROE, ROA and growth.](assets/peer-benchmark-en.png)
+
 ### Build this before signing up
 
 ![Synthetic cumulative sales of 20, 45 and 72 versus standalone quarters of 20, 25 and 27, in JPY 100 million.](assets/quarterly-sales.en.svg)

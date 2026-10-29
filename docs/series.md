@@ -15,6 +15,8 @@ Crabgrass publishes Japanese tutorial series on Qiita. The articles explain conc
 | Chart one company's results and margin with real data | [Practice lessons 1–2](../practice/README.md) | Required |
 | Compare companies under matching conditions | `compare` ([README](../README.md#examples)) | Required |
 | Build your own analysis page | [Company analysis template](../templates/company-analysis/README.md) | Not required for sample data |
+| Benchmark your company against competitors | [Peer benchmark board](../templates/peer-benchmark/README.md) | Not required for the saved snapshot |
+| Research one company in depth | [Company deep-dive workspace](../templates/company-deep-dive/README.md) | Not required for the saved snapshot |
 
 ## TDnet analysis (4 articles)
 
