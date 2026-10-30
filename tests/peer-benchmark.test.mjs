@@ -148,6 +148,20 @@ test("segment shares exclude totals and eliminations and never mix bases", () =>
   assert.equal(segmentMix({ items: [{ segment: "計", metric: "net_sales_total", rawLabel: "x", value: 10 }] }), null);
 });
 
+test("segment shares skip breakdown rows and keep businesses that absorb eliminations", () => {
+  const shares = (items) => segmentMix({ fiscalPeriod: "2026-03", unitMultiplier: 1e6, items: items.map(
+    ([segment, value]) => ({ segment, metric: "net_sales_total", rawLabel: "売上高", value })) })
+    .items.map((i) => [i.segment, Math.round(i.share * 1000) / 1000]);
+  // "(うち米国)" is part of 北米 and must not be counted again.
+  assert.deepEqual(shares([["日本", 30], ["北米", 60], ["(うち米国)", 55], ["その他", 10], ["合計", 100]]),
+    [["日本", 0.3], ["北米", 0.6], ["その他", 0.1]]);
+  // Unit suffixes are dropped before matching, so "連結計(百万円)" is a total, while a
+  // business named with its eliminations stays a segment.
+  assert.deepEqual(shares([["自動車事業及び消去(百万円)", 90], ["販売金融事業(百万円)", 10], ["連結計(百万円)", 100]]),
+    [["自動車事業及び消去", 0.9], ["販売金融事業", 0.1]]);
+  assert.deepEqual(shares([["A", 70], ["B", 30], ["消去又は全社", -5], ["調整額", 0]]), [["A", 0.7], ["B", 0.3]]);
+});
+
 test("bars share a zero baseline and missing values draw nothing", () => {
   const scale = domain([-0.05, 0.1, null]);
   assert.deepEqual(scale, { min: -0.05, max: 0.1 });

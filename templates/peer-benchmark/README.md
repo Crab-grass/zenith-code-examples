@@ -66,7 +66,7 @@ The local server whitelists every field before it reaches the page:
 - **ROE and ROA are calculated here from period-end values** (ROE = profit attributable to owners ÷ equity attributable to owners, falling back to shareholders' equity; ROA = net income ÷ total assets). Zero or negative denominators, missing values or a balance sheet from another period give “—”. The sector distribution may use a different method.
 - **Three-year revenue growth** (CAGR) needs four consecutive ordinary fiscal years (360–366 days) with the same year-end month and the same accounting standard at both ends.
 - The **sector band** (Q1–Q3 with median) comes from your company's sector code. Peers can belong to another sector.
-- **Business mix** shows external sales by segment as each company reports them (business lines or regions). Totals and eliminations are excluded; segments are never merged across companies. Colours only follow each company's order.
+- **Business mix** shows external sales by segment as each company reports them (business lines or regions). Totals, eliminations and "of which" breakdown rows are excluded; segments are never merged across companies. Colours only follow each company's order.
 - **People** figures are for the reporting company (non-consolidated) except consolidated employees. Male childcare-leave methods differ by company and can exceed 100%. The gender wage gap is women's pay as a share of men's.
 - Missing values show “—”, never zero. Figures under different accounting standards include definitional differences.
 
