@@ -59,15 +59,15 @@ The code in the `practice` folder is the same as the code printed in lessons 1â€
 
 ## ZENITH Code analysis (5 articles)
 
-Analyses that teams use in competitor research and planning meetings, built on the two dashboard templates. Articles are being published on Qiita in order.
+Analyses that teams use in competitor research and planning meetings, built on the two dashboard templates. All five articles are on Qiita.
 
 | # | Topic | In this repository |
 | --- | --- | --- |
 | 1 | [Build a peer benchmark automatically: profitability and efficiency against the sector distribution](https://qiita.com/Sohei-Taniguchi-CG/items/de733ed981cd5d21e738) (Japanese) | [Peer benchmark board](../templates/peer-benchmark/README.md): ROE, ROA and 3-year growth against the sector quartiles |
-| 2 | Compare competitors by business segment | Company deep-dive and peer benchmark: segment mix |
-| 3 | Financial strength and cash flow against competitors | [Company deep-dive workspace](../templates/company-deep-dive/README.md) |
-| 4 | Track how company forecasts were revised | Company deep-dive: forecasts and results |
-| 5 | Compare people and organisation disclosures | Peer benchmark board: workforce and diversity |
+| 2 | [Which businesses earn the money: comparing segment disclosures](https://qiita.com/Sohei-Taniguchi-CG/items/df286e30b8b8d33b6d68) (Japanese) | Company deep-dive segments and the peer benchmark business mix |
+| 3 | [Cash to spend and where it goes: financial strength and cash flow](https://qiita.com/Sohei-Taniguchi-CG/items/67bf0244bb60458d0f08) (Japanese) | [Company deep-dive workspace](../templates/company-deep-dive/README.md): balance sheet and cash allocation |
+| 4 | [How company plans changed: tracking forecast revisions](https://qiita.com/Sohei-Taniguchi-CG/items/595d98c387e34d7a3fc2) (Japanese) | Company deep-dive: company forecasts and results |
+| 5 | [People and organisation: human capital disclosures in one table](https://qiita.com/Sohei-Taniguchi-CG/items/f33d67095abc3e8beb3a) (Japanese) | Peer benchmark board: workforce and diversity |
 
 ## Going further
 
