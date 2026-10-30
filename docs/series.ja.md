@@ -59,15 +59,15 @@
 
 ## ZENITH Code分析（全5回）
 
-競合調査や経営会議の資料で使う分析を、2つのダッシュボードのテンプレートで行う連載です。Qiitaで順に公開します。
+競合調査や経営会議の資料で使う分析を、2つのダッシュボードのテンプレートで行う連載です。Qiitaで全5回を公開しています。
 
 | 回 | 扱う内容 | このリポジトリで |
 | --- | --- | --- |
 | ① | [同業他社ベンチマークを自動で作る――収益性と効率を業種の分布の中で見る](https://qiita.com/Sohei-Taniguchi-CG/items/de733ed981cd5d21e738) | [比較ボード](../templates/peer-benchmark/README.ja.md)のROE・ROA・3年成長率と業種の四分位 |
-| ② | 競合がどの事業で稼いでいるかを比べる | 深掘りワークスペースと比較ボードの事業構成 |
-| ③ | 財務体質とキャッシュフローを競合と比べる | [深掘りワークスペース](../templates/company-deep-dive/README.ja.md) |
-| ④ | 業績予想の修正の履歴を追う | 深掘りワークスペースの会社計画と実績 |
-| ⑤ | 人と組織の開示を競合と比べる | 比較ボードの人材 |
+| ② | [競合がどの事業で稼いでいるか――セグメント情報を並べて比べる](https://qiita.com/Sohei-Taniguchi-CG/items/df286e30b8b8d33b6d68) | 深掘りワークスペースの事業セグメントと比較ボードの事業構成 |
+| ③ | [事業に回せるお金と使い道――財務体質とキャッシュフローを競合と比べる](https://qiita.com/Sohei-Taniguchi-CG/items/67bf0244bb60458d0f08) | [深掘りワークスペース](../templates/company-deep-dive/README.ja.md)の財務と資金配分 |
+| ④ | [会社計画はどう変わってきたか――業績予想の修正の履歴を追う](https://qiita.com/Sohei-Taniguchi-CG/items/595d98c387e34d7a3fc2) | 深掘りワークスペースの会社計画と実績 |
+| ⑤ | [人と組織を競合と比べる――人的資本の開示を一つの表にする](https://qiita.com/Sohei-Taniguchi-CG/items/f33d67095abc3e8beb3a) | 比較ボードの人材 |
 
 ## 記事より先に進みたいとき
 
