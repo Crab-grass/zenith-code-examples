@@ -70,6 +70,14 @@
 | ④ | [会社計画はどう変わってきたか――業績予想の修正の履歴を追う](https://qiita.com/Sohei-Taniguchi-CG/items/595d98c387e34d7a3fc2) | 深掘りワークスペースの会社計画と実績 |
 | ⑤ | [人と組織を競合と比べる――人的資本の開示を一つの表にする](https://qiita.com/Sohei-Taniguchi-CG/items/f33d67095abc3e8beb3a) | 比較ボードの人材 |
 
+## ZENITH Codeディープ解析（連載中）
+
+有価証券報告書の奥にある開示（本文・株主・政策保有・監査・主要な販売先）を、自社と競合の数社で並べて読む連載です。[開示リーダー](../templates/disclosure-reader/README.ja.md)を使います。
+
+| 回 | 扱う内容 | このリポジトリで |
+| --- | --- | --- |
+| ① | [有報の本文を競合で読み比べる――「事業等のリスク」と「対処すべき課題」を見出しで並べる](https://qiita.com/Sohei-Taniguchi-CG/items/d5c2ab6d877fdbd287cf) | 開示リーダーの本文の読み比べ（見出しの取り出し・キーワード・AIに渡すプロンプト） |
+
 ## 記事より先に進みたいとき
 
 - **まとめて見る**：`python3 python/report.py --symbol <証券コード> --out output/report --lang ja`で、グラフ付きの1社分のレポートを作れます。目的別の手順は[レシピ集](recipes.ja.md)にあります。
