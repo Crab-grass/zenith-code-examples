@@ -42,7 +42,7 @@ Annual securities reports, taxonomies and statement hierarchies.
 
 ## ZENITH Code practice (8 lessons)
 
-Build a personal company analysis page showing trends, operating margin, peer comparison and sources. Articles are being published on Qiita in order.
+Build a personal company analysis page showing trends, operating margin, peer comparison and sources. All eight articles are on Qiita.
 
 | # | Topic | In this repository |
 | --- | --- | --- |
@@ -50,10 +50,10 @@ Build a personal company analysis page showing trends, operating margin, peer co
 | 2 | [Calculate operating margin and check it against the API](https://qiita.com/Sohei-Taniguchi-CG/items/0b2d22511a6cddf5ae7d) (Japanese) | [practice02_margin.py](../practice/README.md) |
 | 3 | [Align conditions before comparing two companies](https://qiita.com/Sohei-Taniguchi-CG/items/c74edd2c330a69bc9dac) (Japanese) | `compare --symbols 7203,7267` reports shared periods and differing standards or period lengths |
 | 4 | [Build an analysis page that switches companies and metrics](https://qiita.com/Sohei-Taniguchi-CG/items/f7f1fd4582ece2e4409a) (Japanese) | Start the [company analysis template](../templates/company-analysis/README.md) with fictional data |
-| 5 | Link the financial table to its sources | The template's financial table and provenance view |
-| 6 | Fiscal periods and year-on-year change | The template's period selection and year-on-year change |
-| 7 | Spacing, colours and content | The template's three styles |
-| 8 | Switch from sample to real data | The template's live mode (the key stays in your local server) |
+| 5 | [Trace the financial table back to its sources](https://qiita.com/Sohei-Taniguchi-CG/items/9ec079444e5a818ccb7d) (Japanese) | The template's financial table, CSV export and provenance view |
+| 6 | [Add fiscal period selection and year-on-year change](https://qiita.com/Sohei-Taniguchi-CG/items/e3942e2e1d71ef30054a) (Japanese) | The template's period selection and year-on-year change |
+| 7 | [Make the page work on desktop and phone](https://qiita.com/Sohei-Taniguchi-CG/items/96b1de81d30de4d9dfa0) (Japanese) | The template's themes, responsive layout and saved display settings |
+| 8 | [Run the page on real ZENITH Code data](https://qiita.com/Sohei-Taniguchi-CG/items/6f927c65172a28401525) (Japanese) | The template's live mode (the key stays in your local server) |
 
 The code in the `practice` folder is the same as the code printed in lessons 1–2 and is updated if the articles change.
 
