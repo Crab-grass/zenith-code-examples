@@ -70,6 +70,14 @@ Analyses that teams use in competitor research and planning meetings, built on t
 | 4 | [How company plans changed: tracking forecast revisions](https://qiita.com/Sohei-Taniguchi-CG/items/595d98c387e34d7a3fc2) (Japanese) | Company deep-dive: company forecasts and results |
 | 5 | [People and organisation: human capital disclosures in one table](https://qiita.com/Sohei-Taniguchi-CG/items/f33d67095abc3e8beb3a) (Japanese) | Peer benchmark board: workforce and diversity |
 
+## ZENITH Code Deep Reading (in progress)
+
+A series that reads the deeper parts of annual securities reports (narrative sections, shareholders, strategic shareholdings, audit fees and major customers) side by side for your company and a few peers. It uses the [disclosure reader](../templates/disclosure-reader/README.md).
+
+| # | Article | In this repository |
+| --- | --- | --- |
+| 1 | [Reading annual-report narratives against peers: business risks and issues to address, by heading](https://qiita.com/Sohei-Taniguchi-CG/items/d5c2ab6d877fdbd287cf) (Japanese) | Disclosure reader text comparison: heading extraction, keyword hits and the AI prompt |
+
 ## Going further
 
 - **Everything at once**: `python3 python/report.py --symbol <code> --out output/report` writes a one-page report with charts. See the [recipes](recipes.md) for task-by-task commands.
