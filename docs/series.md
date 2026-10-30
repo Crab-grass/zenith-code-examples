@@ -57,6 +57,18 @@ Build a personal company analysis page showing trends, operating margin, peer co
 
 The code in the `practice` folder is the same as the code printed in lessons 1–2 and is updated if the articles change.
 
+## ZENITH Code analysis (5 articles)
+
+Analyses that teams use in competitor research and planning meetings, built on the two dashboard templates. Articles are being published on Qiita in order.
+
+| # | Topic | In this repository |
+| --- | --- | --- |
+| 1 | [Build a peer benchmark automatically: profitability and efficiency against the sector distribution](https://qiita.com/Sohei-Taniguchi-CG/items/de733ed981cd5d21e738) (Japanese) | [Peer benchmark board](../templates/peer-benchmark/README.md): ROE, ROA and 3-year growth against the sector quartiles |
+| 2 | Compare competitors by business segment | Company deep-dive and peer benchmark: segment mix |
+| 3 | Financial strength and cash flow against competitors | [Company deep-dive workspace](../templates/company-deep-dive/README.md) |
+| 4 | Track how company forecasts were revised | Company deep-dive: forecasts and results |
+| 5 | Compare people and organisation disclosures | Peer benchmark board: workforce and diversity |
+
 ## Going further
 
 - **Everything at once**: `python3 python/report.py --symbol <code> --out output/report` writes a one-page report with charts. See the [recipes](recipes.md) for task-by-task commands.
