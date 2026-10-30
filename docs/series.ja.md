@@ -17,6 +17,7 @@
 | 自分用の分析画面を作る | [企業・決算分析テンプレート](../templates/company-analysis/README.ja.md) | サンプルは不要 |
 | 自社と競合を比べる | [比較ボード](../templates/peer-benchmark/README.ja.md) | 保存データは不要 |
 | 1 社を深く調べる | [深掘りワークスペース](../templates/company-deep-dive/README.ja.md) | 保存データは不要 |
+| 有報の本文・株主・政策保有を競合で並べて読む | [開示リーダー](../templates/disclosure-reader/README.ja.md) | 保存データは不要 |
 
 ## TDnet解析（全4回）
 

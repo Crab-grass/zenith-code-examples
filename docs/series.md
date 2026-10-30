@@ -17,6 +17,7 @@ Crabgrass publishes Japanese tutorial series on Qiita. The articles explain conc
 | Build your own analysis page | [Company analysis template](../templates/company-analysis/README.md) | Not required for sample data |
 | Benchmark your company against competitors | [Peer benchmark board](../templates/peer-benchmark/README.md) | Not required for the saved snapshot |
 | Research one company in depth | [Company deep-dive workspace](../templates/company-deep-dive/README.md) | Not required for the saved snapshot |
+| Read annual-report text, shareholders and strategic holdings across competitors | [Disclosure reader](../templates/disclosure-reader/README.md) | Not required for the saved snapshot |
 
 ## TDnet analysis (4 articles)
 
