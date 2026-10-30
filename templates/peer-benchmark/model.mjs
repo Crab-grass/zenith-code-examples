@@ -136,11 +136,18 @@ export function revenueCagr3y(years) {
   return a === null || b === null || b <= 0 || a < 0 ? null : (a / b) ** (1 / 3) - 1;
 }
 
-const TOTAL_SEGMENT = /^(連結|計|合計|小計|総計|全社|消去|調整額|報告セグメント計|セグメント計|total|consolidated)$|消去|調整|全社|セグメント計/i;
+const TOTAL_SEGMENT = /^(連結|連結計|計|合計|小計|総計|全社|消去|調整額|報告セグメント計|セグメント計|total|consolidated)$/i;
+// "消去又は全社" is an adjustment row; "自動車事業及び消去" is a business that absorbs eliminations.
+const ADJUSTMENT_SEGMENT = /消去|調整|全社|セグメント計/;
+const isTotalSegment = (name) => TOTAL_SEGMENT.test(name) || (ADJUSTMENT_SEGMENT.test(name) && !/事業/.test(name));
+// "(うち米国)" is a breakdown of the row above it; adding it would count the same sales twice.
+const BREAKDOWN_SEGMENT = /^[（(]\s*(うち|of which)/i;
+const UNIT_SUFFIX = /\s*[（(](百万円|千円|円)[)）]$/;
 const INTERNAL_SALES = /セグメント間|所在地間|inter-?segment/i;
 
 // Shares of the segments a company reports, on the first external-sales basis
-// it lists. Totals and eliminations are excluded; segments are never merged.
+// it lists. Totals, eliminations and "of which" breakdowns are excluded; segments
+// are never merged.
 export function segmentMix(row) {
   if (!row || !Array.isArray(row.items)) return null;
   const multiplier = finite(row.unitMultiplier) ?? 1;
@@ -148,7 +155,10 @@ export function segmentMix(row) {
   const sales = row.items.filter((i) => i && i.metric === "net_sales_total" && typeof i.segment === "string");
   const basis = sales.map((i) => i.rawLabel ?? "").find((label) => !INTERNAL_SALES.test(label));
   if (basis === undefined) return null;
-  const items = sales.filter((i) => (i.rawLabel ?? "") === basis && !TOTAL_SEGMENT.test(i.segment.trim()));
+  const items = sales
+    .filter((i) => (i.rawLabel ?? "") === basis)
+    .map((i) => ({ ...i, segment: i.segment.trim().replace(UNIT_SUFFIX, "") }))
+    .filter((i) => !isTotalSegment(i.segment) && !BREAKDOWN_SEGMENT.test(i.segment));
   const seen = new Set();
   const out = [];
   for (const item of items) {
