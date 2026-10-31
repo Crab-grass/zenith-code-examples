@@ -26,8 +26,8 @@ server = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(server)
 SYMBOL, ZenithError, fetch_bundle, request_rows = server.SYMBOL, server.ZenithError, server.fetch_bundle, server.request_rows
 
-# Four automakers and suppliers that hold each other's shares, plus a smaller parts maker that
-# reports main customers (the four larger companies do not).
+# Four automakers and suppliers that hold each other's shares, plus a smaller parts maker. Denso
+# and the parts maker report main customers; Toyota, Honda and Mazda do not.
 DEFAULT_SYMBOLS = ("7203", "6902", "7267", "7261", "7217")
 MAX_SAVED = 8
 # Last line of defence: refuse to write a file that contains any of these keys.
