@@ -92,6 +92,9 @@ export const texts = {
     selfNotice: "自社名義の行があります（自己株式）。", noMajor: "大株主のデータがありません。",
     largeTitle: "直近の大量保有報告（新しい順に5件まで）", largeNone: "大量保有報告はありません。",
     merged: "同じ内容の{n}件を1件にまとめました", reportDate: "提出日",
+    jointOthers: "ほか{n}者（共同保有）", reportKind: "種類", kind_initial: "新規", kind_change: "変更",
+    moreHolders: "ほか{n}者",
+    largeNote: "1行が1通の報告書。共同保有は保有割合の大きい1者の名前と、共同保有者の合計の割合を出し、下に内訳を3者まで並べます。",
 
     crossSummaryTitle: "保有先の数（純投資目的以外）", listedIssues: "上場", unlistedIssues: "非上場", priorIssues: "前期",
     priorNote: "前期の数は、有報では純投資目的の区分にだけ記載があります。純投資目的以外は当期の数と、増減した保有先の明細です。",
@@ -210,6 +213,9 @@ export const texts = {
     selfNotice: "A row in the company's own name (treasury shares) is listed.", noMajor: "No major-shareholder data.",
     largeTitle: "Latest large-shareholding reports (newest 5)", largeNone: "No large-shareholding reports.",
     merged: "{n} identical rows shown as one", reportDate: "Filed",
+    jointOthers: "and {n} joint holders", reportKind: "Type", kind_initial: "Initial", kind_change: "Change",
+    moreHolders: "{n} more",
+    largeNote: "One row per report. For a joint report the largest holder is named, the ratio is the joint total, and up to three holders are listed below.",
 
     crossSummaryTitle: "Number of holdings (other than pure investment)", listedIssues: "Listed", unlistedIssues: "Unlisted", priorIssues: "Prior",
     priorNote: "Filings give prior-year counts only for pure investment holdings; for other holdings they give this year's count and the itemized changes.",

@@ -7,7 +7,7 @@ A sample workspace for strategy, IR and research teams that reads **the deeper p
 | View | What it does |
 | --- | --- |
 | 1. Read the text | Lines up the **headings** of business risks, management policy, R&D, capital expenditure and audit sections in one column per company. Highlights which headings mention a keyword (e.g. 為替 FX, サイバー cyber, 人材 people); click a heading to read its text on the right. Copies a prompt for an AI assistant containing the headings and sources only |
-| 2. Shareholders | Top-10 shareholders (shared holders and compared companies marked), a 100% bar of shareholding by category, the latest large-shareholding reports (identical rows merged) |
+| 2. Shareholders | Top-10 shareholders (shared holders and compared companies marked), a 100% bar of shareholding by category, the latest large-shareholding reports (one row per report; joint reports show the joint ratio and holders) |
 | 3. Strategic holdings | How many companies' shares are held for purposes other than pure investment, itemized holdings with year-on-year change, **holdings sold out during the year**, deemed holdings, holdings of subsidiaries and **mutual holdings** between the compared companies |
 | 4. Audit & customers | Audit, non-audit and network fees with the non-audit share; customers that account for 10% or more of revenue, with their share of revenue |
 
@@ -74,7 +74,7 @@ The local server forwards only the fields the views need (the whitelists in `ser
 - **Character counts** are of the text received, not the API's `chars`. Tables arrive flattened into lines, so the count is not the document's length.
 - Companies without the section (ETFs, REITs) show “No such section”.
 - **Shared shareholders** are matched by name after unifying ㈱ / 株式会社, （相）, trust-account suffixes (信託口) and full-/half-width forms.
-- **Large-shareholding reports** with the same holder, shares and ratio are merged; the newest five are shown.
+- **Large-shareholding reports** are shown one row per report (document ID). A joint report returns each joint holder as its own row, so the row names the largest holder, shows the joint ratio (`groupRatio`) and lists up to three holders. Reports with the same holder, shares and ratio (amendments) are merged; the newest five are shown with their type (`reportKind`: initial or change).
 - **Itemized holdings are only what is disclosed.** Banks and others list up to 60, so fewer rows than holdings is not an error. Rows with prior-year shares only are counted as sold out during the year. Mutual holdings are found by matching the holding's name with the compared companies' names.
 - **Audit fees**: without subsidiaries the API leaves the total empty, so the parent's fee is the total. The non-audit share = non-audit ÷ (audit + non-audit), calculated here; no non-audit work means 0%.
 - **Main customers** are divided by annual revenue for the same fiscal year; prior-year rows only when revenue 12 months earlier is available. A share above 100% means the unit may not match the filing, so neither amount nor share is shown. A 404 means no customer reaches 10% of revenue.

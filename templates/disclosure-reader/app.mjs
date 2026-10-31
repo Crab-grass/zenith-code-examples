@@ -317,14 +317,21 @@ function renderHolders(host, data) {
       { label: t("holder"), cls: "name", render: (r) => {
         const cell = node("span", undefined, { class: "holder" });
         cell.append(node("span", r.holderName ?? "—"));
-        if (M.isOwnName(r.holderName, c.profile)) cell.append(badge(t("selfBadge"), "self"));
+        if (r.others) {
+          cell.append(node("small", fill("jointOthers", { n: r.others }), { class: "muted" }));
+          const shown = r.holders.slice(0, 3).map((h) => `${h.holderName ?? "—"} ${pct(h.ratio, 2)}`);
+          if (r.holders.length > 3) shown.push(fill("moreHolders", { n: r.holders.length - 3 }));
+          cell.append(node("small", shown.join(" / "), { class: "muted members" }));
+        }
+        if (r.holders.some((h) => M.isOwnName(h.holderName, c.profile))) cell.append(badge(t("selfBadge"), "self"));
         if (r.duplicates > 1) cell.append(node("small", fill("merged", { n: r.duplicates }), { class: "muted" }));
         return cell;
       } },
+      { label: t("reportKind"), cls: "nowrap", render: (r) => (r.reportKind ? t("kind_" + r.reportKind) : "—") },
       { label: t("ratio"), num: true, render: (r) => pct(r.ratio, 2) },
       { label: t("sharesK"), num: true, render: (r) => M.thousands(r.shares, state.lang) },
       { label: "", render: (r) => link(r.sourceUrl) },
-    ], large, { compact: true }));
+    ], large, { compact: true }), node("p", t("largeNote"), { class: "muted small" }));
     cards.append(card);
   }
   host.append(cards);

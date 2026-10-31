@@ -153,8 +153,8 @@ test("strategic holdings: sold-out rows, deemed holdings, subsidiaries and parti
   assert.equal(M.crossSummary(null), null);
 });
 
-test("large-holding reports: identical rows are merged, newest five kept", () => {
-  const row = (holderName, shares, ratio, submittedAt) => ({ symbol: "7203", holderName, shares, unit: "株", ratio, submittedAt, docId: "S100ABCD", sourceUrl: EDINET });
+test("large-holding reports without a docId: identical rows are merged, newest five kept", () => {
+  const row = (holderName, shares, ratio, submittedAt) => ({ symbol: "7203", holderName, shares, unit: "株", ratio, submittedAt, docId: null, sourceUrl: EDINET });
   const rows = M.largeHolderRows([
     row("株式会社豊田自動織機", 1442085035, 0.0913, "2026-05-08 07:08:00+00"),
     row("株式会社豊田自動織機", 1442085035, 0.0913, "2026-05-08 07:14:00+00"),
@@ -168,6 +168,27 @@ test("large-holding reports: identical rows are merged, newest five kept", () =>
     ["株式会社豊田自動織機", 2, "2026-05-08"], ["株式会社豊田自動織機", 3, "2025-06-30"], ["A", 1, "2024-01-01"], ["B", 1, "2023-01-01"], ["C", 1, "2022-01-01"]]);
   assert.equal(rows[0].submittedAt, "2026-05-08 07:14:00+00"); // the newest of the duplicates
   assert.deepEqual(M.largeHolderRows([]), []);
+});
+
+test("large-holding reports: a joint report is one row with the joint ratio, largest holder first", () => {
+  const row = (holderName, shares, ratio, docId, submittedAt, extra = {}) => ({ symbol: "7217", holderName, shares, unit: "株", ratio, submittedAt, docId, sourceUrl: EDINET,
+    groupRatio: 0.5137, isJointReport: true, reportKind: "change", ...extra });
+  const rows = M.largeHolderRows([
+    row("市野 諮", 1375000, 0.1403, "S100Z93C", "2026-10-30 02:57:00+00"),
+    row("株式会社イチノホールディングス", 3664000, 0.3734, "S100Z93C", "2026-10-30 02:57:00+00"),
+    row("市野 諮", 5000000, 0.528, "S100V001", "2025-02-14 06:32:00+00", { groupRatio: 0.528, isJointReport: false, reportKind: "initial" }),
+  ]);
+  assert.deepEqual(rows.map((r) => [r.holderName, r.others, r.ratio, r.shares, r.reportKind, r.duplicates]), [
+    ["株式会社イチノホールディングス", 1, 0.5137, 5039000, "change", 1], ["市野 諮", 0, 0.528, 5000000, "initial", 1]]);
+  assert.deepEqual(rows[0].holders.map((h) => h.holderName), ["株式会社イチノホールディングス", "市野 諮"]);
+  // Without groupRatio the joint ratio is the sum of the holders' ratios.
+  const summed = M.largeHolderRows([row("A", 1, 0.03, "S100Z001", "2026-01-01", { groupRatio: null }), row("B", 2, 0.025, "S100Z001", "2026-01-01", { groupRatio: null })]);
+  assert.equal(Math.round(summed[0].ratio * 1e4), 550);
+  assert.equal(summed[0].shares, 3);
+  // Two documents with the same content (an amendment filed minutes later) are shown once.
+  const twice = M.largeHolderRows([row("株式会社豊田自動織機", 1442085035, 0.0913, "S100Y2HX", "2026-05-08 07:08:00+00", { groupRatio: null }),
+    row("株式会社豊田自動織機", 1442085035, 0.0913, "S100Y2HY", "2026-05-08 07:14:00+00", { groupRatio: null })]);
+  assert.deepEqual(twice.map((r) => [r.docId, r.duplicates]), [["S100Y2HY", 2]]);
 });
 
 test("common holders and compared companies among the top-10 shareholders", () => {
