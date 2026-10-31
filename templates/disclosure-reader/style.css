@@ -164,6 +164,7 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .badge.zero { background: var(--panel); color: var(--muted); border: 1px solid var(--rule-soft); }
 .holder { display: inline-flex; flex-wrap: wrap; gap: 4px 6px; align-items: baseline; }
 .holder small { font-size: 11px; }
+.holder .members { flex-basis: 100%; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 520px), 1fr)); gap: 16px; margin-bottom: 16px; }
 .card { padding: 14px 16px; background: var(--sheet); border: 1px solid var(--rule); border-radius: 8px; min-width: 0; }
 .panel .cards { margin: 0; }

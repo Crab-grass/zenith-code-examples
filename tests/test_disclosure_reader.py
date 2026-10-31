@@ -67,7 +67,8 @@ class FakeApi:
         if path == "/large-holders":
             row = {"symbol": s, "fiscalPeriod": None, "rank": None, "holderName": "株式会社豊田自動織機", "holderNameRaw": "x", "agent": None,
                    "address": None, "shares": 10, "unit": "株", "ratio": 0.09, "source": "large_holding_report",
-                   "submittedAt": "2026-05-08 07:08:00+00", "docId": "S100Y2HX", "sourceUrl": EDINET, "archiveUrl": ARCHIVE}
+                   "submittedAt": "2026-05-08 07:08:00+00", "docId": "S100Y2HX", "sourceUrl": EDINET, "archiveUrl": ARCHIVE,
+                   "groupRatio": 0.0913, "isJointReport": False, "reportKind": "change", "reportNumber": 3, "obligationDate": "2026-04-30"}
             return [row, dict(row, submittedAt="2026-05-08 07:14:00+00")]
         if path == "/cross-shareholdings":
             return [doc(s, holders=[{"holder": "reporting", "companyName": None}],
@@ -151,6 +152,10 @@ class FetchBundleTests(unittest.TestCase):
         self.assertFalse(block["truncated"])
         self.assertEqual(len(company["largeHolders"]), 2)  # duplicates are merged in the browser (model.mjs)
         self.assertEqual(company["largeHolders"][0]["submittedAt"], "2026-05-08 07:14:00+00")
+        large = company["largeHolders"][0]
+        self.assertEqual((large["groupRatio"], large["isJointReport"], large["reportKind"], large["obligationDate"]), (0.0913, False, "change", "2026-04-30"))
+        self.assertNotIn("reportNumber", large)
+        self.assertNotIn("archiveUrl", large)
 
     def test_long_text_is_cut_and_flagged(self):
         rows = [doc("7203", content="あ" * (server.MAX_CONTENT + 5))]

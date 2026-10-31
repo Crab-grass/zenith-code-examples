@@ -314,20 +314,41 @@ export function peerHolders(companies) {
   return out;
 }
 
-// Large-shareholding reports: rows with the same holder, shares and ratio are one filing reported
-// more than once (amendments, joint filers). Keep the newest, newest first, at most `limit`.
+// Large-shareholding reports: one row per report (docId). A joint report lists each joint holder
+// as its own row with the same docId; the report's ratio is the joint total (groupRatio), and the
+// largest holder leads. Reports with the same holder, shares and ratio (amendments, rows without a
+// docId) are one filing reported more than once and are shown once. Newest first, at most `limit`.
 export function largeHolderRows(rows, limit = 5) {
   const groups = new Map();
   for (const row of rows) {
-    const key = [String(row.holderName ?? "").trim(), finite(row.shares), finite(row.ratio)].join("|");
+    const key = row.docId ? `doc|${row.docId}` : [String(row.holderName ?? "").trim(), finite(row.shares), finite(row.ratio)].join("|");
     const group = groups.get(key);
-    if (!group) groups.set(key, { ...row, duplicates: 1 });
+    if (!group) groups.set(key, { ...row, holders: [row], duplicates: 1 });
     else {
+      group.holders.push(row);
       group.duplicates += 1;
-      if (String(row.submittedAt ?? "") > String(group.submittedAt ?? "")) Object.assign(group, { ...row, duplicates: group.duplicates });
+      if (String(row.submittedAt ?? "") > String(group.submittedAt ?? "")) group.submittedAt = row.submittedAt;
     }
   }
-  return [...groups.values()].sort((a, b) => String(b.submittedAt ?? "").localeCompare(String(a.submittedAt ?? ""))).slice(0, limit);
+  const reports = new Map();
+  for (const group of groups.values()) {
+    const holders = group.holders.slice().sort((a, b) => (finite(b.ratio) ?? -1) - (finite(a.ratio) ?? -1));
+    const joint = Boolean(group.docId) && holders.length > 1;
+    const sum = (key) => (holders.every((h) => finite(h[key]) !== null) ? holders.reduce((s, h) => s + h[key], 0) : null);
+    const lead = holders[0];
+    const report = { ...group, holderName: lead.holderName, holders: joint ? holders : [lead], others: joint ? holders.length - 1 : 0,
+      ratio: joint ? finite(group.groupRatio) ?? sum("ratio") : finite(lead.ratio), shares: joint ? sum("shares") : finite(lead.shares),
+      duplicates: joint ? 1 : group.duplicates };
+    const same = [String(report.holderName ?? "").trim(), report.shares, report.ratio, report.others].join("|");
+    const seen = reports.get(same);
+    if (!seen) reports.set(same, report);
+    else {
+      const duplicates = seen.duplicates + report.duplicates;
+      if (String(report.submittedAt ?? "") > String(seen.submittedAt ?? "")) reports.set(same, { ...report, duplicates });
+      else seen.duplicates = duplicates;
+    }
+  }
+  return [...reports.values()].sort((a, b) => String(b.submittedAt ?? "").localeCompare(String(a.submittedAt ?? ""))).slice(0, limit);
 }
 
 // Shareholder categories for the 100% bar. The two foreign categories are shown together.
