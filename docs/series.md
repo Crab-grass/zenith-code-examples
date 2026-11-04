@@ -78,6 +78,7 @@ A series that reads the deeper parts of annual securities reports (narrative sec
 | --- | --- | --- |
 | 1 | [Reading annual-report narratives against peers: business risks and issues to address, by heading](https://qiita.com/Sohei-Taniguchi-CG/items/d5c2ab6d877fdbd287cf) (Japanese) | Disclosure reader text comparison: heading extraction, keyword hits and the AI prompt |
 | 2 | [Reading capital ties from shareholders: major shareholders, ownership by category and large-shareholding reports against peers](https://qiita.com/Sohei-Taniguchi-CG/items/98cb09289a3772b747df) (Japanese) | Disclosure reader shareholders: shared holders, cross-holdings, ownership by category, one row per large-shareholding report |
+| 3 | [Mapping business ties from strategic shareholdings: holdings counts, fully sold holdings and cross-holdings against peers](https://qiita.com/Sohei-Taniguchi-CG/items/db06b9d701b8324fe265) (Japanese) | Disclosure reader strategic holdings: counts, change from the prior year, fully sold holdings, cross-holdings among the compared companies |
 
 ## Going further
 
