@@ -260,7 +260,17 @@ test("main customers: share of same-year revenue only, unit mismatches hidden, 4
   assert.equal(result.source, null);
   assert.equal(M.customerRows({ ...report, customerSource: "notes" }, revenue).source, "notes");
   assert.equal(M.customerRows({ ...report, customerSource: "elsewhere" }, revenue).source, null);
-  assert.equal(M.customerRows(null, revenue).status, "none"); // 404: no customer above 10%
+  // A customer group the filing does not name: amount kept, name null, reason in notes (6762).
+  const unnamed = M.customerRows(doc("6762", { customers: [{ period: "current", customer: null, revenue: 466405000000, segment: "エナジー応用製品", notes: ["顧客名の記載なし（原文: 1グループ）"] }] }),
+    [{ fiscalPeriod: "2026-03", period: "FY", revenue: 2300000000000 }]);
+  assert.deepEqual([unnamed.rows[0].named, unnamed.rows[0].notes, unnamed.rows[0].revenue], [false, ["顧客名の記載なし（原文: 1グループ）"], 466405000000]);
+  assert.ok(unnamed.rows[0].share > 0.2);
+  assert.equal(result.rows[0].named, true);
+  assert.deepEqual(M.unnamedCustomer(["顧客名の記載なし（原文: 1グループ）"]), { kind: "unnamed", reason: "（原文: 1グループ）" });
+  assert.deepEqual(M.unnamedCustomer(["2 グループの合計（伊藤忠商事グループ・住友商事グループ）"]), { kind: "combined", reason: "（伊藤忠商事グループ・住友商事グループ）" });
+  assert.deepEqual(M.unnamedCustomer(["2 グループの合計（名前の記載なし）"]), { kind: "combined", reason: "（名前の記載なし）" });
+  assert.deepEqual(M.unnamedCustomer([]), { kind: "unnamed", reason: "" });
+  assert.equal(M.customerRows(null, revenue).status, "none"); // 404: no rows (no customer above 10%, no annual report, or a range only)
   assert.equal(M.customerRows(doc("1", { customers: [] }), revenue).status, "none");
 });
 

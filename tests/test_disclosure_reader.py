@@ -121,6 +121,14 @@ class FetchBundleTests(unittest.TestCase):
             self.assertEqual(server.clean_customers([dict(row, sourceTag=tag)], "6902")["customerSource"], source)
         self.assertNotIn("sourceTag", server.clean_customers([dict(row, sourceTag="x")], "6902"))
 
+    def test_unnamed_customer_rows_keep_amount_and_reason(self):
+        unnamed = {"symbol": "6762", "fiscalPeriod": "2026-03", "docId": "S1", "customers": [
+            {"period": "current", "customer": None, "revenue": 466405000000, "segment": "エナジー応用製品",
+             "notes": ["顧客名の記載なし（原文: 1グループ）", {"x": 1}], "secret": 1}]}
+        c = server.clean_customers([unnamed], "6762")["customers"][0]
+        self.assertEqual(c, {"period": "current", "customer": None, "revenue": 466405000000, "segment": "エナジー応用製品",
+                             "notes": ["顧客名の記載なし（原文: 1グループ）"]})
+
     def test_no_main_customers_means_no_revenue_request(self):
         api = FakeApi(customers=False)
         bundle = server.fetch_bundle(["7203", "7261"], "k", api)
@@ -212,7 +220,7 @@ class FetchBundleTests(unittest.TestCase):
                       + server.CROSS_SUMMARY + server.CROSS_HOLDING + server.FEE_PARTS + server.FEE_SCOPE + server.CUSTOMER + server.REVENUE)
         allowed |= {"placeholder", "retrievedAt", "companies", "profile", "texts", "content", "truncated", "docId", "sourceUrl", "region",
                     "majorShareholders", "shareholderCategories", "categories", "largeHolders", "crossShareholdings", "holders", "summary",
-                    "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource"} | set(server.SECTIONS)
+                    "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource", "notes"} | set(server.SECTIONS)
         self.assertLessEqual(set(keys(demo)), allowed)
         self.assertIs(demo["placeholder"], False)
         build_demo.check(demo)  # the same last-line check build_demo.py runs before writing

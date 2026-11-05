@@ -467,13 +467,29 @@ export function customerRows(report, revenueRows) {
     const share = amount !== null && revenue > 0 ? amount / revenue : null;
     // Some filings are parsed at 1,000× the reported unit. A share above 100% cannot be right,
     // so neither the share nor the amount is shown.
-    if (share !== null && share > 1) return { ...c, revenue: null, share: null, revenuePeriod: period, unitMismatch: true };
-    return { ...c, revenue: amount, share, revenuePeriod: revenue !== null ? period : null, unitMismatch: false };
+    // Some filings give an amount for a customer group without naming it (customer null, the reason in notes).
+    const named = typeof c.customer === "string" && c.customer.trim() !== "";
+    const notes = (c.notes ?? []).filter((n) => typeof n === "string");
+    if (share !== null && share > 1) return { ...c, named, notes, revenue: null, share: null, revenuePeriod: period, unitMismatch: true };
+    return { ...c, named, notes, revenue: amount, share, revenuePeriod: revenue !== null ? period : null, unitMismatch: false };
   });
   // notes: the segment notes (often a customer together with its group companies);
   // sales: the "sales by main customer" table (each company on its own). Compare like with like.
   const source = report.customerSource === "notes" || report.customerSource === "sales" ? report.customerSource : null;
   return { status: "ok", rows, fiscalPeriod: report.fiscalPeriod, source };
+}
+
+// A row without a single customer name (customer null): either the filing does not name the
+// customer ("unnamed") or it gives one amount for several groups ("combined"). The reason comes from
+// the API's notes without repeating the label:
+// ["顧客名の記載なし（原文: 1グループ）"] → unnamed "（原文: 1グループ）";
+// ["2 グループの合計（A・B）"] → combined "（A・B）".
+export function unnamedCustomer(notes) {
+  const list = (notes ?? []).filter((n) => typeof n === "string");
+  const kind = list.some((n) => /^\d+\s*グループの合計/.test(n)) ? "combined" : "unnamed";
+  const reason = list.map((n) => n.replace(/^顧客名の記載なし|^\d+\s*グループの合計/, "").trim()).filter(Boolean)
+    .map((n) => (n.startsWith("（") ? n : `（${n}）`)).join("");
+  return { kind, reason };
 }
 
 // ---------- Formatting ---------------------------------------------------------------------
