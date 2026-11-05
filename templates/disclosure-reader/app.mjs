@@ -468,7 +468,8 @@ function renderAudit(host, data) {
     card.append(companyTitle(c, result.fiscalPeriod ? fy(result.fiscalPeriod) : null));
     if (result.status === "none") card.append(node("p", t("noCustomers"), { class: "muted" }));
     else card.append(...(result.source ? [node("p", t("customerSource_" + result.source), { class: "muted small" })] : []), table([
-      { label: t("customer"), cls: "name", render: (r) => r.customer ?? "—" },
+      { label: t("customer"), cls: "name", render: (r) => (r.named ? r.customer
+        : ((u) => node("span", t(u.kind === "combined" ? "combinedCustomers" : "unnamedCustomer") + u.reason, { class: "muted" }))(M.unnamedCustomer(r.notes))) },
       { label: t("segment"), render: (r) => r.segment ?? "—" },
       { label: t("auditPeriod"), cls: "nowrap", render: (r) => t(r.period === "prior" ? "prior" : "current") },
       { label: t("revenueM"), num: true, render: (r) => (r.unitMismatch ? "—" : m(r.revenue)) },

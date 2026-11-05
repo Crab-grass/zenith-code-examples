@@ -243,7 +243,14 @@ def clean_customers(rows, expected):
     row = _latest(rows)
     out = _document(row)
     out["customerSource"] = CUSTOMER_SOURCES.get(row.get("sourceTag"))  # "notes", "sales" or None
-    out["customers"] = [_pick(c, CUSTOMER) for c in _list(row.get("customers") or [], 60)]
+    customers = []
+    for c in _list(row.get("customers") or [], 60):
+        item = _pick(c, CUSTOMER)
+        # Why a row has no customer name ("not named in the filing", "combined amount of 2 groups").
+        notes = c.get("notes")
+        item["notes"] = [n[:200] for n in notes[:3] if isinstance(n, str)] if isinstance(notes, list) else []
+        customers.append(item)
+    out["customers"] = customers
     return out
 
 
