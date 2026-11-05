@@ -257,6 +257,9 @@ test("main customers: share of same-year revenue only, unit mismatches hidden, 4
   const scaled = M.customerRows(doc("3042", { customers: [{ period: "current", customer: "ＮＲＩセキュアテクノロジーズ 株式会社", revenue: 189950000000, segment: "x" }] }),
     [{ fiscalPeriod: "2026-03", period: "FY", revenue: 2500000000 }]);
   assert.deepEqual([scaled.rows[0].unitMismatch, scaled.rows[0].share, scaled.rows[0].revenue], [true, null, null]);
+  assert.equal(result.source, null);
+  assert.equal(M.customerRows({ ...report, customerSource: "notes" }, revenue).source, "notes");
+  assert.equal(M.customerRows({ ...report, customerSource: "elsewhere" }, revenue).source, null);
   assert.equal(M.customerRows(null, revenue).status, "none"); // 404: no customer above 10%
   assert.equal(M.customerRows(doc("1", { customers: [] }), revenue).status, "none");
 });

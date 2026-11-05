@@ -121,7 +121,9 @@ export const texts = {
     customersTitle: "主要な販売先", customer: "販売先", segment: "セグメント", revenueM: "売上（百万円）", shareOfRevenue: "売上高に対する割合",
     noCustomers: "売上の10%以上の販売先の記載なし", unitMismatch: "単位が原文と合わない可能性があるため表示しません",
     noRevenue: "同じ期の売上高がないため割合は出しません",
-    customersNote: "割合は同じ決算期の年間の売上高（損益計算書）で割って求めます。期が合わない行は割りません。",
+    customersNote: "割合は同じ決算期の年間の売上高（損益計算書）で割って求めます。期が合わない行は割りません。販売先の範囲は読んだ表で違います（注記はグループ会社を含めることがあり、販売実績の表は会社ごと）。各社の表の上の出どころをそろえて比べます。",
+    customerSource_notes: "出どころ：注記の主要な顧客の情報（グループ会社を含めて1行に書く会社があります）",
+    customerSource_sales: "出どころ：主な相手先別の販売実績の表（会社ごとの行）",
   },
   en: {
     title: "Disclosure Reader",
@@ -242,6 +244,8 @@ export const texts = {
     customersTitle: "Main customers", customer: "Customer", segment: "Segment", revenueM: "Sales (JPY m)", shareOfRevenue: "Share of revenue",
     noCustomers: "No customer accounts for 10% or more of revenue", unitMismatch: "Not shown: the unit may not match the filing",
     noRevenue: "No revenue for the same year, so no share",
-    customersNote: "Share = sales to the customer ÷ annual revenue for the same fiscal year (income statement). Rows whose year does not match are not divided.",
+    customersNote: "Share = sales to the customer ÷ annual revenue for the same fiscal year (income statement). Rows whose year does not match are not divided. The scope of a customer depends on the table it was read from (notes may include group companies; the sales table is per company), so compare companies whose source above the table matches.",
+    customerSource_notes: "Source: main-customer note (some companies report a customer together with its group companies on one line)",
+    customerSource_sales: "Source: sales by main customer table (one line per company)",
   },
 };

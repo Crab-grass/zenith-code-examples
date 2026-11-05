@@ -8,8 +8,9 @@ customers, one after another. Nothing is written unless every request succeeds (
 disclosure does not exist and is kept as empty). The key comes from ZENITH_API_KEY or a hidden
 prompt only.
 
-    python3 templates/disclosure-reader/build_demo.py                 # 7203 6902 7267 7261 7217
-    python3 templates/disclosure-reader/build_demo.py 6758 6752 6501  # your own selection
+    python3 templates/disclosure-reader/build_demo.py                   # demo.json: 7203 6902 7267 7261 7217
+    python3 templates/disclosure-reader/build_demo.py --set suppliers   # demo-suppliers.json (see SETS)
+    python3 templates/disclosure-reader/build_demo.py 6758 6752 6501    # your own selection into demo.json
 """
 import argparse
 import getpass
@@ -29,6 +30,11 @@ SYMBOL, ZenithError, fetch_bundle, request_rows = server.SYMBOL, server.ZenithEr
 # Four automakers and suppliers that hold each other's shares, plus a smaller parts maker. Denso
 # and the parts maker report main customers; Toyota, Honda and Mazda do not.
 DEFAULT_SYMBOLS = ("7203", "6902", "7267", "7261", "7217")
+# Parts makers whose annual reports name the carmakers they sell to (main customers): Toyota-group
+# suppliers that report the group as one customer or each group company separately, and Honda-group
+# suppliers, one of which also sells to Ford and GM. Opened with server.py --demo suppliers.
+SUPPLIER_SYMBOLS = ("6902", "7259", "3116", "7220", "7296")
+SETS = {"automakers": (DEFAULT_SYMBOLS, server.DEMOS["automakers"]), "suppliers": (SUPPLIER_SYMBOLS, server.DEMOS["suppliers"])}
 MAX_SAVED = 8
 # Last line of defence: refuse to write a file that contains any of these keys.
 BANNED = {"price", "marketCap", "per", "pbr", "psr", "beta", "dividendYield", "priceDate", "archiveUrl",
@@ -61,11 +67,14 @@ def build(symbols, api_key, requester=request_rows, out=ROOT / "demo.json"):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("symbols", nargs="*", default=list(DEFAULT_SYMBOLS),
-                        help="Securities codes (default: %s)" % " ".join(DEFAULT_SYMBOLS))
-    parser.add_argument("--out", default=str(ROOT / "demo.json"), help="Output file (default: demo.json next to this script)")
+    parser.add_argument("symbols", nargs="*", help="Securities codes (default: the codes of --set)")
+    parser.add_argument("--set", choices=sorted(SETS), default="automakers",
+                        help="Saved snapshot to rebuild: automakers (demo.json) or suppliers (demo-suppliers.json)")
+    parser.add_argument("--out", help="Output file (default: the file of --set next to this script)")
     args = parser.parse_args()
-    codes = args.symbols
+    default_codes, default_file = SETS[args.set]
+    codes = args.symbols or list(default_codes)
+    args.out = args.out or str(ROOT / default_file)
     if not server.MIN_COMPANIES <= len(codes) <= MAX_SAVED or len(set(codes)) != len(codes) or not all(SYMBOL.fullmatch(s) for s in codes):
         parser.error("Give %d to %d distinct securities codes such as 7203 or 130A." % (server.MIN_COMPANIES, MAX_SAVED))
     key = os.environ.get("ZENITH_API_KEY", "").strip()

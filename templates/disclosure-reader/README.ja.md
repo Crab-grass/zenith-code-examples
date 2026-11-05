@@ -25,6 +25,12 @@ python3 templates/disclosure-reader/server.py
 
 保存データは、画面に表示された取得日に **ZENITH Code の実データを取得して保存したもの** です（トヨタ自動車・デンソー・本田技研工業・マツダ・テイン）。最新の開示ではありません。保存データではAPIを呼ばず、登録も不要です。
 
+自動車部品の5社（デンソー・アイシン・トヨタ紡織・武蔵精密工業・エフ・シー・シー）の保存データもあります。主要な販売先（自動車会社）を並べるときは、こちらで起動します。
+
+```sh
+python3 templates/disclosure-reader/server.py --demo suppliers
+```
+
 - 上の「比べる会社」で2〜5社を選びます。左の4つの画面を切り替えます。
 - JA / EN、明るい表示 / 暗い表示を切り替えられます（初期値はOSの設定に従います）。
 - `?companies=7203,7261#cross` のようにURLで会社と画面を指定できます。
@@ -84,11 +90,12 @@ python3 templates/disclosure-reader/server.py --live
 
 ## 保存データを取り直す
 
-`demo.json` は、実データ接続と同じ関数（`server.py` の `fetch_bundle`）の出力をそのまま保存したものです。
+`demo.json` と `demo-suppliers.json` は、実データ接続と同じ関数（`server.py` の `fetch_bundle`）の出力をそのまま保存したものです。
 
 ```sh
-python3 templates/disclosure-reader/build_demo.py              # 7203 6902 7267 7261 7217
-python3 templates/disclosure-reader/build_demo.py 6758 6752    # 別の組み合わせ
+python3 templates/disclosure-reader/build_demo.py                   # demo.json（7203 6902 7267 7261 7217）
+python3 templates/disclosure-reader/build_demo.py --set suppliers   # demo-suppliers.json（6902 7259 3116 7220 7296）
+python3 templates/disclosure-reader/build_demo.py 6758 6752         # 別の組み合わせを demo.json に
 ```
 
 キーは `ZENITH_API_KEY` か非表示入力で渡し、コマンドラインには書きません。すべて成功したときだけファイルを書き換え、書き込む前に株価・計上額・TDnetのリンクが入っていないことをもう一度確かめます。
@@ -103,7 +110,7 @@ python3 templates/disclosure-reader/build_demo.py 6758 6752    # 別の組み合
 | `app.mjs` | 4つの画面（`VIEWS` に並べる）、会社の選択 |
 | `i18n.mjs` | 日英の文言 |
 | `index.html` / `style.css` | レイアウト、明るい表示と暗い表示 |
-| `demo.json` | オフライン用に保存したデータ |
+| `demo.json` / `demo-suppliers.json` | オフライン用に保存したデータ（自動車会社 / 自動車部品。`--demo` で選ぶ） |
 
 読みたい節を足すときは、`server.py` の `SECTIONS` と `model.mjs` の `SECTIONS`、`i18n.mjs` の `sec_<名前>` を足します（1社あたりのリクエストが1件増えます）。
 
