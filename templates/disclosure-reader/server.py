@@ -28,6 +28,8 @@ MAX_BODY = 512
 # The five annual-report sections the reader compares (text-blocks `tag` aliases).
 SECTIONS = ("risks", "policy", "rnd", "capex", "audits")
 MAX_CONTENT = 120000  # characters per section; longer text is cut and flagged
+# Saved snapshots the reader can open without an API key (--demo). Only these names are accepted.
+DEMOS = {"automakers": "demo.json", "suppliers": "demo-suppliers.json"}
 
 # Whitelists: anything not listed never reaches the browser or demo.json. Left out on purpose:
 #   - prices and price-derived values (/profile returns price, marketCap, PER, PBR, ...);
@@ -47,6 +49,18 @@ CROSS_HOLDING = ("holder", "type", "row", "name", "shares", "priorShares", "issu
 FEE_PARTS = ("audit", "nonAudit", "networkAudit", "networkNonAudit")
 FEE_SCOPE = ("reportingCompany", "consolidatedSubsidiaries", "total")
 CUSTOMER = ("period", "customer", "revenue", "segment")
+# Where the main-customers rows were read (the API's sourceTag). The notes often name a customer
+# together with its group companies; the "sales by main customer" table names each company.
+CUSTOMER_SOURCES = {
+    "jpcrp_cor:InformationForEachOfMainCustomersTextBlock": "notes",
+    "jpigp_cor:InformationAboutMajorCustomersIFRSTextBlock": "notes",
+    "jpcrp_cor:NotesSegmentInformationEtcConsolidatedFinancialStatementsTextBlock": "notes",
+    "jpcrp_cor:NotesSegmentInformationEtcFinancialStatementsTextBlock": "notes",
+    "jpigp_cor:NotesSegmentInformationConsolidatedFinancialStatementsIFRSTextBlock": "notes",
+    "jpigp_cor:NotesSegmentInformationFinancialStatementsIFRSTextBlock": "notes",
+    "jpcrp_cor:ProductionOrdersReceivedAndSalesTextBlock": "sales",
+    "jpcrp_cor:ManagementAnalysisOfFinancialPositionOperatingResultsAndCashFlowsTextBlock": "sales",
+}
 REVENUE = ("symbol", "fiscalPeriod", "period", "revenue")
 PREFECTURE = re.compile(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)")
 
@@ -228,6 +242,7 @@ def clean_customers(rows, expected):
         _check_symbol(row, expected)
     row = _latest(rows)
     out = _document(row)
+    out["customerSource"] = CUSTOMER_SOURCES.get(row.get("sourceTag"))  # "notes", "sales" or None
     out["customers"] = [_pick(c, CUSTOMER) for c in _list(row.get("customers") or [], 60)]
     return out
 
@@ -299,10 +314,10 @@ def parse_body(body):
     return symbols
 
 
-def make_server(port=8790, api_key="", requester=request_rows):
+def make_server(port=8790, api_key="", requester=request_rows, demo_set="automakers"):
     token = secrets.token_urlsafe(32)
     gate = threading.Lock()
-    demo = json.loads((ROOT / "demo.json").read_text(encoding="utf-8"))
+    demo = json.loads((ROOT / DEMOS[demo_set]).read_text(encoding="utf-8"))
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
@@ -386,6 +401,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--port", type=int, default=8790)
     parser.add_argument("--live", action="store_true", help="Enable private API access; key stays in this process")
+    parser.add_argument("--demo", choices=sorted(DEMOS), default="automakers",
+                        help="Saved snapshot to open: automakers (demo.json) or suppliers (demo-suppliers.json)")
     args = parser.parse_args()
     key = ""
     if args.live:
@@ -396,9 +413,9 @@ def main():
             parser.error("Set ZENITH_API_KEY or run interactively. Do not pass a key on the command line.")
     if not 1024 <= args.port <= 65535:
         parser.error("Use a port from 1024 to 65535.")
-    with make_server(args.port, key) as server:
+    with make_server(args.port, key, demo_set=args.demo) as server:
         print("Open http://127.0.0.1:%d" % server.server_port, flush=True)
-        print("Saved snapshot ready. Live access: %s. Ctrl+C to stop." % (
+        print("Saved snapshot: %s (%s). Live access: %s. Ctrl+C to stop." % (args.demo, DEMOS[args.demo],
             "enabled; each fetch makes 12-13 requests per company and requires a click" if key else "disabled"), flush=True)
         try:
             server.serve_forever()

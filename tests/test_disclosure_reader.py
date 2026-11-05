@@ -114,6 +114,13 @@ class FetchBundleTests(unittest.TestCase):
         self.assertEqual(len(api.calls), 26)
         self.assertEqual([c["symbol"] for c in bundle["companies"]], ["7203", "7261"])
 
+    def test_main_customer_source_is_reduced_to_notes_or_sales(self):
+        row = {"symbol": "6902", "fiscalPeriod": "2026-03", "docId": "S100Y9T1", "customers": []}
+        for tag, source in [("jpigp_cor:InformationAboutMajorCustomersIFRSTextBlock", "notes"),
+                            ("jpcrp_cor:ProductionOrdersReceivedAndSalesTextBlock", "sales"), ("other:Unknown", None), (None, None)]:
+            self.assertEqual(server.clean_customers([dict(row, sourceTag=tag)], "6902")["customerSource"], source)
+        self.assertNotIn("sourceTag", server.clean_customers([dict(row, sourceTag="x")], "6902"))
+
     def test_no_main_customers_means_no_revenue_request(self):
         api = FakeApi(customers=False)
         bundle = server.fetch_bundle(["7203", "7261"], "k", api)
@@ -196,12 +203,16 @@ class FetchBundleTests(unittest.TestCase):
                 server.parse_body(body)
 
     def test_saved_demo_uses_only_whitelisted_fields(self):
-        demo = json.loads((TEMPLATE / "demo.json").read_text(encoding="utf-8"))
+        for name in server.DEMOS.values():
+            with self.subTest(name):
+                self.check_saved(json.loads((TEMPLATE / name).read_text(encoding="utf-8")))
+
+    def check_saved(self, demo):
         allowed = set(server.DOC + server.PROFILE + server.TEXT + server.MAJOR + server.CATEGORY + server.LARGE + server.CROSS_HOLDER
                       + server.CROSS_SUMMARY + server.CROSS_HOLDING + server.FEE_PARTS + server.FEE_SCOPE + server.CUSTOMER + server.REVENUE)
         allowed |= {"placeholder", "retrievedAt", "companies", "profile", "texts", "content", "truncated", "docId", "sourceUrl", "region",
                     "majorShareholders", "shareholderCategories", "categories", "largeHolders", "crossShareholdings", "holders", "summary",
-                    "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue"} | set(server.SECTIONS)
+                    "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource"} | set(server.SECTIONS)
         self.assertLessEqual(set(keys(demo)), allowed)
         self.assertIs(demo["placeholder"], False)
         build_demo.check(demo)  # the same last-line check build_demo.py runs before writing
@@ -225,6 +236,14 @@ class BuildDemoTests(unittest.TestCase):
             self.assertEqual(out.read_text(encoding="utf-8"), "previous")
         self.assertEqual(build_demo.DEFAULT_SYMBOLS, ("7203", "6902", "7267", "7261", "7217"))
 
+    def test_named_sets_match_the_files_the_server_opens(self):
+        self.assertEqual(set(build_demo.SETS), set(server.DEMOS))
+        for name, (codes, file) in build_demo.SETS.items():
+            self.assertEqual(file, server.DEMOS[name])
+            self.assertTrue(server.MIN_COMPANIES <= len(codes) <= server.MAX_COMPANIES, name)
+            saved = json.loads((TEMPLATE / file).read_text(encoding="utf-8"))
+            self.assertEqual(tuple(c["symbol"] for c in saved["companies"]), codes, name)
+
     def test_last_line_check_refuses_banned_fields_and_links(self):
         for bad in [{"a": {"carryingAmount": 1}}, {"price": 1}, [{"archiveUrl": "x"}], {"u": "https://www.release.tdnet.info/x.pdf"}]:
             with self.assertRaises(ValueError):
@@ -233,9 +252,9 @@ class BuildDemoTests(unittest.TestCase):
 
 
 class ServerTests(unittest.TestCase):
-    def start(self, key="test-private-key", requester=None):
+    def start(self, key="test-private-key", requester=None, demo_set="automakers"):
         self.api = requester or FakeApi()
-        self.server = server.make_server(0, key, self.api)
+        self.server = server.make_server(0, key, self.api, demo_set)
         self.thread = threading.Thread(target=self.server.serve_forever, daemon=True)
         self.thread.start()
         self.base = "http://127.0.0.1:%d" % self.server.server_port
@@ -279,6 +298,16 @@ class ServerTests(unittest.TestCase):
             self.assertEqual(self.request(path)[0], 404, path)
         status, config, _ = self.request("/api/config")
         self.assertEqual((config["minCompanies"], config["maxCompanies"], config["liveEnabled"]), (2, 5, True))
+        self.assertEqual(self.api.calls, [])
+
+    def test_demo_set_selects_the_saved_file(self):
+        self.tearDown()
+        self.start(demo_set="suppliers")
+        saved = json.loads((TEMPLATE / "demo-suppliers.json").read_text(encoding="utf-8"))
+        self.assertEqual(self.request("/api/demo")[1], saved)
+        self.assertEqual(self.request("/demo-suppliers.json")[0], 404)
+        with self.assertRaises(KeyError):
+            server.make_server(0, "", FakeApi(), "../demo")
         self.assertEqual(self.api.calls, [])
 
     def test_live_fetch_keeps_the_key_server_side(self):

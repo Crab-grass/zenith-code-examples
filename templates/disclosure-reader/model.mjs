@@ -457,7 +457,7 @@ export function auditRows(report) {
 // Each customer as a share of annual revenue for the same fiscal year. "prior" means the year
 // 12 months before the report's fiscal period; if that year's revenue is not available, no share.
 export function customerRows(report, revenueRows) {
-  if (!report || !(report.customers ?? []).length) return { status: "none", rows: [], fiscalPeriod: report?.fiscalPeriod ?? null };
+  if (!report || !(report.customers ?? []).length) return { status: "none", rows: [], fiscalPeriod: report?.fiscalPeriod ?? null, source: null };
   const target = { current: report.fiscalPeriod, prior: addMonths(report.fiscalPeriod, -12) };
   const rows = report.customers.map((c) => {
     const period = target[c.period] ?? null;
@@ -470,7 +470,10 @@ export function customerRows(report, revenueRows) {
     if (share !== null && share > 1) return { ...c, revenue: null, share: null, revenuePeriod: period, unitMismatch: true };
     return { ...c, revenue: amount, share, revenuePeriod: revenue !== null ? period : null, unitMismatch: false };
   });
-  return { status: "ok", rows, fiscalPeriod: report.fiscalPeriod };
+  // notes: the segment notes (often a customer together with its group companies);
+  // sales: the "sales by main customer" table (each company on its own). Compare like with like.
+  const source = report.customerSource === "notes" || report.customerSource === "sales" ? report.customerSource : null;
+  return { status: "ok", rows, fiscalPeriod: report.fiscalPeriod, source };
 }
 
 // ---------- Formatting ---------------------------------------------------------------------

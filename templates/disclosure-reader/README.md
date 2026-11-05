@@ -25,6 +25,12 @@ Open **http://127.0.0.1:8790** and stop with **Ctrl+C**. Use `--port 8791` if th
 
 The snapshot is **real ZENITH Code data saved on the date shown on screen** (Toyota, Denso, Honda, Mazda and TEIN). It is not the latest filing. The snapshot makes no API calls and needs no account.
 
+A second snapshot covers five auto-parts makers (Denso, Aisin, Toyota Boshoku, Musashi Seimitsu and F.C.C.). Start with it to compare their main customers (the carmakers they sell to):
+
+```sh
+python3 templates/disclosure-reader/server.py --demo suppliers
+```
+
 - Choose 2–5 companies at the top and switch between the four views on the left.
 - Switch JA / EN and light / dark (the default follows your OS).
 - Link to a selection and view with `?companies=7203,7261#cross`.
@@ -86,11 +92,12 @@ The local server forwards only the fields the views need (the whitelists in `ser
 
 ## Refresh the snapshot
 
-`demo.json` is the exact output of `fetch_bundle` in `server.py`, the same function live mode uses.
+`demo.json` and `demo-suppliers.json` are the exact output of `fetch_bundle` in `server.py`, the same function live mode uses.
 
 ```sh
-python3 templates/disclosure-reader/build_demo.py              # 7203 6902 7267 7261 7217
-python3 templates/disclosure-reader/build_demo.py 6758 6752    # your own selection
+python3 templates/disclosure-reader/build_demo.py                   # demo.json (7203 6902 7267 7261 7217)
+python3 templates/disclosure-reader/build_demo.py --set suppliers   # demo-suppliers.json (6902 7259 3116 7220 7296)
+python3 templates/disclosure-reader/build_demo.py 6758 6752         # your own selection into demo.json
 ```
 
 Provide the key with `ZENITH_API_KEY` or the hidden prompt, never on the command line. The file is replaced only when every request succeeds, after a last check that no prices, carrying amounts or TDnet links are included.
@@ -105,7 +112,7 @@ Provide the key with `ZENITH_API_KEY` or the hidden prompt, never on the command
 | `app.mjs` | The four views (the `VIEWS` list) and company selection |
 | `i18n.mjs` | Japanese and English copy |
 | `index.html` / `style.css` | Layout, light and dark themes |
-| `demo.json` | Saved snapshot for offline use |
+| `demo.json` / `demo-suppliers.json` | Saved snapshots for offline use (carmakers / auto parts; pick with `--demo`) |
 
 To read another section, add it to `SECTIONS` in `server.py` and `model.mjs` and add `sec_<name>` to `i18n.mjs` (one more request per company).
 
