@@ -64,6 +64,16 @@ function company(raw) {
   if (audit) list(audit.fees, 4);
   const customers = single(raw.mainCustomers, symbol);
   if (customers) list(customers.customers, 60);
+  const treasury = (value) => {
+    const report = single(value, symbol);
+    if (report) {
+      if (report.votingRightsTable !== null && report.votingRightsTable !== undefined && !isObject(report.votingRightsTable)) fail();
+      list(report.votingRightsTable?.holders, 60);
+      list(report.issuedShares, 10);
+      if (report.consolidated !== null && report.consolidated !== undefined && !isObject(report.consolidated)) fail();
+    }
+    return report;
+  };
   return {
     symbol, profile, texts,
     majorShareholders: list(raw.majorShareholders, 40).map((row) => sameCompany(row, symbol)),
@@ -73,6 +83,8 @@ function company(raw) {
     auditFees: audit,
     mainCustomers: customers,
     revenue: list(raw.revenue, 5).map((row) => sameCompany(row, symbol)),
+    treasuryShares: treasury(raw.treasuryShares),
+    priorTreasuryShares: treasury(raw.priorTreasuryShares),
   };
 }
 export function normalizeBundle(result, symbols) {
@@ -490,6 +502,78 @@ export function unnamedCustomer(notes) {
   const reason = list.map((n) => n.replace(/^顧客名の記載なし|^\d+\s*グループの合計/, "").trim()).filter(Boolean)
     .map((n) => (n.startsWith("（") ? n : `（${n}）`)).join("");
   return { kind, reason };
+}
+
+// ---------- 5. Treasury shares and voting rights ------------------------------------------------
+// The "treasury shares, etc." table of the voting-rights section lists shares without votes: the
+// company's own shares (own) and its shares held by companies in which it holds a quarter or more of
+// the votes (mutual). The table is at the fiscal year end. The earnings-release count is
+// consolidated and has another scope, so it is shown next to the table, never mixed into it, and
+// nothing is subtracted from issued shares here.
+const withoutNote = (name) => String(name ?? "").normalize("NFKC").replace(/\((?:注|※)[^)]*\).*$/, "").trim();
+export function isTreasuryOwnRow(name, profile) {
+  const text = withoutNote(name);
+  if (/^(当社|自己|自社)/.test(text)) return true;
+  const own = companyKey(profile?.nameJa);
+  return Boolean(own) && companyKey(text) === own;
+}
+const heldShares = (row) => {
+  if (finite(row?.total) !== null) return row.total;
+  const parts = [row?.ownName, row?.othersNames].map(finite).filter((v) => v !== null);
+  return parts.length ? parts.reduce((s, v) => s + v, 0) : null;
+};
+const sumShares = (rows) => {
+  const known = rows.map((r) => r.shares).filter((v) => v !== null);
+  return known.length ? known.reduce((s, v) => s + v, 0) : null;
+};
+const minus = (a, b) => (finite(a) !== null && finite(b) !== null ? a - b : null);
+export function treasuryRows(report, profile) {
+  if (!report) return null;
+  const issuedRows = report.issuedShares ?? [];
+  // Issued shares of all classes (no class member), as the table's ratio uses them.
+  const issued = issuedRows.find((r) => Array.isArray(r.members) && r.members.length === 0) ?? (issuedRows.length === 1 ? issuedRows[0] : null);
+  const issuedYearEnd = finite(issued?.atFiscalYearEnd);
+  const issuedFiling = finite(issued?.atFilingDate);
+  // Share of issued shares at the year end; none when the count would exceed them (a company formed after the year end).
+  const share = (shares) => (shares !== null && issuedYearEnd > 0 && shares <= issuedYearEnd ? shares / issuedYearEnd : null);
+  const table = report.votingRightsTable ?? {};
+  const holders = (table.holders ?? []).map((h) => {
+    const shares = heldShares(h);
+    return { row: h.row ?? null, name: h.name ?? null, own: isTreasuryOwnRow(h.name, profile), ownName: finite(h.ownName),
+      othersNames: finite(h.othersNames), shares, ratio: share(shares), apiRatio: finite(h.ratio) };
+  });
+  const listed = holders.length > 0 || Boolean(table.total);
+  const ownRows = holders.filter((h) => h.own);
+  const mutualRows = holders.filter((h) => !h.own);
+  const own = ownRows.length ? sumShares(ownRows) : listed ? 0 : null;
+  const mutual = mutualRows.length ? sumShares(mutualRows) : listed ? 0 : null;
+  const tableTotal = heldShares(table.total);
+  const rowsSum = sumShares(holders);
+  const total = tableTotal ?? rowsSum;
+  const release = report.consolidated && report.consolidated.fiscalPeriod === report.fiscalPeriod ? report.consolidated : null;
+  const releaseTreasury = finite(release?.treasuryShares);
+  const releaseIssued = finite(release?.issuedShares);
+  return {
+    fiscalPeriod: report.fiscalPeriod ?? null, docId: report.docId ?? null, submittedAt: report.submittedAt ?? null, sourceUrl: edinetUrl(report.sourceUrl),
+    issuedYearEnd, issuedFiling, issuedAfterYearEnd: minus(issuedFiling, issuedYearEnd),
+    holders, ownRows, mutualRows, ownFound: !listed || ownRows.length > 0,
+    own, ownRatio: share(own), mutual, mutualRatio: share(mutual),
+    total, ratio: share(total), apiRatio: finite(table.total?.ratio),
+    // The filing's total row against the sum of its holder rows (null when either is missing).
+    rowsSum, sumMatches: tableTotal !== null && rowsSum !== null ? tableTotal === rowsSum : null,
+    // Earnings release (consolidated, same fiscal year): its treasury count minus the table's own shares.
+    releaseTreasury, releaseIssued, releaseMinusOwn: minus(releaseTreasury, own),
+    releaseIssuedMatches: releaseIssued !== null && issuedYearEnd !== null ? releaseIssued === issuedYearEnd : null,
+  };
+}
+
+// The same table one year earlier: changes in own, mutual and total shares and in issued shares.
+export function treasuryChange(current, prior) {
+  if (!current || !prior) return null;
+  return {
+    priorPeriod: prior.fiscalPeriod, ownPrior: prior.own, own: minus(current.own, prior.own), mutual: minus(current.mutual, prior.mutual),
+    total: minus(current.total, prior.total), issuedPrior: prior.issuedYearEnd, issued: minus(current.issuedYearEnd, prior.issuedYearEnd),
+  };
 }
 
 // ---------- Formatting ---------------------------------------------------------------------

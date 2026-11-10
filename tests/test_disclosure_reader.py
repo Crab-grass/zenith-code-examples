@@ -36,8 +36,8 @@ def doc(symbol, **extra):
 class FakeApi:
     """Answers like the API, including fields the server must strip, and 404s for missing disclosures."""
 
-    def __init__(self, fail_on=None, customers=True, missing=("capex",)):
-        self.calls, self.fail_on, self.customers, self.missing = [], fail_on, customers, missing
+    def __init__(self, fail_on=None, customers=True, missing=("capex",), treasury=True):
+        self.calls, self.fail_on, self.customers, self.missing, self.treasury = [], fail_on, customers, missing, treasury
 
     def __call__(self, path, params, key):
         self.calls.append((path, dict(params), key))
@@ -88,6 +88,19 @@ class FakeApi:
         if path == "/income-statement":
             return [{"symbol": s, "fiscalPeriod": "2026-03", "period": "FY", "accountingStandard": "jgaap", "revenue": 5594277000,
                      "costOfRevenue": 1, "eps": 496.56, "operatingIncome": 9, "provenance": {"archiveUrl": ARCHIVE}}]
+        if path == "/treasury-shares":
+            if not self.treasury:
+                raise server.ZenithError("HTTP 404. Check the symbol and available coverage.")
+            period = params.get("fiscalPeriod", "2026-03")
+            own = 9006000 if period == "2026-03" else 9023500
+            return [doc(s, fiscalPeriod=period, votingRightsTable={
+                "total": {"ownName": own + 1000, "othersNames": None, "total": own + 1000, "ratio": 0.048, "extra": 1},
+                "holders": [{"row": 1, "name": "テスト" + s, "nameEn": "Test", "address": "愛知県刈谷市豊田町１丁目１番地", "addressEn": "x",
+                             "ownName": own, "othersNames": None, "total": own, "ratio": 0.048, "machineTranslatedFields": ["addressEn"]},
+                            {"row": 2, "name": "相互保有の会社", "address": "愛知県刈谷市", "ownName": 1000, "othersNames": None, "total": 1000, "ratio": 0}]},
+                issuedShares=[{"members": [], "atFiscalYearEnd": 187665738, "atFilingDate": 187665738},
+                              {"members": ["jpcrp_cor_OrdinaryShare"], "atFiscalYearEnd": 187665738, "atFilingDate": 187665738}],
+                consolidated={"fiscalPeriod": period, "source": "tdnet-summary", "issuedShares": 187665738, "treasuryShares": own + 39})]
         raise AssertionError("unexpected path " + path)
 
 
@@ -111,7 +124,9 @@ class FetchBundleTests(unittest.TestCase):
             ("/major-shareholders", {"symbol": "7203"}), ("/shareholder-categories", {"symbol": "7203"}), ("/large-holders", {"symbol": "7203"}),
             ("/cross-shareholdings", {"symbol": "7203"}), ("/audit-fees", {"symbol": "7203"}), ("/main-customers", {"symbol": "7203"}),
             ("/income-statement", {"symbol": "7203", "period": "annual", "limit": 3})])
-        self.assertEqual(len(api.calls), 26)
+        self.assertEqual([(p, q) for p, q, _ in api.calls[13:15]], [
+            ("/treasury-shares", {"symbol": "7203"}), ("/treasury-shares", {"symbol": "7203", "fiscalPeriod": "2025-03"})])
+        self.assertEqual(len(api.calls), 30)
         self.assertEqual([c["symbol"] for c in bundle["companies"]], ["7203", "7261"])
 
     def test_main_customer_source_is_reduced_to_notes_or_sales(self):
@@ -132,12 +147,33 @@ class FetchBundleTests(unittest.TestCase):
     def test_no_main_customers_means_no_revenue_request(self):
         api = FakeApi(customers=False)
         bundle = server.fetch_bundle(["7203", "7261"], "k", api)
-        self.assertEqual(len(api.calls), 24)
+        self.assertEqual(len(api.calls), 28)
         self.assertNotIn("/income-statement", [c[0] for c in api.calls])
         company = bundle["companies"][0]
         self.assertIsNone(company["mainCustomers"])  # 404 = no customer at 10% or more
         self.assertEqual(company["revenue"], [])
         self.assertIsNone(company["texts"]["capex"])  # 404 = the section does not exist
+
+    def test_treasury_shares_keep_counts_and_drop_addresses(self):
+        company = server.fetch_bundle(["7203", "7261"], "k", FakeApi())["companies"][0]
+        treasury, prior = company["treasuryShares"], company["priorTreasuryShares"]
+        self.assertEqual(treasury["votingRightsTable"]["holders"][0],
+                         {"row": 1, "name": "テスト7203", "ownName": 9006000, "othersNames": None, "total": 9006000, "ratio": 0.048})
+        self.assertEqual(treasury["votingRightsTable"]["total"], {"ownName": 9007000, "othersNames": None, "total": 9007000, "ratio": 0.048})
+        self.assertEqual(treasury["issuedShares"][1], {"atFiscalYearEnd": 187665738, "atFilingDate": 187665738, "members": ["jpcrp_cor_OrdinaryShare"]})
+        self.assertEqual(treasury["consolidated"], {"fiscalPeriod": "2026-03", "issuedShares": 187665738, "treasuryShares": 9006039})
+        self.assertEqual((prior["fiscalPeriod"], prior["votingRightsTable"]["holders"][0]["total"]), ("2025-03", 9023500))
+        text = json.dumps([treasury, prior], ensure_ascii=False)
+        for needle in ("刈谷市", "tdnet", "nameEn", "addressEn", "machineTranslatedFields", "extra", "\"source\""):
+            self.assertNotIn(needle, text)
+        # A report for another fiscal period is not used as the prior year; a 404 means no table and no second request.
+        self.assertIsNone(server.clean_treasury([doc("7203", fiscalPeriod="2024-03")], "7203", "2025-03"))
+        self.assertEqual(server.previous_year("2026-03"), "2025-03")
+        self.assertIsNone(server.previous_year("2026-3"))
+        api = FakeApi(treasury=False)
+        none = server.fetch_bundle(["7203", "7261"], "k", api)["companies"][0]
+        self.assertEqual((none["treasuryShares"], none["priorTreasuryShares"]), (None, None))
+        self.assertEqual(len(api.calls), 28)
 
     def test_whitelist_drops_prices_carrying_amounts_and_tdnet_links(self):
         bundle = server.fetch_bundle(["7203", "7261"], "k", FakeApi())
@@ -220,7 +256,9 @@ class FetchBundleTests(unittest.TestCase):
                       + server.CROSS_SUMMARY + server.CROSS_HOLDING + server.FEE_PARTS + server.FEE_SCOPE + server.CUSTOMER + server.REVENUE)
         allowed |= {"placeholder", "retrievedAt", "companies", "profile", "texts", "content", "truncated", "docId", "sourceUrl", "region",
                     "majorShareholders", "shareholderCategories", "categories", "largeHolders", "crossShareholdings", "holders", "summary",
-                    "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource", "notes"} | set(server.SECTIONS)
+                    "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource", "notes",
+                    "treasuryShares", "priorTreasuryShares", "votingRightsTable", "total", "issuedShares", "members", "consolidated"} | set(server.SECTIONS)
+        allowed |= set(server.TREASURY_HOLDER + server.ISSUED + server.RELEASE)
         self.assertLessEqual(set(keys(demo)), allowed)
         self.assertIs(demo["placeholder"], False)
         build_demo.check(demo)  # the same last-line check build_demo.py runs before writing
@@ -235,7 +273,7 @@ class BuildDemoTests(unittest.TestCase):
             saved = json.loads(out.read_text(encoding="utf-8"))
             self.assertIs(saved["placeholder"], False)
             self.assertEqual([c["symbol"] for c in saved["companies"]], ["7203", "7261"])
-            self.assertEqual(len(api.calls), 26)
+            self.assertEqual(len(api.calls), 30)
             self.assertEqual({c[2] for c in api.calls}, {"k"})
             self.assertNotIn('"k"', out.read_text(encoding="utf-8"))
             out.write_text("previous", encoding="utf-8")
@@ -322,7 +360,7 @@ class ServerTests(unittest.TestCase):
         status, data, _ = self.request("/api/compare", {"symbols": ["7203", "7261"]}, self.headers())
         self.assertEqual(status, 200)
         self.assertEqual(data["mode"], "live")
-        self.assertEqual(len(self.api.calls), 26)
+        self.assertEqual(len(self.api.calls), 30)
         self.assertEqual({c[2] for c in self.api.calls}, {"test-private-key"})
         self.assertNotIn("test-private-key", json.dumps(data))
         for field in PRICE_FIELDS + ("archiveUrl", "carryingAmount"):
