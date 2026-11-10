@@ -103,6 +103,7 @@ const VIEWS = [
   { id: "holders", render: renderHolders },
   { id: "cross", render: renderCross },
   { id: "audit", render: renderAudit },
+  { id: "treasury", render: renderTreasury },
 ];
 
 // ---------- 1. Text blocks ----------
@@ -482,6 +483,74 @@ function renderAudit(host, data) {
   host.append(panel(t("sources"), t("sourcesNote"), sourcesTable(companies.map((c) => ({ company: c, report: c.auditFees ?? c.mainCustomers })))));
 }
 
+// ---------- 5. Treasury shares and voting rights ----------
+function renderTreasury(host, data) {
+  const companies = data.companies;
+  const rows = companies.map((c) => {
+    const current = M.treasuryRows(c.treasuryShares, c.profile);
+    return { company: c, t: current, change: M.treasuryChange(current, M.treasuryRows(c.priorTreasuryShares, c.profile)) };
+  });
+  const n = (v) => M.number(v, state.lang);
+  const ratio = (v) => pct(v, 2);
+  const nameCell = (r) => companyTitle(r.company, r.t ? fy(r.t.fiscalPeriod) : null);
+  const checks = (r) => {
+    const cell = node("span", undefined, { class: "holder" });
+    if (!r.t) cell.append(node("span", t("noTreasury"), { class: "muted small" }));
+    else {
+      if (r.t.sumMatches === false) cell.append(node("span", t("treasurySumMismatch"), { class: "warn small" }));
+      if (!r.t.ownFound) cell.append(node("span", t("treasuryOwnNotFound"), { class: "warn small" }));
+      if (r.t.sumMatches !== false && r.t.ownFound) cell.append(node("span", r.t.sumMatches ? t("treasurySumMatches") : "—", { class: "muted small" }));
+    }
+    return cell;
+  };
+  host.append(notes(["treasuryRead1", "treasuryRead2", "treasuryRead3"]));
+  host.append(panel(t("treasuryTitle"), t("treasuryNote"), table([
+    { label: "", render: nameCell },
+    { label: t("issuedYearEnd"), num: true, render: (r) => n(r.t?.issuedYearEnd) },
+    { label: t("ownShares"), num: true, render: (r) => n(r.t?.own) },
+    { label: t("ownRatio"), num: true, render: (r) => ratio(r.t?.ownRatio) },
+    { label: t("mutualShares"), num: true, render: (r) => n(r.t?.mutual) },
+    { label: t("mutualRatio"), num: true, render: (r) => ratio(r.t?.mutualRatio) },
+    { label: t("treasuryTotal"), num: true, cls: "strong", render: (r) => n(r.t?.total) },
+    { label: t("treasuryRatio"), num: true, cls: "strong", render: (r) => ratio(r.t?.ratio) },
+    { label: t("filedRatio"), num: true, render: (r) => ratio(r.t?.apiRatio) },
+    { label: t("treasuryCheck"), render: checks },
+  ], rows)));
+
+  // Holder rows other than the company itself (mutual holdings), one table for all companies.
+  const mutualRows = rows.flatMap((r) => (r.t?.mutualRows.length ? r.t.mutualRows.map((h, i) => ({ ...h, company: r.company, first: i === 0 }))
+    : [{ company: r.company, first: true, none: true }]));
+  host.append(panel(t("mutualTitle"), t("mutualNote"), table([
+    { label: "", render: (r) => (r.first ? companyTitle(r.company) : "") },
+    { label: t("holder"), cls: "name", render: (r) => (r.none ? node("span", t("mutualNone"), { class: "muted" }) : r.name ?? "—") },
+    { label: t("sharesHeld"), num: true, render: (r) => (r.none ? "" : n(r.shares)) },
+    { label: t("ratio"), num: true, render: (r) => (r.none ? "" : ratio(r.ratio)) },
+  ], mutualRows, { compact: true, rowClass: (r) => (r.first ? "group-start" : null) })));
+
+  host.append(panel(t("treasuryChangeTitle"), t("treasuryChangeNote"), table([
+    { label: "", render: (r) => companyTitle(r.company, r.change ? fill("sincePeriod", { p: r.change.priorPeriod }) : null) },
+    { label: t("ownPrior"), num: true, render: (r) => n(r.change?.ownPrior) },
+    { label: t("ownShares"), num: true, render: (r) => n(r.t?.own) },
+    { label: t("ownChange"), num: true, cls: "strong", render: (r) => M.signed(r.change?.own, state.lang) },
+    { label: t("mutualChange"), num: true, render: (r) => M.signed(r.change?.mutual, state.lang) },
+    { label: t("issuedPrior"), num: true, render: (r) => n(r.change?.issuedPrior) },
+    { label: t("issuedYearEnd"), num: true, render: (r) => n(r.t?.issuedYearEnd) },
+    { label: t("issuedChange"), num: true, render: (r) => M.signed(r.change?.issued, state.lang) },
+  ], rows)));
+
+  host.append(panel(t("releaseTitle"), t("releaseNote"), table([
+    { label: "", render: nameCell },
+    { label: t("releaseTreasury"), num: true, render: (r) => n(r.t?.releaseTreasury) },
+    { label: t("ownShares"), num: true, render: (r) => n(r.t?.own) },
+    { label: t("releaseMinusOwn"), num: true, cls: "strong", render: (r) => M.signed(r.t?.releaseMinusOwn, state.lang) },
+    { label: t("releaseIssued"), num: true, render: (r) => n(r.t?.releaseIssued) },
+    { label: t("issuedYearEnd"), num: true, render: (r) => n(r.t?.issuedYearEnd) },
+    { label: t("issuedFiling"), num: true, render: (r) => n(r.t?.issuedFiling) },
+    { label: t("issuedAfterYearEnd"), num: true, render: (r) => M.signed(r.t?.issuedAfterYearEnd, state.lang) },
+  ], rows)));
+  host.append(panel(t("sources"), t("sourcesNote"), sourcesTable(companies.map((c) => ({ company: c, report: c.treasuryShares })))));
+}
+
 // ---------- Frame: navigation, picker, status ----------
 function renderNav() {
   const nav = $("viewNav");
@@ -546,7 +615,7 @@ function renderPicker() {
   $("loadButton").textContent = state.busy ? t("loading") : t("fetch");
   $("loadButton").disabled = state.busy || !state.config?.liveEnabled;
   $("loadButton").setAttribute("aria-busy", String(state.busy));
-  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 13 });
+  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 15 });
   $("setup").hidden = state.mode !== "live" || Boolean(state.config?.liveEnabled);
   $("demoMode").setAttribute("aria-pressed", String(state.mode === "demo"));
   $("liveMode").setAttribute("aria-pressed", String(state.mode === "live"));

@@ -239,6 +239,46 @@ test("audit fees: totals fall back to the reporting company and the non-audit sh
   assert.equal(M.auditRows(doc("1", { fees: [{ period: "current", audit: none, nonAudit: none }] }))[0].nonAuditRatio, null);
 });
 
+test("treasury shares: own and mutual rows, ratios to issued shares, the prior year and the earnings release", () => {
+  const values = (name, total, ratio, row) => ({ row, name, ownName: total, othersNames: null, total, ratio });
+  const report = (period, own, issued, release, extra = {}) => doc("6902", { fiscalPeriod: period, votingRightsTable: {
+    total: { ownName: own + 361600, othersNames: null, total: own + 361600, ratio: 0.0753 },
+    holders: [values("株式会社デンソー", own, 0.0752, 1), values("伊藤精工株式会社", 333100, 0.0001, 2), values("株式会社デンソーパーラー", 28500, 0, 3)] },
+    issuedShares: [{ members: [], atFiscalYearEnd: issued, atFilingDate: issued }, { members: ["jpcrp_cor_OrdinaryShare"], atFiscalYearEnd: issued, atFilingDate: issued }],
+    consolidated: { fiscalPeriod: period, issuedShares: issued, treasuryShares: release }, ...extra });
+  const profile = { nameJa: "デンソー" };
+  const current = M.treasuryRows(report("2026-03", 218934200, 2910979691, 219039381), profile);
+  assert.deepEqual([current.own, current.mutual, current.total, current.rowsSum, current.sumMatches], [218934200, 361600, 219295800, 219295800, true]);
+  assert.deepEqual(current.mutualRows.map((h) => h.name), ["伊藤精工株式会社", "株式会社デンソーパーラー"]);
+  assert.equal(M.percent(current.ownRatio, "en", 2), "7.52%");
+  assert.equal(M.percent(current.ratio, "en", 2), "7.53%");
+  assert.equal(current.apiRatio, 0.0753);
+  assert.equal(current.releaseMinusOwn, 105181);
+  assert.equal(current.releaseIssuedMatches, true);
+  const change = M.treasuryChange(current, M.treasuryRows(report("2025-03", 93558800, 2910979691, 93663914), profile));
+  assert.deepEqual([change.priorPeriod, change.ownPrior, change.own, change.mutual, change.issued], ["2025-03", 93558800, 125375400, 0, 0]);
+
+  // Issued shares cancelled after the year end; the release of another year is not compared.
+  const cancelled = M.treasuryRows(doc("7259", { votingRightsTable: { total: values(null, 34451000, 0.0454), holders: [values("株式会社アイシン", 34451000, 0.0454, 1)] },
+    issuedShares: [{ members: [], atFiscalYearEnd: 759023902, atFilingDate: 726023902 }], consolidated: { fiscalPeriod: "2025-03", issuedShares: 1, treasuryShares: 1 } }), { nameJa: "アイシン" });
+  assert.deepEqual([cancelled.mutual, cancelled.issuedAfterYearEnd, cancelled.releaseTreasury, cancelled.releaseMinusOwn], [0, -33000000, null, null]);
+
+  // Own rows written with notes or as 当社; a total row that differs from its rows; a count above issued shares.
+  assert.ok(M.isTreasuryOwnRow("東亞合成㈱ (注)１、２", { nameJa: "東亞合成株式会社" }));
+  assert.ok(M.isTreasuryOwnRow("当社 (注) １", { nameJa: "旭化成" }));
+  assert.ok(!M.isTreasuryOwnRow("旭有機材㈱ (注) ２", { nameJa: "旭化成" }));
+  const odd = M.treasuryRows(doc("2795", { votingRightsTable: { total: values(null, 380800, 0.0635), holders: [values("日本プリメックス株式会社", 350800, 0.0635, 1)] },
+    issuedShares: [{ members: [], atFiscalYearEnd: 5523592, atFilingDate: 5523592 }] }), { nameJa: "日本プリメックス" });
+  assert.deepEqual([odd.total, odd.rowsSum, odd.sumMatches], [380800, 350800, false]);
+  const unknown = M.treasuryRows(doc("543A", { votingRightsTable: { total: values(null, 186900, 0.0001), holders: [values("徳島日野自動車株式会社", 30500, 0, 1)] },
+    issuedShares: [{ members: [], atFiscalYearEnd: 1, atFilingDate: 2756582628 }] }), { nameJa: "ＡＲＣＨＩＯＮ" });
+  assert.deepEqual([unknown.ownFound, unknown.own, unknown.ratio], [false, 0, null]);
+  const empty = M.treasuryRows(doc("8697", { votingRightsTable: { total: null, holders: [] }, issuedShares: [] }), null);
+  assert.deepEqual([empty.own, empty.mutual, empty.total, empty.ownFound], [null, null, null, true]);
+  assert.equal(M.treasuryRows(null), null);
+  assert.equal(M.treasuryChange(current, null), null);
+});
+
 test("main customers: share of same-year revenue only, unit mismatches hidden, 404 explained", () => {
   const revenue = [{ symbol: "7217", fiscalPeriod: "2026-03", period: "FY", revenue: 5594277000 }, { symbol: "7217", fiscalPeriod: "2024-03", period: "FY", revenue: 4865893000 }];
   const report = doc("7217", { customers: [
@@ -284,6 +324,9 @@ test("normalization rejects other companies' rows and unknown sections", () => {
     (d) => (d.companies[0].texts.risks = doc("7203", { content: 1 })),
     (d) => (d.companies[0].majorShareholders = [{ symbol: "9999" }]),
     (d) => (d.companies[1].crossShareholdings = doc("7261", { holdings: "x" })),
+    (d) => (d.companies[1].treasuryShares = doc("9999", { votingRightsTable: { holders: [] } })),
+    (d) => (d.companies[1].priorTreasuryShares = doc("7261", { votingRightsTable: { holders: "x" } })),
+    (d) => (d.companies[1].treasuryShares = doc("7261", { votingRightsTable: [] })),
     (d) => (d.companies[1].symbol = "7203"),
     (d) => (d.companies = []),
     (d) => (d.companies[0].symbol = "../x"),
@@ -338,6 +381,11 @@ test("saved demo.json normalizes and carries no prices, carrying amounts or TDne
   assert.ok(data.companies.every((c) => !c.texts.risks || M.sectionOutline(c.texts.risks, "").headings.length > 0));
   assert.ok(M.crossLinks(data.companies).mutual.length >= 1);
   assert.ok(data.companies.some((c) => M.customerRows(c.mainCustomers, c.revenue).rows.some((r) => r.share !== null)));
+  // Treasury shares: every company's own row is found and the table's rows add up to its total.
+  for (const c of data.companies) {
+    const treasury = M.treasuryRows(c.treasuryShares, c.profile);
+    assert.ok(treasury && treasury.ownFound && treasury.sumMatches !== false, c.symbol);
+  }
 });
 
 test("every interface text exists in both languages and avoids restricted wording", () => {
@@ -347,7 +395,7 @@ test("every interface text exists in both languages and avoids restricted wordin
   // Prefix-built keys ("sec_" + tag) are added explicitly below.
   const used = new Set([...app.matchAll(/\b(?:t|fill|notice)\("([A-Za-z_]+)"/g)].map((m) => m[1]).filter((k) => !k.endsWith("_")));
   for (const m of html.matchAll(/data-i18n(?:-label)?="([^"]+)"/g)) used.add(m[1]);
-  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit"]) used.add(prefix + id);
+  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury"]) used.add(prefix + id);
   for (const tag of M.SECTIONS) used.add("sec_" + tag);
   for (const key of M.CATEGORY_ORDER) used.add("cat_" + key);
   for (const key of ["holder_largest", "holder_second-largest", "upstream_failed", "invalid_response", "invalid_request", "busy", "local_only", "setup_required"]) used.add(key);

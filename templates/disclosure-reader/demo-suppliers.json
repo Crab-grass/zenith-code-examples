@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-05T07:55:18Z",
+ "retrievedAt": "2026-11-10T05:58:05Z",
  "companies": [
   {
    "symbol": "6902",
@@ -653,13 +653,15 @@
       "period": "prior",
       "customer": "トヨタグループ",
       "revenue": 3903121000000,
-      "segment": null
+      "segment": "日本、北米、欧州、アジア、その他",
+      "notes": []
      },
      {
       "period": "current",
       "customer": "トヨタグループ",
       "revenue": 4134582000000,
-      "segment": null
+      "segment": "日本、北米、欧州、アジア、その他",
+      "notes": []
      }
     ]
    },
@@ -682,7 +684,131 @@
      "period": "FY",
      "revenue": 7144733000000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "6902",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-11T06:36:00Z",
+    "docId": "S100Y9T1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9T1",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 219295800,
+      "othersNames": null,
+      "total": 219295800,
+      "ratio": 0.0753
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社デンソー",
+       "ownName": 218934200,
+       "othersNames": null,
+       "total": 218934200,
+       "ratio": 0.0752
+      },
+      {
+       "row": 2,
+       "name": "伊藤精工株式会社",
+       "ownName": 333100,
+       "othersNames": null,
+       "total": 333100,
+       "ratio": 0.0001
+      },
+      {
+       "row": 3,
+       "name": "株式会社デンソーパーラー",
+       "ownName": 28500,
+       "othersNames": null,
+       "total": 28500,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 2910979691,
+     "treasuryShares": 219039381
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "6902",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-11T06:37:00Z",
+    "docId": "S100VWHL",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWHL",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 93920400,
+      "othersNames": null,
+      "total": 93920400,
+      "ratio": 0.0322
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社デンソー",
+       "ownName": 93558800,
+       "othersNames": null,
+       "total": 93558800,
+       "ratio": 0.0321
+      },
+      {
+       "row": 2,
+       "name": "伊藤精工株式会社",
+       "ownName": 333100,
+       "othersNames": null,
+       "total": 333100,
+       "ratio": 0.0001
+      },
+      {
+       "row": 3,
+       "name": "株式会社デンソーパーラー",
+       "ownName": 28500,
+       "othersNames": null,
+       "total": 28500,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 2910979691,
+     "treasuryShares": 93663914
+    }
+   }
   },
   {
    "symbol": "7259",
@@ -1189,13 +1315,15 @@
       "period": "prior",
       "customer": "トヨタ自動車㈱及びそのグループ会社",
       "revenue": 2870025000000,
-      "segment": null
+      "segment": null,
+      "notes": []
      },
      {
       "period": "current",
       "customer": "トヨタ自動車㈱及びそのグループ会社",
       "revenue": 3112449000000,
-      "segment": null
+      "segment": null,
+      "notes": []
      }
     ]
    },
@@ -1218,7 +1346,99 @@
      "period": "FY",
      "revenue": 4909557000000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "7259",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-12T05:02:00Z",
+    "docId": "S100YAWO",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YAWO",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 34451000,
+      "othersNames": null,
+      "total": 34451000,
+      "ratio": 0.0454
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社アイシン",
+       "ownName": 34451000,
+       "othersNames": null,
+       "total": 34451000,
+       "ratio": 0.0454
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 759023902,
+      "atFilingDate": 726023902,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 759023902,
+      "atFilingDate": 726023902,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 759023902,
+     "treasuryShares": 34451032
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7259",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-16T07:03:00Z",
+    "docId": "S100VXZU",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VXZU",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 51362800,
+      "othersNames": null,
+      "total": 51362800,
+      "ratio": 0.0635
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社アイシン",
+       "ownName": 51362800,
+       "othersNames": null,
+       "total": 51362800,
+       "ratio": 0.0635
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 809023902,
+      "atFilingDate": 759023902,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 809023902,
+      "atFilingDate": 759023902,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 809023902,
+     "treasuryShares": 51362870
+    }
+   }
   },
   {
    "symbol": "3116",
@@ -1669,13 +1889,15 @@
       "period": "prior",
       "customer": "トヨタ自動車（株）グループ",
       "revenue": 1422366000000,
-      "segment": null
+      "segment": "日本、北中南米、中国、アジア、欧州・アフリカ",
+      "notes": []
      },
      {
       "period": "current",
       "customer": "トヨタ自動車（株）グループ",
       "revenue": 1489792000000,
-      "segment": null
+      "segment": "日本、北中南米、中国、アジア、欧州・アフリカ",
+      "notes": []
      }
     ]
    },
@@ -1698,7 +1920,99 @@
      "period": "FY",
      "revenue": 1953625000000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "3116",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-09T01:09:00Z",
+    "docId": "S100Y9AH",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9AH",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 9006000,
+      "othersNames": null,
+      "total": 9006000,
+      "ratio": 0.048
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "トヨタ紡織株式会社",
+       "ownName": 9006000,
+       "othersNames": null,
+       "total": 9006000,
+       "ratio": 0.048
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 187665738,
+      "atFilingDate": 187665738,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 187665738,
+      "atFilingDate": 187665738,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 187665738,
+     "treasuryShares": 9006039
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "3116",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-10T01:40:00Z",
+    "docId": "S100VWKM",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWKM",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 9023500,
+      "othersNames": null,
+      "total": 9023500,
+      "ratio": 0.0481
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "トヨタ紡織株式会社",
+       "ownName": 9023500,
+       "othersNames": null,
+       "total": 9023500,
+       "ratio": 0.0481
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 187665738,
+      "atFilingDate": 187665738,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 187665738,
+      "atFilingDate": 187665738,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 187665738,
+     "treasuryShares": 9023517
+    }
+   }
   },
   {
    "symbol": "7220",
@@ -1987,16 +2301,16 @@
     {
      "symbol": "7220",
      "holderName": "グランサム、マヨ、ヴァン オッテルロー アンド カンパニー エルエルシー(Grantham, Mayo, Van Otterloo & Co. LLC)",
-     "shares": 4143000,
+     "shares": 5007900,
      "unit": "株",
-     "ratio": 0.0632,
-     "submittedAt": "2026-09-24T01:15:00Z",
-     "groupRatio": 0.0632,
+     "ratio": 0.0763,
+     "submittedAt": "2026-11-09T02:17:00Z",
+     "groupRatio": 0.0763,
      "isJointReport": false,
      "reportKind": "change",
-     "obligationDate": "2026-09-14",
-     "docId": "S100Z38R",
-     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Z38R"
+     "obligationDate": "2026-10-30",
+     "docId": "S100ZD23",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100ZD23"
     },
     {
      "symbol": "7220",
@@ -2191,7 +2505,8 @@
       "period": "current",
       "customer": "本田技研工業株式会社",
       "revenue": 21931000000,
-      "segment": "日本"
+      "segment": "日本",
+      "notes": []
      }
     ]
    },
@@ -2214,7 +2529,99 @@
      "period": "FY",
      "revenue": 349917000000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "7220",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-22T06:50:00Z",
+    "docId": "S100YGX6",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGX6",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 40900,
+      "othersNames": null,
+      "total": 40900,
+      "ratio": 0.0006
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "武蔵精密工業株式会社",
+       "ownName": 40900,
+       "othersNames": null,
+       "total": 40900,
+       "ratio": 0.0006
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 65581861,
+      "atFilingDate": 65581861,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 65581861,
+      "atFilingDate": 65581861,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 65581861,
+     "treasuryShares": 40990
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7220",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-20T07:33:00Z",
+    "docId": "S100W0UJ",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W0UJ",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 35800,
+      "othersNames": null,
+      "total": 35800,
+      "ratio": 0.0005
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "武蔵精密工業株式会社",
+       "ownName": 35800,
+       "othersNames": null,
+       "total": 35800,
+       "ratio": 0.0005
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 65556761,
+      "atFilingDate": 65556761,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 65556761,
+      "atFilingDate": 65556761,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 65556761,
+     "treasuryShares": 35825
+    }
+   }
   },
   {
    "symbol": "7296",
@@ -2711,37 +3118,43 @@
       "period": "prior",
       "customer": "本田技研工業㈱及び同グループ",
       "revenue": 94933000000,
-      "segment": "二輪事業、四輪事業"
+      "segment": "二輪事業、四輪事業",
+      "notes": []
      },
      {
       "period": "current",
       "customer": "本田技研工業㈱及び同グループ",
       "revenue": 92676000000,
-      "segment": "二輪事業、四輪事業"
+      "segment": "二輪事業、四輪事業",
+      "notes": []
      },
      {
       "period": "prior",
       "customer": "Ford及び同グループ",
       "revenue": 51659000000,
-      "segment": "四輪事業"
+      "segment": "四輪事業",
+      "notes": []
      },
      {
       "period": "current",
       "customer": "Ford及び同グループ",
       "revenue": 52574000000,
-      "segment": "四輪事業"
+      "segment": "四輪事業",
+      "notes": []
      },
      {
       "period": "prior",
       "customer": "ゼネラルモーターズ",
       "revenue": 23747000000,
-      "segment": "四輪事業"
+      "segment": "四輪事業",
+      "notes": []
      },
      {
       "period": "current",
       "customer": "ゼネラルモーターズ",
       "revenue": 24089000000,
-      "segment": "四輪事業"
+      "segment": "四輪事業",
+      "notes": []
      }
     ]
    },
@@ -2764,7 +3177,99 @@
      "period": "FY",
      "revenue": 240283000000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "7296",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-22T04:03:00Z",
+    "docId": "S100YFKQ",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YFKQ",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 3621800,
+      "othersNames": null,
+      "total": 3621800,
+      "ratio": 0.0696
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社エフ・シー・シー",
+       "ownName": 3621800,
+       "othersNames": null,
+       "total": 3621800,
+       "ratio": 0.0696
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 52056530,
+      "atFilingDate": 52056530,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 52056530,
+      "atFilingDate": 52056530,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 52056530,
+     "treasuryShares": 3621868
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7296",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-24T05:36:00Z",
+    "docId": "S100W2JQ",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W2JQ",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 3632800,
+      "othersNames": null,
+      "total": 3632800,
+      "ratio": 0.0698
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社エフ・シー・シー",
+       "ownName": 3632800,
+       "othersNames": null,
+       "total": 3632800,
+       "ratio": 0.0698
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 52056530,
+      "atFilingDate": 52056530,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 52056530,
+      "atFilingDate": 52056530,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 52056530,
+     "treasuryShares": 3632850
+    }
+   }
   }
  ]
 }

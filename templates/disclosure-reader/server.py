@@ -62,6 +62,13 @@ CUSTOMER_SOURCES = {
     "jpcrp_cor:ManagementAnalysisOfFinancialPositionOperatingResultsAndCashFlowsTextBlock": "sales",
 }
 REVENUE = ("symbol", "fiscalPeriod", "period", "revenue")
+# Treasury shares (voting-rights section): holder rows without addresses, issued shares per class and
+# the earnings-release counts (numbers only; the release itself is never linked).
+TREASURY_VALUES = ("ownName", "othersNames", "total", "ratio")
+TREASURY_HOLDER = ("row", "name") + TREASURY_VALUES
+ISSUED = ("atFiscalYearEnd", "atFilingDate")
+RELEASE = ("fiscalPeriod", "issuedShares", "treasuryShares")
+PERIOD = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])")
 PREFECTURE = re.compile(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)")
 
 
@@ -254,6 +261,44 @@ def clean_customers(rows, expected):
     return out
 
 
+def clean_treasury(rows, expected, period=None):
+    """The treasury-shares table of one annual report. With `period`, only a report for that fiscal period."""
+    if not rows:
+        return None
+    rows = _list(rows, 10)
+    for row in rows:
+        _check_symbol(row, expected)
+    if period is not None:
+        rows = [r for r in rows if r.get("fiscalPeriod") == period]
+    row = _latest(rows)
+    if row is None:
+        return None
+    out = _document(row)
+    table = row.get("votingRightsTable") if isinstance(row.get("votingRightsTable"), dict) else {}
+    total = table.get("total")
+    out["votingRightsTable"] = {
+        "total": _pick(total, TREASURY_VALUES) if isinstance(total, dict) else None,
+        "holders": [_pick(h, TREASURY_HOLDER) for h in _list(table.get("holders") or [], 60)],  # addresses are never copied
+    }
+    issued = []
+    for item in _list(row.get("issuedShares") or [], 10):
+        members = item.get("members") if isinstance(item, dict) else None
+        entry = _pick(item, ISSUED)
+        entry["members"] = [str(m)[:100] for m in members[:5]] if isinstance(members, list) else []
+        issued.append(entry)
+    out["issuedShares"] = issued
+    release = row.get("consolidated")
+    out["consolidated"] = _pick(release, RELEASE) if isinstance(release, dict) else None
+    return out
+
+
+def previous_year(period):
+    """The same month a year earlier: 2026-03 -> 2025-03."""
+    if not isinstance(period, str) or not PERIOD.fullmatch(period):
+        return None
+    return "%04d-%s" % (int(period[:4]) - 1, period[5:])
+
+
 def clean_revenue(rows, expected):
     out = []
     for row in _list(rows or [], 5):
@@ -273,7 +318,10 @@ def optional(requester, path, params, api_key):
 
 
 def fetch_company(symbol, api_key, requester=request_rows):
-    """One company, whitelisted. 12 requests, 13 when main customers exist (revenue is then fetched)."""
+    """One company, whitelisted. 14 requests, 15 when main customers exist (revenue is then fetched).
+
+    Treasury shares are fetched twice: the latest annual report, then the one a year earlier
+    (no second request when the first is a 404)."""
     company = {"symbol": symbol}
     company["profile"] = clean_profile(requester("/profile", {"symbol": symbol}, api_key), symbol)
     company["texts"] = {tag: clean_text(optional(requester, "/text-blocks", {"symbol": symbol, "tag": tag}, api_key), symbol)
@@ -290,6 +338,13 @@ def fetch_company(symbol, api_key, requester=request_rows):
         # Only needed to express each customer as a share of annual revenue.
         company["revenue"] = clean_revenue(requester("/income-statement", {
             "symbol": symbol, "period": "annual", "limit": 3}, api_key), symbol)
+    treasury = clean_treasury(optional(requester, "/treasury-shares", {"symbol": symbol}, api_key), symbol)
+    company["treasuryShares"] = treasury
+    company["priorTreasuryShares"] = None
+    prior = previous_year(treasury["fiscalPeriod"]) if treasury else None
+    if prior:
+        company["priorTreasuryShares"] = clean_treasury(
+            optional(requester, "/treasury-shares", {"symbol": symbol, "fiscalPeriod": prior}, api_key), symbol, prior)
     return company
 
 
@@ -423,7 +478,7 @@ def main():
     with make_server(args.port, key, demo_set=args.demo) as server:
         print("Open http://127.0.0.1:%d" % server.server_port, flush=True)
         print("Saved snapshot: %s (%s). Live access: %s. Ctrl+C to stop." % (args.demo, DEMOS[args.demo],
-            "enabled; each fetch makes 12-13 requests per company and requires a click" if key else "disabled"), flush=True)
+            "enabled; each fetch makes 14-15 requests per company and requires a click" if key else "disabled"), flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:

@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-04T14:21:15Z",
+ "retrievedAt": "2026-11-10T05:59:42Z",
  "companies": [
   {
    "symbol": "7203",
@@ -799,7 +799,427 @@
     ]
    },
    "mainCustomers": null,
-   "revenue": []
+   "revenue": [],
+   "treasuryShares": {
+    "symbol": "7203",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-10T06:33:00Z",
+    "docId": "S100Y8NY",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 2785928500,
+      "othersNames": null,
+      "total": 2785928500,
+      "ratio": 0.1764
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "トヨタ自動車㈱",
+       "ownName": 2761055400,
+       "othersNames": null,
+       "total": 2761055400,
+       "ratio": 0.1748
+      },
+      {
+       "row": 2,
+       "name": "名古屋テレビ放送㈱",
+       "ownName": 4500000,
+       "othersNames": null,
+       "total": 4500000,
+       "ratio": 0.0003
+      },
+      {
+       "row": 3,
+       "name": "フタバ産業㈱",
+       "ownName": 4081500,
+       "othersNames": null,
+       "total": 4081500,
+       "ratio": 0.0003
+      },
+      {
+       "row": 4,
+       "name": "トヨタ瑞浪開発㈱",
+       "ownName": 2853300,
+       "othersNames": null,
+       "total": 2853300,
+       "ratio": 0.0002
+      },
+      {
+       "row": 5,
+       "name": "豊田鉄工㈱",
+       "ownName": 2500000,
+       "othersNames": null,
+       "total": 2500000,
+       "ratio": 0.0002
+      },
+      {
+       "row": 6,
+       "name": "アイシン高丘㈱",
+       "ownName": 2420300,
+       "othersNames": null,
+       "total": 2420300,
+       "ratio": 0.0002
+      },
+      {
+       "row": 7,
+       "name": "㈱デンソーテン",
+       "ownName": 1736900,
+       "othersNames": null,
+       "total": 1736900,
+       "ratio": 0.0001
+      },
+      {
+       "row": 8,
+       "name": "豊臣機工㈱",
+       "ownName": 1585800,
+       "othersNames": null,
+       "total": 1585800,
+       "ratio": 0.0001
+      },
+      {
+       "row": 9,
+       "name": "トヨタ紡織㈱",
+       "ownName": 1242400,
+       "othersNames": null,
+       "total": 1242400,
+       "ratio": 0.0001
+      },
+      {
+       "row": 10,
+       "name": "京三電機㈱",
+       "ownName": 1112000,
+       "othersNames": null,
+       "total": 1112000,
+       "ratio": 0.0001
+      },
+      {
+       "row": 11,
+       "name": "ナミコー㈱",
+       "ownName": 700000,
+       "othersNames": null,
+       "total": 700000,
+       "ratio": 0
+      },
+      {
+       "row": 12,
+       "name": "トリニティ工業㈱",
+       "ownName": 500000,
+       "othersNames": null,
+       "total": 500000,
+       "ratio": 0
+      },
+      {
+       "row": 13,
+       "name": "共和レザー㈱",
+       "ownName": 500000,
+       "othersNames": null,
+       "total": 500000,
+       "ratio": 0
+      },
+      {
+       "row": 14,
+       "name": "愛三工業㈱",
+       "ownName": 488800,
+       "othersNames": null,
+       "total": 488800,
+       "ratio": 0
+      },
+      {
+       "row": 15,
+       "name": "㈱東海理化電機製作所",
+       "ownName": 389900,
+       "othersNames": null,
+       "total": 389900,
+       "ratio": 0
+      },
+      {
+       "row": 16,
+       "name": "大豊工業㈱",
+       "ownName": 76000,
+       "othersNames": null,
+       "total": 76000,
+       "ratio": 0
+      },
+      {
+       "row": 17,
+       "name": "㈱徳島ダイハツモータース",
+       "ownName": 65000,
+       "othersNames": null,
+       "total": 65000,
+       "ratio": 0
+      },
+      {
+       "row": 18,
+       "name": "アイシン軽金属㈱",
+       "ownName": 49500,
+       "othersNames": null,
+       "total": 49500,
+       "ratio": 0
+      },
+      {
+       "row": 19,
+       "name": "㈱メタルアート",
+       "ownName": 39000,
+       "othersNames": null,
+       "total": 39000,
+       "ratio": 0
+      },
+      {
+       "row": 20,
+       "name": "㈱浅野歯車工作所",
+       "ownName": 31400,
+       "othersNames": null,
+       "total": 31400,
+       "ratio": 0
+      },
+      {
+       "row": 21,
+       "name": "津田工業㈱",
+       "ownName": 1300,
+       "othersNames": null,
+       "total": 1300,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 15794987460,
+      "atFilingDate": 15794987460,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 15794987460,
+      "atFilingDate": 15794987460,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 15794987460,
+     "treasuryShares": 2761602986
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7203",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-18T06:30:00Z",
+    "docId": "S100VWVY",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWVY",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 2780021800,
+      "othersNames": null,
+      "total": 2780021800,
+      "ratio": 0.176
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "トヨタ自動車㈱",
+       "ownName": 2746057600,
+       "othersNames": null,
+       "total": 2746057600,
+       "ratio": 0.1739
+      },
+      {
+       "row": 2,
+       "name": "豊田合成㈱",
+       "ownName": 9091100,
+       "othersNames": null,
+       "total": 9091100,
+       "ratio": 0.0006
+      },
+      {
+       "row": 3,
+       "name": "名古屋テレビ放送㈱",
+       "ownName": 4500000,
+       "othersNames": null,
+       "total": 4500000,
+       "ratio": 0.0003
+      },
+      {
+       "row": 4,
+       "name": "フタバ産業㈱",
+       "ownName": 4081500,
+       "othersNames": null,
+       "total": 4081500,
+       "ratio": 0.0003
+      },
+      {
+       "row": 5,
+       "name": "トヨタ瑞浪開発㈱",
+       "ownName": 2853300,
+       "othersNames": null,
+       "total": 2853300,
+       "ratio": 0.0002
+      },
+      {
+       "row": 6,
+       "name": "豊田鉄工㈱",
+       "ownName": 2500000,
+       "othersNames": null,
+       "total": 2500000,
+       "ratio": 0.0002
+      },
+      {
+       "row": 7,
+       "name": "アイシン高丘㈱",
+       "ownName": 2420300,
+       "othersNames": null,
+       "total": 2420300,
+       "ratio": 0.0002
+      },
+      {
+       "row": 8,
+       "name": "㈱デンソーテン",
+       "ownName": 1736900,
+       "othersNames": null,
+       "total": 1736900,
+       "ratio": 0.0001
+      },
+      {
+       "row": 9,
+       "name": "豊臣機工㈱",
+       "ownName": 1585800,
+       "othersNames": null,
+       "total": 1585800,
+       "ratio": 0.0001
+      },
+      {
+       "row": 10,
+       "name": "トヨタ紡織㈱",
+       "ownName": 1242400,
+       "othersNames": null,
+       "total": 1242400,
+       "ratio": 0.0001
+      },
+      {
+       "row": 11,
+       "name": "京三電機㈱",
+       "ownName": 1112000,
+       "othersNames": null,
+       "total": 1112000,
+       "ratio": 0.0001
+      },
+      {
+       "row": 12,
+       "name": "ナミコー㈱",
+       "ownName": 700000,
+       "othersNames": null,
+       "total": 700000,
+       "ratio": 0
+      },
+      {
+       "row": 13,
+       "name": "トリニティ工業㈱",
+       "ownName": 500000,
+       "othersNames": null,
+       "total": 500000,
+       "ratio": 0
+      },
+      {
+       "row": 14,
+       "name": "共和レザー㈱",
+       "ownName": 500000,
+       "othersNames": null,
+       "total": 500000,
+       "ratio": 0
+      },
+      {
+       "row": 15,
+       "name": "愛三工業㈱",
+       "ownName": 488800,
+       "othersNames": null,
+       "total": 488800,
+       "ratio": 0
+      },
+      {
+       "row": 16,
+       "name": "㈱東海理化電機製作所",
+       "ownName": 389900,
+       "othersNames": null,
+       "total": 389900,
+       "ratio": 0
+      },
+      {
+       "row": 17,
+       "name": "大豊工業㈱",
+       "ownName": 76000,
+       "othersNames": null,
+       "total": 76000,
+       "ratio": 0
+      },
+      {
+       "row": 18,
+       "name": "㈱徳島ダイハツモータース",
+       "ownName": 65000,
+       "othersNames": null,
+       "total": 65000,
+       "ratio": 0
+      },
+      {
+       "row": 19,
+       "name": "アイシン軽金属㈱",
+       "ownName": 49500,
+       "othersNames": null,
+       "total": 49500,
+       "ratio": 0
+      },
+      {
+       "row": 20,
+       "name": "㈱メタルアート",
+       "ownName": 39000,
+       "othersNames": null,
+       "total": 39000,
+       "ratio": 0
+      },
+      {
+       "row": 21,
+       "name": "㈱浅野歯車工作所",
+       "ownName": 31400,
+       "othersNames": null,
+       "total": 31400,
+       "ratio": 0
+      },
+      {
+       "row": 22,
+       "name": "津田工業㈱",
+       "ownName": 1300,
+       "othersNames": null,
+       "total": 1300,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 15794987460,
+      "atFilingDate": 15794987460,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 15794987460,
+      "atFilingDate": 15794987460,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 15794987460,
+     "treasuryShares": 2746057686
+    }
+   }
   },
   {
    "symbol": "6902",
@@ -1446,18 +1866,21 @@
     "submittedAt": "2026-06-11T06:36:00Z",
     "docId": "S100Y9T1",
     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9T1",
+    "customerSource": "notes",
     "customers": [
      {
       "period": "prior",
-      "customer": "トヨタ自動車㈱",
-      "revenue": 1902231000000,
-      "segment": null
+      "customer": "トヨタグループ",
+      "revenue": 3903121000000,
+      "segment": "日本、北米、欧州、アジア、その他",
+      "notes": []
      },
      {
       "period": "current",
-      "customer": "トヨタ自動車㈱",
-      "revenue": 1991604000000,
-      "segment": null
+      "customer": "トヨタグループ",
+      "revenue": 4134582000000,
+      "segment": "日本、北米、欧州、アジア、その他",
+      "notes": []
      }
     ]
    },
@@ -1480,7 +1903,131 @@
      "period": "FY",
      "revenue": 7144733000000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "6902",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-11T06:36:00Z",
+    "docId": "S100Y9T1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9T1",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 219295800,
+      "othersNames": null,
+      "total": 219295800,
+      "ratio": 0.0753
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社デンソー",
+       "ownName": 218934200,
+       "othersNames": null,
+       "total": 218934200,
+       "ratio": 0.0752
+      },
+      {
+       "row": 2,
+       "name": "伊藤精工株式会社",
+       "ownName": 333100,
+       "othersNames": null,
+       "total": 333100,
+       "ratio": 0.0001
+      },
+      {
+       "row": 3,
+       "name": "株式会社デンソーパーラー",
+       "ownName": 28500,
+       "othersNames": null,
+       "total": 28500,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 2910979691,
+     "treasuryShares": 219039381
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "6902",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-11T06:37:00Z",
+    "docId": "S100VWHL",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWHL",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 93920400,
+      "othersNames": null,
+      "total": 93920400,
+      "ratio": 0.0322
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社デンソー",
+       "ownName": 93558800,
+       "othersNames": null,
+       "total": 93558800,
+       "ratio": 0.0321
+      },
+      {
+       "row": 2,
+       "name": "伊藤精工株式会社",
+       "ownName": 333100,
+       "othersNames": null,
+       "total": 333100,
+       "ratio": 0.0001
+      },
+      {
+       "row": 3,
+       "name": "株式会社デンソーパーラー",
+       "ownName": 28500,
+       "othersNames": null,
+       "total": 28500,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 2910979691,
+      "atFilingDate": 2910979691,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 2910979691,
+     "treasuryShares": 93663914
+    }
+   }
   },
   {
    "symbol": "7267",
@@ -2344,7 +2891,179 @@
     ]
    },
    "mainCustomers": null,
-   "revenue": []
+   "revenue": [],
+   "treasuryShares": {
+    "symbol": "7267",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-18T06:30:00Z",
+    "docId": "S100YDD9",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 643158200,
+      "othersNames": null,
+      "total": 643158200,
+      "ratio": 0.1419
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "本田技研工業㈱",
+       "ownName": 634998100,
+       "othersNames": null,
+       "total": 634998100,
+       "ratio": 0.1401
+      },
+      {
+       "row": 2,
+       "name": "㈱スチールセンター",
+       "ownName": 4169100,
+       "othersNames": null,
+       "total": 4169100,
+       "ratio": 0.0009
+      },
+      {
+       "row": 3,
+       "name": "㈱山田製作所",
+       "ownName": 3988000,
+       "othersNames": null,
+       "total": 3988000,
+       "ratio": 0.0009
+      },
+      {
+       "row": 4,
+       "name": "総合事務サービス㈱",
+       "ownName": 3000,
+       "othersNames": null,
+       "total": 3000,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 4533000000,
+      "atFilingDate": 4533000000,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 4533000000,
+      "atFilingDate": 4533000000,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 4533000000,
+     "treasuryShares": 640419559
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7267",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-18T06:36:00Z",
+    "docId": "S100VYOD",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VYOD",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 939503000,
+      "othersNames": 5150300,
+      "total": 944653300,
+      "ratio": 0.1789
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "本田技研工業㈱",
+       "ownName": 928219000,
+       "othersNames": null,
+       "total": 928219000,
+       "ratio": 0.1758
+      },
+      {
+       "row": 2,
+       "name": "㈱スチールセンター",
+       "ownName": 1980000,
+       "othersNames": 2143000,
+       "total": 4123000,
+       "ratio": 0.0008
+      },
+      {
+       "row": 3,
+       "name": "㈱山田製作所",
+       "ownName": 3600000,
+       "othersNames": 377400,
+       "total": 3977400,
+       "ratio": 0.0008
+      },
+      {
+       "row": 4,
+       "name": "㈱ジーテクト",
+       "ownName": 1434000,
+       "othersNames": 2154700,
+       "total": 3588700,
+       "ratio": 0.0007
+      },
+      {
+       "row": 5,
+       "name": "日立アステモ㈱",
+       "ownName": 3000000,
+       "othersNames": null,
+       "total": 3000000,
+       "ratio": 0.0006
+      },
+      {
+       "row": 6,
+       "name": "㈱アイキテック",
+       "ownName": 1264900,
+       "othersNames": 475200,
+       "total": 1740100,
+       "ratio": 0.0003
+      },
+      {
+       "row": 7,
+       "name": "総合事務サービス㈱",
+       "ownName": 3000,
+       "othersNames": null,
+       "total": 3000,
+       "ratio": 0
+      },
+      {
+       "row": 8,
+       "name": "㈱ホンダカーズ博多",
+       "ownName": 2100,
+       "othersNames": null,
+       "total": 2100,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 5280000000,
+      "atFilingDate": 5280000000,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 5280000000,
+      "atFilingDate": 5280000000,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 5280000000,
+     "treasuryShares": 933490429
+    }
+   }
   },
   {
    "symbol": "7261",
@@ -3030,7 +3749,131 @@
     ]
    },
    "mainCustomers": null,
-   "revenue": []
+   "revenue": [],
+   "treasuryShares": {
+    "symbol": "7261",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-23T00:09:00Z",
+    "docId": "S100YDZ1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 1060100,
+      "othersNames": null,
+      "total": 1060100,
+      "ratio": 0.0017
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "マツダ株式会社",
+       "ownName": 1017200,
+       "othersNames": null,
+       "total": 1017200,
+       "ratio": 0.0016
+      },
+      {
+       "row": 2,
+       "name": "株式会社広島東洋カープ",
+       "ownName": 22600,
+       "othersNames": null,
+       "total": 22600,
+       "ratio": 0
+      },
+      {
+       "row": 3,
+       "name": "ヨシワ工業株式会社",
+       "ownName": 20300,
+       "othersNames": null,
+       "total": 20300,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 631803979,
+      "atFilingDate": 631803979,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 631803979,
+      "atFilingDate": 631803979,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 631803979,
+     "treasuryShares": 1024049
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7261",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-24T07:31:00Z",
+    "docId": "S100VZ6C",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VZ6C",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 1490100,
+      "othersNames": null,
+      "total": 1490100,
+      "ratio": 0.0024
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "マツダ株式会社",
+       "ownName": 1447200,
+       "othersNames": null,
+       "total": 1447200,
+       "ratio": 0.0023
+      },
+      {
+       "row": 2,
+       "name": "株式会社広島東洋カープ",
+       "ownName": 22600,
+       "othersNames": null,
+       "total": 22600,
+       "ratio": 0
+      },
+      {
+       "row": 3,
+       "name": "ヨシワ工業株式会社",
+       "ownName": 20300,
+       "othersNames": null,
+       "total": 20300,
+       "ratio": 0
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 631803979,
+      "atFilingDate": 631803979,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 631803979,
+      "atFilingDate": 631803979,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 631803979,
+     "treasuryShares": 1454028
+    }
+   }
   },
   {
    "symbol": "7217",
@@ -3413,18 +4256,35 @@
     "submittedAt": "2026-06-24T07:00:00Z",
     "docId": "S100YIDI",
     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIDI",
+    "customerSource": "notes",
     "customers": [
+     {
+      "period": "prior",
+      "customer": "TURN 14 DISTRIBUTION INC.",
+      "revenue": 718808000,
+      "segment": null,
+      "notes": []
+     },
      {
       "period": "current",
       "customer": "TURN 14 DISTRIBUTION INC.",
       "revenue": 800557000,
-      "segment": "自動車用サスペンションの製造・販売事業"
+      "segment": "自動車用サスペンションの製造・販売事業",
+      "notes": []
+     },
+     {
+      "period": "prior",
+      "customer": "㈱タカマコンペティションプロダクト",
+      "revenue": 564566000,
+      "segment": null,
+      "notes": []
      },
      {
       "period": "current",
       "customer": "㈱タカマコンペティションプロダクト",
       "revenue": 579935000,
-      "segment": "自動車用サスペンションの製造・販売事業"
+      "segment": "自動車用サスペンションの製造・販売事業",
+      "notes": []
      }
     ]
    },
@@ -3447,7 +4307,99 @@
      "period": "FY",
      "revenue": 4865893000
     }
-   ]
+   ],
+   "treasuryShares": {
+    "symbol": "7217",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-24T07:00:00Z",
+    "docId": "S100YIDI",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIDI",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 188600,
+      "othersNames": null,
+      "total": 188600,
+      "ratio": 0.0188
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社テイン",
+       "ownName": 188600,
+       "othersNames": null,
+       "total": 188600,
+       "ratio": 0.0188
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 10000000,
+      "atFilingDate": 9811308,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 10000000,
+      "atFilingDate": 9811308,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2026-03",
+     "issuedShares": 10000000,
+     "treasuryShares": 188692
+    }
+   },
+   "priorTreasuryShares": {
+    "symbol": "7217",
+    "fiscalPeriod": "2025-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2025-06-25T06:00:00Z",
+    "docId": "S100W5AR",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W5AR",
+    "votingRightsTable": {
+     "total": {
+      "ownName": 6500,
+      "othersNames": null,
+      "total": 6500,
+      "ratio": 0.0013
+     },
+     "holders": [
+      {
+       "row": 1,
+       "name": "株式会社テイン",
+       "ownName": 6500,
+       "othersNames": null,
+       "total": 6500,
+       "ratio": 0.0013
+      }
+     ]
+    },
+    "issuedShares": [
+     {
+      "atFiscalYearEnd": 5000000,
+      "atFilingDate": 5000000,
+      "members": []
+     },
+     {
+      "atFiscalYearEnd": 5000000,
+      "atFilingDate": 5000000,
+      "members": [
+       "jpcrp_cor_OrdinaryShare"
+      ]
+     }
+    ],
+    "consolidated": {
+     "fiscalPeriod": "2025-03",
+     "issuedShares": 5000000,
+     "treasuryShares": 6546
+    }
+   }
   }
  ]
 }
