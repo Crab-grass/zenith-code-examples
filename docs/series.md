@@ -80,6 +80,7 @@ A series that reads the deeper parts of annual securities reports (narrative sec
 | 2 | [Reading capital ties from shareholders: major shareholders, ownership by category and large-shareholding reports against peers](https://qiita.com/Sohei-Taniguchi-CG/items/98cb09289a3772b747df) (Japanese) | Disclosure reader shareholders: shared holders, cross-holdings, ownership by category, one row per large-shareholding report |
 | 3 | [Mapping business ties from strategic shareholdings: holdings counts, fully sold holdings and cross-holdings against peers](https://qiita.com/Sohei-Taniguchi-CG/items/db06b9d701b8324fe265) (Japanese) | Disclosure reader strategic holdings: counts, change from the prior year, fully sold holdings, cross-holdings among the compared companies |
 | 4 | [Reading customer dependence from major customers: the share of automakers in the sales of five parts makers](https://qiita.com/Sohei-Taniguchi-CG/items/415dfe6d7902ef6daed7) (Japanese) | Disclosure reader audit and customers: customers above 10% of sales, share of net sales, and which table each figure came from |
+| 5 | [Reading the audit setup from audit fees: audit and non-audit fees, fees to the network firms, and the audit section for five parts makers](https://qiita.com/Sohei-Taniguchi-CG/items/5053377080f95cf98806) (Japanese) | Disclosure reader audit and customers: audit and non-audit fees, the non-audit share, and fees paid to the same network; plus the "status of audits" text in the text comparison |
 
 ## Going further
 
