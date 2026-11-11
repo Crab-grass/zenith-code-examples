@@ -80,6 +80,16 @@ function company(raw) {
     if (row.excerpt !== null && row.excerpt !== undefined && typeof row.excerpt !== "string") fail();
     return row;
   });
+  const directors = single(raw.directors, symbol);
+  if (directors) {
+    list(directors.officers, 80);
+    for (const key of ["counts", "plannedCounts"]) if (directors[key] !== null && directors[key] !== undefined && !isObject(directors[key])) fail();
+  }
+  const pay = single(raw.directorCompensation, symbol);
+  if (pay) for (const category of list(pay.categories, 30)) {
+    list(category.components, 20);
+    list(category.subtotals, 10);
+  }
   return {
     symbol, profile, texts,
     majorShareholders: list(raw.majorShareholders, 40).map((row) => sameCompany(row, symbol)),
@@ -92,6 +102,7 @@ function company(raw) {
     treasuryShares: treasury(raw.treasuryShares),
     priorTreasuryShares: treasury(raw.priorTreasuryShares),
     extraordinaryReports: extraordinary,
+    directors, directorCompensation: pay,
   };
 }
 export function normalizeBundle(result, symbols) {
@@ -632,6 +643,67 @@ export function extraordinaryCounts(companies, category = "all") {
   const order = (r) => REASON_CATEGORIES.indexOf(r.category);
   const rows = [...reasons.values()].sort((a, b) => order(a) - order(b) || b.total - a.total || a.key.localeCompare(b.key));
   return { rows, totals, corrections, span };
+}
+
+// ---------- 7. Officers and remuneration ---------------------------------------------------------
+// From the annual report's officers section (役員の状況) and remuneration section (役員の報酬等).
+// Counts by gender are the filed numbers (as of the filing date). Titles are counted as written:
+// whether an officer is an outside officer is not in the title, so it is not counted here.
+export const OFFICER_DESIGNS = ["board-of-auditors", "audit-committee", "three-committees"];
+export function officerSummary(directors) {
+  if (!directors) return null;
+  const officers = directors.officers ?? [];
+  const board = officers.filter((o) => o.group !== "executive-officers");
+  const executives = officers.filter((o) => o.group === "executive-officers");
+  const count = (rows, re) => rows.filter((o) => re.test(String(o.title ?? ""))).length;
+  const gender = (c) => {
+    const male = finite(c?.male), female = finite(c?.female);
+    const total = male !== null && female !== null ? male + female : null;
+    return { male, female, total, femaleRatio: finite(c?.femaleRatio), femaleShare: total ? female / total : null };
+  };
+  const auditors = count(board, /監査役/);
+  const auditCommittee = count(board, /監査等委員/);
+  const committee = count(board, /監査委員/); // 監査等委員 does not contain 監査委員
+  // The governance design as the titles show it (a company with executive officers has three committees).
+  const design = executives.length || committee ? "three-committees" : auditCommittee ? "audit-committee" : auditors ? "board-of-auditors" : null;
+  const counts = gender(directors.counts);
+  return {
+    fiscalPeriod: directors.fiscalPeriod ?? null, ...counts,
+    rows: officers.length, boardRows: board.length, executiveRows: executives.length,
+    // A person who is both director and executive officer has a row in each group, so rows can exceed the head count.
+    rowsMatch: executives.length || counts.total === null ? null : counts.total === board.length,
+    planned: directors.plannedCounts ? gender(directors.plannedCounts) : null, plannedScope: directors.plannedOfficersScope ?? null,
+    representatives: count(board, /代表取締役/), representativeExecutives: count(executives, /代表執行役/),
+    auditors, auditCommittee, committee, design,
+  };
+}
+
+// Amount-by-type fields of /director-compensation, in display order. ofWhichNonMonetary is an
+// "of which" column of these and is never added.
+export const COMP_TYPES = ["baseRemuneration", "fixed", "performanceBased", "bonus", "stockOptions", "shareAwards", "restrictedShares",
+  "performanceLinkedShares", "nonMonetary", "retirementBenefits", "other"];
+// One row per officer category as filed. "Of which" rows (ofWhichParent) are inside their parent row:
+// never add them up. Which types are performance-linked differs by company (the filed table's upper
+// heading), so the parts are listed as they are, each as a share of the category total.
+export function compensationRows(pay) {
+  if (!pay) return [];
+  return (pay.categories ?? []).map((c) => {
+    const total = finite(c.total);
+    const headcount = finite(c.headcount);
+    const subtotalItems = new Set((c.subtotals ?? []).map((s) => s.item));
+    const parts = [
+      ...COMP_TYPES.filter((key) => finite(c[key]) !== null).map((key) => ({ key, label: null, labelEn: null, amount: c[key] })),
+      ...(c.components ?? []).filter((x) => finite(x.amount) !== null).map((x) => ({ key: null, label: x.labelJa ?? x.labelEn ?? null, labelEn: x.labelEn ?? null, amount: x.amount })),
+    ].map((p) => ({ ...p, subtotal: subtotalItems.has(p.key ?? p.label), share: total ? p.amount / total : null }));
+    // Sum of the parts = standard fields + company-specific components − subtotal columns.
+    const sum = parts.length ? parts.filter((p) => !p.subtotal).reduce((s, p) => s + p.amount, 0) : null;
+    return {
+      label: c.label ?? null, labelEn: c.labelEn ?? null, ofWhich: c.ofWhichParent ?? null,
+      headcount, total, perHead: total !== null && headcount ? total / headcount : null,
+      parts, sum, diff: total !== null && sum !== null ? total - sum : null,
+      nonMonetaryOfWhich: finite(c.ofWhichNonMonetary), totalDisclosed: c.totalDisclosed !== false,
+    };
+  });
 }
 
 // ---------- Formatting ---------------------------------------------------------------------

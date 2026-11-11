@@ -105,6 +105,7 @@ const VIEWS = [
   { id: "audit", render: renderAudit },
   { id: "treasury", render: renderTreasury },
   { id: "extraordinary", render: renderExtraordinary },
+  { id: "officers", render: renderOfficers },
 ];
 
 // ---------- 1. Text blocks ----------
@@ -618,6 +619,66 @@ function renderExtraordinary(host, data) {
   ], timeline, { compact: true }) : node("p", t("noExtraordinary"), { class: "muted" })));
 }
 
+// ---------- 7. Officers and remuneration ----------
+function renderOfficers(host, data) {
+  const companies = data.companies;
+  const n = (v) => M.number(v, state.lang);
+  // The filed ratio keeps the filing's digits (27% stays 27%, 16.7% stays 16.7%).
+  const filed = (v) => (M.finite(v) === null ? "—" : new Intl.NumberFormat(state.lang === "en" ? "en-US" : "ja-JP", { style: "percent", maximumFractionDigits: 1 }).format(v));
+  host.append(notes(["officersRead1", "officersRead2", "officersRead3"]));
+
+  // Who sits on the board: counts by gender as filed, and titles counted as written.
+  const people = companies.map((c) => ({ company: c, s: M.officerSummary(c.directors) }));
+  host.append(panel(t("officersTitle"), t("officersNote"), table([
+    { label: "", render: (r) => companyTitle(r.company, r.s?.fiscalPeriod ? fy(r.s.fiscalPeriod) : null) },
+    { label: t("officerDesign"), render: (r) => (r.s?.design ? t("design_" + r.s.design) : "—") },
+    { label: t("officerCount"), num: true, cls: "strong", render: (r) => n(r.s?.total) },
+    { label: t("officerMale"), num: true, render: (r) => n(r.s?.male) },
+    { label: t("officerFemale"), num: true, render: (r) => n(r.s?.female) },
+    { label: t("femaleShare"), num: true, cls: "strong", render: (r) => pct(r.s?.femaleShare) },
+    { label: t("femaleRatioFiled"), num: true, render: (r) => filed(r.s?.femaleRatio) },
+    { label: t("officerPlanned"), render: (r) => (r.s?.planned?.total ? fill("plannedCounts", { m: n(r.s.planned.male), f: n(r.s.planned.female), r: pct(r.s.planned.femaleShare) }) : "—") },
+    { label: t("representatives"), num: true, render: (r) => (r.s ? n(r.s.representatives + r.s.representativeExecutives) : "—") },
+    { label: t("auditorTitles"), num: true, render: (r) => (r.s ? n(r.s.auditors) : "—") },
+    { label: t("auditCommitteeTitles"), num: true, render: (r) => (r.s ? n(r.s.auditCommittee + r.s.committee) : "—") },
+    { label: t("officerCheck"), render: (r) => (!r.s ? node("span", t("noOfficers"), { class: "muted small" })
+      : r.s.rowsMatch === false ? node("span", t("officerRowsMismatch"), { class: "warn small" })
+      : r.s.executiveRows ? node("span", fill("executiveRows", { n: r.s.executiveRows }), { class: "muted small" }) : "") },
+  ], people)));
+
+  // Remuneration per officer category, one table for all companies. "Of which" rows stay under their parent.
+  const m = (v) => M.millions(v, state.lang);
+  const typeName = (p) => (p.key ? t("ctype_" + p.key) : (state.lang === "en" ? p.labelEn || p.label : p.label) || "—");
+  const rows = companies.flatMap((c) => {
+    const list = M.compensationRows(c.directorCompensation);
+    return list.length ? list.map((r, i) => ({ ...r, company: c, first: i === 0 })) : [{ company: c, first: true, empty: true }];
+  });
+  host.append(panel(t("payTitle"), t("payNote"), table([
+    { label: "", render: (r) => (r.first ? companyTitle(r.company, r.company.directorCompensation ? fy(r.company.directorCompensation.fiscalPeriod) : null) : "") },
+    { label: t("payCategory"), cls: "name", render: (r) => {
+      if (r.empty) return node("span", t("noPay"), { class: "muted" });
+      const cell = node("span", undefined, { class: "holder" + (r.ofWhich ? " of-which" : "") });
+      if (r.ofWhich) cell.append(badge(t("ofWhich"), "zero"));
+      cell.append(node("span", (state.lang === "en" ? r.labelEn || r.label : r.label) ?? "—"));
+      return cell;
+    } },
+    { label: t("payHeadcount"), num: true, render: (r) => (r.empty ? "" : n(r.headcount)) },
+    { label: t("payTotal"), num: true, cls: "strong", render: (r) => (r.empty ? "" : m(r.total)) },
+    { label: t("payPerHead"), num: true, render: (r) => (r.empty ? "" : M.millions(r.perHead, state.lang, 1)) },
+    { label: t("payParts"), render: (r) => {
+      if (r.empty) return "";
+      const cell = node("span", undefined, { class: "holder" });
+      for (const p of r.parts) cell.append(badge(`${typeName(p)} ${m(p.amount)}${p.share === null ? "" : `（${pct(p.share)}）`}${p.subtotal ? " " + t("paySubtotal") : ""}`, "zero"));
+      if (!r.parts.length) cell.append(node("span", "—", { class: "muted" }));
+      return cell;
+    } },
+    { label: t("payDiff"), num: true, render: (r) => (r.empty || r.diff === null ? (r.empty ? "" : "—")
+      : Math.abs(r.diff) <= 2e6 ? node("span", M.signed(r.diff / 1e6, state.lang) + (r.diff ? " " + t("payRounding") : ""), { class: "muted small" })
+      : node("span", M.signed(r.diff / 1e6, state.lang), { class: "warn small" })) },
+  ], rows, { compact: true, rowClass: (r) => (r.first ? "group-start" : null) })));
+  host.append(panel(t("sources"), t("sourcesNote"), sourcesTable(companies.map((c) => ({ company: c, report: c.directors ?? c.directorCompensation })))));
+}
+
 // ---------- Frame: navigation, picker, status ----------
 function renderNav() {
   const nav = $("viewNav");
@@ -682,7 +743,7 @@ function renderPicker() {
   $("loadButton").textContent = state.busy ? t("loading") : t("fetch");
   $("loadButton").disabled = state.busy || !state.config?.liveEnabled;
   $("loadButton").setAttribute("aria-busy", String(state.busy));
-  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 16 + 1 });
+  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 18 + 1 });
   $("setup").hidden = state.mode !== "live" || Boolean(state.config?.liveEnabled);
   $("demoMode").setAttribute("aria-pressed", String(state.mode === "demo"));
   $("liveMode").setAttribute("aria-pressed", String(state.mode === "live"));

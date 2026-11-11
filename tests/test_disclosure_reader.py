@@ -116,6 +116,25 @@ class FakeApi:
                      "label": "Significant event", "category": "significant-event", "structured": False},
                     {"key": "representative_change", "element": "y", "labelJa": "代表取締役の異動", "labelEn": "Change of representative director",
                      "label": "x", "category": "governance", "structured": False}]
+        if path == "/directors":
+            officer = {"group": "directors-and-auditors", "row": 1, "title": "代表取締役社長", "titleEn": "President", "name": "役員 一郎",
+                       "nameEn": None, "notes": [], "birthDate": "1965-04-01", "term": "(注)２", "shares": 4200, "sharesOtherThanOrdinary": None,
+                       "scheduledShares": None, "careerSummary": "1988年４月 当社入社", "machineTranslatedFields": ["titleEn"]}
+            return [doc(s, source="html", counts={"male": 8, "female": 2, "femaleRatio": 0.2}, plannedCounts={"male": 7, "female": 3, "femaleRatio": 0.3},
+                        plannedOfficersScope="all", plannedOfficers=[dict(officer, name="予定 次郎")],
+                        officers=[officer, dict(officer, row=2, title="取締役 監査等委員", titleEn="Director", name="役員 花子"),
+                                  dict(officer, row=3, title="取締役（1960年4月1日生）")])]
+        if path == "/director-compensation":
+            return [doc(s, categoriesSource="facts", categories=[
+                {"category": "x_DirectorsMember", "label": "取締役", "labelEn": "Directors", "headcount": 8, "total": 964000000,
+                 "baseRemuneration": 384000000, "bonus": 213000000, "shareAwards": 367000000, "fixed": None, "ofWhichNonMonetary": None,
+                 "components": [{"element": "x_Monthly", "labelJa": "月額報酬", "labelEn": None, "amount": 1000000, "label": "Monthly"}],
+                 "subtotals": [{"item": "月額報酬", "amount": 1000000, "parts": ["baseRemuneration"]}],
+                 "consolidated": {"total": 1, "components": []}},
+                {"category": "OutsideDirectorsMember", "label": "取締役（うち社外取締役）", "labelEn": None, "headcount": 3, "total": 63000000,
+                 "baseRemuneration": 63000000, "components": [], "ofWhichParent": "取締役"}],
+                individuals=[{"name": "役員 一郎 (取締役)", "position": None, "company": "提出会社", "total": 310000000,
+                              "components": [{"label": "基本報酬", "amount": 101000000}]}])]
         raise AssertionError("unexpected path " + path)
 
 
@@ -142,9 +161,10 @@ class FetchBundleTests(unittest.TestCase):
         self.assertEqual([(p, q) for p, q, _ in api.calls[13:16]], [
             ("/treasury-shares", {"symbol": "7203"}), ("/treasury-shares", {"symbol": "7203", "fiscalPeriod": "2025-03"}),
             ("/extraordinary-reports", {"symbol": "7203", "limit": 50})])
+        self.assertEqual([(p, q) for p, q, _ in api.calls[16:18]], [("/directors", {"symbol": "7203"}), ("/director-compensation", {"symbol": "7203"})])
         # The reason list is one request per fetch, after every company.
         self.assertEqual([(p, q) for p, q, _ in api.calls[-1:]], [("/extraordinary-report-reasons", {})])
-        self.assertEqual(len(api.calls), 33)
+        self.assertEqual(len(api.calls), 37)
         self.assertEqual([c["symbol"] for c in bundle["companies"]], ["7203", "7261"])
 
     def test_main_customer_source_is_reduced_to_notes_or_sales(self):
@@ -165,7 +185,7 @@ class FetchBundleTests(unittest.TestCase):
     def test_no_main_customers_means_no_revenue_request(self):
         api = FakeApi(customers=False)
         bundle = server.fetch_bundle(["7203", "7261"], "k", api)
-        self.assertEqual(len(api.calls), 31)
+        self.assertEqual(len(api.calls), 35)
         self.assertNotIn("/income-statement", [c[0] for c in api.calls])
         company = bundle["companies"][0]
         self.assertIsNone(company["mainCustomers"])  # 404 = no customer at 10% or more
@@ -191,7 +211,7 @@ class FetchBundleTests(unittest.TestCase):
         api = FakeApi(treasury=False)
         none = server.fetch_bundle(["7203", "7261"], "k", api)["companies"][0]
         self.assertEqual((none["treasuryShares"], none["priorTreasuryShares"]), (None, None))
-        self.assertEqual(len(api.calls), 31)
+        self.assertEqual(len(api.calls), 35)
 
     def test_extraordinary_reports_keep_reasons_and_only_a_short_excerpt(self):
         reports = server.fetch_bundle(["7203", "7261"], "k", FakeApi())["companies"][0]["extraordinaryReports"]
@@ -214,6 +234,27 @@ class FetchBundleTests(unittest.TestCase):
                          "当社は、2026年5月22日(以下「本割当決議日」といいます。)開催の取締役会で決議しました。")
         for personal in ("代表取締役 氏名（1960年4月1日生）。", "生年月日を記載。", None, ""):
             self.assertIsNone(server.excerpt(personal))
+
+    def test_officers_and_pay_keep_counts_titles_and_amounts_only(self):
+        company = server.fetch_bundle(["7203", "7261"], "k", FakeApi())["companies"][0]
+        directors, pay = company["directors"], company["directorCompensation"]
+        self.assertEqual((directors["counts"], directors["plannedCounts"], directors["plannedOfficersScope"]),
+                         ({"male": 8, "female": 2, "femaleRatio": 0.2}, {"male": 7, "female": 3, "femaleRatio": 0.3}, "all"))
+        self.assertEqual(directors["officers"][:2], [{"group": "directors-and-auditors", "row": 1, "title": "代表取締役社長", "titleEn": "President"},
+                                                     {"group": "directors-and-auditors", "row": 2, "title": "取締役 監査等委員", "titleEn": "Director"}])
+        self.assertIsNone(directors["officers"][2]["title"])  # a title with a date of birth is dropped
+        category, outside = pay["categories"]
+        self.assertEqual((category["headcount"], category["total"], category["shareAwards"], category["components"], category["subtotals"]),
+                         (8, 964000000, 367000000, [{"labelJa": "月額報酬", "labelEn": None, "amount": 1000000}],
+                          [{"item": "月額報酬", "amount": 1000000, "parts": ["baseRemuneration"]}]))
+        self.assertEqual(outside["ofWhichParent"], "取締役")
+        found = set(keys(company))
+        for field in ("name", "birthDate", "term", "shares", "careerSummary", "plannedOfficers", "individuals", "category", "consolidated", "element"):
+            self.assertNotIn(field, set(keys({"d": directors, "p": pay})), field)
+        text = json.dumps({"d": directors, "p": pay}, ensure_ascii=False)
+        for needle in ("一郎", "花子", "次郎", "1965", "当社入社", "310000000", "4200"):
+            self.assertNotIn(needle, text)
+        self.assertIn("directors", found)
 
     def test_whitelist_drops_prices_carrying_amounts_and_tdnet_links(self):
         bundle = server.fetch_bundle(["7203", "7261"], "k", FakeApi())
@@ -298,8 +339,10 @@ class FetchBundleTests(unittest.TestCase):
                     "majorShareholders", "shareholderCategories", "categories", "largeHolders", "crossShareholdings", "holders", "summary",
                     "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource", "notes",
                     "treasuryShares", "priorTreasuryShares", "votingRightsTable", "total", "issuedShares", "members", "consolidated",
-                    "extraordinaryReports", "reasons", "excerpt", "labelEn", "category"} | set(server.SECTIONS)
-        allowed |= set(server.TREASURY_HOLDER + server.ISSUED + server.RELEASE + server.EXTRAORDINARY + server.REASON)
+                    "extraordinaryReports", "reasons", "excerpt", "labelEn", "category",
+                    "directors", "counts", "plannedCounts", "officers", "directorCompensation", "components", "subtotals", "parts"} | set(server.SECTIONS)
+        allowed |= set(server.TREASURY_HOLDER + server.ISSUED + server.RELEASE + server.EXTRAORDINARY + server.REASON + server.DIRECTORS + server.GENDER
+                        + server.OFFICER + server.COMPENSATION + server.COMP_CATEGORY + server.COMP_PART + ("item", "amount"))
         self.assertLessEqual(set(keys(demo)), allowed)
         self.assertIs(demo["placeholder"], False)
         build_demo.check(demo)  # the same last-line check build_demo.py runs before writing
@@ -314,7 +357,7 @@ class BuildDemoTests(unittest.TestCase):
             saved = json.loads(out.read_text(encoding="utf-8"))
             self.assertIs(saved["placeholder"], False)
             self.assertEqual([c["symbol"] for c in saved["companies"]], ["7203", "7261"])
-            self.assertEqual(len(api.calls), 33)
+            self.assertEqual(len(api.calls), 37)
             self.assertEqual({c[2] for c in api.calls}, {"k"})
             self.assertNotIn('"k"', out.read_text(encoding="utf-8"))
             out.write_text("previous", encoding="utf-8")
@@ -333,7 +376,8 @@ class BuildDemoTests(unittest.TestCase):
 
     def test_last_line_check_refuses_banned_fields_and_links(self):
         for bad in [{"a": {"carryingAmount": 1}}, {"price": 1}, [{"archiveUrl": "x"}], {"u": "https://www.release.tdnet.info/x.pdf"},
-                    [{"reasonText": "x"}], {"sections": {}}]:
+                    [{"reasonText": "x"}], {"sections": {}}, {"birthDate": "1965-04-01"}, [{"careerSummary": "x"}], {"individuals": []},
+                    {"plannedOfficers": []}]:
             with self.assertRaises(ValueError):
                 build_demo.check(bad)
         build_demo.check({"sourceUrl": EDINET, "content": "本文"})
@@ -402,7 +446,7 @@ class ServerTests(unittest.TestCase):
         status, data, _ = self.request("/api/compare", {"symbols": ["7203", "7261"]}, self.headers())
         self.assertEqual(status, 200)
         self.assertEqual(data["mode"], "live")
-        self.assertEqual(len(self.api.calls), 33)
+        self.assertEqual(len(self.api.calls), 37)
         self.assertEqual({c[2] for c in self.api.calls}, {"test-private-key"})
         self.assertNotIn("test-private-key", json.dumps(data))
         for field in PRICE_FIELDS + ("archiveUrl", "carryingAmount"):
