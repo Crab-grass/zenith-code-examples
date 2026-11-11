@@ -109,7 +109,7 @@ class FakeApi:
                    "sections": {"counterparty": {"address": "愛知県刈谷市"}}}
             person = dict(row, docId="S100XMU2", submittedAt="2026-02-25T07:32:00Z",
                           reasons=[{"tag": "x", "key": "representative_change", "label": "代表取締役の異動"}, {"tag": "y", "key": "new_unlisted_key", "label": "未登録"}],
-                          reasonText="新任 氏名 １９６５年４月１日生 略歴あり。")
+                          reasonText="当社は、取締役 氏名から辞任届が提出され、これを受理しました。")
             return [person, row]
         if path == "/extraordinary-report-reasons":
             return [{"key": "significant_event", "element": "x", "labelJa": "財政状態・経営成績等への重要事象（提出会社）", "labelEn": "Significant event",
@@ -201,14 +201,17 @@ class FetchBundleTests(unittest.TestCase):
                                  "reasons": [{"key": "significant_event", "label": "財政状態・経営成績等への重要事象（提出会社）",
                                               "labelEn": "Significant event", "category": "significant-event"}],
                                  "excerpt": "当社の財政状態に著しい影響を与える事象が発生いたしましたので、本臨時報告書を提出するものであります。"})
-        # A date of birth drops the text; an unknown reason key keeps its name without a category.
+        # A change of representative director drops the text (it can name people); an unknown reason key keeps its name without a category.
         self.assertIsNone(person["excerpt"])
         self.assertEqual([(r["key"], r["category"]) for r in person["reasons"]], [("representative_change", "governance"), ("new_unlisted_key", None)])
         text = json.dumps(reports, ensure_ascii=False)
-        for needle in ("reasonText", "sections", "刈谷市", "2文目", "１９６５", "tag"):
+        for needle in ("reasonText", "sections", "刈谷市", "2文目", "氏名", "tag"):
             self.assertNotIn(needle, text)
         self.assertEqual(server.excerpt("あ" * 200 + "。"), "あ" * 119 + "…")
         self.assertEqual(server.excerpt("文の終わりがない"), "文の終わりがない")
+        # A 。 inside brackets does not end the sentence.
+        self.assertEqual(server.excerpt("当社は、2026年5月22日（以下「本割当決議日」といいます。）開催の取締役会で決議しました。次の文。"),
+                         "当社は、2026年5月22日(以下「本割当決議日」といいます。)開催の取締役会で決議しました。")
         for personal in ("代表取締役 氏名（1960年4月1日生）。", "生年月日を記載。", None, ""):
             self.assertIsNone(server.excerpt(personal))
 

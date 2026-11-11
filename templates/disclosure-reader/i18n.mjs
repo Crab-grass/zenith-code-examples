@@ -149,7 +149,7 @@ export const texts = {
 
     extraRead1: "臨時報告書は、株主総会の決議・代表取締役の異動・財政状態などに大きな影響を与える出来事などがあったときに、会社がそのつど提出する書類です（金融商品取引法第24条の5第4項）。",
     extraRead2: "提出日は日本時間の日付です（APIはUTCで返します）。1通に事由が複数ある書類は、件数の表でそれぞれの事由に1件ずつ数えます。訂正の臨時報告書（書類の種類 190）は件数に入れず、別の行に数えます。",
-    extraRead3: "画面に出すのは提出の理由の文の冒頭（最初の1文・120字まで）だけです。生年月日などを含む文は出しません。出来事の中身は原文の「報告内容」で確かめます。",
+    extraRead3: "画面に出すのは提出の理由の文の冒頭（最初の1文・120字まで）だけです。代表取締役の異動・主要株主の異動の書類と、生年月日などを含む文は出しません。出来事の中身は原文の「報告内容」で確かめます。",
     reasonCategory: "分類", reason: "事由",
     rcat_all: "すべて", rcat_governance: "ガバナンス", "rcat_capital-and-financing": "資本・資金調達", "rcat_significant-event": "重要事象",
     rcat_reorganization: "組織再編", rcat_ownership: "支配・株主の異動", rcat_fund: "投信", rcat_other: "その他",
@@ -309,7 +309,7 @@ export const texts = {
     releaseTreasury: "Release treasury", releaseMinusOwn: "Gap (release − table)", releaseIssued: "Release issued", issuedFiling: "Issued (filing date)", issuedAfterYearEnd: "Filing date − year end",
     extraRead1: "A company files an extraordinary report (臨時報告書) each time a specified event occurs, such as resolutions of a shareholders' meeting, a change of representative director or an event with a significant effect on its financial position (Financial Instruments and Exchange Act art. 24-5(4)).",
     extraRead2: "Filing dates are Japan-time dates (the API returns UTC). A filing with several reasons counts once under each reason. Corrections (document type 190) are not in the counts; they are counted on a separate line.",
-    extraRead3: "Only the start of the stated reason (the first sentence, up to 120 characters) is shown, never text with a date of birth or a career summary. Read what happened in the filing itself.",
+    extraRead3: "Only the start of the stated reason (the first sentence, up to 120 characters) is shown; nothing for changes of representative directors or major shareholders, or for text with a date of birth or a career summary. Read what happened in the filing itself.",
     reasonCategory: "Category", reason: "Reason",
     rcat_all: "All", rcat_governance: "Governance", "rcat_capital-and-financing": "Capital & financing", "rcat_significant-event": "Significant events",
     rcat_reorganization: "Reorganization", rcat_ownership: "Control & shareholders", rcat_fund: "Funds", rcat_other: "Other",

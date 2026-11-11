@@ -71,13 +71,16 @@ ISSUED = ("atFiscalYearEnd", "atFilingDate")
 RELEASE = ("fiscalPeriod", "issuedShares", "treasuryShares")
 PERIOD = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])")
 # Extraordinary reports (臨時報告書): one row per filing. The reason text is cut to its first sentence
-# (at most EXCERPT characters) and dropped when it reads like a personal record (a date of birth or a
-# career summary); `sections` (the counterparty summaries of a merger or split) are never passed on.
+# (at most EXCERPT characters) and dropped for changes of representative directors or major
+# shareholders and whenever it reads like a personal record (a date of birth or a career summary); `sections` (the counterparty summaries of a merger or split) are never passed on.
 EXTRAORDINARY = ("symbol", "docTypeCode", "submittedAt")
 REASON = ("key", "label")
 REASON_TYPE = ("key", "labelJa", "labelEn", "category")
 EXTRAORDINARY_LIMIT = 50  # the newest 50 per company (the API allows up to 100)
 EXCERPT = 120
+# Reasons whose text is about people (who became or stopped being a representative director or a
+# major shareholder): even the first sentence can carry a name, so no excerpt is passed on.
+PERSONAL_REASONS = {"representative_change", "major_shareholder_change"}
 PERSONAL = re.compile(r"[0-9]{1,4}\s*年\s*[0-9]{1,2}\s*月\s*[0-9]{1,2}\s*日\s*生|生年月日|略歴")
 PREFECTURE = re.compile(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)")
 
@@ -309,14 +312,26 @@ def previous_year(period):
     return "%04d-%s" % (int(period[:4]) - 1, period[5:])
 
 
+def first_sentence(text):
+    """Text up to the first 。 outside brackets: filings put 。 inside (以下「…」といいます。)."""
+    depth = 0
+    for i, ch in enumerate(text):
+        if ch in "(「『":
+            depth += 1
+        elif ch in ")」』":
+            depth = max(0, depth - 1)
+        elif ch == "。" and depth == 0:
+            return text[:i + 1]
+    return text
+
+
 def excerpt(text):
     """The first sentence of a report's reason text, at most EXCERPT characters; None for personal records."""
     if not isinstance(text, str):
         return None
-    text = unicodedata.normalize("NFKC", text).strip()
-    if not text or PERSONAL.search(text.split("。", 1)[0]):
+    first = first_sentence(unicodedata.normalize("NFKC", text).strip())
+    if not first or PERSONAL.search(first):
         return None
-    first = text.split("。", 1)[0] + ("。" if "。" in text else "")
     return first if len(first) <= EXCERPT else first[:EXCERPT - 1] + "…"
 
 
@@ -327,7 +342,8 @@ def clean_extraordinary(rows, expected):
         _check_symbol(row, expected)
         item = _document(row, EXTRAORDINARY)
         item["reasons"] = [_pick(r, REASON) for r in _list(row.get("reasons") or [], 10)]
-        item["excerpt"] = excerpt(row.get("reasonText"))
+        personal = any(r["key"] in PERSONAL_REASONS for r in item["reasons"])
+        item["excerpt"] = None if personal else excerpt(row.get("reasonText"))
         out.append(item)  # reasonText in full and sections are never copied.
     return sorted(out, key=lambda r: str(r.get("submittedAt") or ""), reverse=True)
 
