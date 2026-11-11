@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-11T17:35:06Z",
+ "retrievedAt": "2026-11-11T21:59:40Z",
  "companies": [
   {
    "symbol": "6902",
@@ -835,7 +835,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -851,7 +851,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -867,7 +867,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -915,7 +915,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -931,7 +931,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -995,7 +995,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1853,7 +1853,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1917,7 +1917,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1981,7 +1981,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -3032,7 +3032,7 @@
      {
       "label": "取締役",
       "labelEn": "Director",
-      "headcount": null,
+      "headcount": 10,
       "total": 413000000,
       "ofWhichNonMonetary": null,
       "ofWhichParent": null,
@@ -3052,12 +3052,12 @@
       "subtotals": []
      },
      {
-      "label": "社外取締役",
-      "labelEn": "Outside directors",
-      "headcount": null,
+      "label": "取締役（うち社外取締役）",
+      "labelEn": null,
+      "headcount": 4,
       "total": 50000000,
       "ofWhichNonMonetary": null,
-      "ofWhichParent": null,
+      "ofWhichParent": "取締役",
       "totalDisclosed": null,
       "baseRemuneration": 50000000,
       "fixed": null,
@@ -3076,7 +3076,7 @@
      {
       "label": "監査役",
       "labelEn": "Auditandsupervisoryboardmenber",
-      "headcount": null,
+      "headcount": 6,
       "total": 107000000,
       "ofWhichNonMonetary": null,
       "ofWhichParent": null,
@@ -3096,12 +3096,12 @@
       "subtotals": []
      },
      {
-      "label": "社外監査役",
-      "labelEn": "Outside corporate auditors",
-      "headcount": null,
+      "label": "監査役（うち社外監査役）",
+      "labelEn": null,
+      "headcount": 3,
       "total": 31000000,
       "ofWhichNonMonetary": null,
-      "ofWhichParent": null,
+      "ofWhichParent": "監査役",
       "totalDisclosed": null,
       "baseRemuneration": 31000000,
       "fixed": null,
@@ -4806,7 +4806,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -4822,7 +4822,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
