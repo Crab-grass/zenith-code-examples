@@ -316,6 +316,44 @@ test("extraordinary reports: Japan-time dates, one row per filing, counts per re
   assert.deepEqual(M.extraordinaryCounts([company("7203", "トヨタ自動車")]).totals, { 7203: 0 });
 });
 
+test("officers and pay: counts as filed, titles counted, pay per person, parts and of-which rows", () => {
+  const officer = (title, group = "directors-and-auditors") => ({ group, row: 1, title, titleEn: null });
+  const directors = doc("7296", { counts: { male: 8, female: 2, femaleRatio: 0.2 }, plannedCounts: { male: 7, female: 3, femaleRatio: 0.3 }, plannedOfficersScope: "all",
+    officers: [officer("代表取締役社長"), officer("取締役"), officer("取締役 常勤監査等委員"), officer("取締役 監査等委員"), officer("取締役 監査等委員"),
+      officer("取締役"), officer("取締役"), officer("取締役"), officer("取締役"), officer("取締役")] });
+  const s = M.officerSummary(directors);
+  assert.deepEqual([s.total, s.male, s.female, s.femaleRatio, s.femaleShare, s.rowsMatch, s.representatives, s.auditors, s.auditCommittee, s.committee, s.design],
+    [10, 8, 2, 0.2, 0.2, true, 1, 0, 3, 0, "audit-committee"]);
+  assert.deepEqual([s.planned.total, s.planned.femaleShare, s.plannedScope], [10, 0.3, "all"]);
+  // Board of auditors; a female ratio filed as 27% stays as filed next to the calculated 3 ÷ 11.
+  const kansa = M.officerSummary(doc("6902", { counts: { male: 8, female: 3, femaleRatio: 0.27 }, plannedCounts: null,
+    officers: [officer("取締役社長 代表取締役"), officer("常勤監査役"), officer("監査役"), ...Array(8).fill(officer("取締役"))] }));
+  assert.deepEqual([kansa.femaleRatio, Math.round(kansa.femaleShare * 1000), kansa.auditors, kansa.design, kansa.planned], [0.27, 273, 2, "board-of-auditors", null]);
+  // Three committees: a director who is also an executive officer has a row in each group, so rows are not compared.
+  const three = M.officerSummary(doc("6758", { counts: { male: 2, female: 1, femaleRatio: 0.333 },
+    officers: [officer("取締役 代表執行役"), officer("取締役 監査委員"), officer("取締役"), officer("代表執行役 社長", "executive-officers")] }));
+  assert.deepEqual([three.design, three.rowsMatch, three.executiveRows, three.representatives, three.representativeExecutives, three.committee], ["three-committees", null, 1, 0, 1, 1]);
+  assert.equal(M.officerSummary(doc("7203", { counts: { male: 3, female: 0 }, officers: [officer("取締役")] })).rowsMatch, false);
+  assert.equal(M.officerSummary(null), null);
+
+  const pay = doc("7259", { categoriesSource: "facts", categories: [
+    { label: "取締役", labelEn: "Directors", headcount: 10, total: 608000000, bonus: 164000000, shareAwards: 175000000, baseRemuneration: null,
+      components: [{ labelJa: "月額報酬", labelEn: null, amount: 268000000 }], subtotals: [] },
+    { label: "取締役(うち社外取締役)", labelEn: null, headcount: 6, total: 57000000, components: [{ labelJa: "月額報酬", labelEn: null, amount: 57000000 }],
+      subtotals: [], ofWhichParent: "取締役" },
+    { label: "取締役", labelEn: null, headcount: null, total: 100, performanceBased: 78, bonus: 64, shareAwards: 14, nonMonetary: null, components: [],
+      subtotals: [{ item: "performanceBased", amount: 78, parts: ["bonus", "shareAwards"] }], ofWhichNonMonetary: 14 },
+  ] });
+  const [directorsRow, outside, withSubtotal] = M.compensationRows(pay);
+  assert.deepEqual([directorsRow.perHead, directorsRow.sum, directorsRow.diff, directorsRow.ofWhich], [60800000, 607000000, 1000000, null]);
+  assert.deepEqual(directorsRow.parts.map((p) => [p.key ?? p.label, Math.round(p.share * 1000)]), [["bonus", 270], ["shareAwards", 288], ["月額報酬", 441]]);
+  assert.deepEqual([outside.ofWhich, outside.perHead], ["取締役", 9500000]);
+  // A subtotal column is listed but not added; no head count means no pay per person; the "of which non-monetary" column is never added.
+  assert.deepEqual([withSubtotal.sum, withSubtotal.diff, withSubtotal.perHead, withSubtotal.parts.find((p) => p.key === "performanceBased").subtotal, withSubtotal.nonMonetaryOfWhich],
+    [78, 22, null, true, 14]);
+  assert.deepEqual(M.compensationRows(null), []);
+});
+
 test("main customers: share of same-year revenue only, unit mismatches hidden, 404 explained", () => {
   const revenue = [{ symbol: "7217", fiscalPeriod: "2026-03", period: "FY", revenue: 5594277000 }, { symbol: "7217", fiscalPeriod: "2024-03", period: "FY", revenue: 4865893000 }];
   const report = doc("7217", { customers: [
@@ -367,6 +405,10 @@ test("normalization rejects other companies' rows and unknown sections", () => {
     (d) => (d.companies[1].extraordinaryReports = [doc("9999")]),
     (d) => (d.companies[1].extraordinaryReports = [doc("7261", { reasons: "x" })]),
     (d) => (d.companies[1].extraordinaryReports = [doc("7261", { excerpt: 1 })]),
+    (d) => (d.companies[1].directors = doc("9999", { officers: [] })),
+    (d) => (d.companies[1].directors = doc("7261", { officers: "x" })),
+    (d) => (d.companies[1].directors = doc("7261", { officers: [], counts: 3 })),
+    (d) => (d.companies[1].directorCompensation = doc("7261", { categories: [{ components: "x" }] })),
     (d) => (d.companies[1].symbol = "7203"),
     (d) => (d.companies = []),
     (d) => (d.companies[0].symbol = "../x"),
@@ -433,6 +475,13 @@ test("saved demo.json normalizes and carries no prices, carrying amounts or TDne
     assert.ok(r.excerpt === null || Array.from(r.excerpt).length <= 120, r.docId);
     assert.ok(!("reasonText" in r) && !("sections" in r), r.docId);
   }
+  // Officers and pay: counts and titles only (no names), pay rows with totals.
+  assert.ok(data.companies.every((c) => M.officerSummary(c.directors)?.total > 0));
+  assert.ok(data.companies.every((c) => M.compensationRows(c.directorCompensation).some((r) => r.total > 0)));
+  for (const c of data.companies) {
+    for (const o of c.directors.officers) assert.deepEqual(Object.keys(o).sort(), ["group", "row", "title", "titleEn"]);
+    assert.ok(!("individuals" in c.directorCompensation) && !("plannedOfficers" in c.directors), c.symbol);
+  }
 });
 
 test("every interface text exists in both languages and avoids restricted wording", () => {
@@ -442,10 +491,12 @@ test("every interface text exists in both languages and avoids restricted wordin
   // Prefix-built keys ("sec_" + tag) are added explicitly below.
   const used = new Set([...app.matchAll(/\b(?:t|fill|notice)\("([A-Za-z_]+)"/g)].map((m) => m[1]).filter((k) => !k.endsWith("_")));
   for (const m of html.matchAll(/data-i18n(?:-label)?="([^"]+)"/g)) used.add(m[1]);
-  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury", "extraordinary"]) used.add(prefix + id);
+  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury", "extraordinary", "officers"]) used.add(prefix + id);
   for (const tag of M.SECTIONS) used.add("sec_" + tag);
   for (const key of M.CATEGORY_ORDER) used.add("cat_" + key);
   for (const key of ["all", ...M.REASON_CATEGORIES]) used.add("rcat_" + key);
+  for (const key of M.COMP_TYPES) used.add("ctype_" + key);
+  for (const key of M.OFFICER_DESIGNS) used.add("design_" + key);
   for (const key of ["holder_largest", "holder_second-largest", "upstream_failed", "invalid_response", "invalid_request", "busy", "local_only", "setup_required"]) used.add(key);
   for (const key of used) {
     assert.ok(key in texts.ja, `ja missing ${key}`);

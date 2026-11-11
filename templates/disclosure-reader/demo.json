@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-11T16:43:46Z",
+ "retrievedAt": "2026-11-11T17:35:24Z",
  "companies": [
   {
    "symbol": "7203",
@@ -1445,7 +1445,233 @@
      ],
      "excerpt": "当社は、譲渡制限付株式報酬制度(以下、本制度という。)に基づき、報酬案策定会議の審議を経て、2024年5月8日開催の取締役会において、当社の社外取締役を除く取締役(以下、対象取締役という。)および取締役を兼務しない執行役員(以下、対象取締…"
     }
-   ]
+   ],
+   "directors": {
+    "symbol": "7203",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-10T06:33:00Z",
+    "plannedOfficersScope": "all",
+    "docId": "S100Y8NY",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+    "counts": {
+     "male": 8,
+     "female": 2,
+     "femaleRatio": 0.2
+    },
+    "plannedCounts": {
+     "male": 8,
+     "female": 2,
+     "femaleRatio": 0.2
+    },
+    "officers": [
+     {
+      "group": "directors-and-auditors",
+      "row": 1,
+      "title": "取締役会長 （代表取締役）",
+      "titleEn": "Chairman and Director (Representative Director)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 2,
+      "title": "取締役副会長 （代表取締役）",
+      "titleEn": "Executive Vice Chairman and Director (Representative Director)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 3,
+      "title": "取締役副社長 （代表取締役）",
+      "titleEn": "Executive Vice President and Director (Representative Director)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 4,
+      "title": "取締役副社長 （代表取締役）",
+      "titleEn": "Executive Vice President and Director (Representative Director)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 5,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 6,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 7,
+      "title": "取締役 （監査等委員）",
+      "titleEn": "Director (Audit and Supervisory Committee Member)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 8,
+      "title": "取締役 （監査等委員）",
+      "titleEn": "Director (Audit and Supervisory Committee Member)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 9,
+      "title": "取締役 （監査等委員）",
+      "titleEn": "Director (Audit and Supervisory Committee Member)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 10,
+      "title": "取締役 （常勤監査等委員）",
+      "titleEn": "Director (Full-time Audit and Supervisory Committee Member)"
+     }
+    ]
+   },
+   "directorCompensation": {
+    "symbol": "7203",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-10T06:33:00Z",
+    "categoriesSource": "facts",
+    "docId": "S100Y8NY",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y8NY",
+    "categories": [
+     {
+      "label": "取締役（監査等委員である取締役を除く）",
+      "labelEn": "Members of the board of directors excluding directors who are audit and supervisory committee members",
+      "headcount": 12,
+      "total": 4131000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 932000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": 1206000000,
+      "stockOptions": null,
+      "shareAwards": 1993000000,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "うち社外取締役",
+      "labelEn": "Of which: outside members of the board of directors",
+      "headcount": 6,
+      "total": 101000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": "取締役（監査等委員である取締役を除く）",
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 101000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "監査等委員である取締役",
+      "labelEn": "Members of the board of directors who are audit and supervisory committee members",
+      "headcount": 4,
+      "total": 194000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 194000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "うち社外取締役",
+      "labelEn": "Of which: outside members of the board of directors",
+      "headcount": 3,
+      "total": 104000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": "監査等委員である取締役",
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 104000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "監査役",
+      "labelEn": "Corporate auditors",
+      "headcount": 6,
+      "total": 80000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 80000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "監査役(うち社外監査役)",
+      "labelEn": null,
+      "headcount": 3,
+      "total": 28000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": "監査役",
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 28000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     }
+    ]
+   }
   },
   {
    "symbol": "6902",
@@ -2447,7 +2673,201 @@
      ],
      "excerpt": "当社は、2024年5月10日開催の取締役会決議において、当社の譲渡制限付株式報酬制度(以下「本制度」といいます。)に基づき、当社の非業務執行取締役及び社外取締役を除く取締役(以下「対象取締役」といいます。)及び当社の取締役を兼務しない経営…"
     }
-   ]
+   ],
+   "directors": {
+    "symbol": "6902",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-11T06:36:00Z",
+    "plannedOfficersScope": "all",
+    "docId": "S100Y9T1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9T1",
+    "counts": {
+     "male": 10,
+     "female": 2,
+     "femaleRatio": 0.167
+    },
+    "plannedCounts": {
+     "male": 8,
+     "female": 4,
+     "femaleRatio": 0.333
+    },
+    "officers": [
+     {
+      "group": "directors-and-auditors",
+      "row": 1,
+      "title": "取締役会長",
+      "titleEn": "Chairman and Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 2,
+      "title": "取締役社長 代表取締役",
+      "titleEn": "President and Director, Representative Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 3,
+      "title": "取締役副社長 代表取締役",
+      "titleEn": "Executive Vice President and Director, Representative Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 4,
+      "title": "取締役副社長 代表取締役",
+      "titleEn": "Executive Vice President and Director, Representative Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 5,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 6,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 7,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 8,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 9,
+      "title": "常勤監査役",
+      "titleEn": "Full-time Audit & Supervisory Board Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 10,
+      "title": "常勤監査役",
+      "titleEn": "Full-time Audit & Supervisory Board Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 11,
+      "title": "監査役",
+      "titleEn": "Audit & Supervisory Board Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 12,
+      "title": "監査役",
+      "titleEn": "Audit & Supervisory Board Member"
+     }
+    ]
+   },
+   "directorCompensation": {
+    "symbol": "6902",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-11T06:36:00Z",
+    "categoriesSource": "facts",
+    "docId": "S100Y9T1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y9T1",
+    "categories": [
+     {
+      "label": "取締役",
+      "labelEn": "Directors",
+      "headcount": 8,
+      "total": 964000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": 384000000,
+      "fixed": null,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": 213000000,
+      "stockOptions": null,
+      "shareAwards": 367000000,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "取締役（うち社外取締役）",
+      "labelEn": null,
+      "headcount": 3,
+      "total": 63000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": "取締役",
+      "totalDisclosed": null,
+      "baseRemuneration": 63000000,
+      "fixed": null,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "監査役",
+      "labelEn": "Corporate auditors",
+      "headcount": 5,
+      "total": 143000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": 143000000,
+      "fixed": null,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "監査役（うち社外監査役）",
+      "labelEn": null,
+      "headcount": 2,
+      "total": 37000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": "監査役",
+      "totalDisclosed": null,
+      "baseRemuneration": 37000000,
+      "fixed": null,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     }
+    ]
+   }
   },
   {
    "symbol": "7267",
@@ -3651,7 +4071,292 @@
      ],
      "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生したため、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第12号の規定に基づき、本臨時報告書を提出するものであります。"
     }
-   ]
+   ],
+   "directors": {
+    "symbol": "7267",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-18T06:30:00Z",
+    "plannedOfficersScope": "all",
+    "docId": "S100YDD9",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9",
+    "counts": {
+     "male": 23,
+     "female": 3,
+     "femaleRatio": 0.12
+    },
+    "plannedCounts": {
+     "male": 21,
+     "female": 3,
+     "femaleRatio": 0.13
+    },
+    "officers": [
+     {
+      "group": "directors-and-auditors",
+      "row": 1,
+      "title": "取締役 取締役会議長 指名委員",
+      "titleEn": "Director, Chairman of the Board of Directors, Nominating Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 2,
+      "title": "取締役 報酬委員",
+      "titleEn": "Director, Compensation Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 3,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 4,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 5,
+      "title": "取締役 常勤監査委員",
+      "titleEn": "Director, Full-time Audit Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 6,
+      "title": "取締役 常勤監査委員",
+      "titleEn": "Director, Full-time Audit Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 7,
+      "title": "取締役 指名委員 監査委員",
+      "titleEn": "Director, Nominating Committee Member, Audit Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 8,
+      "title": "取締役 指名委員(委員長) 報酬委員",
+      "titleEn": "Director, Nominating Committee Member (Chairperson), Compensation Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 9,
+      "title": "取締役 監査委員(委員長) 報酬委員",
+      "titleEn": "Director, Audit Committee Member (Chairperson), Compensation Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 10,
+      "title": "取締役 指名委員 報酬委員(委員長)",
+      "titleEn": "Director, Nominating Committee Member, Compensation Committee Member (Chairperson)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 11,
+      "title": "取締役 監査委員",
+      "titleEn": "Director, Member of the Audit Committee"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 12,
+      "title": "取締役 指名委員",
+      "titleEn": "Director, Nominating Committee Member"
+     },
+     {
+      "group": "executive-officers",
+      "row": 13,
+      "title": "代表執行役社長 最高経営責任者",
+      "titleEn": "Representative Executive Officer, President, Chief Executive Officer"
+     },
+     {
+      "group": "executive-officers",
+      "row": 14,
+      "title": "代表執行役副社長 コンプライアンス＆ プライバシーオフィサー 企業風土改革担当",
+      "titleEn": "Representative Executive Officer, Executive Vice President, Compliance & Privacy Officer, in charge of Corporate Culture Reform"
+     },
+     {
+      "group": "executive-officers",
+      "row": 15,
+      "title": "執行役専務 北米地域本部長",
+      "titleEn": "Senior Managing Executive Officer, Head of Regional Operations (North America)"
+     },
+     {
+      "group": "executive-officers",
+      "row": 16,
+      "title": "執行役常務 中国本部長",
+      "titleEn": "Managing Executive Officer, Head of Regional Operations (China)"
+     },
+     {
+      "group": "executive-officers",
+      "row": 17,
+      "title": "執行役常務",
+      "titleEn": "Managing Executive Officer"
+     },
+     {
+      "group": "executive-officers",
+      "row": 18,
+      "title": "執行役常務",
+      "titleEn": "Managing Executive Officer"
+     },
+     {
+      "group": "executive-officers",
+      "row": 19,
+      "title": "執行役常務",
+      "titleEn": "Managing Executive Officer"
+     },
+     {
+      "group": "executive-officers",
+      "row": 20,
+      "title": "執行役常務 サプライチェーン購買本部長",
+      "titleEn": "Managing Executive Officer, Head of Supply Chain & Purchasing Operations"
+     },
+     {
+      "group": "executive-officers",
+      "row": 21,
+      "title": "執行役常務 四輪事業本部長 統合地域本部長 リスクマネジメントオフィサー",
+      "titleEn": "Managing Executive Officer, Head of Automobile Business Operations, Head of Integrated Regional Operations, Risk Management Officer"
+     },
+     {
+      "group": "executive-officers",
+      "row": 22,
+      "title": "執行役常務 二輪・パワープロダクツ事業本部長",
+      "titleEn": "Managing Executive Officer, Head of Motorcycle & Power Products Business Operations"
+     },
+     {
+      "group": "executive-officers",
+      "row": 23,
+      "title": "執行役 四輪生産本部長",
+      "titleEn": "Executive Officer, Head of Automobile Production Operations"
+     },
+     {
+      "group": "executive-officers",
+      "row": 24,
+      "title": "執行役 四輪事業本部 地域事業・カスタマーファースト担当 地域事業統括部長",
+      "titleEn": "Executive Officer, in charge of Regional Operations and Customer First, Automobile Business Operations; Operating Division Manager of Regional Operations Division"
+     },
+     {
+      "group": "executive-officers",
+      "row": 25,
+      "title": "執行役",
+      "titleEn": "Executive Officer"
+     },
+     {
+      "group": "executive-officers",
+      "row": 26,
+      "title": "執行役 品質改革本部長",
+      "titleEn": "Executive Officer, Head of Quality Innovation Operations"
+     },
+     {
+      "group": "executive-officers",
+      "row": 27,
+      "title": "執行役 最高財務責任者 コーポレート管理本部長",
+      "titleEn": "Executive Officer, Chief Financial Officer, Head of Corporate Administration Operations"
+     },
+     {
+      "group": "executive-officers",
+      "row": 28,
+      "title": "執行役 四輪事業本部 事業戦略担当 事業戦略統括部長",
+      "titleEn": "Executive Officer, in charge of Business Strategy, Automobile Business Operations; Operating Division Manager of Business Strategy Division"
+     },
+     {
+      "group": "executive-officers",
+      "row": 29,
+      "title": "執行役 企業変革責任者 コーポレート戦略本部長 安全運転普及本部長",
+      "titleEn": "Executive Officer, Chief Transformation Officer, Head of Corporate Strategy Operations, Head of Traffic Safety Promotion Operations"
+     }
+    ]
+   },
+   "directorCompensation": {
+    "symbol": "7267",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-18T06:30:00Z",
+    "categoriesSource": "facts",
+    "docId": "S100YDD9",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDD9",
+    "categories": [
+     {
+      "label": "取締役（社外取締役を除く）",
+      "labelEn": "Directors excluding outside directors",
+      "headcount": 2,
+      "total": 116000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 116000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "社外取締役",
+      "labelEn": "Outside directors",
+      "headcount": 6,
+      "total": 107000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 107000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "執行役",
+      "labelEn": "Executive officers",
+      "headcount": 15,
+      "total": 933000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 711000000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [
+       {
+        "labelJa": "ＳＴＩ",
+        "labelEn": "Short term incentive",
+        "amount": 109000000
+       },
+       {
+        "labelJa": "ＬＴＩ",
+        "labelEn": "Long term incentive",
+        "amount": 112000000
+       }
+      ],
+      "subtotals": []
+     }
+    ]
+   }
   },
   {
    "symbol": "7261",
@@ -4591,7 +5296,209 @@
      ],
      "excerpt": "当社は、2024年6月25日の当社第158回定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
     }
-   ]
+   ],
+   "directors": {
+    "symbol": "7261",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-23T00:09:00Z",
+    "plannedOfficersScope": null,
+    "docId": "S100YDZ1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1",
+    "counts": {
+     "male": 12,
+     "female": 3,
+     "femaleRatio": 0.2
+    },
+    "plannedCounts": null,
+    "officers": [
+     {
+      "group": "directors-and-auditors",
+      "row": 1,
+      "title": "代表取締役 会長",
+      "titleEn": "Chairman and Representative Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 2,
+      "title": "代表取締役 社長兼CEO (最高経営責任者) 〔コミュニケーション・サステナビリティ統括〕",
+      "titleEn": "President and Representative Director, CEO (Chief Executive Officer) [Supervising Communication and Sustainability]"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 3,
+      "title": "代表取締役 副社長兼経営役員CFO （最高財務責任者） 〔社長補佐、経営企画・北米事業・欧州事業・ 中南米事業統括〕",
+      "titleEn": "Executive Vice President and Representative Director, Managing Officer, CFO (Chief Financial Officer) [Assistant to the President, Supervising Corporate Planning, North American Business, European Business, and Central and South American Business]"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 4,
+      "title": "取締役 副社長兼経営役員 〔社長補佐、 ものづくり・品質統括〕",
+      "titleEn": "Director, Executive Vice President and Managing Officer [Assistant to the President, Supervising Monozukuri and Quality]"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 5,
+      "title": "取締役 経営役員CCO （最高コスト責任者） 〔コスト革新統括、ものづくり統括補佐〕",
+      "titleEn": "Director, Managing Officer, CCO (Chief Cost Officer) [Supervising Cost Innovation, Assistant to Supervising Monozukuri]"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 6,
+      "title": "取締役 経営役員CSO （最高戦略責任者） 〔戦略領域統括〕",
+      "titleEn": "Director, Managing Officer, CSO (Chief Strategy Officer) [Supervising Strategic Areas]"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 7,
+      "title": "取締役 経営役員CTO （最高技術責任者） 〔研究開発統括、ものづくり統括補佐〕",
+      "titleEn": "Director, Managing Officer, CTO (Chief Technology Officer) [Supervising R&D, Assistant to Supervising Monozukuri]"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 8,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 9,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 10,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 11,
+      "title": "取締役監査等委員 (常勤)",
+      "titleEn": "Director, Audit and Supervisory Committee Member (Full-time)"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 12,
+      "title": "取締役監査等委員",
+      "titleEn": "Director, Audit and Supervisory Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 13,
+      "title": "取締役監査等委員",
+      "titleEn": "Director, Audit and Supervisory Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 14,
+      "title": "取締役監査等委員",
+      "titleEn": "Director, Audit and Supervisory Committee Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 15,
+      "title": "取締役監査等委員",
+      "titleEn": "Director, Audit and Supervisory Committee Member"
+     }
+    ]
+   },
+   "directorCompensation": {
+    "symbol": "7261",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-23T00:09:00Z",
+    "categoriesSource": "facts",
+    "docId": "S100YDZ1",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDZ1",
+    "categories": [
+     {
+      "label": "取締役（監査等委員及び社外取締役を除く）",
+      "labelEn": "Directors excluding audit and supervisory committee members and outside directors",
+      "headcount": 8,
+      "total": 1141000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": 497000000,
+      "fixed": null,
+      "performanceBased": 288000000,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [
+       {
+        "labelJa": "RS",
+        "labelEn": "RS",
+        "amount": 117000000
+       },
+       {
+        "labelJa": "PSU",
+        "labelEn": "PSU",
+        "amount": 67000000
+       },
+       {
+        "labelJa": "その他報酬",
+        "labelEn": "Other compensations",
+        "amount": 171000000
+       }
+      ],
+      "subtotals": []
+     },
+     {
+      "label": "監査等委員（社外取締役を除く）",
+      "labelEn": "Directors appointed as audit and supervisory committee members excluding outside directors",
+      "headcount": 2,
+      "total": 39000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": 39000000,
+      "fixed": null,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "社外取締役",
+      "labelEn": "Outside directors",
+      "headcount": 7,
+      "total": 107000000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": 107000000,
+      "fixed": null,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": null,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     }
+    ]
+   }
   },
   {
    "symbol": "7217",
@@ -5215,7 +6122,133 @@
      ],
      "excerpt": "当社は、2024年6月27日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
     }
-   ]
+   ],
+   "directors": {
+    "symbol": "7217",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-24T07:00:00Z",
+    "plannedOfficersScope": "all",
+    "docId": "S100YIDI",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIDI",
+    "counts": {
+     "male": 7,
+     "female": 1,
+     "femaleRatio": 0.125
+    },
+    "plannedCounts": {
+     "male": 7,
+     "female": 2,
+     "femaleRatio": 0.222
+    },
+    "officers": [
+     {
+      "group": "directors-and-auditors",
+      "row": 1,
+      "title": "代表取締役社長",
+      "titleEn": "President and Representative Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 2,
+      "title": "専務取締役",
+      "titleEn": "Senior Managing Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 3,
+      "title": "専務取締役",
+      "titleEn": "Senior Managing Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 4,
+      "title": "取締役",
+      "titleEn": "Director"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 5,
+      "title": "監査役",
+      "titleEn": "Audit & Supervisory Board Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 6,
+      "title": "監査役",
+      "titleEn": "Audit & Supervisory Board Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 7,
+      "title": "監査役",
+      "titleEn": "Audit & Supervisory Board Member"
+     },
+     {
+      "group": "directors-and-auditors",
+      "row": 8,
+      "title": "監査役",
+      "titleEn": "Audit & Supervisory Board Member"
+     }
+    ]
+   },
+   "directorCompensation": {
+    "symbol": "7217",
+    "fiscalPeriod": "2026-03",
+    "period": "FY",
+    "docTypeCode": "120",
+    "submittedAt": "2026-06-24T07:00:00Z",
+    "categoriesSource": "facts",
+    "docId": "S100YIDI",
+    "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YIDI",
+    "categories": [
+     {
+      "label": "取締役（社外取締役を除く）",
+      "labelEn": "Directors excluding outside directors",
+      "headcount": 5,
+      "total": 108794000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 96056000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": 12737000,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     },
+     {
+      "label": "社外役員",
+      "labelEn": "Outside directors (and other officers)",
+      "headcount": 6,
+      "total": 23397000,
+      "ofWhichNonMonetary": null,
+      "ofWhichParent": null,
+      "totalDisclosed": null,
+      "baseRemuneration": null,
+      "fixed": 22710000,
+      "performanceBased": null,
+      "nonMonetary": null,
+      "bonus": null,
+      "stockOptions": null,
+      "shareAwards": null,
+      "restrictedShares": null,
+      "performanceLinkedShares": null,
+      "retirementBenefits": 687000,
+      "other": null,
+      "components": [],
+      "subtotals": []
+     }
+    ]
+   }
   }
  ]
 }

@@ -82,6 +82,17 @@ EXCERPT = 120
 # major shareholder): even the first sentence can carry a name, so no excerpt is passed on.
 PERSONAL_REASONS = {"representative_change", "major_shareholder_change"}
 PERSONAL = re.compile(r"[0-9]{1,4}\s*年\s*[0-9]{1,2}\s*月\s*[0-9]{1,2}\s*日\s*生|生年月日|略歴")
+# Officers (役員の状況) and their remuneration (役員の報酬等): head counts, titles and amounts per officer
+# category only. Names, dates of birth, terms, shareholdings and career summaries never leave this
+# process, and neither do the named officers paid JPY 100 million or more (`individuals`).
+DIRECTORS = DOC + ("plannedOfficersScope",)
+GENDER = ("male", "female", "femaleRatio")
+OFFICER = ("group", "row", "title", "titleEn")
+COMPENSATION = DOC + ("categoriesSource",)
+COMP_AMOUNTS = ("baseRemuneration", "fixed", "performanceBased", "nonMonetary", "bonus", "stockOptions", "shareAwards",
+                "restrictedShares", "performanceLinkedShares", "retirementBenefits", "other")
+COMP_CATEGORY = ("label", "labelEn", "headcount", "total", "ofWhichNonMonetary", "ofWhichParent", "totalDisclosed") + COMP_AMOUNTS
+COMP_PART = ("labelJa", "labelEn", "amount")
 PREFECTURE = re.compile(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)")
 
 
@@ -363,6 +374,52 @@ def classify(companies, types):
                 reason["category"] = known.get("category")
 
 
+def clean_directors(rows, expected):
+    """Officers of the latest annual report: counts by gender and each row's group and title only."""
+    if not rows:
+        return None
+    rows = _list(rows, 10)
+    for row in rows:
+        _check_symbol(row, expected)
+    row = _latest(rows)
+    out = _document(row, DIRECTORS)
+    for key in ("counts", "plannedCounts"):
+        out[key] = _pick(row[key], GENDER) if isinstance(row.get(key), dict) else None
+    officers = []
+    for officer in _list(row.get("officers") or [], 80):
+        item = _pick(officer, OFFICER)
+        if PERSONAL.search(str(item["title"] or "")):
+            item["title"] = item["titleEn"] = None
+        officers.append(item)  # name, birthDate, term, shares and careerSummary are never copied.
+    out["officers"] = officers
+    return out  # plannedOfficers (names of the expected officers) is never copied either.
+
+
+def clean_compensation(rows, expected):
+    """Remuneration per officer category: head count, total and amount by type. `individuals` is never copied."""
+    if not rows:
+        return None
+    rows = _list(rows, 10)
+    for row in rows:
+        _check_symbol(row, expected)
+    row = _latest(rows)
+    out = _document(row, COMPENSATION)
+    categories = []
+    for category in _list(row.get("categories") or [], 30):
+        item = _pick(category, COMP_CATEGORY)
+        item["components"] = [_pick(c, COMP_PART) for c in _list(category.get("components") or [], 20)]
+        subtotals = []
+        for sub in _list(category.get("subtotals") or [], 10):
+            entry = _pick(sub, ("item", "amount"))
+            parts = sub.get("parts")
+            entry["parts"] = [str(x)[:100] for x in parts[:20]] if isinstance(parts, list) else []
+            subtotals.append(entry)
+        item["subtotals"] = subtotals
+        categories.append(item)
+    out["categories"] = categories
+    return out
+
+
 def clean_revenue(rows, expected):
     out = []
     for row in _list(rows or [], 5):
@@ -382,10 +439,11 @@ def optional(requester, path, params, api_key):
 
 
 def fetch_company(symbol, api_key, requester=request_rows):
-    """One company, whitelisted. 15 requests, 16 when main customers exist (revenue is then fetched).
+    """One company, whitelisted. 17 requests, 18 when main customers exist (revenue is then fetched).
 
     Treasury shares are fetched twice: the latest annual report, then the one a year earlier
-    (no second request when the first is a 404). Extraordinary reports are one request (the newest 50)."""
+    (no second request when the first is a 404). Extraordinary reports are one request (the newest 50);
+    officers and their remuneration are one request each."""
     company = {"symbol": symbol}
     company["profile"] = clean_profile(requester("/profile", {"symbol": symbol}, api_key), symbol)
     company["texts"] = {tag: clean_text(optional(requester, "/text-blocks", {"symbol": symbol, "tag": tag}, api_key), symbol)
@@ -411,6 +469,9 @@ def fetch_company(symbol, api_key, requester=request_rows):
             optional(requester, "/treasury-shares", {"symbol": symbol, "fiscalPeriod": prior}, api_key), symbol, prior)
     company["extraordinaryReports"] = clean_extraordinary(optional(requester, "/extraordinary-reports", {
         "symbol": symbol, "limit": EXTRAORDINARY_LIMIT}, api_key), symbol)
+    company["directors"] = clean_directors(optional(requester, "/directors", {"symbol": symbol}, api_key), symbol)
+    company["directorCompensation"] = clean_compensation(
+        optional(requester, "/director-compensation", {"symbol": symbol}, api_key), symbol)
     return company
 
 
@@ -545,7 +606,7 @@ def main():
     with make_server(args.port, key, demo_set=args.demo) as server:
         print("Open http://127.0.0.1:%d" % server.server_port, flush=True)
         print("Saved snapshot: %s (%s). Live access: %s. Ctrl+C to stop." % (args.demo, DEMOS[args.demo],
-            "enabled; each fetch makes 15-16 requests per company plus 1 and requires a click" if key else "disabled"), flush=True)
+            "enabled; each fetch makes 17-18 requests per company plus 1 and requires a click" if key else "disabled"), flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:
