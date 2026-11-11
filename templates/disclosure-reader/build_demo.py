@@ -3,9 +3,10 @@
 
 The file is the exact fetch_bundle() output the browser receives in live mode: prices,
 price-derived values (including cross-shareholding carrying amounts) and TDnet document links
-are already removed by the whitelist. 14 requests per company, 15 when the company reports main
-customers, one after another. Nothing is written unless every request succeeds (a 404 means the
-disclosure does not exist and is kept as empty). The key comes from ZENITH_API_KEY or a hidden
+are already removed by the whitelist. 15 requests per company, 16 when the company reports main
+customers, plus 1 for the list of extraordinary-report reasons, one after another. Nothing is
+written unless every request succeeds (a 404 means the disclosure does not exist and is kept as
+empty). The key comes from ZENITH_API_KEY or a hidden
 prompt only.
 
     python3 templates/disclosure-reader/build_demo.py                   # demo.json: 7203 6902 7267 7261 7217
@@ -38,7 +39,7 @@ SETS = {"automakers": (DEFAULT_SYMBOLS, server.DEMOS["automakers"]), "suppliers"
 MAX_SAVED = 8
 # Last line of defence: refuse to write a file that contains any of these keys.
 BANNED = {"price", "marketCap", "per", "pbr", "psr", "beta", "dividendYield", "priceDate", "archiveUrl",
-          "carryingAmount", "priorCarryingAmount", "chars", "address", "holderNameRaw"}
+          "carryingAmount", "priorCarryingAmount", "chars", "address", "holderNameRaw", "reasonText", "sections"}
 
 
 def check(value):
@@ -82,7 +83,7 @@ def main():
         key = getpass.getpass("ZENITH API key (hidden): ").strip()
     if not key:
         parser.error("Set ZENITH_API_KEY or run interactively. Do not pass a key on the command line.")
-    print("Fetching %d companies, up to %d requests ..." % (len(codes), 15 * len(codes)), flush=True)
+    print("Fetching %d companies, up to %d requests ..." % (len(codes), 16 * len(codes) + 1), flush=True)
     try:
         snapshot = build(codes, key, out=Path(args.out))
     except ZenithError as error:
@@ -91,9 +92,10 @@ def main():
         sys.exit("Stopped; unexpected response (%s). demo.json was not changed." % type(error).__name__)
     for company in snapshot["companies"]:
         texts = [tag for tag, block in company["texts"].items() if block]
-        print("  %s: sections %s, %d major shareholders, customers %s, treasury shares %s" % (
+        print("  %s: sections %s, %d major shareholders, customers %s, treasury shares %s, %d extraordinary reports" % (
             company["symbol"], ",".join(texts) or "-", len(company["majorShareholders"]),
-            "yes" if company["mainCustomers"] else "no", "yes" if company["treasuryShares"] else "no"))
+            "yes" if company["mainCustomers"] else "no", "yes" if company["treasuryShares"] else "no",
+            len(company["extraordinaryReports"])))
     print("Wrote %s. Check the display rights before publishing screenshots or files." % args.out)
 
 

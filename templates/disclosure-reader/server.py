@@ -11,6 +11,7 @@ import re
 import secrets
 import sys
 import threading
+import unicodedata
 from urllib.parse import urlsplit
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
@@ -69,6 +70,18 @@ TREASURY_HOLDER = ("row", "name") + TREASURY_VALUES
 ISSUED = ("atFiscalYearEnd", "atFilingDate")
 RELEASE = ("fiscalPeriod", "issuedShares", "treasuryShares")
 PERIOD = re.compile(r"[0-9]{4}-(?:0[1-9]|1[0-2])")
+# Extraordinary reports (臨時報告書): one row per filing. The reason text is cut to its first sentence
+# (at most EXCERPT characters) and dropped for changes of representative directors or major
+# shareholders and whenever it reads like a personal record (a date of birth or a career summary); `sections` (the counterparty summaries of a merger or split) are never passed on.
+EXTRAORDINARY = ("symbol", "docTypeCode", "submittedAt")
+REASON = ("key", "label")
+REASON_TYPE = ("key", "labelJa", "labelEn", "category")
+EXTRAORDINARY_LIMIT = 50  # the newest 50 per company (the API allows up to 100)
+EXCERPT = 120
+# Reasons whose text is about people (who became or stopped being a representative director or a
+# major shareholder): even the first sentence can carry a name, so no excerpt is passed on.
+PERSONAL_REASONS = {"representative_change", "major_shareholder_change"}
+PERSONAL = re.compile(r"[0-9]{1,4}\s*年\s*[0-9]{1,2}\s*月\s*[0-9]{1,2}\s*日\s*生|生年月日|略歴")
 PREFECTURE = re.compile(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)")
 
 
@@ -299,6 +312,57 @@ def previous_year(period):
     return "%04d-%s" % (int(period[:4]) - 1, period[5:])
 
 
+def first_sentence(text):
+    """Text up to the first 。 outside brackets: filings put 。 inside (以下「…」といいます。)."""
+    depth = 0
+    for i, ch in enumerate(text):
+        if ch in "(「『":
+            depth += 1
+        elif ch in ")」』":
+            depth = max(0, depth - 1)
+        elif ch == "。" and depth == 0:
+            return text[:i + 1]
+    return text
+
+
+def excerpt(text):
+    """The first sentence of a report's reason text, at most EXCERPT characters; None for personal records."""
+    if not isinstance(text, str):
+        return None
+    first = first_sentence(unicodedata.normalize("NFKC", text).strip())
+    if not first or PERSONAL.search(first):
+        return None
+    return first if len(first) <= EXCERPT else first[:EXCERPT - 1] + "…"
+
+
+def clean_extraordinary(rows, expected):
+    """Extraordinary reports of one company, newest first. A 404 and an empty list both mean none."""
+    out = []
+    for row in _list(rows or [], EXTRAORDINARY_LIMIT):
+        _check_symbol(row, expected)
+        item = _document(row, EXTRAORDINARY)
+        item["reasons"] = [_pick(r, REASON) for r in _list(row.get("reasons") or [], 10)]
+        personal = any(r["key"] in PERSONAL_REASONS for r in item["reasons"])
+        item["excerpt"] = None if personal else excerpt(row.get("reasonText"))
+        out.append(item)  # reasonText in full and sections are never copied.
+    return sorted(out, key=lambda r: str(r.get("submittedAt") or ""), reverse=True)
+
+
+def clean_reason_types(rows):
+    """The reason list (key, names and category), used to classify each report's reasons."""
+    return {r["key"]: r for r in (_pick(row, REASON_TYPE) for row in _list(rows or [], 200)) if isinstance(r["key"], str)}
+
+
+def classify(companies, types):
+    """Adds the English name and the category from the reason list; unknown keys get neither."""
+    for company in companies:
+        for report in company["extraordinaryReports"]:
+            for reason in report["reasons"]:
+                known = types.get(reason["key"]) or {}
+                reason["labelEn"] = known.get("labelEn")
+                reason["category"] = known.get("category")
+
+
 def clean_revenue(rows, expected):
     out = []
     for row in _list(rows or [], 5):
@@ -318,10 +382,10 @@ def optional(requester, path, params, api_key):
 
 
 def fetch_company(symbol, api_key, requester=request_rows):
-    """One company, whitelisted. 14 requests, 15 when main customers exist (revenue is then fetched).
+    """One company, whitelisted. 15 requests, 16 when main customers exist (revenue is then fetched).
 
     Treasury shares are fetched twice: the latest annual report, then the one a year earlier
-    (no second request when the first is a 404)."""
+    (no second request when the first is a 404). Extraordinary reports are one request (the newest 50)."""
     company = {"symbol": symbol}
     company["profile"] = clean_profile(requester("/profile", {"symbol": symbol}, api_key), symbol)
     company["texts"] = {tag: clean_text(optional(requester, "/text-blocks", {"symbol": symbol, "tag": tag}, api_key), symbol)
@@ -345,6 +409,8 @@ def fetch_company(symbol, api_key, requester=request_rows):
     if prior:
         company["priorTreasuryShares"] = clean_treasury(
             optional(requester, "/treasury-shares", {"symbol": symbol, "fiscalPeriod": prior}, api_key), symbol, prior)
+    company["extraordinaryReports"] = clean_extraordinary(optional(requester, "/extraordinary-reports", {
+        "symbol": symbol, "limit": EXTRAORDINARY_LIMIT}, api_key), symbol)
     return company
 
 
@@ -352,9 +418,10 @@ def fetch_bundle(symbols, api_key, requester=request_rows):
     """The comparison exactly as the browser receives it (and as build_demo.py saves it).
 
     Strictly sequential; the first failure other than a 404 aborts everything (no partial result,
-    no retry).
+    no retry). The reason list of extraordinary reports is one more request per fetch.
     """
     companies = [fetch_company(symbol, api_key, requester) for symbol in symbols]
+    classify(companies, clean_reason_types(requester("/extraordinary-report-reasons", {}, api_key)))
     return {"mode": "live", "retrievedAt": _now(), "companies": companies}
 
 
@@ -478,7 +545,7 @@ def main():
     with make_server(args.port, key, demo_set=args.demo) as server:
         print("Open http://127.0.0.1:%d" % server.server_port, flush=True)
         print("Saved snapshot: %s (%s). Live access: %s. Ctrl+C to stop." % (args.demo, DEMOS[args.demo],
-            "enabled; each fetch makes 14-15 requests per company and requires a click" if key else "disabled"), flush=True)
+            "enabled; each fetch makes 15-16 requests per company plus 1 and requires a click" if key else "disabled"), flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:

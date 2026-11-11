@@ -279,6 +279,43 @@ test("treasury shares: own and mutual rows, ratios to issued shares, the prior y
   assert.equal(M.treasuryChange(current, null), null);
 });
 
+test("extraordinary reports: Japan-time dates, one row per filing, counts per reason without corrections", () => {
+  const reason = (key, category, label = key) => ({ key, label, labelEn: null, category });
+  const report = (symbol, docId, submittedAt, reasons, docTypeCode = "180") => ({ symbol, docId, docTypeCode, submittedAt, sourceUrl: EDINET, reasons, excerpt: null });
+  const meeting = reason("shareholders_meeting_resolution", "governance", "株主総会決議");
+  const event = reason("significant_event", "significant-event");
+  const group = reason("significant_event_group", "significant-event");
+  const a = company("7220", "武蔵精密工業", { extraordinaryReports: [
+    report("7220", "S100YMSX", "2026-06-29T04:00:00Z", [meeting]),
+    report("7220", "S100XJOX", "2026-02-06T06:58:00Z", [event, group]),
+    report("7220", "S100SS6C", "2024-02-08T16:38:00Z", [reason("representative_change", "governance")]),
+  ] });
+  const b = company("3116", "トヨタ紡織", { extraordinaryReports: [
+    report("3116", "S100XXEC", "2026-04-07T07:17:00Z", [group, event], "190"),
+    report("3116", "S100XP7T", "2026-03-06T03:50:00Z", [group]),
+    report("3116", "S100ZZZZ", "2026-03-06T03:50:00Z", [reason("new_unlisted_key", null, "未登録")]),
+  ] });
+  // UTC 16:38 is the next day in Japan; a value without a zone is UTC.
+  assert.equal(M.jstDate("2024-02-08T16:38:00Z"), "2024-02-09");
+  assert.equal(M.jstDate("2026-06-10 06:33:00"), "2026-06-10");
+  assert.equal(M.jstDate("x"), null);
+  const all = M.extraordinaryTimeline([a, b]);
+  assert.deepEqual(all.map((r) => r.report.docId), ["S100YMSX", "S100XXEC", "S100XP7T", "S100ZZZZ", "S100XJOX", "S100SS6C"]);
+  assert.deepEqual([all[1].correction, all[4].reasons.length, all[5].date], [true, 2, "2024-02-09"]);
+  assert.deepEqual(M.extraordinaryTimeline([a, b], "significant-event").map((r) => r.report.docId), ["S100XXEC", "S100XP7T", "S100XJOX"]);
+
+  const counts = M.extraordinaryCounts([a, b]);
+  assert.deepEqual(counts.rows.map((r) => [r.key, r.counts["7220"] ?? 0, r.counts["3116"] ?? 0]), [
+    ["representative_change", 1, 0], ["shareholders_meeting_resolution", 1, 0],
+    ["significant_event_group", 1, 1], ["significant_event", 1, 0], ["new_unlisted_key", 0, 1]]);
+  assert.deepEqual([counts.totals, counts.corrections], [{ 7220: 3, 3116: 2 }, { 7220: 0, 3116: 1 }]);
+  assert.deepEqual(counts.span["7220"], { from: "2024-02-09", to: "2026-06-29", filings: 3 });
+  assert.equal(M.reasonCategory(b.extraordinaryReports[2].reasons[0]), "other");
+  const governance = M.extraordinaryCounts([a, b], "governance");
+  assert.deepEqual([governance.rows.map((r) => r.key), governance.totals], [["representative_change", "shareholders_meeting_resolution"], { 7220: 2, 3116: 0 }]);
+  assert.deepEqual(M.extraordinaryCounts([company("7203", "トヨタ自動車")]).totals, { 7203: 0 });
+});
+
 test("main customers: share of same-year revenue only, unit mismatches hidden, 404 explained", () => {
   const revenue = [{ symbol: "7217", fiscalPeriod: "2026-03", period: "FY", revenue: 5594277000 }, { symbol: "7217", fiscalPeriod: "2024-03", period: "FY", revenue: 4865893000 }];
   const report = doc("7217", { customers: [
@@ -327,6 +364,9 @@ test("normalization rejects other companies' rows and unknown sections", () => {
     (d) => (d.companies[1].treasuryShares = doc("9999", { votingRightsTable: { holders: [] } })),
     (d) => (d.companies[1].priorTreasuryShares = doc("7261", { votingRightsTable: { holders: "x" } })),
     (d) => (d.companies[1].treasuryShares = doc("7261", { votingRightsTable: [] })),
+    (d) => (d.companies[1].extraordinaryReports = [doc("9999")]),
+    (d) => (d.companies[1].extraordinaryReports = [doc("7261", { reasons: "x" })]),
+    (d) => (d.companies[1].extraordinaryReports = [doc("7261", { excerpt: 1 })]),
     (d) => (d.companies[1].symbol = "7203"),
     (d) => (d.companies = []),
     (d) => (d.companies[0].symbol = "../x"),
@@ -386,6 +426,13 @@ test("saved demo.json normalizes and carries no prices, carrying amounts or TDne
     const treasury = M.treasuryRows(c.treasuryShares, c.profile);
     assert.ok(treasury && treasury.ownFound && treasury.sumMatches !== false, c.symbol);
   }
+  // Extraordinary reports: rows of the company only, short excerpts, no full text or section bodies.
+  assert.ok(data.companies.some((c) => c.extraordinaryReports.length > 0));
+  for (const c of data.companies) for (const r of c.extraordinaryReports) {
+    assert.ok(M.jstDate(r.submittedAt), r.docId);
+    assert.ok(r.excerpt === null || Array.from(r.excerpt).length <= 120, r.docId);
+    assert.ok(!("reasonText" in r) && !("sections" in r), r.docId);
+  }
 });
 
 test("every interface text exists in both languages and avoids restricted wording", () => {
@@ -395,9 +442,10 @@ test("every interface text exists in both languages and avoids restricted wordin
   // Prefix-built keys ("sec_" + tag) are added explicitly below.
   const used = new Set([...app.matchAll(/\b(?:t|fill|notice)\("([A-Za-z_]+)"/g)].map((m) => m[1]).filter((k) => !k.endsWith("_")));
   for (const m of html.matchAll(/data-i18n(?:-label)?="([^"]+)"/g)) used.add(m[1]);
-  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury"]) used.add(prefix + id);
+  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury", "extraordinary"]) used.add(prefix + id);
   for (const tag of M.SECTIONS) used.add("sec_" + tag);
   for (const key of M.CATEGORY_ORDER) used.add("cat_" + key);
+  for (const key of ["all", ...M.REASON_CATEGORIES]) used.add("rcat_" + key);
   for (const key of ["holder_largest", "holder_second-largest", "upstream_failed", "invalid_response", "invalid_request", "busy", "local_only", "setup_required"]) used.add(key);
   for (const key of used) {
     assert.ok(key in texts.ja, `ja missing ${key}`);

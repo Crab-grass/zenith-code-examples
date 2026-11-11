@@ -162,6 +162,8 @@ table.grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .badge.self { background: var(--warn-soft); color: var(--warn); }
 .badge.hit { background: var(--accent-soft); color: var(--hit); }
 .badge.zero { background: var(--panel); color: var(--muted); border: 1px solid var(--rule-soft); }
+.grid tr.extra-detail td { background: var(--panel); font: 13px/1.8 var(--serif); color: var(--ink); white-space: normal; }
+.grid tr.extra-detail .excerpt { margin-right: 8px; }
 .holder { display: inline-flex; flex-wrap: wrap; gap: 4px 6px; align-items: baseline; }
 .holder small { font-size: 11px; }
 .holder .members { flex-basis: 100%; }

@@ -74,6 +74,12 @@ function company(raw) {
     }
     return report;
   };
+  const extraordinary = list(raw.extraordinaryReports, 100).map((row) => {
+    sameCompany(row, symbol);
+    list(row.reasons, 10);
+    if (row.excerpt !== null && row.excerpt !== undefined && typeof row.excerpt !== "string") fail();
+    return row;
+  });
   return {
     symbol, profile, texts,
     majorShareholders: list(raw.majorShareholders, 40).map((row) => sameCompany(row, symbol)),
@@ -85,6 +91,7 @@ function company(raw) {
     revenue: list(raw.revenue, 5).map((row) => sameCompany(row, symbol)),
     treasuryShares: treasury(raw.treasuryShares),
     priorTreasuryShares: treasury(raw.priorTreasuryShares),
+    extraordinaryReports: extraordinary,
   };
 }
 export function normalizeBundle(result, symbols) {
@@ -574,6 +581,57 @@ export function treasuryChange(current, prior) {
     priorPeriod: prior.fiscalPeriod, ownPrior: prior.own, own: minus(current.own, prior.own), mutual: minus(current.mutual, prior.mutual),
     total: minus(current.total, prior.total), issuedPrior: prior.issuedYearEnd, issued: minus(current.issuedYearEnd, prior.issuedYearEnd),
   };
+}
+
+// ---------- 6. Extraordinary reports ------------------------------------------------------------
+// One row per filing (臨時報告書). A filing can give several reasons; docTypeCode 190 is a correction
+// of an earlier filing. Dates are counted in Japan time (the API returns UTC). The counts never
+// include corrections, so an amended filing is not counted twice.
+export const REASON_CATEGORIES = ["governance", "capital-and-financing", "significant-event", "reorganization", "ownership", "fund", "other"];
+export const CORRECTION = "190";
+export const isCorrection = (report) => report?.docTypeCode === CORRECTION;
+export const reasonCategory = (reason) => (REASON_CATEGORIES.includes(reason?.category) ? reason.category : "other");
+export function jstDate(value) {
+  if (typeof value !== "string" || !value) return null;
+  const iso = value.trim().replace(" ", "T");
+  const d = new Date(/(Z|[+-]\d{2}(:?\d{2})?)$/.test(iso) ? iso.replace(/([+-]\d{2})$/, "$1:00") : iso + "Z"); // no zone = UTC
+  return Number.isNaN(d.getTime()) ? null : new Date(d.getTime() + 9 * 3600e3).toISOString().slice(0, 10);
+}
+const inCategory = (report, category) => !category || category === "all" || (report.reasons ?? []).some((r) => reasonCategory(r) === category);
+
+// All companies' filings in one list, newest first (one row per filing, all its reasons).
+export function extraordinaryTimeline(companies, category = "all") {
+  return companies.flatMap((company) => (company.extraordinaryReports ?? []).filter((r) => inCategory(r, category)).map((report) => ({
+    company, report, date: jstDate(report.submittedAt), correction: isCorrection(report), reasons: report.reasons ?? [],
+  }))).sort((a, b) => String(b.report.submittedAt ?? "").localeCompare(String(a.report.submittedAt ?? "")) || a.company.symbol.localeCompare(b.company.symbol));
+}
+
+// Company x reason counts. A filing with two reasons counts once under each; corrections are counted apart.
+export function extraordinaryCounts(companies, category = "all") {
+  const reasons = new Map();
+  const totals = {}, corrections = {}, span = {};
+  for (const c of companies) {
+    totals[c.symbol] = 0;
+    corrections[c.symbol] = 0;
+    const dates = (c.extraordinaryReports ?? []).map((r) => jstDate(r.submittedAt)).filter(Boolean).sort();
+    span[c.symbol] = { from: dates[0] ?? null, to: dates.at(-1) ?? null, filings: (c.extraordinaryReports ?? []).length };
+    for (const report of c.extraordinaryReports ?? []) {
+      if (!inCategory(report, category)) continue;
+      if (isCorrection(report)) { corrections[c.symbol] += 1; continue; }
+      totals[c.symbol] += 1;
+      for (const key of new Set((report.reasons ?? []).map((r) => r.key))) {
+        const reason = report.reasons.find((r) => r.key === key);
+        if (category !== "all" && reasonCategory(reason) !== category) continue;
+        if (!reasons.has(key)) reasons.set(key, { key, label: reason.label ?? key, labelEn: reason.labelEn ?? null, category: reasonCategory(reason), counts: {}, total: 0 });
+        const row = reasons.get(key);
+        row.counts[c.symbol] = (row.counts[c.symbol] ?? 0) + 1;
+        row.total += 1;
+      }
+    }
+  }
+  const order = (r) => REASON_CATEGORIES.indexOf(r.category);
+  const rows = [...reasons.values()].sort((a, b) => order(a) - order(b) || b.total - a.total || a.key.localeCompare(b.key));
+  return { rows, totals, corrections, span };
 }
 
 // ---------- Formatting ---------------------------------------------------------------------
