@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-11T17:35:24Z",
+ "retrievedAt": "2026-11-11T22:00:07Z",
  "companies": [
   {
    "symbol": "7203",
@@ -1230,7 +1230,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1246,7 +1246,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1262,7 +1262,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1310,7 +1310,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1326,7 +1326,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1374,7 +1374,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -1438,7 +1438,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -2506,7 +2506,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -2522,7 +2522,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -2538,7 +2538,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -2586,7 +2586,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -2602,7 +2602,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -2666,7 +2666,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -5177,7 +5177,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -5193,7 +5193,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -5225,7 +5225,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -5241,7 +5241,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
@@ -5273,7 +5273,7 @@
      "reasons": [
       {
        "key": "stock_option_issue",
-       "label": "ストックオプションの発行",
+       "label": "届出を要しない株券等又は新株予約権証券等の発行",
        "labelEn": "Issuance of stock options (not subject to securities registration)",
        "category": "capital-and-financing"
       }
