@@ -1,8 +1,8 @@
-# Disclosure reader (annual-report text, shareholders, strategic holdings and treasury shares, side by side)
+# Disclosure reader (annual-report text, shareholders, strategic holdings, treasury shares and extraordinary reports, side by side)
 
 [日本語](README.ja.md) · [Repository README](../../README.md)
 
-A sample workspace for strategy, IR and research teams that reads **the deeper parts of the annual securities report (有価証券報告書) for 2–5 companies side by side**: how risks are written, who the shareholders are, how strategic holdings are being unwound, audit fees and main customers, treasury shares and voting rights.
+A sample workspace for strategy, IR and research teams that reads **the deeper parts of the annual securities report (有価証券報告書) for 2–5 companies side by side**: how risks are written, who the shareholders are, how strategic holdings are being unwound, audit fees and main customers, treasury shares and voting rights. Extraordinary reports are lined up as a timeline by filing date.
 
 | View | What it does |
 | --- | --- |
@@ -11,6 +11,7 @@ A sample workspace for strategy, IR and research teams that reads **the deeper p
 | 3. Strategic holdings | How many companies' shares are held for purposes other than pure investment, itemized holdings with year-on-year change, **holdings sold out during the year**, deemed holdings, holdings of subsidiaries and **mutual holdings** between the compared companies |
 | 4. Audit & customers | Audit, non-audit and network fees with the non-audit share; customers that account for 10% or more of revenue, with their share of revenue |
 | 5. Treasury & votes | From the filing's treasury-shares table: **shares without votes (own and mutually held)** with their ratio to issued shares, the mutual-holding rows, **the change from the prior year**, **the gap to the earnings release's treasury count** and issued shares at the filing date |
+| 6. Extraordinary reports | Extraordinary reports (臨時報告書) as **a timeline, newest first, one filing per row** (all reasons of a filing; corrections marked), **counts per company and reason** and a filter by reason category. Choose a filing to see only the start of its stated reason; the full text is on EDINET |
 
 ## 1. Try it without an account
 
@@ -32,7 +33,7 @@ A second snapshot covers five auto-parts makers (Denso, Aisin, Toyota Boshoku, M
 python3 templates/disclosure-reader/server.py --demo suppliers
 ```
 
-- Choose 2–5 companies at the top and switch between the five views on the left.
+- Choose 2–5 companies at the top and switch between the six views on the left.
 - Switch JA / EN and light / dark (the default follows your OS).
 - Link to a selection and view with `?companies=7203,7261#cross`.
 
@@ -62,8 +63,10 @@ Choose **Live**, add 2–5 securities codes and press **Fetch**.
 | `/stable/main-customers` | 1 |
 | `/stable/income-statement?period=annual&limit=3` (only when main customers exist; revenue and period only) | 0–1 |
 | `/stable/treasury-shares` (the latest annual report and the one a year earlier; once if the latest is a 404) | 1–2 |
+| `/stable/extraordinary-reports?limit=50` (the newest 50 filings) | 1 |
+| `/stable/extraordinary-report-reasons` (the list of reasons; once per fetch, whatever the number of companies) | 1 per fetch |
 
-**A fetch = 14–15 requests per company**, at most 75 for five companies, one company at a time, never in parallel. A 404 (the disclosure does not exist) counts as "none"; any other failure stops the whole fetch and nothing partial is shown. No retries, no auto refresh. Switching views, keywords and copying the prompt make no API calls.
+**A fetch = 15–16 requests per company, plus 1**, at most 81 for five companies, one company at a time, never in parallel. A 404 (the disclosure does not exist) counts as "none"; any other failure stops the whole fetch and nothing partial is shown. No retries, no auto refresh. Switching views, keywords and copying the prompt make no API calls.
 
 ## What reaches the browser
 
@@ -73,6 +76,7 @@ The local server forwards only the fields the views need (the whitelists in `ser
 - **No carrying amounts of strategic holdings** (`carryingAmount`, `priorCarryingAmount`). Listed shares are carried at market value, so the amounts are set by share prices. Only share counts, the stated purpose and whether the other company holds back are used.
 - **Only revenue and its period from the income statement**, to express main customers as a share of revenue.
 - **The treasury-shares table is reduced to holder names, share counts and ratios** (no addresses or translations). The earnings-release counts (`consolidated`) are numbers only (period, issued and treasury shares), never a link to the release.
+- **Extraordinary reports are reduced to the document ID and type, the filing time, the reasons (key, name, category) and the start of the stated reason** (the first sentence, up to 120 characters). Filings such as a change of representative director carry names, dates of birth and career summaries, so the full text (`reasonText`) and the structured sections (`sections`) are never forwarded, and text with a date of birth or a career summary is not forwarded even in part.
 - **No TDnet document links.** `archiveUrl` is always removed and `sourceUrl` survives only for EDINET pages. Document IDs and filing dates are shown.
 - Shareholder addresses are reduced to the **prefecture (or “overseas”)** before they are forwarded.
 - Upstream error details are never shown.
@@ -90,6 +94,7 @@ The local server forwards only the fields the views need (the whitelists in `ser
 - **Treasury shares, etc.** is the voting-rights table of shares without votes (Companies Act art. 308). The row in the company's own name is **own**; the other rows are **mutual** holdings (this company's shares held by a company in which it has a quarter or more of the votes, or similar), added up in `treasuryRows` in `model.mjs`. Notes after a name such as "(注)１" are dropped before matching, and a row named 当社 ("the company") counts as own. Ratios = shares ÷ issued shares of all classes at the year end, calculated here, next to the filed ratio. Companies whose rows do not add up to the total, or whose own row is not found by name, are flagged. The table counts whole trading units, so treasury shares below one unit are not in it.
 - **The earnings release's treasury count** is consolidated, a different scope from the own shares in the table. The view shows the gap (release − table) only and **never subtracts treasury shares from issued shares.** Check the filing's notes when the gap is more than one unit. After a stock split past the year end, the release may already show post-split counts.
 - **The change from the prior year** is the difference from the same table in the annual report one year earlier (`treasuryChange`). Companies without such a report (for example after a change of fiscal year) show “—”.
+- **Extraordinary reports are dated in Japan time** (the API returns UTC; `jstDate`). The counts (`extraordinaryCounts`) leave out corrections (document type 190), which are counted on their own line; a filing with several reasons counts once under each. Categories come from the reason list's `category`; reasons not in the list are “Other”. The newest 50 filings per company are fetched, and a company that reaches 50 is marked next to its date range. A company without extraordinary reports gets an empty list from the API, not a 404.
 - “—” means unavailable or not disclosed and is never treated as zero.
 
 ## The AI prompt
@@ -114,8 +119,8 @@ Provide the key with `ZENITH_API_KEY` or the hidden prompt, never on the command
 | --- | --- |
 | `server.py` | Loopback-only server, field whitelists, `fetch_bundle` |
 | `build_demo.py` | Builds `demo.json` from live data |
-| `model.mjs` | Validation, heading extraction, keywords, name matching, mutual holdings, sold-out counting, audit fees, customer shares, treasury shares (shared with the Node tests) |
-| `app.mjs` | The five views (the `VIEWS` list) and company selection |
+| `model.mjs` | Validation, heading extraction, keywords, name matching, mutual holdings, sold-out counting, audit fees, customer shares, treasury shares, the extraordinary-report timeline and counts (shared with the Node tests) |
+| `app.mjs` | The six views (the `VIEWS` list) and company selection |
 | `i18n.mjs` | Japanese and English copy |
 | `index.html` / `style.css` | Layout, light and dark themes |
 | `demo.json` / `demo-suppliers.json` | Saved snapshots for offline use (carmakers / auto parts; pick with `--demo`) |

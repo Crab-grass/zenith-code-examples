@@ -12,7 +12,7 @@ const state = {
   mode: "demo", view: "text", config: null, demo: null, demoSelected: [], live: [], data: null, retrievedAt: null,
   busy: false, status: { key: "", vars: {}, error: false },
   section: M.SECTIONS.includes(params.get("section")) ? params.get("section") : "risks",
-  keyword: params.get("q") ?? "", active: null, prompt: null,
+  keyword: params.get("q") ?? "", active: null, prompt: null, reasonCategory: "all",
 };
 const t = (key) => texts[state.lang][key] ?? texts.en[key] ?? key;
 const fill = (key, values) => t(key).replace(/\{(\w+)\}/g, (_, k) => values[k] ?? "");
@@ -104,6 +104,7 @@ const VIEWS = [
   { id: "cross", render: renderCross },
   { id: "audit", render: renderAudit },
   { id: "treasury", render: renderTreasury },
+  { id: "extraordinary", render: renderExtraordinary },
 ];
 
 // ---------- 1. Text blocks ----------
@@ -551,6 +552,72 @@ function renderTreasury(host, data) {
   host.append(panel(t("sources"), t("sourcesNote"), sourcesTable(companies.map((c) => ({ company: c, report: c.treasuryShares })))));
 }
 
+// ---------- 6. Extraordinary reports ----------
+function renderExtraordinary(host, data) {
+  const companies = data.companies;
+  const category = state.reasonCategory;
+  const reasonName = (r) => (state.lang === "en" ? r.labelEn || r.label : r.label) || r.key || "—";
+  host.append(notes(["extraRead1", "extraRead2", "extraRead3"]));
+  // Filter by the reason list's category (display only; no request).
+  const present = new Set(companies.flatMap((c) => (c.extraordinaryReports ?? []).flatMap((r) => (r.reasons ?? []).map(M.reasonCategory))));
+  const controls = node("div", undefined, { class: "controls" });
+  const seg = node("div", undefined, { class: "seg wrap", role: "group", "aria-label": t("reasonCategory") });
+  for (const id of ["all", ...M.REASON_CATEGORIES.filter((k) => present.has(k))]) {
+    const b = node("button", t("rcat_" + id), { type: "button", "aria-pressed": String(category === id) });
+    b.addEventListener("click", () => { state.reasonCategory = id; render(); });
+    seg.append(b);
+  }
+  controls.append(node("span", t("reasonCategory"), { class: "muted small" }), seg);
+  host.append(controls);
+
+  // Company x reason counts (corrections counted apart).
+  const counts = M.extraordinaryCounts(companies, category);
+  const countRows = [...counts.rows,
+    { summary: "extraFilings", values: counts.totals }, { summary: "extraCorrections", values: counts.corrections }];
+  host.append(panel(t("extraCountTitle"), t("extraCountNote"), table([
+    { label: t("reason"), cls: "name", render: (r) => (r.summary ? node("strong", t(r.summary)) : reasonName(r)) },
+    { label: t("reasonCategory"), render: (r) => (r.summary ? "" : node("span", t("rcat_" + r.category), { class: "muted small" })) },
+    ...companies.map((c) => ({ label: nameOf(c), num: true,
+      render: (r) => { const v = r.summary ? r.values[c.symbol] : r.counts[c.symbol]; return v ? String(v) : node("span", "0", { class: "muted" }); } })),
+  ], countRows, { compact: true, rowClass: (r) => (r.summary === "extraFilings" ? "group-start" : null) })));
+  host.append(node("p", companies.map((c) => {
+    const s = counts.span[c.symbol];
+    return `${nameOf(c)} ${s.from ? `${s.from}〜${s.to}` : "—"}${s.filings >= 50 ? " " + t("extraLimit") : ""}`;
+  }).join(" · "), { class: "panel-note" }));
+
+  // Timeline: one filing per row, newest first. Choosing a row shows the start of its reason text
+  // in a line right under it (one at a time).
+  const show = (row, button) => {
+    const open = button.getAttribute("aria-pressed") !== "true";
+    for (const b of host.querySelectorAll("button[data-extra]")) b.setAttribute("aria-pressed", String(open && b === button));
+    for (const tr of host.querySelectorAll("tr.extra-detail")) tr.remove();
+    if (!open) return;
+    const tr = node("tr", undefined, { class: "extra-detail" });
+    const td = node("td", undefined, { colspan: "6" });
+    td.append(node("span", row.report.excerpt ?? t("extraNoExcerpt"), { class: "excerpt" }), " ", link(row.report.sourceUrl, t("extraReadFull")));
+    tr.append(td);
+    button.closest("tr").after(tr);
+  };
+  const timeline = M.extraordinaryTimeline(companies, category);
+  host.append(panel(t("extraTimelineTitle"), t("extraTimelineNote"), timeline.length ? table([
+    { label: t("extraDate"), cls: "nowrap mono", render: (r) => r.date ?? "—" },
+    { label: "", render: (r) => companyTitle(r.company) },
+    { label: t("reason"), render: (r) => {
+      const cell = node("span", undefined, { class: "holder" });
+      for (const reason of r.reasons) cell.append(badge(reasonName(reason), "zero"));
+      if (r.correction) cell.append(badge(t("extraCorrection"), "self"));
+      return cell;
+    } },
+    { label: t("docId"), cls: "mono", render: (r) => r.report.docId ?? "—" },
+    { label: "", render: (r) => link(r.report.sourceUrl) },
+    { label: "", render: (r) => {
+      const b = node("button", t("extraShow"), { type: "button", class: "chip", "data-extra": "1", "aria-pressed": "false" });
+      b.addEventListener("click", () => show(r, b));
+      return b;
+    } },
+  ], timeline, { compact: true }) : node("p", t("noExtraordinary"), { class: "muted" })));
+}
+
 // ---------- Frame: navigation, picker, status ----------
 function renderNav() {
   const nav = $("viewNav");
@@ -615,7 +682,7 @@ function renderPicker() {
   $("loadButton").textContent = state.busy ? t("loading") : t("fetch");
   $("loadButton").disabled = state.busy || !state.config?.liveEnabled;
   $("loadButton").setAttribute("aria-busy", String(state.busy));
-  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 15 });
+  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 16 + 1 });
   $("setup").hidden = state.mode !== "live" || Boolean(state.config?.liveEnabled);
   $("demoMode").setAttribute("aria-pressed", String(state.mode === "demo"));
   $("liveMode").setAttribute("aria-pressed", String(state.mode === "live"));

@@ -43,7 +43,7 @@ class FakeApi:
         self.calls.append((path, dict(params), key))
         if self.fail_on == len(self.calls):
             raise server.ZenithError("HTTP 401. private-upstream-detail")
-        s = params["symbol"]
+        s = params.get("symbol")
         if path == "/profile":
             return [{"symbol": s, "nameJa": "テスト" + s, "nameEn": "Test", "isEtf": False, "assetType": "EQUITY", "price": 2500,
                      "marketCap": 1e13, "per": 9.1, "pbr": 1.1, "beta": 1.0, "dividendYield": 0.03, "priceDate": "2026-10-30",
@@ -101,6 +101,21 @@ class FakeApi:
                 issuedShares=[{"members": [], "atFiscalYearEnd": 187665738, "atFilingDate": 187665738},
                               {"members": ["jpcrp_cor_OrdinaryShare"], "atFiscalYearEnd": 187665738, "atFilingDate": 187665738}],
                 consolidated={"fiscalPeriod": period, "source": "tdnet-summary", "issuedShares": 187665738, "treasuryShares": own + 39})]
+        if path == "/extraordinary-reports":
+            row = {"symbol": s, "docId": "S100ZD3V", "docTypeCode": "180", "submittedAt": "2026-11-09T01:43:00Z", "sourceUrl": EDINET,
+                   "reasons": [{"tag": "jpcrp-esr_cor:EventWithSignificantEffectsOnFinancialPositionBusinessPerformanceAndCashFlowsTextBlock",
+                                "key": "significant_event", "label": "財政状態・経営成績等への重要事象（提出会社）"}],
+                   "reasonText": "当社の財政状態に著しい影響を与える事象が発生いたしましたので、本臨時報告書を提出するものであります。2文目。",
+                   "sections": {"counterparty": {"address": "愛知県刈谷市"}}}
+            person = dict(row, docId="S100XMU2", submittedAt="2026-02-25T07:32:00Z",
+                          reasons=[{"tag": "x", "key": "representative_change", "label": "代表取締役の異動"}, {"tag": "y", "key": "new_unlisted_key", "label": "未登録"}],
+                          reasonText="新任 氏名 １９６５年４月１日生 略歴あり。")
+            return [person, row]
+        if path == "/extraordinary-report-reasons":
+            return [{"key": "significant_event", "element": "x", "labelJa": "財政状態・経営成績等への重要事象（提出会社）", "labelEn": "Significant event",
+                     "label": "Significant event", "category": "significant-event", "structured": False},
+                    {"key": "representative_change", "element": "y", "labelJa": "代表取締役の異動", "labelEn": "Change of representative director",
+                     "label": "x", "category": "governance", "structured": False}]
         raise AssertionError("unexpected path " + path)
 
 
@@ -124,9 +139,12 @@ class FetchBundleTests(unittest.TestCase):
             ("/major-shareholders", {"symbol": "7203"}), ("/shareholder-categories", {"symbol": "7203"}), ("/large-holders", {"symbol": "7203"}),
             ("/cross-shareholdings", {"symbol": "7203"}), ("/audit-fees", {"symbol": "7203"}), ("/main-customers", {"symbol": "7203"}),
             ("/income-statement", {"symbol": "7203", "period": "annual", "limit": 3})])
-        self.assertEqual([(p, q) for p, q, _ in api.calls[13:15]], [
-            ("/treasury-shares", {"symbol": "7203"}), ("/treasury-shares", {"symbol": "7203", "fiscalPeriod": "2025-03"})])
-        self.assertEqual(len(api.calls), 30)
+        self.assertEqual([(p, q) for p, q, _ in api.calls[13:16]], [
+            ("/treasury-shares", {"symbol": "7203"}), ("/treasury-shares", {"symbol": "7203", "fiscalPeriod": "2025-03"}),
+            ("/extraordinary-reports", {"symbol": "7203", "limit": 50})])
+        # The reason list is one request per fetch, after every company.
+        self.assertEqual([(p, q) for p, q, _ in api.calls[-1:]], [("/extraordinary-report-reasons", {})])
+        self.assertEqual(len(api.calls), 33)
         self.assertEqual([c["symbol"] for c in bundle["companies"]], ["7203", "7261"])
 
     def test_main_customer_source_is_reduced_to_notes_or_sales(self):
@@ -147,7 +165,7 @@ class FetchBundleTests(unittest.TestCase):
     def test_no_main_customers_means_no_revenue_request(self):
         api = FakeApi(customers=False)
         bundle = server.fetch_bundle(["7203", "7261"], "k", api)
-        self.assertEqual(len(api.calls), 28)
+        self.assertEqual(len(api.calls), 31)
         self.assertNotIn("/income-statement", [c[0] for c in api.calls])
         company = bundle["companies"][0]
         self.assertIsNone(company["mainCustomers"])  # 404 = no customer at 10% or more
@@ -173,7 +191,26 @@ class FetchBundleTests(unittest.TestCase):
         api = FakeApi(treasury=False)
         none = server.fetch_bundle(["7203", "7261"], "k", api)["companies"][0]
         self.assertEqual((none["treasuryShares"], none["priorTreasuryShares"]), (None, None))
-        self.assertEqual(len(api.calls), 28)
+        self.assertEqual(len(api.calls), 31)
+
+    def test_extraordinary_reports_keep_reasons_and_only_a_short_excerpt(self):
+        reports = server.fetch_bundle(["7203", "7261"], "k", FakeApi())["companies"][0]["extraordinaryReports"]
+        self.assertEqual([r["docId"] for r in reports], ["S100ZD3V", "S100XMU2"])  # newest first
+        event, person = reports
+        self.assertEqual(event, {"symbol": "7203", "docTypeCode": "180", "submittedAt": "2026-11-09T01:43:00Z", "docId": "S100ZD3V", "sourceUrl": EDINET,
+                                 "reasons": [{"key": "significant_event", "label": "財政状態・経営成績等への重要事象（提出会社）",
+                                              "labelEn": "Significant event", "category": "significant-event"}],
+                                 "excerpt": "当社の財政状態に著しい影響を与える事象が発生いたしましたので、本臨時報告書を提出するものであります。"})
+        # A date of birth drops the text; an unknown reason key keeps its name without a category.
+        self.assertIsNone(person["excerpt"])
+        self.assertEqual([(r["key"], r["category"]) for r in person["reasons"]], [("representative_change", "governance"), ("new_unlisted_key", None)])
+        text = json.dumps(reports, ensure_ascii=False)
+        for needle in ("reasonText", "sections", "刈谷市", "2文目", "１９６５", "tag"):
+            self.assertNotIn(needle, text)
+        self.assertEqual(server.excerpt("あ" * 200 + "。"), "あ" * 119 + "…")
+        self.assertEqual(server.excerpt("文の終わりがない"), "文の終わりがない")
+        for personal in ("代表取締役 氏名（1960年4月1日生）。", "生年月日を記載。", None, ""):
+            self.assertIsNone(server.excerpt(personal))
 
     def test_whitelist_drops_prices_carrying_amounts_and_tdnet_links(self):
         bundle = server.fetch_bundle(["7203", "7261"], "k", FakeApi())
@@ -257,8 +294,9 @@ class FetchBundleTests(unittest.TestCase):
         allowed |= {"placeholder", "retrievedAt", "companies", "profile", "texts", "content", "truncated", "docId", "sourceUrl", "region",
                     "majorShareholders", "shareholderCategories", "categories", "largeHolders", "crossShareholdings", "holders", "summary",
                     "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource", "notes",
-                    "treasuryShares", "priorTreasuryShares", "votingRightsTable", "total", "issuedShares", "members", "consolidated"} | set(server.SECTIONS)
-        allowed |= set(server.TREASURY_HOLDER + server.ISSUED + server.RELEASE)
+                    "treasuryShares", "priorTreasuryShares", "votingRightsTable", "total", "issuedShares", "members", "consolidated",
+                    "extraordinaryReports", "reasons", "excerpt", "labelEn", "category"} | set(server.SECTIONS)
+        allowed |= set(server.TREASURY_HOLDER + server.ISSUED + server.RELEASE + server.EXTRAORDINARY + server.REASON)
         self.assertLessEqual(set(keys(demo)), allowed)
         self.assertIs(demo["placeholder"], False)
         build_demo.check(demo)  # the same last-line check build_demo.py runs before writing
@@ -273,7 +311,7 @@ class BuildDemoTests(unittest.TestCase):
             saved = json.loads(out.read_text(encoding="utf-8"))
             self.assertIs(saved["placeholder"], False)
             self.assertEqual([c["symbol"] for c in saved["companies"]], ["7203", "7261"])
-            self.assertEqual(len(api.calls), 30)
+            self.assertEqual(len(api.calls), 33)
             self.assertEqual({c[2] for c in api.calls}, {"k"})
             self.assertNotIn('"k"', out.read_text(encoding="utf-8"))
             out.write_text("previous", encoding="utf-8")
@@ -291,7 +329,8 @@ class BuildDemoTests(unittest.TestCase):
             self.assertEqual(tuple(c["symbol"] for c in saved["companies"]), codes, name)
 
     def test_last_line_check_refuses_banned_fields_and_links(self):
-        for bad in [{"a": {"carryingAmount": 1}}, {"price": 1}, [{"archiveUrl": "x"}], {"u": "https://www.release.tdnet.info/x.pdf"}]:
+        for bad in [{"a": {"carryingAmount": 1}}, {"price": 1}, [{"archiveUrl": "x"}], {"u": "https://www.release.tdnet.info/x.pdf"},
+                    [{"reasonText": "x"}], {"sections": {}}]:
             with self.assertRaises(ValueError):
                 build_demo.check(bad)
         build_demo.check({"sourceUrl": EDINET, "content": "本文"})
@@ -360,7 +399,7 @@ class ServerTests(unittest.TestCase):
         status, data, _ = self.request("/api/compare", {"symbols": ["7203", "7261"]}, self.headers())
         self.assertEqual(status, 200)
         self.assertEqual(data["mode"], "live")
-        self.assertEqual(len(self.api.calls), 30)
+        self.assertEqual(len(self.api.calls), 33)
         self.assertEqual({c[2] for c in self.api.calls}, {"test-private-key"})
         self.assertNotIn("test-private-key", json.dumps(data))
         for field in PRICE_FIELDS + ("archiveUrl", "carryingAmount"):

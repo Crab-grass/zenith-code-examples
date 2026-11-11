@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-10T05:59:42Z",
+ "retrievedAt": "2026-11-11T16:43:46Z",
  "companies": [
   {
    "symbol": "7203",
@@ -1219,7 +1219,233 @@
      "issuedShares": 15794987460,
      "treasuryShares": 2746057686
     }
-   }
+   },
+   "extraordinaryReports": [
+    {
+     "symbol": "7203",
+     "docTypeCode": "190",
+     "submittedAt": "2026-08-07T06:30:00Z",
+     "docId": "S100YVEP",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YVEP",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、本日、株式付与ESOP(Employee Stock Ownership Plan)信託を活用した、1当社の幹部職のうち一定の要件を満たす者を対象とする株式交付制度(以下、「幹部職向け制度」といい、その対象となる従業員を「対象幹部…"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2026-08-04T06:30:00Z",
+     "docId": "S100YU3U",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YU3U",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、本日、株式付与ESOP(Employee Stock Ownership Plan)信託を活用した、1当社の幹部職のうち一定の要件を満たす者を対象とする株式交付制度(以下、「幹部職向け制度」といい、その対象となる従業員を「対象幹部…"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "190",
+     "submittedAt": "2026-06-18T06:30:00Z",
+     "docId": "S100YDIS",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YDIS",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2025年8月7日付で、会社法(平成17年法律第86号。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2026-06-18T06:00:00Z",
+     "docId": "S100YE7V",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YE7V",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社第122回定時株主総会(以下「本総会」といいます。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2026-06-15T06:36:00Z",
+     "docId": "S100YBTK",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YBTK",
+     "reasons": [
+      {
+       "key": "significant_event",
+       "label": "財政状態・経営成績等への重要事象（提出会社）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the company)",
+       "category": "significant-event"
+      }
+     ],
+     "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生いたしましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第12号の規定に基づき、本臨時報告書を提出するものであり…"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2026-05-08T04:55:00Z",
+     "docId": "S100Y2EV",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y2EV",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、譲渡制限付株式報酬制度(以下、本制度という。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2025-08-07T06:30:00Z",
+     "docId": "S100WHMY",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100WHMY",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2025年8月7日付で、会社法(平成17年法律第86号。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2025-06-13T06:00:00Z",
+     "docId": "S100VXSQ",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VXSQ",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社第121回定時株主総会(以下「本総会」といいます。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2025-06-10T07:00:00Z",
+     "docId": "S100VWQ2",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VWQ2",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "当社は、当社の連結子会社である日野自動車株式会社(以下「日野」といいます。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2025-05-08T04:55:00Z",
+     "docId": "S100VPQE",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VPQE",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、譲渡制限付株式報酬制度(以下、本制度という。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "190",
+     "submittedAt": "2025-03-17T06:32:00Z",
+     "docId": "S100VESB",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VESB",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "当社は、2025年2月5日開催の取締役会において、新会社の設立を決議しました。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2025-02-05T04:36:00Z",
+     "docId": "S100V6U8",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100V6U8",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "当社は、2025年2月5日開催の取締役会において、新会社の設立を決議しました。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2024-06-19T06:00:00Z",
+     "docId": "S100TNT2",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TNT2",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社第120回定時株主総会(以下「本総会」といいます。"
+    },
+    {
+     "symbol": "7203",
+     "docTypeCode": "180",
+     "submittedAt": "2024-05-08T04:55:00Z",
+     "docId": "S100TD9S",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TD9S",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、譲渡制限付株式報酬制度(以下、本制度という。"
+    }
+   ]
   },
   {
    "symbol": "6902",
@@ -2027,7 +2253,201 @@
      "issuedShares": 2910979691,
      "treasuryShares": 93663914
     }
-   }
+   },
+   "extraordinaryReports": [
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2026-06-19T02:07:00Z",
+     "docId": "S100YEG5",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YEG5",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2026年6月18日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "190",
+     "submittedAt": "2026-06-18T06:48:00Z",
+     "docId": "S100YCHE",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YCHE",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2026年5月22日開催の当社取締役会において、取締役(非業務執行取締役及び社外取締役を除きます。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2026-05-22T06:59:00Z",
+     "docId": "S100Y5TI",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y5TI",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2026年5月22日開催の当社取締役会において、取締役(非業務執行取締役及び社外取締役を除きます。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2026-05-22T06:58:00Z",
+     "docId": "S100Y5TD",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100Y5TD",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2026年5月22日(以下「本割当決議日」といいます。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2026-03-24T07:38:00Z",
+     "docId": "S100XT0T",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XT0T",
+     "reasons": [
+      {
+       "key": "significant_event",
+       "label": "財政状態・経営成績等への重要事象（提出会社）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the company)",
+       "category": "significant-event"
+      }
+     ],
+     "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生いたしましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第12号の規定に基づき、本臨時報告書を提出するものであり…"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2025-06-16T02:36:00Z",
+     "docId": "S100VXY3",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VXY3",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2025年6月13日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2025-05-19T06:31:00Z",
+     "docId": "S100VL2X",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VL2X",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2025年5月19日開催の取締役会決議において、当社の譲渡制限付株式報酬制度(以下「本制度」といいます。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2025-05-19T06:31:00Z",
+     "docId": "S100VQ2X",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VQ2X",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2025年5月19日(以下「本割当決議日」といいます。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2025-05-13T00:33:00Z",
+     "docId": "S100VQ31",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VQ31",
+     "reasons": [
+      {
+       "key": "significant_event",
+       "label": "財政状態・経営成績等への重要事象（提出会社）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the company)",
+       "category": "significant-event"
+      }
+     ],
+     "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生いたしましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第12号の規定に基づき、本臨時報告書を提出するものであり…"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2024-06-21T02:04:00Z",
+     "docId": "S100TP02",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TP02",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2024年6月20日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2024-05-21T02:04:00Z",
+     "docId": "S100TGV6",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TGV6",
+     "reasons": [
+      {
+       "key": "significant_event",
+       "label": "財政状態・経営成績等への重要事象（提出会社）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the company)",
+       "category": "significant-event"
+      }
+     ],
+     "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生いたしましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第12号の規定に基づき、本臨時報告書を提出するものであり…"
+    },
+    {
+     "symbol": "6902",
+     "docTypeCode": "180",
+     "submittedAt": "2024-05-10T06:08:00Z",
+     "docId": "S100TDBG",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TDBG",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2024年5月10日開催の取締役会決議において、当社の譲渡制限付株式報酬制度(以下「本制度」といいます。"
+    }
+   ]
   },
   {
    "symbol": "7267",
@@ -3063,7 +3483,175 @@
      "issuedShares": 5280000000,
      "treasuryShares": 933490429
     }
-   }
+   },
+   "extraordinaryReports": [
+    {
+     "symbol": "7267",
+     "docTypeCode": "190",
+     "submittedAt": "2026-07-01T07:36:00Z",
+     "docId": "S100YO4C",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YO4C",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "当社は、2025年12月16日、当社の持分法適用関連会社であるAstemo株式会社(以下「Astemo」といいます。"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2026-07-01T02:39:00Z",
+     "docId": "S100YNU9",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YNU9",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2026年6月26日の当社第102回定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2026-03-13T01:55:00Z",
+     "docId": "S100XQPQ",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XQPQ",
+     "reasons": [
+      {
+       "key": "significant_event",
+       "label": "財政状態・経営成績等への重要事象（提出会社）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the company)",
+       "category": "significant-event"
+      },
+      {
+       "key": "significant_event_group",
+       "label": "財政状態・経営成績等への重要事象（連結）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the group)",
+       "category": "significant-event"
+      }
+     ],
+     "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生したため、金融商品取引法第24条の5第4項および企業内容等の開示に関する内閣府令第19条第2項第12号および第19号の規定に基づき、本臨時報告書を提出するも…"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2025-12-17T01:38:00Z",
+     "docId": "S100XB04",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XB04",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "当社は、2025年12月16日、当社の持分法適用関連会社であるAstemo株式会社(以下「Astemo」といいます。"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2025-06-24T02:34:00Z",
+     "docId": "S100W3L1",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W3L1",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2025年6月19日開催の当社第101回定時株主総会において決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本臨時報告書を提出するものであり…"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2025-04-08T06:30:00Z",
+     "docId": "S100VL4A",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VL4A",
+     "reasons": [
+      {
+       "key": "representative_change",
+       "label": "代表取締役の異動",
+       "labelEn": "Change of representative director",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2025年4月7日に取締役 代表執行役副社長 青山 真二から辞任届が提出され、これを受理しました。"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "190",
+     "submittedAt": "2024-07-17T07:02:00Z",
+     "docId": "S100U28S",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100U28S",
+     "reasons": [
+      {
+       "key": "public_offering_or_secondary_distribution_of_securities_outside_japan",
+       "label": "本邦以外の地域における有価証券の募集又は売出",
+       "labelEn": "Public offering or secondary distribution of securities outside Japan",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "2024年7月4日(木)開催の経営会議において承認された当社普通株式の売出し(引受人の買取引受による売出し)(以下「引受人の買取引受による売出し」という。"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2024-07-04T06:00:00Z",
+     "docId": "S100TZCY",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TZCY",
+     "reasons": [
+      {
+       "key": "public_offering_or_secondary_distribution_of_securities_outside_japan",
+       "label": "本邦以外の地域における有価証券の募集又は売出",
+       "labelEn": "Public offering or secondary distribution of securities outside Japan",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "2024年7月4日(木)開催の経営会議において承認された当社普通株式の売出し(引受人の買取引受による売出し)(以下「引受人の買取引受による売出し」という。"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2024-06-24T01:37:00Z",
+     "docId": "S100TQHL",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TQHL",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2024年6月19日開催の当社第100回定時株主総会において決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本臨時報告書を提出するものであり…"
+    },
+    {
+     "symbol": "7267",
+     "docTypeCode": "180",
+     "submittedAt": "2024-05-10T06:25:00Z",
+     "docId": "S100TDT2",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TDT2",
+     "reasons": [
+      {
+       "key": "significant_event",
+       "label": "財政状態・経営成績等への重要事象（提出会社）",
+       "labelEn": "Event with a significant effect on financial position, results or cash flows (the company)",
+       "category": "significant-event"
+      }
+     ],
+     "excerpt": "当社の財政状態、経営成績及びキャッシュ・フローの状況に著しい影響を与える事象が発生したため、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第12号の規定に基づき、本臨時報告書を提出するものであります。"
+    }
+   ]
   },
   {
    "symbol": "7261",
@@ -3873,7 +4461,137 @@
      "issuedShares": 631803979,
      "treasuryShares": 1454028
     }
-   }
+   },
+   "extraordinaryReports": [
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2026-07-22T06:00:00Z",
+     "docId": "S100YRS5",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YRS5",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2026年7月22日開催の当社取締役会において、譲渡制限付株式報酬制度(以下、「本制度」といいます。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2026-07-22T06:00:00Z",
+     "docId": "S100YRS0",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YRS0",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、 2026年7月22日開催の当社取締役会において、業績連動型譲渡制限付株式報酬制度 (以下、「本制度」といいます。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2026-06-26T02:02:00Z",
+     "docId": "S100YLQL",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YLQL",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2026年6月24日の当社第160回定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2025-07-23T06:01:00Z",
+     "docId": "S100WEE0",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100WEE0",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2024年6月25日開催の当社第158回定時株主総会において、当社の取締役(監査等委員である取締役及び社外取締役を除く。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2025-07-23T06:00:00Z",
+     "docId": "S100WEDV",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100WEDV",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2024年6月25日開催の当社第158回定時株主総会において、当社の取締役(監査等委員である取締役及び社外取締役を除く。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2025-06-27T02:00:00Z",
+     "docId": "S100W8AA",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W8AA",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2025年6月25日の当社第159回定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2024-07-24T05:56:00Z",
+     "docId": "S100U3M6",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100U3M6",
+     "reasons": [
+      {
+       "key": "stock_option_issue",
+       "label": "ストックオプションの発行",
+       "labelEn": "Issuance of stock options (not subject to securities registration)",
+       "category": "capital-and-financing"
+      }
+     ],
+     "excerpt": "当社は、2024年6月25日開催の当社第158回定時株主総会決議において、当社の取締役(監査等委員である取締役及び社外取締役を除く。"
+    },
+    {
+     "symbol": "7261",
+     "docTypeCode": "180",
+     "submittedAt": "2024-06-27T01:54:00Z",
+     "docId": "S100TVVS",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TVVS",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2024年6月25日の当社第158回定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    }
+   ]
   },
   {
    "symbol": "7217",
@@ -4399,7 +5117,105 @@
      "issuedShares": 5000000,
      "treasuryShares": 6546
     }
-   }
+   },
+   "extraordinaryReports": [
+    {
+     "symbol": "7217",
+     "docTypeCode": "180",
+     "submittedAt": "2026-06-29T07:19:00Z",
+     "docId": "S100YMMC",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YMMC",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2026年6月25日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "7217",
+     "docTypeCode": "180",
+     "submittedAt": "2025-12-26T07:00:00Z",
+     "docId": "S100XDM8",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100XDM8",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "当社は2025年9月25日開催の取締役会において、特定子会社の異動を伴う子会社設立 を行うことを決議いたしましたので 、 金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第3号の規定に基づき、本臨時報告書…"
+    },
+    {
+     "symbol": "7217",
+     "docTypeCode": "180",
+     "submittedAt": "2025-07-01T01:11:00Z",
+     "docId": "S100W9ZS",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W9ZS",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2025年6月26日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    },
+    {
+     "symbol": "7217",
+     "docTypeCode": "180",
+     "submittedAt": "2025-06-25T04:30:00Z",
+     "docId": "S100W4KP",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100W4KP",
+     "reasons": [
+      {
+       "key": "parent_or_specified_subsidiary_change",
+       "label": "親会社・特定子会社の異動",
+       "labelEn": "Change in parent company or specified subsidiary",
+       "category": "ownership"
+      }
+     ],
+     "excerpt": "2023年11月21日開催の当社取締役会の決議に基づき、当社は、特定子会社の異動を伴う子会社を設立したことから、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第3号の規定に基づき、本臨時報告書を提出する…"
+    },
+    {
+     "symbol": "7217",
+     "docTypeCode": "180",
+     "submittedAt": "2025-05-09T04:30:00Z",
+     "docId": "S100VQ0W",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100VQ0W",
+     "reasons": [
+      {
+       "key": "change_in_independent_auditors",
+       "label": "監査公認会計士等の異動",
+       "labelEn": "Change of certified public accountant / audit firm",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2025年5月9日開催の当社監査役会において、以下のとおり、金融商品取引法第193条の2第1項および第2項の監査証明をおこなう公認会計士等の異動をおこなうことについて決議いたしましたので、金融商品取引法第24条の5第4項及び企業内…"
+    },
+    {
+     "symbol": "7217",
+     "docTypeCode": "180",
+     "submittedAt": "2024-07-03T01:31:00Z",
+     "docId": "S100TWTG",
+     "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100TWTG",
+     "reasons": [
+      {
+       "key": "shareholders_meeting_resolution",
+       "label": "株主総会決議",
+       "labelEn": "Resolutions of the general shareholders' meeting",
+       "category": "governance"
+      }
+     ],
+     "excerpt": "当社は、2024年6月27日の定時株主総会において、決議事項が決議されましたので、金融商品取引法第24条の5第4項及び企業内容等の開示に関する内閣府令第19条第2項第9号の2の規定に基づき、本報告書を提出するものであります。"
+    }
+   ]
   }
  ]
 }
