@@ -2,7 +2,7 @@
 
 Code for the dev.to article *I charted 12 years of Nintendo's results in 25 lines of Python*.
 
-![Nintendo's revenue and operating income, fiscal years ending March 2015 to March 2026](nintendo-annotated.png)
+![Nintendo: 12 years of annual results](results.png)
 
 ## Run
 
