@@ -178,6 +178,14 @@ unset ZENITH_API_KEY
 
 Use these as local/server-side examples. Do not embed your API key in browser JavaScript. On other shells, set `ZENITH_API_KEY` using your environment's secure configuration. `.env` files are ignored by Git but are **not automatically loaded** by these scripts.
 
+## English articles on dev.to
+
+Short, runnable stories built from Japanese annual reports. Code for each article lives in [`articles/devto`](articles/devto).
+
+| # | Article | Code |
+| --- | --- | --- |
+| 1 | 12 years of Nintendo's results in 25 lines of Python | [`01-nintendo`](articles/devto/01-nintendo/README.md) |
+
 ## Qiita series and practice code
 
 The [article-to-code map](docs/series.md) links each Japanese Qiita article (TDnet analysis, EDINET analysis and ZENITH Code practice) to the code here. The Python programs from practice lessons 1–2 are in the [practice](practice/README.md) folder and run without the articles.
