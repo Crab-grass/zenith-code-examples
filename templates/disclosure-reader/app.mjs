@@ -647,12 +647,15 @@ function renderOfficers(host, data) {
       : r.s.executiveRows ? node("span", fill("executiveRows", { n: r.s.executiveRows }), { class: "muted small" }) : "") },
   ], people)));
 
-  // Remuneration per officer category, one table for all companies. "Of which" rows stay under their parent.
+  // Remuneration per officer category, one table for all companies. "Of which" rows stay under their parent;
+  // total rows (sumOf) are marked and shown as filed, never added.
   const m = (v) => M.millions(v, state.lang);
   const typeName = (p) => (p.key ? t("ctype_" + p.key) : (state.lang === "en" ? p.labelEn || p.label : p.label) || "—");
   const rows = companies.flatMap((c) => {
     const list = M.compensationRows(c.directorCompensation);
-    return list.length ? list.map((r, i) => ({ ...r, company: c, first: i === 0 })) : [{ company: c, first: true, empty: true }];
+    // English names of the summed categories come from the company's own rows when it files them.
+    const english = (label) => list.find((o) => o.label === label)?.labelEn || label;
+    return list.length ? list.map((r, i) => ({ ...r, sumOfEn: r.sumOf.map(english), company: c, first: i === 0 })) : [{ company: c, first: true, empty: true }];
   });
   host.append(panel(t("payTitle"), t("payNote"), table([
     { label: "", render: (r) => (r.first ? companyTitle(r.company, r.company.directorCompensation ? fy(r.company.directorCompensation.fiscalPeriod) : null) : "") },
@@ -660,7 +663,9 @@ function renderOfficers(host, data) {
       if (r.empty) return node("span", t("noPay"), { class: "muted" });
       const cell = node("span", undefined, { class: "holder" + (r.ofWhich ? " of-which" : "") });
       if (r.ofWhich) cell.append(badge(t("ofWhich"), "zero"));
+      if (r.isTotal) cell.append(badge(t("payTotalRow"), "zero"));
       cell.append(node("span", (state.lang === "en" ? r.labelEn || r.label : r.label) ?? "—"));
+      if (r.isTotal) cell.append(node("span", fill("payTotalOf", { parts: state.lang === "en" ? r.sumOfEn.join(" + ") : r.sumOf.join("＋") }), { class: "muted small" }));
       return cell;
     } },
     { label: t("payHeadcount"), num: true, render: (r) => (r.empty ? "" : n(r.headcount)) },

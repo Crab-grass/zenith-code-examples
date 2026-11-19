@@ -132,7 +132,9 @@ class FakeApi:
                  "subtotals": [{"item": "月額報酬", "amount": 1000000, "parts": ["baseRemuneration"]}],
                  "consolidated": {"total": 1, "components": []}},
                 {"category": "OutsideDirectorsMember", "label": "取締役（うち社外取締役）", "labelEn": None, "headcount": 3, "total": 63000000,
-                 "baseRemuneration": 63000000, "components": [], "ofWhichParent": "取締役"}],
+                 "baseRemuneration": 63000000, "components": [], "ofWhichParent": "取締役", "sumOf": "取締役"},
+                {"category": "Total", "label": "合計", "labelEn": "Total", "headcount": 13, "total": 1107000000, "components": [],
+                 "sumOf": ["取締役", "監査役", 3, "x" * 150] + ["y"] * 30}],
                 individuals=[{"name": "役員 一郎 (取締役)", "position": None, "company": "提出会社", "total": 310000000,
                               "components": [{"label": "基本報酬", "amount": 101000000}]}])]
         if path == "/subsidiaries":
@@ -256,11 +258,15 @@ class FetchBundleTests(unittest.TestCase):
         self.assertEqual(directors["officers"][:2], [{"group": "directors-and-auditors", "row": 1, "title": "代表取締役社長", "titleEn": "President"},
                                                      {"group": "directors-and-auditors", "row": 2, "title": "取締役 監査等委員", "titleEn": "Director"}])
         self.assertIsNone(directors["officers"][2]["title"])  # a title with a date of birth is dropped
-        category, outside = pay["categories"]
+        category, outside, total = pay["categories"]
         self.assertEqual((category["headcount"], category["total"], category["shareAwards"], category["components"], category["subtotals"]),
                          (8, 964000000, 367000000, [{"labelJa": "月額報酬", "labelEn": None, "amount": 1000000}],
                           [{"item": "月額報酬", "amount": 1000000, "parts": ["baseRemuneration"]}]))
         self.assertEqual(outside["ofWhichParent"], "取締役")
+        # A total row keeps the categories it adds up (strings only, at most 20, each cut to 100); anything else is [].
+        self.assertEqual((category["sumOf"], outside["sumOf"]), ([], []))
+        self.assertEqual(total["sumOf"][:3], ["取締役", "監査役", "x" * 100])
+        self.assertLessEqual(len(total["sumOf"]), 20)
         found = set(keys(company))
         for field in ("name", "birthDate", "term", "shares", "careerSummary", "plannedOfficers", "individuals", "category", "consolidated", "element"):
             self.assertNotIn(field, set(keys({"d": directors, "p": pay})), field)
@@ -377,7 +383,7 @@ class FetchBundleTests(unittest.TestCase):
                     "holdings", "rationale", "auditFees", "fees", "nonAuditRatio", "mainCustomers", "customers", "revenue", "customerSource", "notes",
                     "treasuryShares", "priorTreasuryShares", "votingRightsTable", "total", "issuedShares", "members", "consolidated",
                     "extraordinaryReports", "reasons", "excerpt", "labelEn", "category",
-                    "directors", "counts", "plannedCounts", "officers", "directorCompensation", "components", "subtotals", "parts",
+                    "directors", "counts", "plannedCounts", "officers", "directorCompensation", "components", "subtotals", "parts", "sumOf",
                     "subsidiaries", "entities", "location", "locationEn", "noteNumbers"} | set(server.SECTIONS)
         allowed |= set(server.TREASURY_HOLDER + server.ISSUED + server.RELEASE + server.EXTRAORDINARY + server.REASON + server.DIRECTORS + server.GENDER
                         + server.OFFICER + server.COMPENSATION + server.COMP_CATEGORY + server.COMP_PART + ("item", "amount")

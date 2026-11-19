@@ -1,6 +1,6 @@
 {
  "placeholder": false,
- "retrievedAt": "2026-11-19T11:21:48Z",
+ "retrievedAt": "2026-11-19T11:33:34Z",
  "companies": [
   {
    "symbol": "7203",
@@ -1558,7 +1558,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "うち社外取締役",
@@ -1580,7 +1581,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "監査等委員である取締役",
@@ -1602,7 +1604,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "うち社外取締役",
@@ -1624,7 +1627,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "監査役",
@@ -1646,7 +1650,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "監査役(うち社外監査役)",
@@ -1668,7 +1673,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      }
     ]
    },
@@ -3709,7 +3715,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "取締役（うち社外取締役）",
@@ -3731,7 +3738,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "監査役",
@@ -3753,7 +3761,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "監査役（うち社外監査役）",
@@ -3775,7 +3784,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "合計",
@@ -3797,7 +3807,11 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": [
+       "取締役",
+       "監査役"
+      ]
      }
     ]
    },
@@ -6475,7 +6489,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "社外取締役",
@@ -6497,7 +6512,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "執行役",
@@ -6530,7 +6546,8 @@
         "amount": 112000000
        }
       ],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "合計",
@@ -6563,7 +6580,12 @@
         "amount": 112000000
        }
       ],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": [
+       "取締役（社外取締役を除く）",
+       "社外取締役",
+       "執行役"
+      ]
      }
     ]
    },
@@ -8295,7 +8317,8 @@
         "amount": 171000000
        }
       ],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "監査等委員（社外取締役を除く）",
@@ -8317,7 +8340,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "社外取締役",
@@ -8339,7 +8363,8 @@
       "retirementBenefits": null,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      }
     ]
    },
@@ -10190,7 +10215,8 @@
       "retirementBenefits": 12737000,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      },
      {
       "label": "社外役員",
@@ -10212,7 +10238,8 @@
       "retirementBenefits": 687000,
       "other": null,
       "components": [],
-      "subtotals": []
+      "subtotals": [],
+      "sumOf": []
      }
     ]
    },
