@@ -93,6 +93,14 @@ COMP_AMOUNTS = ("baseRemuneration", "fixed", "performanceBased", "nonMonetary", 
                 "restrictedShares", "performanceLinkedShares", "retirementBenefits", "other")
 COMP_CATEGORY = ("label", "labelEn", "headcount", "total", "ofWhichNonMonetary", "ofWhichParent", "totalDisclosed") + COMP_AMOUNTS
 COMP_PART = ("labelJa", "labelEn", "amount")
+# Group companies (関係会社の状況): one row per related company as filed. `address` (the company's
+# location) is passed on as `location`, because `address` stays banned in saved files (in the
+# large-holder data it is a person's address). The footnote text (`notes`) is never passed on.
+GROUP_CATEGORIES = ("consolidated-subsidiary", "equity-method-affiliate", "equity-method-unconsolidated-subsidiary", "affiliate",
+                    "parent", "other-related-company", "other", "unknown")
+GROUP_ENTITY = ("category", "name", "nameEn", "capital", "capitalCurrency", "capitalText", "business", "businessEn",
+                "votingRatio", "votingRatioIndirect", "votingDirection", "relationship", "relationshipEn")
+GROUP_LIMIT = 400  # related companies per filing; longer lists are cut and flagged
 PREFECTURE = re.compile(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)")
 
 
@@ -420,6 +428,33 @@ def clean_compensation(rows, expected):
     return out
 
 
+def clean_subsidiaries(rows, expected):
+    """Related companies of the latest annual report: counts per category and one row per company."""
+    if not rows:
+        return None
+    rows = _list(rows, 10)
+    for row in rows:
+        _check_symbol(row, expected)
+    row = _latest(rows)
+    out = _document(row)
+    counts = row.get("counts") if isinstance(row.get("counts"), dict) else {}
+    out["counts"] = {key: counts[key] for key in GROUP_CATEGORIES
+                     if isinstance(counts.get(key), int) and not isinstance(counts.get(key), bool)}
+    entities = row.get("entities") or []
+    if not isinstance(entities, list):
+        raise ValueError("rows")
+    out["truncated"] = len(entities) > GROUP_LIMIT
+    out["entities"] = []
+    for entity in entities[:GROUP_LIMIT]:
+        item = _pick(entity, GROUP_ENTITY)
+        item["location"] = _scalar(entity.get("address"))
+        item["locationEn"] = _scalar(entity.get("addressEn"))
+        numbers = entity.get("noteNumbers")
+        item["noteNumbers"] = [n for n in numbers[:10] if isinstance(n, int) and not isinstance(n, bool)] if isinstance(numbers, list) else []
+        out["entities"].append(item)  # notes (footnote text) and machineTranslatedFields are never copied.
+    return out
+
+
 def clean_revenue(rows, expected):
     out = []
     for row in _list(rows or [], 5):
@@ -439,11 +474,11 @@ def optional(requester, path, params, api_key):
 
 
 def fetch_company(symbol, api_key, requester=request_rows):
-    """One company, whitelisted. 17 requests, 18 when main customers exist (revenue is then fetched).
+    """One company, whitelisted. 18 requests, 19 when main customers exist (revenue is then fetched).
 
     Treasury shares are fetched twice: the latest annual report, then the one a year earlier
     (no second request when the first is a 404). Extraordinary reports are one request (the newest 50);
-    officers and their remuneration are one request each."""
+    officers, their remuneration and the group companies are one request each."""
     company = {"symbol": symbol}
     company["profile"] = clean_profile(requester("/profile", {"symbol": symbol}, api_key), symbol)
     company["texts"] = {tag: clean_text(optional(requester, "/text-blocks", {"symbol": symbol, "tag": tag}, api_key), symbol)
@@ -472,6 +507,7 @@ def fetch_company(symbol, api_key, requester=request_rows):
     company["directors"] = clean_directors(optional(requester, "/directors", {"symbol": symbol}, api_key), symbol)
     company["directorCompensation"] = clean_compensation(
         optional(requester, "/director-compensation", {"symbol": symbol}, api_key), symbol)
+    company["subsidiaries"] = clean_subsidiaries(optional(requester, "/subsidiaries", {"symbol": symbol}, api_key), symbol)
     return company
 
 
@@ -606,7 +642,7 @@ def main():
     with make_server(args.port, key, demo_set=args.demo) as server:
         print("Open http://127.0.0.1:%d" % server.server_port, flush=True)
         print("Saved snapshot: %s (%s). Live access: %s. Ctrl+C to stop." % (args.demo, DEMOS[args.demo],
-            "enabled; each fetch makes 17-18 requests per company plus 1 and requires a click" if key else "disabled"), flush=True)
+            "enabled; each fetch makes 18-19 requests per company plus 1 and requires a click" if key else "disabled"), flush=True)
         try:
             server.serve_forever()
         except KeyboardInterrupt:

@@ -1,8 +1,8 @@
-# Disclosure reader (annual-report text, shareholders, strategic holdings, treasury shares, officers and pay, and extraordinary reports, side by side)
+# Disclosure reader (annual-report text, shareholders, strategic holdings, treasury shares, officers and pay, group companies, and extraordinary reports, side by side)
 
 [日本語](README.ja.md) · [Repository README](../../README.md)
 
-A sample workspace for strategy, IR and research teams that reads **the deeper parts of the annual securities report (有価証券報告書) for 2–5 companies side by side**: how risks are written, who the shareholders are, how strategic holdings are being unwound, audit fees and main customers, treasury shares and voting rights, who sits on the board and how they are paid. Extraordinary reports are lined up as a timeline by filing date.
+A sample workspace for strategy, IR and research teams that reads **the deeper parts of the annual securities report (有価証券報告書) for 2–5 companies side by side**: how risks are written, who the shareholders are, how strategic holdings are being unwound, audit fees and main customers, treasury shares and voting rights, who sits on the board and how they are paid, and which subsidiaries and affiliates make up the group. Extraordinary reports are lined up as a timeline by filing date.
 
 | View | What it does |
 | --- | --- |
@@ -13,6 +13,7 @@ A sample workspace for strategy, IR and research teams that reads **the deeper p
 | 5. Treasury & votes | From the filing's treasury-shares table: **shares without votes (own and mutually held)** with their ratio to issued shares, the mutual-holding rows, **the change from the prior year**, **the gap to the earnings release's treasury count** and issued shares at the filing date |
 | 6. Extraordinary reports | Extraordinary reports (臨時報告書) as **a timeline, newest first, one filing per row** (all reasons of a filing; corrections marked), **counts per company and reason** and a filter by reason category. Choose a filing to see only the start of its stated reason; the full text is on EDINET |
 | 7. Officers & pay | From the officers section: **officers by gender and the female ratio** (with the numbers expected after the AGM when filed), and representative directors, auditors and audit committee members counted from titles. From the remuneration section: **total pay, head count and pay per person for each officer category**, the breakdown by type with its share of the total, "of which outside" rows and the gap between the parts and the total |
+| 8. Group companies | From the related-companies section (関係会社の状況): **how many consolidated subsidiaries are listed, how many are 100% owned**, equity-method companies, **the share of subsidiaries whose capital is in a foreign currency**, and the parent or other related company that holds the filer's votes (with its ratio). **A capital-currency × company table** and every related company with its category, location, capital as filed, business, voting ratio (of which indirect) and relationship, filtered by category |
 
 ## 1. Try it without an account
 
@@ -34,7 +35,7 @@ A second snapshot covers five auto-parts makers (Denso, Aisin, Toyota Boshoku, M
 python3 templates/disclosure-reader/server.py --demo suppliers
 ```
 
-- Choose 2–5 companies at the top and switch between the seven views on the left.
+- Choose 2–5 companies at the top and switch between the eight views on the left.
 - Switch JA / EN and light / dark (the default follows your OS).
 - Link to a selection and view with `?companies=7203,7261#cross`.
 
@@ -68,8 +69,9 @@ Choose **Live**, add 2–5 securities codes and press **Fetch**.
 | `/stable/extraordinary-report-reasons` (the list of reasons; once per fetch, whatever the number of companies) | 1 per fetch |
 | `/stable/directors` (the officers section of the latest annual report) | 1 |
 | `/stable/director-compensation` (the remuneration section of the latest annual report) | 1 |
+| `/stable/subsidiaries` (the related-companies section of the latest annual report) | 1 |
 
-**A fetch = 17–18 requests per company, plus 1**, at most 91 for five companies, one company at a time, never in parallel. A 404 (the disclosure does not exist) counts as "none"; any other failure stops the whole fetch and nothing partial is shown. No retries, no auto refresh. Switching views, keywords and copying the prompt make no API calls.
+**A fetch = 18–19 requests per company, plus 1**, at most 96 for five companies, one company at a time, never in parallel. A 404 (the disclosure does not exist) counts as "none"; any other failure stops the whole fetch and nothing partial is shown. No retries, no auto refresh. Switching views, keywords and copying the prompt make no API calls.
 
 ## What reaches the browser
 
@@ -81,6 +83,7 @@ The local server forwards only the fields the views need (the whitelists in `ser
 - **The treasury-shares table is reduced to holder names, share counts and ratios** (no addresses or translations). The earnings-release counts (`consolidated`) are numbers only (period, issued and treasury shares), never a link to the release.
 - **Extraordinary reports are reduced to the document ID and type, the filing time, the reasons (key, name, category) and the start of the stated reason** (the first sentence, up to 120 characters). Filings such as a change of representative director carry names, dates of birth and career summaries, so the full text (`reasonText`) and the structured sections (`sections`) are never forwarded. For changes of representative directors or major shareholders, and for text with a date of birth or a career summary, not even the start is forwarded.
 - **Officers are reduced to the counts by gender (at the filing date and expected after the AGM) and each row's group and title.** Names, dates of birth, terms, shareholdings, career summaries and the list of expected officers (`plannedOfficers`) are never forwarded. **Pay is reduced to head count, total, amounts by type, company-specific columns and subtotals per officer category**; the names and pay of officers paid JPY 100 million or more (`individuals`) are never forwarded.
+- **Group companies are reduced to each related company's category, name, location, capital, business, voting ratio and relationship, and the counts per category.** The location arrives as `address` and is forwarded as `location` (`address` stays banned in saved files, because in other data it is a person's address). The footnote text (`notes`) is never forwarded, only the footnote numbers. Up to 400 companies per filing; a longer list is cut and marked.
 - **No TDnet document links.** `archiveUrl` is always removed and `sourceUrl` survives only for EDINET pages. Document IDs and filing dates are shown.
 - Shareholder addresses are reduced to the **prefecture (or “overseas”)** before they are forwarded.
 - Upstream error details are never shown.
@@ -101,6 +104,7 @@ The local server forwards only the fields the views need (the whitelists in `ser
 - **Extraordinary reports are dated in Japan time** (the API returns UTC; `jstDate`). The counts (`extraordinaryCounts`) leave out corrections (document type 190), which are counted on their own line; a filing with several reasons counts once under each. Categories come from the reason list's `category`; reasons not in the list are “Other”. The newest 50 filings per company are fetched, and a company that reaches 50 is marked next to its date range. A company without extraordinary reports gets an empty list from the API, not a 404.
 - **Officers by gender** are the filed numbers as of the filing date (`counts`). The female ratio is calculated here as women ÷ (men + women), next to the filed ratio (`femaleRatio`). The numbers expected after the AGM (`plannedCounts`) appear only when the report lists the expected officers. **Representative directors, auditors and audit (and supervisory) committee members are counted from words in the titles**, and the governance design is read from the titles too (`officerSummary`). Outside officers are not in the titles and are not counted. At a company with three committees a director who is also an executive officer appears in both lists, so rows are not compared with the head count.
 - **Pay** follows the filing's rows per officer category (`compensationRows`). Pay per person = total ÷ head count, and the head count includes officers who left during the year; a category without a head count shows “—”. **“Of which” rows (`ofWhichParent`) are inside the category above** and are never added, and no company total is shown (some outside-officer rows carry no “of which” mark). The parts = amounts by type + company-specific columns (`components`) − subtotals (`subtotals`), shown as a gap to the total. Tables are rounded to JPY million, so a gap of up to JPY 2 million is shown as rounding. Which types are performance-linked depends on each table's headings, so no performance-linked share is calculated.
+- **Group companies** are the rows of the related-companies section (`groupSummary`). **The section lists the main related companies only, not every consolidated subsidiary**: a large group such as Toyota lists a few dozen of its hundreds of subsidiaries. "100% of votes" counts consolidated subsidiaries with a voting ratio of 100.0% as filed (indirect holdings included). The foreign-currency share is subsidiaries with capital in a currency other than JPY ÷ subsidiaries whose capital currency is known. **The currency of the capital is a hint of the country, not the location itself** (`capitalCurrencies`); the location column is as filed. Rows marked "holds the filer's votes" (`votingDirection: held-by`) are a parent or another related company holding votes in the filer, and their ratio is the filer's votes they hold. Ratios keep the filing's digits (22.49% stays 22.49%).
 - “—” means unavailable or not disclosed and is never treated as zero.
 
 ## The AI prompt
@@ -125,8 +129,8 @@ Provide the key with `ZENITH_API_KEY` or the hidden prompt, never on the command
 | --- | --- |
 | `server.py` | Loopback-only server, field whitelists, `fetch_bundle` |
 | `build_demo.py` | Builds `demo.json` from live data |
-| `model.mjs` | Validation, heading extraction, keywords, name matching, mutual holdings, sold-out counting, audit fees, customer shares, treasury shares, the extraordinary-report timeline and counts, the officer summary and pay rows (shared with the Node tests) |
-| `app.mjs` | The seven views (the `VIEWS` list) and company selection |
+| `model.mjs` | Validation, heading extraction, keywords, name matching, mutual holdings, sold-out counting, audit fees, customer shares, treasury shares, the extraordinary-report timeline and counts, the officer summary and pay rows, the group-company summary and currency table (shared with the Node tests) |
+| `app.mjs` | The eight views (the `VIEWS` list) and company selection |
 | `i18n.mjs` | Japanese and English copy |
 | `index.html` / `style.css` | Layout, light and dark themes |
 | `demo.json` / `demo-suppliers.json` | Saved snapshots for offline use (carmakers / auto parts; pick with `--demo`) |
