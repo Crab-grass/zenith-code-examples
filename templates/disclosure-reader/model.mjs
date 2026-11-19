@@ -89,6 +89,8 @@ function company(raw) {
   if (pay) for (const category of list(pay.categories, 30)) {
     list(category.components, 20);
     list(category.subtotals, 10);
+    const sumOf = category.sumOf;
+    if (sumOf !== null && sumOf !== undefined && (!Array.isArray(sumOf) || sumOf.length > 20 || sumOf.some((x) => typeof x !== "string"))) fail();
   }
   const groups = single(raw.subsidiaries, symbol);
   if (groups) {
@@ -690,6 +692,8 @@ export const COMP_TYPES = ["baseRemuneration", "fixed", "performanceBased", "bon
 // One row per officer category as filed. "Of which" rows (ofWhichParent) are inside their parent row:
 // never add them up. Which types are performance-linked differs by company (the filed table's upper
 // heading), so the parts are listed as they are, each as a share of the category total.
+// A total row (sumOf lists the categories it adds up, e.g. 取締役 + 監査役) is not one more category:
+// isTotal marks it so it is never added to the other rows.
 export function compensationRows(pay) {
   if (!pay) return [];
   return (pay.categories ?? []).map((c) => {
@@ -707,6 +711,8 @@ export function compensationRows(pay) {
       headcount, total, perHead: total !== null && headcount ? total / headcount : null,
       parts, sum, diff: total !== null && sum !== null ? total - sum : null,
       nonMonetaryOfWhich: finite(c.ofWhichNonMonetary), totalDisclosed: c.totalDisclosed !== false,
+      sumOf: Array.isArray(c.sumOf) ? c.sumOf.filter((x) => typeof x === "string") : [],
+      isTotal: Array.isArray(c.sumOf) && c.sumOf.some((x) => typeof x === "string"),
     };
   });
 }

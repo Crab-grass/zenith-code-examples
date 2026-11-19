@@ -423,6 +423,9 @@ def clean_compensation(rows, expected):
             entry["parts"] = [str(x)[:100] for x in parts[:20]] if isinstance(parts, list) else []
             subtotals.append(entry)
         item["subtotals"] = subtotals
+        # A total row ("合計") names the categories it adds up; it is never one more category.
+        sum_of = category.get("sumOf")
+        item["sumOf"] = [x[:100] for x in sum_of[:20] if isinstance(x, str)] if isinstance(sum_of, list) else []
         categories.append(item)
     out["categories"] = categories
     return out

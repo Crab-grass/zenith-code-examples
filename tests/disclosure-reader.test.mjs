@@ -352,6 +352,14 @@ test("officers and pay: counts as filed, titles counted, pay per person, parts a
   assert.deepEqual([withSubtotal.sum, withSubtotal.diff, withSubtotal.perHead, withSubtotal.parts.find((p) => p.key === "performanceBased").subtotal, withSubtotal.nonMonetaryOfWhich],
     [78, 22, null, true, 14]);
   assert.deepEqual(M.compensationRows(null), []);
+  assert.deepEqual([directorsRow.isTotal, directorsRow.sumOf], [false, []]);
+  // A total row (sumOf) is marked, kept as filed and never added to the other categories.
+  const [, total] = M.compensationRows(doc("6902", { categories: [
+    { label: "取締役", labelEn: "Directors", headcount: 10, total: 1000000000, components: [], subtotals: [] },
+    { label: "合計", labelEn: "Total", headcount: 13, total: 1107000000, components: [], subtotals: [], sumOf: ["取締役", "監査役"] },
+  ] }));
+  assert.deepEqual([total.isTotal, total.sumOf, total.total, total.headcount], [true, ["取締役", "監査役"], 1107000000, 13]);
+  assert.equal(M.compensationRows(doc("6902", { categories: [{ label: "合計", total: 1, components: [], subtotals: [], sumOf: [] }] }))[0].isTotal, false);
 });
 
 test("group companies: counts, fully owned, foreign-currency capital, owners and the currency matrix", () => {
@@ -441,6 +449,9 @@ test("normalization rejects other companies' rows and unknown sections", () => {
     (d) => (d.companies[1].directors = doc("7261", { officers: "x" })),
     (d) => (d.companies[1].directors = doc("7261", { officers: [], counts: 3 })),
     (d) => (d.companies[1].directorCompensation = doc("7261", { categories: [{ components: "x" }] })),
+    (d) => (d.companies[1].directorCompensation = doc("7261", { categories: [{ sumOf: "取締役" }] })),
+    (d) => (d.companies[1].directorCompensation = doc("7261", { categories: [{ sumOf: [1] }] })),
+    (d) => (d.companies[1].directorCompensation = doc("7261", { categories: [{ sumOf: Array(21).fill("x") }] })),
     (d) => (d.companies[1].subsidiaries = doc("9999", { entities: [] })),
     (d) => (d.companies[1].subsidiaries = doc("7261", { entities: "x" })),
     (d) => (d.companies[1].subsidiaries = doc("7261", { entities: [], counts: [] })),
@@ -513,6 +524,9 @@ test("saved demo.json normalizes and carries no prices, carrying amounts or TDne
   // Officers and pay: counts and titles only (no names), pay rows with totals.
   assert.ok(data.companies.every((c) => M.officerSummary(c.directors)?.total > 0));
   assert.ok(data.companies.every((c) => M.compensationRows(c.directorCompensation).some((r) => r.total > 0)));
+  // Denso and Honda file a total row: it names what it adds up and is never a category of its own.
+  const totals = data.companies.flatMap((c) => M.compensationRows(c.directorCompensation).filter((r) => r.isTotal));
+  assert.ok(totals.length >= 2 && totals.every((r) => r.sumOf.length >= 2));
   for (const c of data.companies) {
     for (const o of c.directors.officers) assert.deepEqual(Object.keys(o).sort(), ["group", "row", "title", "titleEn"]);
     assert.ok(!("individuals" in c.directorCompensation) && !("plannedOfficers" in c.directors), c.symbol);
