@@ -90,6 +90,11 @@ function company(raw) {
     list(category.components, 20);
     list(category.subtotals, 10);
   }
+  const groups = single(raw.subsidiaries, symbol);
+  if (groups) {
+    list(groups.entities, 400);
+    if (groups.counts !== null && groups.counts !== undefined && !isObject(groups.counts)) fail();
+  }
   return {
     symbol, profile, texts,
     majorShareholders: list(raw.majorShareholders, 40).map((row) => sameCompany(row, symbol)),
@@ -102,7 +107,7 @@ function company(raw) {
     treasuryShares: treasury(raw.treasuryShares),
     priorTreasuryShares: treasury(raw.priorTreasuryShares),
     extraordinaryReports: extraordinary,
-    directors, directorCompensation: pay,
+    directors, directorCompensation: pay, subsidiaries: groups,
   };
 }
 export function normalizeBundle(result, symbols) {
@@ -704,6 +709,66 @@ export function compensationRows(pay) {
       nonMonetaryOfWhich: finite(c.ofWhichNonMonetary), totalDisclosed: c.totalDisclosed !== false,
     };
   });
+}
+
+// ---------- 8. Group companies --------------------------------------------------------------
+// From the annual report's related-companies section (関係会社の状況). The section lists the main
+// related companies only, not every consolidated subsidiary. Voting ratios include the indirect
+// part (votingRatioIndirect is "of which indirect"). votingDirection "held-by" means the related
+// company holds the filer's votes (a parent or another related company).
+export const GROUP_CATEGORIES = ["consolidated-subsidiary", "equity-method-affiliate", "equity-method-unconsolidated-subsidiary", "affiliate",
+  "parent", "other-related-company", "other", "unknown"];
+export const GROUP_FILTERS = ["all", "consolidated", "equity-method", "parents"];
+const GROUP_FILTER_OF = { "consolidated-subsidiary": "consolidated", "equity-method-affiliate": "equity-method",
+  "equity-method-unconsolidated-subsidiary": "equity-method", parent: "parents", "other-related-company": "parents" };
+export const FULLY_OWNED = 0.9995; // 100.0% as filed (one decimal)
+export const groupCategory = (entity) => (GROUP_CATEGORIES.includes(entity?.category) ? entity.category : "unknown");
+const isOwner = (e) => e.votingDirection === "held-by" || ["parent", "other-related-company"].includes(e.category);
+
+export function groupSummary(subsidiaries) {
+  if (!subsidiaries) return null;
+  const entities = subsidiaries.entities ?? [];
+  const counts = isObject(subsidiaries.counts) ? subsidiaries.counts : {};
+  // The API's counts per category; the rows themselves when a count is missing.
+  const count = (key) => finite(counts[key]) ?? entities.filter((e) => groupCategory(e) === key).length;
+  const consolidated = entities.filter((e) => groupCategory(e) === "consolidated-subsidiary");
+  const withCurrency = consolidated.filter((e) => typeof e.capitalCurrency === "string" && e.capitalCurrency);
+  const foreign = withCurrency.filter((e) => e.capitalCurrency !== "JPY").length;
+  return {
+    fiscalPeriod: subsidiaries.fiscalPeriod ?? null, truncated: subsidiaries.truncated === true,
+    consolidated: count("consolidated-subsidiary"),
+    fullyOwned: consolidated.filter((e) => (finite(e.votingRatio) ?? 0) >= FULLY_OWNED).length,
+    noRatio: consolidated.filter((e) => finite(e.votingRatio) === null).length,
+    equityMethod: count("equity-method-affiliate") + count("equity-method-unconsolidated-subsidiary"),
+    withCurrency: withCurrency.length, foreignCurrency: foreign, foreignShare: withCurrency.length ? foreign / withCurrency.length : null,
+    owners: entities.filter(isOwner).map((e) => ({ name: e.name ?? null, nameEn: e.nameEn ?? null, category: groupCategory(e), votingRatio: finite(e.votingRatio) })),
+  };
+}
+
+// Consolidated subsidiaries per capital currency: JPY first, then by the total over the compared
+// companies (largest first). The currency hints at the country; it is not the location itself.
+export function capitalCurrencies(companies) {
+  const totals = new Map();
+  const cells = {};
+  for (const c of companies) {
+    cells[c.symbol] = {};
+    for (const e of c.subsidiaries?.entities ?? []) {
+      if (groupCategory(e) !== "consolidated-subsidiary") continue;
+      const code = typeof e.capitalCurrency === "string" && e.capitalCurrency ? e.capitalCurrency : null;
+      const key = code ?? "";
+      cells[c.symbol][key] = (cells[c.symbol][key] ?? 0) + 1;
+      totals.set(key, (totals.get(key) ?? 0) + 1);
+    }
+  }
+  const rank = (key) => (key === "JPY" ? 0 : key === "" ? 2 : 1);
+  return [...totals].sort((a, b) => rank(a[0]) - rank(b[0]) || b[1] - a[1] || a[0].localeCompare(b[0]))
+    .map(([key, total]) => ({ currency: key || null, total, counts: Object.fromEntries(companies.map((c) => [c.symbol, cells[c.symbol][key] ?? 0])) }));
+}
+
+// The related companies as filed, optionally narrowed to one filter group.
+export function groupEntities(subsidiaries, filter = "all") {
+  return (subsidiaries?.entities ?? []).map((e) => ({ ...e, category: groupCategory(e), held: e.votingDirection === "held-by" }))
+    .filter((e) => filter === "all" || GROUP_FILTER_OF[e.category] === filter);
 }
 
 // ---------- Formatting ---------------------------------------------------------------------

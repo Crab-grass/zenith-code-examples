@@ -12,7 +12,7 @@ const state = {
   mode: "demo", view: "text", config: null, demo: null, demoSelected: [], live: [], data: null, retrievedAt: null,
   busy: false, status: { key: "", vars: {}, error: false },
   section: M.SECTIONS.includes(params.get("section")) ? params.get("section") : "risks",
-  keyword: params.get("q") ?? "", active: null, prompt: null, reasonCategory: "all",
+  keyword: params.get("q") ?? "", active: null, prompt: null, reasonCategory: "all", groupFilter: "all",
 };
 const t = (key) => texts[state.lang][key] ?? texts.en[key] ?? key;
 const fill = (key, values) => t(key).replace(/\{(\w+)\}/g, (_, k) => values[k] ?? "");
@@ -106,6 +106,7 @@ const VIEWS = [
   { id: "treasury", render: renderTreasury },
   { id: "extraordinary", render: renderExtraordinary },
   { id: "officers", render: renderOfficers },
+  { id: "groups", render: renderGroups },
 ];
 
 // ---------- 1. Text blocks ----------
@@ -679,6 +680,86 @@ function renderOfficers(host, data) {
   host.append(panel(t("sources"), t("sourcesNote"), sourcesTable(companies.map((c) => ({ company: c, report: c.directors ?? c.directorCompensation })))));
 }
 
+// ---------- 8. Group companies ----------
+function renderGroups(host, data) {
+  const companies = data.companies;
+  const n = (v) => M.number(v, state.lang);
+  const en = state.lang === "en";
+  // Voting ratios keep the filing's digits (22.49% stays 22.49%).
+  const ratio = (v) => (M.finite(v) === null ? "—" : new Intl.NumberFormat(en ? "en-US" : "ja-JP", { style: "percent", maximumFractionDigits: 2 }).format(v));
+  const named = (e) => (en ? e.nameEn || e.name : e.name || e.nameEn) || "—";
+  host.append(notes(["groupsRead1", "groupsRead2", "groupsRead3"]));
+
+  // One row per company: how many, how many fully owned, equity-method companies, foreign-currency capital, owners.
+  const summaries = companies.map((c) => ({ company: c, s: M.groupSummary(c.subsidiaries) }));
+  host.append(panel(t("groupsTitle"), t("groupsNote"), table([
+    { label: "", render: (r) => companyTitle(r.company, r.s?.fiscalPeriod ? fy(r.s.fiscalPeriod) : null) },
+    { label: t("groupConsolidated"), num: true, cls: "strong", render: (r) => n(r.s?.consolidated) },
+    { label: t("groupFullyOwned"), num: true, render: (r) => n(r.s?.fullyOwned) },
+    { label: t("groupEquityMethod"), num: true, render: (r) => n(r.s?.equityMethod) },
+    { label: t("groupForeignShare"), num: true, cls: "strong", render: (r) => (r.s?.withCurrency
+      ? `${pct(r.s.foreignShare)}${en ? " (" : "（"}${n(r.s.foreignCurrency)}/${n(r.s.withCurrency)}${en ? ")" : "）"}` : "—") },
+    { label: t("groupOwners"), render: (r) => {
+      if (!r.s) return node("span", t("noGroups"), { class: "muted small" });
+      if (!r.s.owners.length) return node("span", "—", { class: "muted" });
+      const cell = node("span", undefined, { class: "holder" });
+      for (const o of r.s.owners) cell.append(badge(`${named(o)} ${ratio(o.votingRatio)}`, "peer"));
+      return cell;
+    } },
+    { label: t("groupCheck"), render: (r) => (!r.s ? "" : r.s.truncated ? node("span", t("groupTruncated"), { class: "warn small" })
+      : r.s.noRatio ? node("span", fill("groupNoRatio", { n: r.s.noRatio }), { class: "muted small" }) : "") },
+  ], summaries)));
+
+  // Capital currency x company: consolidated subsidiaries counted per currency of their capital.
+  const currencies = M.capitalCurrencies(companies);
+  host.append(panel(t("currencyTitle"), t("currencyNote"), currencies.length ? table([
+    { label: t("currency"), cls: "mono", render: (r) => r.currency ?? node("span", t("currencyNone"), { class: "muted" }) },
+    ...companies.map((c) => ({ label: nameOf(c), num: true,
+      render: (r) => (r.counts[c.symbol] ? String(r.counts[c.symbol]) : node("span", "0", { class: "muted" })) })),
+    { label: t("currencyTotal"), num: true, cls: "strong", render: (r) => String(r.total) },
+  ], currencies, { compact: true }) : node("p", t("noGroups"), { class: "muted" })));
+
+  // The related companies as filed, grouped by company, narrowed by category (display only; no request).
+  const filter = state.groupFilter;
+  const controls = node("div", undefined, { class: "controls" });
+  const seg = node("div", undefined, { class: "seg wrap", role: "group", "aria-label": t("groupFilter") });
+  for (const id of M.GROUP_FILTERS) {
+    const b = node("button", t("gfilter_" + id), { type: "button", "aria-pressed": String(filter === id) });
+    b.addEventListener("click", () => { state.groupFilter = id; render(); });
+    seg.append(b);
+  }
+  controls.append(node("span", t("groupFilter"), { class: "muted small" }), seg);
+  host.append(controls);
+  const rows = companies.flatMap((c) => {
+    const list = M.groupEntities(c.subsidiaries, filter);
+    return list.length ? list.map((e, i) => ({ ...e, company: c, first: i === 0 })) : [{ company: c, first: true, empty: true }];
+  });
+  host.append(panel(t("groupListTitle"), t("groupListNote"), table([
+    { label: "", render: (r) => (r.first ? companyTitle(r.company, r.company.subsidiaries ? fy(r.company.subsidiaries.fiscalPeriod) : null) : "") },
+    { label: t("groupCategory"), render: (r) => (r.empty ? "" : badge(t("gcat_" + r.category), r.held ? "peer" : "zero")) },
+    { label: t("groupName"), cls: "name", render: (r) => {
+      if (r.empty) return node("span", t(r.company.subsidiaries ? "noGroupRows" : "noGroups"), { class: "muted" });
+      const cell = node("span", undefined, { class: "holder" });
+      cell.append(node("span", named(r)));
+      if (r.held) cell.append(badge(t("groupHeldBy"), "self"));
+      return cell;
+    } },
+    { label: t("groupLocation"), render: (r) => (r.empty ? "" : (en ? r.locationEn || r.location : r.location || r.locationEn) || "—") },
+    { label: t("groupCapital"), num: true, cls: "nowrap", render: (r) => (r.empty ? ""
+      // English shows the parsed amount and ISO currency; Japanese keeps the filing's wording.
+      : en && r.capitalCurrency && M.finite(r.capital) !== null ? `${r.capitalCurrency} ${n(r.capital)}` : r.capitalText || "—") },
+    { label: t("groupBusiness"), render: (r) => (r.empty ? "" : node("span", (en ? r.businessEn || r.business : r.business || r.businessEn) || "—", { class: "small" })) },
+    { label: t("groupVoting"), num: true, render: (r) => {
+      if (r.empty) return "";
+      const indirect = M.finite(r.votingRatioIndirect);
+      const text = ratio(r.votingRatio) + (indirect ? " " + fill("groupIndirect", { r: ratio(indirect) }) : "");
+      return node("span", text, { class: r.votingRatio === null && indirect === null ? "muted" : null });
+    } },
+    { label: t("groupRelationship"), render: (r) => (r.empty ? "" : node("span", (en ? r.relationshipEn || r.relationship : r.relationship || r.relationshipEn) || "—", { class: "muted small" })) },
+  ], rows, { compact: true, rowClass: (r) => (r.first ? "group-start" : null) })));
+  host.append(panel(t("sources"), t("sourcesNote"), sourcesTable(companies.map((c) => ({ company: c, report: c.subsidiaries })))));
+}
+
 // ---------- Frame: navigation, picker, status ----------
 function renderNav() {
   const nav = $("viewNav");
@@ -743,7 +824,7 @@ function renderPicker() {
   $("loadButton").textContent = state.busy ? t("loading") : t("fetch");
   $("loadButton").disabled = state.busy || !state.config?.liveEnabled;
   $("loadButton").setAttribute("aria-busy", String(state.busy));
-  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 18 + 1 });
+  $("requestNote").textContent = state.mode === "demo" ? t("requestDemo") : fill("requestLive", { n: Math.max(M.MIN_COMPANIES, state.live.length) * 19 + 1 });
   $("setup").hidden = state.mode !== "live" || Boolean(state.config?.liveEnabled);
   $("demoMode").setAttribute("aria-pressed", String(state.mode === "demo"));
   $("liveMode").setAttribute("aria-pressed", String(state.mode === "live"));

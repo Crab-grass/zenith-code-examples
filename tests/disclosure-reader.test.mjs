@@ -354,6 +354,38 @@ test("officers and pay: counts as filed, titles counted, pay per person, parts a
   assert.deepEqual(M.compensationRows(null), []);
 });
 
+test("group companies: counts, fully owned, foreign-currency capital, owners and the currency matrix", () => {
+  const entity = (category, capitalCurrency, votingRatio, extra = {}) => ({ category, name: "子会社", nameEn: null, location: "東京都", locationEn: null,
+    capital: 1, capitalCurrency, capitalText: "百万円 1", business: "x", businessEn: null, votingRatio, votingRatioIndirect: null,
+    votingDirection: "held", relationship: null, relationshipEn: null, noteNumbers: [], ...extra });
+  const denso = doc("6902", { counts: { "consolidated-subsidiary": 5, "equity-method-affiliate": 2, "other-related-company": 1 }, truncated: false, entities: [
+    entity("consolidated-subsidiary", "JPY", 1), entity("consolidated-subsidiary", "USD", 0.9995), entity("consolidated-subsidiary", "USD", 0.999),
+    entity("consolidated-subsidiary", null, null, { votingRatioIndirect: 0.809 }), entity("consolidated-subsidiary", "EUR", 0.6),
+    entity("equity-method-affiliate", "JPY", 0.34), entity("equity-method-affiliate", "USD", 0.4),
+    entity("other-related-company", "JPY", 0.2225, { name: "トヨタ自動車㈱", nameEn: "Toyota", votingDirection: "held-by" }),
+  ] });
+  const s = M.groupSummary(denso);
+  assert.deepEqual([s.consolidated, s.fullyOwned, s.noRatio, s.equityMethod, s.withCurrency, s.foreignCurrency, s.foreignShare],
+    [5, 2, 1, 2, 4, 3, 0.75]);
+  assert.deepEqual(s.owners, [{ name: "トヨタ自動車㈱", nameEn: "Toyota", category: "other-related-company", votingRatio: 0.2225 }]);
+  // Without counts the rows are counted; unknown categories are "unknown" and never consolidated.
+  const bare = M.groupSummary(doc("7296", { entities: [entity("consolidated-subsidiary", "USD", 1), entity("mystery", "JPY", 1),
+    entity("equity-method-unconsolidated-subsidiary", "JPY", 0.5), entity(null, "JPY", 0.3, { votingDirection: "held-by", name: "本田技研工業㈱" })] }));
+  assert.deepEqual([bare.consolidated, bare.equityMethod, bare.foreignShare, bare.owners.map((o) => [o.name, o.category])],
+    [1, 1, 1, [["本田技研工業㈱", "unknown"]]]);
+  assert.equal(M.groupSummary(null), null);
+
+  const fcc = doc("7296", { entities: [entity("consolidated-subsidiary", "USD", 1), entity("consolidated-subsidiary", "JPY", 1), entity("consolidated-subsidiary", "USD", 1)] });
+  const matrix = M.capitalCurrencies([{ symbol: "6902", subsidiaries: denso }, { symbol: "7296", subsidiaries: fcc }, { symbol: "7217", subsidiaries: null }]);
+  assert.deepEqual(matrix.map((r) => [r.currency, r.total, r.counts["6902"], r.counts["7296"], r.counts["7217"]]),
+    [["JPY", 2, 1, 1, 0], ["USD", 4, 2, 2, 0], ["EUR", 1, 1, 0, 0], [null, 1, 1, 0, 0]]);
+
+  assert.deepEqual(M.GROUP_FILTERS.map((f) => M.groupEntities(denso, f).length), [8, 5, 2, 1]);
+  const [owner] = M.groupEntities(denso, "parents");
+  assert.deepEqual([owner.name, owner.held], ["トヨタ自動車㈱", true]);
+  assert.deepEqual(M.groupEntities(null), []);
+});
+
 test("main customers: share of same-year revenue only, unit mismatches hidden, 404 explained", () => {
   const revenue = [{ symbol: "7217", fiscalPeriod: "2026-03", period: "FY", revenue: 5594277000 }, { symbol: "7217", fiscalPeriod: "2024-03", period: "FY", revenue: 4865893000 }];
   const report = doc("7217", { customers: [
@@ -409,6 +441,9 @@ test("normalization rejects other companies' rows and unknown sections", () => {
     (d) => (d.companies[1].directors = doc("7261", { officers: "x" })),
     (d) => (d.companies[1].directors = doc("7261", { officers: [], counts: 3 })),
     (d) => (d.companies[1].directorCompensation = doc("7261", { categories: [{ components: "x" }] })),
+    (d) => (d.companies[1].subsidiaries = doc("9999", { entities: [] })),
+    (d) => (d.companies[1].subsidiaries = doc("7261", { entities: "x" })),
+    (d) => (d.companies[1].subsidiaries = doc("7261", { entities: [], counts: [] })),
     (d) => (d.companies[1].symbol = "7203"),
     (d) => (d.companies = []),
     (d) => (d.companies[0].symbol = "../x"),
@@ -482,6 +517,15 @@ test("saved demo.json normalizes and carries no prices, carrying amounts or TDne
     for (const o of c.directors.officers) assert.deepEqual(Object.keys(o).sort(), ["group", "row", "title", "titleEn"]);
     assert.ok(!("individuals" in c.directorCompensation) && !("plannedOfficers" in c.directors), c.symbol);
   }
+  // Group companies: every company lists consolidated subsidiaries; locations without the footnote text.
+  const ENTITY_KEYS = ["business", "businessEn", "capital", "capitalCurrency", "capitalText", "category", "location", "locationEn", "name", "nameEn",
+    "noteNumbers", "relationship", "relationshipEn", "votingDirection", "votingRatio", "votingRatioIndirect"];
+  for (const c of data.companies) {
+    const s = M.groupSummary(c.subsidiaries);
+    assert.ok(s && s.consolidated > 0 && !s.truncated, c.symbol);
+    for (const e of c.subsidiaries.entities) assert.deepEqual(Object.keys(e).sort(), ENTITY_KEYS, c.symbol);
+  }
+  assert.ok(M.capitalCurrencies(data.companies)[0].currency === "JPY");
 });
 
 test("every interface text exists in both languages and avoids restricted wording", () => {
@@ -491,12 +535,15 @@ test("every interface text exists in both languages and avoids restricted wordin
   // Prefix-built keys ("sec_" + tag) are added explicitly below.
   const used = new Set([...app.matchAll(/\b(?:t|fill|notice)\("([A-Za-z_]+)"/g)].map((m) => m[1]).filter((k) => !k.endsWith("_")));
   for (const m of html.matchAll(/data-i18n(?:-label)?="([^"]+)"/g)) used.add(m[1]);
-  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury", "extraordinary", "officers"]) used.add(prefix + id);
+  for (const prefix of ["nav_", "lead_", "eyebrow_"]) for (const id of ["text", "holders", "cross", "audit", "treasury", "extraordinary", "officers", "groups"]) used.add(prefix + id);
   for (const tag of M.SECTIONS) used.add("sec_" + tag);
   for (const key of M.CATEGORY_ORDER) used.add("cat_" + key);
   for (const key of ["all", ...M.REASON_CATEGORIES]) used.add("rcat_" + key);
   for (const key of M.COMP_TYPES) used.add("ctype_" + key);
   for (const key of M.OFFICER_DESIGNS) used.add("design_" + key);
+  for (const key of M.GROUP_CATEGORIES) used.add("gcat_" + key);
+  for (const key of M.GROUP_FILTERS) used.add("gfilter_" + key);
+  used.add("noGroupRows");
   for (const key of ["holder_largest", "holder_second-largest", "upstream_failed", "invalid_response", "invalid_request", "busy", "local_only", "setup_required"]) used.add(key);
   for (const key of used) {
     assert.ok(key in texts.ja, `ja missing ${key}`);
