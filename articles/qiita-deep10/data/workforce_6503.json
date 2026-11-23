@@ -1,0 +1,150 @@
+[
+ {
+  "symbol": "6503",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YD3V",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-19T07:47:00Z",
+  "employees": 29949,
+  "averageAge": 40.5,
+  "averageTenureYears": 15.3,
+  "averageAnnualSalary": 9134603,
+  "consolidatedEmployees": 150386,
+  "segments": [
+   {
+    "segment": "インフラ",
+    "employees": 22865,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Infrastructure",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "インダストリー・モビリティ",
+    "employees": 29431,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Industry and Mobility",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ライフ",
+    "employees": 65317,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Life",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "デジタルイノベーション",
+    "employees": 4551,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Digital Innovation",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "セミコンダクター・デバイス",
+    "employees": 5556,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Semiconductor Devices",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 15782,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "共　通",
+    "employees": 6884,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Common",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "parentSegments": [
+   {
+    "segment": "インフラ",
+    "employees": 11993,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Infrastructure",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "インダストリー・モビリティ",
+    "employees": 5513,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Industry and Mobility",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ライフ",
+    "employees": 5362,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Life",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "デジタルイノベーション",
+    "employees": 25,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Digital Innovation",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "セミコンダクター・デバイス",
+    "employees": 2114,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Semiconductor Devices",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "共　通",
+    "employees": 4942,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Common",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YD3V"
+ }
+]

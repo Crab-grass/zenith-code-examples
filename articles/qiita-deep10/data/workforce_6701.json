@@ -1,0 +1,80 @@
+[
+ {
+  "symbol": "6701",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YBFV",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-18T06:35:00Z",
+  "employees": 21934,
+  "averageAge": 43.1,
+  "averageTenureYears": 17.3,
+  "averageAnnualSalary": 9939349,
+  "consolidatedEmployees": 101800,
+  "segments": [
+   {
+    "segment": "ITサービス事業",
+    "employees": 57400,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "IT Services Business",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "社会インフラ事業",
+    "employees": 16830,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Social Infrastructure Business",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 27570,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "parentSegments": [
+   {
+    "segment": "ITサービス事業",
+    "employees": 12532,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "IT Services Business",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "社会インフラ事業",
+    "employees": 4763,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Social Infrastructure Business",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 4639,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YBFV"
+ }
+]
