@@ -66,13 +66,13 @@ test('missing values stay "—", never 0, and a parent above the group is not tu
   const s = summarize(report('9001', { employees: null, averageAge: null, averageAnnualSalary: undefined }));
   assert.equal(s.p, null);
   assert.equal(s.share, null);
-  assert.equal(s.outside, null);
+  assert.equal(s.difference, null);
   assert.equal(s.age, null);
   assert.equal(s.salary, null);
   assert.equal(s.underFivePct, false);
   const over = summarize(report('9002', { employees: 1200 }));
   assert.equal(over.share, 1.2);
-  assert.equal(over.outside, null);
+  assert.equal(over.difference, null);
 });
 
 test('the 5% note is a display threshold applied from the share', () => {
@@ -207,6 +207,37 @@ test('--segments prints one line per segment and "—" where the reporting compa
   assert.equal(lines.length, 7);
   assert.ok(lines.includes('6503 その他 | 連結 15,782人 | 提出会社 — | 提出会社の割合 —'));
   assert.ok(lines.includes('6503 インフラ | 連結 22,865人 | 提出会社 11,993人 | 提出会社の割合 52.5%'));
+});
+
+test('when either table\'s segment rows add up to more than its total, no segment share of that company is shown', () => {
+  const group = segmentComparison(report('1', { consolidatedEmployees: 10, employees: 7, segments: [seg('A', 6), seg('B', 6)], parentSegments: [seg('A', 4), seg('B', 3)] }));
+  assert.equal(group.consolidated.sumExceedsTotal, true);
+  assert.equal(group.parent.sumExceedsTotal, false);
+  assert.equal(group.checkOriginal, true);
+  const parent = segmentComparison(report('2', { consolidatedEmployees: 100, employees: 5, segments: [seg('A', 60), seg('B', 40)], parentSegments: [seg('A', 4), seg('B', 3)] }));
+  assert.equal(parent.consolidated.sumExceedsTotal, false);
+  assert.equal(parent.parent.sumExceedsTotal, true);
+  assert.equal(parent.checkOriginal, true);
+  assert.equal(segmentComparison(report('3')).checkOriginal, false);
+  assert.equal(summarize(report('4', { consolidatedEmployees: 10, segments: [seg('A', 6), seg('B', 6)] })).checkOriginal, true);
+  assert.equal(summarize(report('5')).checkOriginal, false);
+});
+
+test('--segments and the default view print "原文を確認" instead of shares when a segment sum is above its total, and keep "—" where a row is missing', async () => {
+  const fetchImpl = async () => json([report('1', {
+    consolidatedEmployees: 10, employees: 7,
+    segments: [seg('A', 6), seg('B', 6), seg('C', null)], parentSegments: [seg('A', 4), seg('B', 3)],
+  })]);
+  const env = { ZENITH_API_KEY: 'test-only' };
+  const segmentLines = await capture(() => main(['--segments', '1'], { env, fetchImpl, wait: async () => {} }));
+  assert.deepEqual(segmentLines, [
+    '1 A | 連結 6人 | 提出会社 4人 | 提出会社の割合 原文を確認',
+    '1 B | 連結 6人 | 提出会社 3人 | 提出会社の割合 原文を確認',
+    '1 C | 連結 — | 提出会社 — | 提出会社の割合 —',
+  ]);
+  const lines = await capture(() => main(['1'], { env, fetchImpl, wait: async () => {} }));
+  assert.match(lines[1], /^ {2}連結事業別: 部分和 12（差 —・原文を確認） \/ 最大区分: —$/);
+  assert.match(lines[2], /^ {2}提出会社事業別: 和 7（差 0） \/ 最大区分: A 4人（原文を確認）$/);
 });
 
 test('the saved snapshot has no keys or personal data and the five segment sums match both totals (group and reporting company)', async () => {

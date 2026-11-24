@@ -1,6 +1,6 @@
 # Reporting company vs. consolidated headcount from Japanese annual reports, in Node.js
 
-Code for the Qiita article *ZENITH Code Deep Dive #10* (Japanese): of the people a group employs, how many are in the filing parent company and how many are in the rest of the group? It reads `/stable/workforce` for five electronics companies (Hitachi, Mitsubishi Electric, Fujitsu, NEC, Sony Group; fiscal period `2026-03`) and prints headcount, headcount by segment for the group and for the reporting company, and the parent-only average age, tenure and salary.
+Code for the Qiita article *ZENITH Code Deep Dive #10* (Japanese): how does the headcount the reporting company (the filing parent, standalone) discloses compare with the consolidated headcount, and what is the difference (consolidated minus reporting company)? It reads `/stable/workforce` for five electronics companies (Hitachi, Mitsubishi Electric, Fujitsu, NEC, Sony Group; fiscal period `2026-03`) and prints headcount, headcount by segment for the group and for the reporting company, and the parent-only average age, tenure and salary.
 
 ## Run (no account, no network)
 
@@ -31,10 +31,10 @@ One request (1 token) per company, 6.5 seconds apart to stay under the Free plan
 
 - The response is an **array**; the script takes the first element.
 - `employees`, `averageAge`, `averageTenureYears` and `averageAnnualSalary` describe the **reporting company only** (single entity), not the group. `consolidatedEmployees` is the group. Salary scope follows the notes in each filing (for example, NEC's filing, `S100YBFV`, note 3, excludes employees seconded out of and into the company from the salary average from this fiscal year).
-- Segment sums leave out rows with `isSubtotal: true`. An empty array, a subtotal-only array, rows without numbers and a **partial sum** are reported as such (the difference and the largest segment show `—`), and a sum above the total is marked `原文を確認` ("check the original") rather than printed as if it matched.
+- Segment sums leave out rows with `isSubtotal: true`. An empty array, a subtotal-only array, rows without numbers and a **partial sum** are reported as such (the difference and the largest segment show `—`), and a sum above the total is marked `原文を確認` ("check the original") rather than printed as if it matched. When either table's rows add up to more than its total, none of that company's segment shares (group or reporting company) is printed; they all show `原文を確認`.
 - `parentSegments` is the breakdown of the reporting company by segment. It is joined to `segments` by segment name; a segment with no row on the reporting-company side shows `—` (not 0): Mitsubishi Electric's reporting-company table has no "Other" row, and Sony Group's has only "Corporate (Common)". When `parentSegments` is an empty array the script says the API response has no such rows and does not call it "no disclosure"; check the filing's tables.
 - The 5% note (`※提出会社は連結の5%未満`) is this article's own display threshold, not an API or legal rule. Compare average salary only next to the reporting company's headcount and its share of the group.
-- Rounding differs by company: Sony Group's filing (`S100YE2C`, section 5 "Employees", note 1) states the consolidated headcount rounded to the nearest hundred (94,900), so the 92,734 difference and the 97.7% outside the reporting company are derived from that rounded figure.
+- Rounding differs by company: Sony Group's filing (`S100YE2C`, section 5 "Employees", note 1) states the consolidated headcount rounded to the nearest hundred (94,900), so the 92,734 difference and its 97.7% share are derived from that rounded figure.
 - `HTTP 404`, `200 with an empty array` and a `null` field are different situations and are never shown as 0. When the data was retrieved, `8951` and `9399` returned HTTP 404.
 - `docId` and `sourceUrl` point to the original filing on EDINET. Check numbers there.
 

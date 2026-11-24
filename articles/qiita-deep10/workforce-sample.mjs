@@ -118,7 +118,9 @@ export function segmentComparison(report) {
   for (const s of parent.items) {
     if (!known.has(s.name)) rows.push({ name: s.name, consolidated: null, parent: s.employees, parentShare: null });
   }
-  return { rows, consolidated, parent };
+  // If the rows of either table add up to more than its total, none of this company's segment shares is shown.
+  const checkOriginal = consolidated.sumExceedsTotal || parent.sumExceedsTotal;
+  return { rows, consolidated, parent, checkOriginal };
 }
 
 // ---- one company ----------------------------------------------------------------------------------
@@ -128,6 +130,8 @@ export function summarize(report) {
   const p = num(report.employees);
   const c = num(report.consolidatedEmployees);
   const share = p !== null && c !== null && c > 0 ? p / c : null;
+  const segments = segmentBreakdown(report.segments, c);
+  const parentSegments = segmentBreakdown(report.parentSegments, p);
   return {
     symbol: report.symbol ?? "—",
     docId: report.docId ?? "—",
@@ -135,20 +139,22 @@ export function summarize(report) {
     date: jstDate(report.submittedAt),
     p,
     c,
-    outside: p !== null && c !== null && p <= c ? c - p : null,
+    difference: p !== null && c !== null && p <= c ? c - p : null,
     share,
     underFivePct: share !== null && share < 0.05, // the article's own display threshold, not an API or legal one
     age: num(report.averageAge),
     tenure: num(report.averageTenureYears),
     salary: num(report.averageAnnualSalary),
-    segments: segmentBreakdown(report.segments, c),
-    parentSegments: segmentBreakdown(report.parentSegments, p),
+    segments,
+    parentSegments,
+    // If the rows of either table add up to more than its total, none of this company's segment shares is shown.
+    checkOriginal: segments.sumExceedsTotal || parentSegments.sumExceedsTotal,
     hasParentSegmentRows: Array.isArray(report.parentSegments) && report.parentSegments.length > 0,
   };
 }
 
-const topLabel = (seg) =>
-  seg.top ? `${seg.top.name} ${fmtInt(seg.top.employees, "人")}（${pct(seg.top.share, seg.sumExceedsTotal)}）` : "—";
+const topLabel = (seg, checkOriginal) =>
+  seg.top ? `${seg.top.name} ${fmtInt(seg.top.employees, "人")}（${pct(seg.top.share, checkOriginal)}）` : "—";
 
 function printCompany(result) {
   if (result.status !== "ok") {
@@ -159,10 +165,10 @@ function printCompany(result) {
   const noParent = s.hasParentSegmentRows ? "" : " ※APIの応答に提出会社の区分の行なし";
   const note = s.underFivePct ? " ※提出会社は連結の5%未満" : "";
   console.log(
-    `${s.symbol} ${s.docId} ${s.fiscalPeriod} ${s.date} | 提出会社 ${fmtInt(s.p, "人")} / 連結 ${fmtInt(s.c, "人")} / 差 ${fmtInt(s.outside, "人")}（提出会社 ${pct(s.share)}）`
+    `${s.symbol} ${s.docId} ${s.fiscalPeriod} ${s.date} | 提出会社 ${fmtInt(s.p, "人")} / 連結 ${fmtInt(s.c, "人")} / 差 ${fmtInt(s.difference, "人")}（提出会社 ${pct(s.share)}）`
   );
-  console.log(`  連結事業別: ${segmentLabel(s.segments)} / 最大区分: ${topLabel(s.segments)}`);
-  console.log(`  提出会社事業別: ${segmentLabel(s.parentSegments)} / 最大区分: ${topLabel(s.parentSegments)}${noParent}`);
+  console.log(`  連結事業別: ${segmentLabel(s.segments)} / 最大区分: ${topLabel(s.segments, s.checkOriginal)}`);
+  console.log(`  提出会社事業別: ${segmentLabel(s.parentSegments)} / 最大区分: ${topLabel(s.parentSegments, s.checkOriginal)}${noParent}`);
   console.log(`  提出会社属性: 年齢 ${fmtNum(s.age, "歳")} / 勤続 ${fmtNum(s.tenure, "年")} / 給与 ${fmtInt(s.salary, "円")}${note}`);
 }
 
@@ -175,7 +181,7 @@ function printSegments(results) {
     }
     const cmp = segmentComparison(result.report);
     for (const row of cmp.rows) {
-      console.log(`${result.symbol} ${row.name} | 連結 ${fmtInt(row.consolidated, "人")} | 提出会社 ${fmtInt(row.parent, "人")} | 提出会社の割合 ${pct(row.parentShare)}`);
+      console.log(`${result.symbol} ${row.name} | 連結 ${fmtInt(row.consolidated, "人")} | 提出会社 ${fmtInt(row.parent, "人")} | 提出会社の割合 ${pct(row.parentShare, cmp.checkOriginal)}`);
     }
     if (cmp.rows.length === 0) console.log(`${result.symbol} ${segmentLabel(cmp.consolidated)}`);
   }
