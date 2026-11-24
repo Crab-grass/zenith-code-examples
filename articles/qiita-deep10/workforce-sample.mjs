@@ -1,8 +1,9 @@
 // workforce-sample.mjs (Node.js 18+, no dependencies)
 // Code for the Qiita article "ZENITH Code Deep Dive #10" (Japanese): headcount of the reporting company
-// (提出会社) vs. the consolidated group, consolidated headcount by segment, and average age / tenure / salary.
+// (提出会社) vs. the consolidated group, headcount by segment on both sides, and average age / tenure / salary.
 //
 //   node workforce-sample.mjs --from-json ./data                  # saved responses, no network, no API key
+//   node workforce-sample.mjs --from-json ./data --segments       # per segment: group vs. reporting company
 //   node workforce-sample.mjs --from-json ./data --sort-by-share  # the "small change" in the article
 //   ZENITH_API_KEY=... node workforce-sample.mjs --period 2026-03 [symbol ...]   # live API, 1 request per company
 //
@@ -32,7 +33,7 @@ export function classify(body) {
 }
 
 export async function fetchWorkforce(symbol, { apiKey, fiscalPeriod, fetchImpl = fetch } = {}) {
-  const params = fiscalPeriod ? { symbol, fiscalPeriod } : { symbol, limit: 1 }; // no period: the latest filing only
+  const params = fiscalPeriod ? { symbol, fiscalPeriod } : { symbol }; // no period: the latest filing
   const url = `${BASE_URL}/workforce?${new URLSearchParams(params)}`;
   const res = await fetchImpl(url, { headers: { "x-api-key": apiKey, Accept: "application/json" } });
   if (res.status === 404) return { symbol, status: "http_404", report: null };
@@ -95,6 +96,31 @@ export function segmentLabel(seg) {
   return "数値の無い行のみ（和 —）";
 }
 
+// ---- reporting company vs. group, per segment ----------------------------------------------------
+// The segment name is the join key: the consolidated row and the reporting-company row with the same name
+// belong to the same row of the filing's table. A segment with no row on one side shows "—", never 0.
+export function segmentComparison(report) {
+  const c = num(report.consolidatedEmployees);
+  const p = num(report.employees);
+  const consolidated = segmentBreakdown(report.segments, c);
+  const parent = segmentBreakdown(report.parentSegments, p);
+  const parentByName = new Map(parent.items.map((s) => [s.name, s]));
+  const rows = consolidated.items.map((s) => {
+    const parentEmployees = parentByName.get(s.name)?.employees ?? null;
+    return {
+      name: s.name,
+      consolidated: s.employees,
+      parent: parentEmployees,
+      parentShare: s.employees > 0 && parentEmployees !== null ? parentEmployees / s.employees : null,
+    };
+  });
+  const known = new Set(consolidated.items.map((s) => s.name));
+  for (const s of parent.items) {
+    if (!known.has(s.name)) rows.push({ name: s.name, consolidated: null, parent: s.employees, parentShare: null });
+  }
+  return { rows, consolidated, parent };
+}
+
 // ---- one company ----------------------------------------------------------------------------------
 // employees / averageAge / averageTenureYears / averageAnnualSalary are the reporting company (single entity),
 // not the group. Any of them can be null; null is shown as "—", never as 0.
@@ -116,9 +142,13 @@ export function summarize(report) {
     tenure: num(report.averageTenureYears),
     salary: num(report.averageAnnualSalary),
     segments: segmentBreakdown(report.segments, c),
+    parentSegments: segmentBreakdown(report.parentSegments, p),
     hasParentSegmentRows: Array.isArray(report.parentSegments) && report.parentSegments.length > 0,
   };
 }
+
+const topLabel = (seg) =>
+  seg.top ? `${seg.top.name} ${fmtInt(seg.top.employees, "人")}（${pct(seg.top.share, seg.sumExceedsTotal)}）` : "—";
 
 function printCompany(result) {
   if (result.status !== "ok") {
@@ -126,17 +156,29 @@ function printCompany(result) {
     return;
   }
   const s = summarize(result.report);
-  const seg = s.segments;
-  const top = seg.top
-    ? `${seg.top.name} ${fmtInt(seg.top.employees, "人")}（${pct(seg.top.share, seg.sumExceedsTotal)}）`
-    : "—";
   const noParent = s.hasParentSegmentRows ? "" : " ※APIの応答に提出会社の区分の行なし";
   const note = s.underFivePct ? " ※提出会社は連結の5%未満" : "";
   console.log(
     `${s.symbol} ${s.docId} ${s.fiscalPeriod} ${s.date} | 提出会社 ${fmtInt(s.p, "人")} / 連結 ${fmtInt(s.c, "人")} / 差 ${fmtInt(s.outside, "人")}（提出会社 ${pct(s.share)}）`
   );
-  console.log(`  連結事業別: ${segmentLabel(seg)} / 最大区分: ${top}${noParent}`);
+  console.log(`  連結事業別: ${segmentLabel(s.segments)} / 最大区分: ${topLabel(s.segments)}`);
+  console.log(`  提出会社事業別: ${segmentLabel(s.parentSegments)} / 最大区分: ${topLabel(s.parentSegments)}${noParent}`);
   console.log(`  提出会社属性: 年齢 ${fmtNum(s.age, "歳")} / 勤続 ${fmtNum(s.tenure, "年")} / 給与 ${fmtInt(s.salary, "円")}${note}`);
+}
+
+// --segments: for each segment, the group's headcount, the reporting company's headcount and its share.
+function printSegments(results) {
+  for (const result of results) {
+    if (result.status !== "ok") {
+      console.log(`${result.symbol} このAPIで該当する従業員の情報を取得できなかった（${result.status}）`);
+      continue;
+    }
+    const cmp = segmentComparison(result.report);
+    for (const row of cmp.rows) {
+      console.log(`${result.symbol} ${row.name} | 連結 ${fmtInt(row.consolidated, "人")} | 提出会社 ${fmtInt(row.parent, "人")} | 提出会社の割合 ${pct(row.parentShare)}`);
+    }
+    if (cmp.rows.length === 0) console.log(`${result.symbol} ${segmentLabel(cmp.consolidated)}`);
+  }
 }
 
 // Display-only change (--sort-by-share): same numbers, one line per company.
@@ -157,7 +199,7 @@ function printSortedByShare(results) {
 
 // ---- command line ---------------------------------------------------------------------------------
 export function parseArgs(argv) {
-  const opts = { fromJson: null, period: null, sortByShare: false, symbols: [] };
+  const opts = { fromJson: null, period: null, sortByShare: false, segments: false, symbols: [] };
   for (let i = 0; i < argv.length; i++) {
     const a = argv[i];
     if (a === "--from-json" || a === "--period") {
@@ -165,9 +207,11 @@ export function parseArgs(argv) {
       if (value === undefined || value.startsWith("--")) throw new Error(`${a} needs a value`);
       if (a === "--from-json") opts.fromJson = value; else opts.period = value;
     } else if (a === "--sort-by-share") opts.sortByShare = true;
+    else if (a === "--segments") opts.segments = true;
     else if (a.startsWith("--")) throw new Error(`unknown option: ${a}`);
     else opts.symbols.push(a);
   }
+  if (opts.sortByShare && opts.segments) throw new Error("--sort-by-share and --segments cannot be combined");
   if (opts.fromJson && opts.period) throw new Error("--period only applies to live API calls; saved JSON files are read as they are");
   return opts;
 }
@@ -187,6 +231,7 @@ export async function main(argv, { env = process.env, fetchImpl = fetch, wait = 
     }
   }
   if (opts.sortByShare) printSortedByShare(results);
+  else if (opts.segments) printSegments(results);
   else results.forEach(printCompany);
 }
 

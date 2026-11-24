@@ -73,7 +73,68 @@
     ]
    }
   ],
-  "parentSegments": [],
+  "parentSegments": [
+   {
+    "segment": "デジタルシステム＆サービス",
+    "employees": 14664,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Digital Systems & Services",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "エナジー",
+    "employees": 522,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Energy",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "モビリティ",
+    "employees": 2392,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Mobility",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "コネクティブインダストリーズ",
+    "employees": 2763,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Connective Industries",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 2392,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "全社（本社他）",
+    "employees": 3201,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Corporate (Headquarters, etc.)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
   "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGBO"
  }
 ]

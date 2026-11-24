@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { main, parseArgs, segmentBreakdown, segmentLabel, summarize, classify } from '../articles/qiita-deep10/workforce-sample.mjs';
+import { main, parseArgs, segmentBreakdown, segmentComparison, segmentLabel, summarize, classify } from '../articles/qiita-deep10/workforce-sample.mjs';
 
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'articles', 'qiita-deep10');
 
@@ -81,6 +81,33 @@ test('the 5% note is a display threshold applied from the share', () => {
   assert.equal(summarize(report('3', { employees: 0 })).underFivePct, true);
 });
 
+test('segmentComparison joins the group row and the reporting-company row by name, and a missing side is "—", never 0', () => {
+  const r = segmentComparison(report('1', {
+    employees: 140, consolidatedEmployees: 1000,
+    segments: [seg('A', 600), seg('B', 300), seg('C', 100), seg('Sub', 900, true)],
+    parentSegments: [seg('A', 120), seg('D', 20)],
+  }));
+  assert.deepEqual(r.rows.map((x) => [x.name, x.consolidated, x.parent, x.parentShare]), [
+    ['A', 600, 120, 0.2],
+    ['B', 300, null, null],
+    ['C', 100, null, null],
+    ['D', null, 20, null],
+  ]);
+  assert.equal(r.consolidated.diff, 0);
+  assert.equal(r.parent.diff, 0);
+});
+
+test('segmentComparison does not divide by a missing or zero group row and leaves a share above 1 to be checked in the original', () => {
+  const r = segmentComparison(report('1', {
+    segments: [seg('A', 0), seg('B', null), seg('C', 10)],
+    parentSegments: [seg('A', 5), seg('B', 5), seg('C', 30)],
+  }));
+  assert.deepEqual(r.rows.map((x) => x.parentShare), [null, null, 3]);
+  assert.equal(r.parent.status, 'complete');
+  const empty = segmentComparison(report('2', { segments: [], parentSegments: [] }));
+  assert.deepEqual(empty.rows, []);
+});
+
 test('classify separates HTTP 404 body, empty array and a normal array', () => {
   assert.equal(classify({ error: 'not_found', message: 'x' }), 'http_404');
   assert.equal(classify([]), 'empty_rows');
@@ -89,7 +116,9 @@ test('classify separates HTTP 404 body, empty array and a normal array', () => {
 
 test('parseArgs reads options and symbols and rejects unclear input', () => {
   assert.deepEqual(parseArgs(['--from-json', './data', '--sort-by-share', '6501']),
-    { fromJson: './data', period: null, sortByShare: true, symbols: ['6501'] });
+    { fromJson: './data', period: null, sortByShare: true, segments: false, symbols: ['6501'] });
+  assert.equal(parseArgs(['--segments']).segments, true);
+  assert.throws(() => parseArgs(['--segments', '--sort-by-share']), /cannot be combined/);
   assert.equal(parseArgs(['--period', '2026-03']).period, '2026-03');
   assert.throws(() => parseArgs(['--period']), /needs a value/);
   assert.throws(() => parseArgs(['--from-json', '--sort-by-share']), /needs a value/);
@@ -124,14 +153,15 @@ test('live mode makes one request per symbol, pauses between them and keeps goin
   assert.equal(lines[1], '8002 このAPIで該当する従業員の情報を取得できなかった（empty_rows）');
   assert.equal(lines[2], '1000 DOC1000 2000-03 2000-06-20 | 提出会社 100人 / 連結 1,000人 / 差 900人（提出会社 10.0%）');
   assert.equal(lines[3], '  連結事業別: 和 1,000（差 0） / 最大区分: A 700人（70.0%）');
-  assert.equal(lines[4], '  提出会社属性: 年齢 40.5歳 / 勤続 15年 / 給与 6,000,000円');
+  assert.equal(lines[4], '  提出会社事業別: 和 100（差 0） / 最大区分: A 100人（100.0%）');
+  assert.equal(lines[5], '  提出会社属性: 年齢 40.5歳 / 勤続 15年 / 給与 6,000,000円');
 });
 
 test('without --period only the latest filing is requested', async () => {
   const urls = [];
   await capture(() => main(['1000'], { env: { ZENITH_API_KEY: 'test-only' }, fetchImpl: async (url) => { urls.push(url); return json([report('1000')]); }, wait: async () => {} }));
   assert.equal(urls.length, 1);
-  assert.ok(urls[0].includes('symbol=1000') && urls[0].includes('limit=1') && !urls[0].includes('fiscalPeriod'));
+  assert.ok(urls[0].includes('symbol=1000') && !urls[0].includes('fiscalPeriod'));
 });
 
 test('a rate-limit or server error stops the run instead of retrying', async () => {
@@ -167,11 +197,24 @@ test('the saved snapshot reproduces the --sort-by-share output printed in the ar
   assert.equal(lines.join('\n') + '\n', await readFile(join(dir, 'expected-output-sort-by-share.txt'), 'utf8'));
 });
 
-test('the saved snapshot has no keys or personal data and the five segment sums match the consolidated totals', async () => {
+test('the saved snapshot reproduces the --segments output printed in the article', async () => {
+  const lines = await capture(() => main(['--from-json', join(dir, 'data'), '--segments'], { env: {} }));
+  assert.equal(lines.join('\n') + '\n', await readFile(join(dir, 'expected-output-segments.txt'), 'utf8'));
+});
+
+test('--segments prints one line per segment and "—" where the reporting company has no row', async () => {
+  const lines = await capture(() => main(['--from-json', join(dir, 'data'), '--segments', '6503'], { env: {} }));
+  assert.equal(lines.length, 7);
+  assert.ok(lines.includes('6503 その他 | 連結 15,782人 | 提出会社 — | 提出会社の割合 —'));
+  assert.ok(lines.includes('6503 インフラ | 連結 22,865人 | 提出会社 11,993人 | 提出会社の割合 52.5%'));
+});
+
+test('the saved snapshot has no keys or personal data and the five segment sums match both totals (group and reporting company)', async () => {
   for (const symbol of ['6501', '6503', '6701', '6702', '6758']) {
     const text = await readFile(join(dir, 'data', `workforce_${symbol}.json`), 'utf8');
     assert.doesNotMatch(text, /api[_-]?key|secret|token|password|@|tdnet/i);
     const s = summarize(JSON.parse(text)[0]);
     assert.equal(s.segments.diff, 0);
+    assert.equal(s.parentSegments.diff, 0);
   }
 });
