@@ -1,0 +1,103 @@
+[
+ {
+  "symbol": "6758",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YE2C",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-18T06:38:00Z",
+  "employees": 2166,
+  "averageAge": 42.7,
+  "averageTenureYears": 16,
+  "averageAnnualSalary": 11550986,
+  "nullReasons": {
+   "averageAnnualSalary": null
+  },
+  "consolidatedEmployees": 94900,
+  "segments": [
+   {
+    "segment": "Ｇ＆ＮＳ（ゲーム＆ネットワークサービス）",
+    "employees": 12300,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Game & Network Services (G&NS)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "音楽",
+    "employees": 11400,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Music",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "映画",
+    "employees": 11300,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Pictures",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ＥＴ＆Ｓ（エンタテインメント・テクノロジー＆サービス）",
+    "employees": 33100,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Entertainment, Technology & Services (ET&S)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "Ｉ＆ＳＳ（イメージング＆センシング・ソリューション）",
+    "employees": 18800,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Imaging & Sensing Solutions (I&SS)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 1600,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "全社（共通）",
+    "employees": 6400,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Corporate (Common)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "parentSegments": [
+   {
+    "segment": "全社（共通）",
+    "employees": 2166,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Corporate (Common)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YE2C"
+ }
+]

@@ -1,0 +1,113 @@
+[
+ {
+  "symbol": "6702",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YM3K",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-26T06:30:00Z",
+  "employees": 32224,
+  "averageAge": 42.7,
+  "averageTenureYears": 17.6,
+  "averageAnnualSalary": 10122665,
+  "nullReasons": {
+   "averageAnnualSalary": null
+  },
+  "consolidatedEmployees": 99203,
+  "segments": [
+   {
+    "segment": "サービスソリューション",
+    "employees": 73100,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Service Solutions",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ハードウェアソリューション",
+    "employees": 15303,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Hardware Solutions",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ユビキタスソリューション",
+    "employees": 291,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Ubiquitous Solutions",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "消去・全社",
+    "employees": 10509,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Eliminations and Corporate",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "非継続事業",
+    "employees": 0,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Discontinued Operations",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "parentSegments": [
+   {
+    "segment": "サービスソリューション",
+    "employees": 23083,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Service Solutions",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ハードウェアソリューション",
+    "employees": 1007,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Hardware Solutions",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "ユビキタスソリューション",
+    "employees": 85,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Ubiquitous Solutions",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "消去・全社",
+    "employees": 8049,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Eliminations and Corporate",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM3K"
+ }
+]

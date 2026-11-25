@@ -1,0 +1,143 @@
+[
+ {
+  "symbol": "6501",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YGBO",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-22T06:56:00Z",
+  "employees": 25934,
+  "averageAge": 42.2,
+  "averageTenureYears": 18.1,
+  "averageAnnualSalary": 9949714,
+  "nullReasons": {
+   "averageAnnualSalary": null
+  },
+  "consolidatedEmployees": 287901,
+  "segments": [
+   {
+    "segment": "デジタルシステム＆サービス",
+    "employees": 104835,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Digital Systems & Services",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "エナジー",
+    "employees": 58547,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Energy",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "モビリティ",
+    "employees": 23912,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Mobility",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "コネクティブインダストリーズ",
+    "employees": 86063,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Connective Industries",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 11343,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "全社（本社他）",
+    "employees": 3201,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Corporate (Headquarters, etc.)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "parentSegments": [
+   {
+    "segment": "デジタルシステム＆サービス",
+    "employees": 14664,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Digital Systems & Services",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "エナジー",
+    "employees": 522,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Energy",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "モビリティ",
+    "employees": 2392,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Mobility",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "コネクティブインダストリーズ",
+    "employees": 2763,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Connective Industries",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "その他",
+    "employees": 2392,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Other",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "全社（本社他）",
+    "employees": 3201,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Corporate (Headquarters, etc.)",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   }
+  ],
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGBO"
+ }
+]
