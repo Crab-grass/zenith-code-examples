@@ -10,3 +10,7 @@ Figures for the dev.to article on using the ZENITH Code MCP server (`get_workfor
 Screens are recreated for illustration; every number comes from the actual API responses (some are computed from them, e.g. totals and ratios; retrieved 2026-11-25 18:13:12–18:13:34 JST).
 
 Data provided by ZENITH Code (sources: TDnet, EDINET and company disclosures; processed by ZENITH Code). ZENITH Code does not warrant the accuracy, completeness or timeliness of the data, and nothing here is investment advice.
+
+## v3 (colors aligned with earlier articles)
+
+`cover-v3.png`, `q1-workforce-v3.png`, `q2-cross-shareholdings-v3.png`, `q3-diversity-v3.png` — same content as v2, recolored to the teal/amber palette used in articles 01–05 (teal bars `#0a6f8a`→`#00e5ff`, amber `#9a5b13`→`#ffb454`). Use v3 in the article.
