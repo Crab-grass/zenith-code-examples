@@ -10,6 +10,9 @@
   "averageAge": 40.5,
   "averageTenureYears": 15.3,
   "averageAnnualSalary": 9134603,
+  "nullReasons": {
+   "averageAnnualSalary": null
+  },
   "consolidatedEmployees": 150386,
   "segments": [
    {

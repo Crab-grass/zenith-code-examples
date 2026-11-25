@@ -42,7 +42,7 @@ node workforce-sample.mjs --period 2026-03 7203 7267 8951     # 自分で選ん�
 
 リポジトリのルートで `node --test tests/*.test.mjs` を実行すると、[`tests/qiita-deep10.test.mjs`](../../tests/qiita-deep10.test.mjs) が動きます。小計行・部分和・総数超過・事業ごとの突き合わせ・null・404 と空の 200・レート制限での停止・`--segments`・`--sort-by-share` を架空の値で確かめ、保存した応答の出力が上の2つのファイルと一致することも確かめます。
 
-`data/` の応答は、2026年11月24日 13:45（日本時間）に `/stable/workforce` から取得したものです（決算期 `2026-03`・2026年6月提出の有報）。株価や API キーは含みません。コードは MIT ライセンスで、API のデータの権利を与えるものではありません。本番の応答は、[利用規約](https://zenithcode.net/terms)の範囲で自分の用途に使ってください。
+`data/` の応答は、2026年11月26日 7:05（日本時間）に `/stable/workforce` から取得したものです（決算期 `2026-03`・2026年6月提出の有報）。株価や API キーは含みません。コードは MIT ライセンスで、API のデータの権利を与えるものではありません。本番の応答は、[利用規約](https://zenithcode.net/terms)の範囲で自分の用途に使ってください。
 
 Data provided by ZENITH Code（出典: EDINET・各社の開示。ZENITH Code が加工）。データの正確性・完全性・適時性は保証されません。投資助言ではありません。
 

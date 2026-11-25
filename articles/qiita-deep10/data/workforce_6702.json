@@ -10,6 +10,9 @@
   "averageAge": 42.7,
   "averageTenureYears": 17.6,
   "averageAnnualSalary": 10122665,
+  "nullReasons": {
+   "averageAnnualSalary": null
+  },
   "consolidatedEmployees": 99203,
   "segments": [
    {
@@ -48,6 +51,16 @@
     "isSubtotal": false,
     "subtotalOf": null,
     "segmentEn": "Eliminations and Corporate",
+    "machineTranslatedFields": [
+     "segmentEn"
+    ]
+   },
+   {
+    "segment": "非継続事業",
+    "employees": 0,
+    "isSubtotal": false,
+    "subtotalOf": null,
+    "segmentEn": "Discontinued Operations",
     "machineTranslatedFields": [
      "segmentEn"
     ]

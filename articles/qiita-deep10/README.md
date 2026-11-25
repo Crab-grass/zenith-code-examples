@@ -42,7 +42,7 @@ One request (1 token) per company, 6.5 seconds apart to stay under the Free plan
 
 `node --test tests/*.test.mjs` from the repository root runs [`tests/qiita-deep10.test.mjs`](../../tests/qiita-deep10.test.mjs): synthetic fixtures for subtotal rows, partial sums, sums above the total, the segment-by-segment join, null fields, 404 vs. empty 200, rate-limit stops, `--segments` and `--sort-by-share`, plus a replay of the saved snapshot against the expected output files.
 
-The saved responses in `data/` were retrieved from `/stable/workforce` at 13:45 JST on 2026-11-24 (fiscal period `2026-03`, filings submitted in June 2026). They contain no stock prices or API keys. Code is MIT-licensed; that does not grant rights to API data. Keep live responses for your own use under the [terms](https://zenithcode.net/en/terms).
+The saved responses in `data/` were retrieved from `/stable/workforce` at 07:05 JST on 2026-11-26 (fiscal period `2026-03`, filings submitted in June 2026). They contain no stock prices or API keys. Code is MIT-licensed; that does not grant rights to API data. Keep live responses for your own use under the [terms](https://zenithcode.net/en/terms).
 
 Data provided by ZENITH Code (sources: EDINET and company disclosures; processed by ZENITH Code). ZENITH Code does not warrant the accuracy, completeness or timeliness of the data, and nothing here is investment advice.
 
