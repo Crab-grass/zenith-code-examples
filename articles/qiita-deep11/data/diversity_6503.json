@@ -1,0 +1,995 @@
+[
+ {
+  "symbol": "6503",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YD3V",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-19T07:47:00Z",
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YD3V",
+  "reportingCompany": {
+   "femaleManagerRatio": 0.042,
+   "maleChildcareLeaveRatio": 0.899,
+   "maleChildcareLeaveBasis": "childcare-leave-and-purpose-leave",
+   "wageGapAll": 0.642,
+   "wageGapRegular": 0.66,
+   "wageGapNonRegular": 0.593
+  },
+  "subsidiaries": [
+   {
+    "name": "三菱電機プラントエンジニアリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.009,
+    "maleChildcareLeaveRatio": 1.015,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.665,
+    "wageGapRegular": 0.843,
+    "wageGapNonRegular": 0.529,
+    "nameEn": "Mitsubishi Electric Plant Engineering Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機社会インフラ機器㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.846,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.542,
+    "wageGapRegular": 0.545,
+    "wageGapNonRegular": 0.709,
+    "nameEn": "Mitsubishi Electric Social Infrastructure Apparatus Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "長崎菱電テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1.333,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.664,
+    "wageGapRegular": 0.667,
+    "wageGapNonRegular": 0.873,
+    "nameEn": "Nagasaki Ryoden Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "名菱電子㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.042,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.71,
+    "wageGapRegular": 0.661,
+    "wageGapNonRegular": 0.995,
+    "nameEn": "Meiryo Electronics Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機コントロールパネル㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.742,
+    "wageGapRegular": 0.742,
+    "wageGapNonRegular": 0.711,
+    "nameEn": "Mitsubishi Electric Control Panel Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱神テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.799,
+    "wageGapRegular": 0.814,
+    "wageGapNonRegular": 0.688,
+    "nameEn": "Ryoshin Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "丸亀菱電テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.029,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.732,
+    "wageGapRegular": 0.811,
+    "wageGapNonRegular": 0.753,
+    "nameEn": "Marugame Ryoden Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "多田電機㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.7,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.792,
+    "wageGapRegular": 0.786,
+    "wageGapNonRegular": 0.875,
+    "nameEn": "Tada Electric Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機ディフェンス＆スペーステクノロジーズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.846,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.746,
+    "wageGapRegular": 0.753,
+    "wageGapNonRegular": 0.634,
+    "nameEn": "Mitsubishi Electric Defense & Space Technologies Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱プレシジョン㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.008,
+    "maleChildcareLeaveRatio": 0.889,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.744,
+    "wageGapRegular": 0.892,
+    "wageGapNonRegular": 0.382,
+    "nameEn": "Mitsubishi Precision Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱栄テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.026,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.856,
+    "wageGapRegular": 0.81,
+    "wageGapNonRegular": 0.887,
+    "nameEn": "Ryoei Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱電湘南エレクトロニクス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.019,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.778,
+    "wageGapRegular": 0.804,
+    "wageGapNonRegular": 0.857,
+    "nameEn": "Ryoden Shonan Electronics Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "名菱テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.917,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.642,
+    "wageGapRegular": 0.864,
+    "wageGapNonRegular": 0.65,
+    "nameEn": "Meiryo Technica Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機メカトロニクスエンジニアリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.917,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.631,
+    "wageGapRegular": 0.629,
+    "wageGapNonRegular": 0.834,
+    "nameEn": "Mitsubishi Electric Mechatronics Engineering Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機 FA産業機器㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.711,
+    "wageGapRegular": 0.707,
+    "wageGapNonRegular": 0.789,
+    "nameEn": "Mitsubishi Electric FA Industrial Products Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "山菱テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.077,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.647,
+    "wageGapRegular": 0.665,
+    "wageGapNonRegular": 0.776,
+    "nameEn": "Sanryo Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "甲神電機㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.687,
+    "wageGapRegular": 0.709,
+    "wageGapNonRegular": 0.81,
+    "nameEn": "Koshin Electric Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "姫菱テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.25,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.694,
+    "wageGapRegular": 0.692,
+    "wageGapNonRegular": 0.681,
+    "nameEn": "Kiryo Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコモビリティーソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.066,
+    "maleChildcareLeaveRatio": 0.714,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.73,
+    "wageGapRegular": 0.721,
+    "wageGapNonRegular": 0.544,
+    "nameEn": "Melco Mobility Solutions Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱デービー精工",
+    "notes": [],
+    "femaleManagerRatio": 0.017,
+    "maleChildcareLeaveRatio": 0.917,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.733,
+    "wageGapRegular": 0.733,
+    "wageGapNonRegular": 0.889,
+    "nameEn": "DB Seiko Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機モビリティ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.013,
+    "maleChildcareLeaveRatio": 1.005,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.609,
+    "wageGapRegular": 0.619,
+    "wageGapNonRegular": 0.658,
+    "nameEn": "Mitsubishi Electric Mobility Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機デジタルイノベーション㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.046,
+    "maleChildcareLeaveRatio": 1.043,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.756,
+    "wageGapRegular": 0.791,
+    "wageGapNonRegular": 0.473,
+    "nameEn": "Mitsubishi Electric Digital Innovation Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機ビルソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.014,
+    "maleChildcareLeaveRatio": 0.777,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.593,
+    "wageGapRegular": 0.581,
+    "wageGapNonRegular": 0.601,
+    "nameEn": "Mitsubishi Electric Building Solutions Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "阪神輸送機㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.474,
+    "wageGapRegular": 0.708,
+    "wageGapNonRegular": 0.319,
+    "nameEn": "Hanshin Yuso-Ki Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱菱サ・ビルウェア",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.8,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.748,
+    "wageGapRegular": 0.752,
+    "wageGapNonRegular": 0.614,
+    "nameEn": "Ryosa Buildware Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルテック・ビジネス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.17,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.697,
+    "wageGapRegular": 0.742,
+    "wageGapNonRegular": 0.502,
+    "nameEn": "Meltec Business Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "稲菱テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.568,
+    "wageGapRegular": 0.56,
+    "wageGapNonRegular": 0.322,
+    "nameEn": "Toryo Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "関西ビルテクノサービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.668,
+    "wageGapRegular": 0.706,
+    "wageGapNonRegular": 0.461,
+    "nameEn": "Kansai Building Techno Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "西日本ビルテクノサービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.032,
+    "maleChildcareLeaveRatio": 0.333,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.688,
+    "wageGapRegular": 0.824,
+    "wageGapNonRegular": 0.412,
+    "nameEn": "Nishi-Nihon Building Techno Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "東日本ビルテクノサービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.016,
+    "maleChildcareLeaveRatio": 0,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.622,
+    "wageGapRegular": 0.7,
+    "wageGapNonRegular": 0.472,
+    "nameEn": "Higashi-Nihon Building Techno Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコビルエンジニアリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.009,
+    "maleChildcareLeaveRatio": 0.276,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.63,
+    "wageGapRegular": 0.625,
+    "wageGapNonRegular": 0.575,
+    "nameEn": "Melco Building Engineering Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機住環境システムズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.02,
+    "maleChildcareLeaveRatio": 0.98,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.681,
+    "wageGapRegular": 0.702,
+    "wageGapNonRegular": 0.759,
+    "nameEn": "Mitsubishi Electric Living Environment Systems Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機照明㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.032,
+    "maleChildcareLeaveRatio": 0.643,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.614,
+    "wageGapRegular": 0.614,
+    "wageGapNonRegular": 0.82,
+    "nameEn": "Mitsubishi Electric Lighting Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機ホーム機器㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.019,
+    "maleChildcareLeaveRatio": 0.714,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.551,
+    "wageGapRegular": 0.56,
+    "wageGapNonRegular": 0.536,
+    "nameEn": "Mitsubishi Electric Home Appliance Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱三菱電機ライフネットワーク",
+    "notes": [],
+    "femaleManagerRatio": 0.03,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.698,
+    "wageGapRegular": 0.683,
+    "wageGapNonRegular": 0.7,
+    "nameEn": "Mitsubishi Electric Life Network Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "静菱テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.698,
+    "wageGapRegular": 0.833,
+    "wageGapNonRegular": 0.827,
+    "nameEn": "Shizuryo Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機冷熱応用システム㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.045,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.746,
+    "wageGapRegular": 0.764,
+    "wageGapNonRegular": 0.689,
+    "nameEn": "Mitsubishi Electric HVAC Applied Systems Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコエアテクノロジー㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1.444,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.706,
+    "wageGapRegular": 0.729,
+    "wageGapNonRegular": 0.796,
+    "nameEn": "Melco Air Technology Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコパワーデバイス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.014,
+    "maleChildcareLeaveRatio": 0.7,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.72,
+    "wageGapRegular": 0.723,
+    "wageGapNonRegular": 0.792,
+    "nameEn": "Melco Power Device Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコパワーセミコンダクタチップ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.4,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.775,
+    "wageGapRegular": 0.763,
+    "wageGapNonRegular": 0.923,
+    "nameEn": "Melco Power Semiconductor Chip Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコセミコンダクタエンジニアリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.717,
+    "wageGapRegular": 0.747,
+    "wageGapNonRegular": 0.584,
+    "nameEn": "Melco Semiconductor Engineering Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "メルコアドバンストデバイス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.693,
+    "wageGapRegular": 0.727,
+    "wageGapNonRegular": 0.567,
+    "nameEn": "Melco Advanced Device Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機エンジニアリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.036,
+    "maleChildcareLeaveRatio": 0.937,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.672,
+    "wageGapRegular": 0.685,
+    "wageGapNonRegular": 0.605,
+    "nameEn": "Mitsubishi Electric Engineering Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機ソフトウエア㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.048,
+    "maleChildcareLeaveRatio": 1.12,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.805,
+    "wageGapRegular": 0.822,
+    "wageGapNonRegular": 0.654,
+    "nameEn": "Mitsubishi Electric Software Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機ライフサービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.018,
+    "maleChildcareLeaveRatio": 0.933,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.506,
+    "wageGapRegular": 0.627,
+    "wageGapNonRegular": 0.663,
+    "nameEn": "Mitsubishi Electric Life Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機システムサービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.016,
+    "maleChildcareLeaveRatio": 0.756,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.543,
+    "wageGapRegular": 0.552,
+    "wageGapNonRegular": 0.608,
+    "nameEn": "Mitsubishi Electric System & Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱ダイヤモンドパーソネル",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.6,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.741,
+    "wageGapRegular": 0.737,
+    "wageGapNonRegular": 0.645,
+    "nameEn": "Diamond Personnel Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱弘電社",
+    "notes": [],
+    "femaleManagerRatio": 0.047,
+    "maleChildcareLeaveRatio": 0.615,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.714,
+    "wageGapRegular": 0.699,
+    "wageGapNonRegular": 0.763,
+    "nameEn": "The Kodensha,Co.,Ltd."
+   },
+   {
+    "name": "㈱アイプラネット",
+    "notes": [],
+    "femaleManagerRatio": 0.036,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.69,
+    "wageGapRegular": 0.701,
+    "wageGapNonRegular": 0.658,
+    "nameEn": "iPlanet Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機トレーディング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.059,
+    "maleChildcareLeaveRatio": 0.889,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.696,
+    "wageGapRegular": 0.728,
+    "wageGapNonRegular": 0.536,
+    "nameEn": "Mitsubishi Electric Trading Corp.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱彩テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Ryosai Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱東洋機工製作所",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Toyo Kiko Seisakusho Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱電化成㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Ryoden Kasei Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱三工業㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Ryosan Industry Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "島田理化工業㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Shimada Rika Kogyo Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "通菱テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.077,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Tsuryo Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ヴィスコ・テクノロジーズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "ViSCO Technologies Corporation"
+   },
+   {
+    "name": "㈱ビーシーシー",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "BCC Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機メカトロニクステクノロジーズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.029,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Mitsubishi Electric Mechatronics Technologies Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱セツヨーアステック",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Setsuyo Astec Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "光菱電機㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Koryo Denki Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三和電気㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Sanwa Electric Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "沖縄菱電ビルシステム㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.095,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Okinawa Ryoden Building Systems Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機冷熱プラント㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Mitsubishi Electric HVAC Plant Engineering Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機冷熱機器販売㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.019,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Mitsubishi Electric HVAC Equipment Sales Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱ハイパーサイクルシステムズ",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Hyper Cycle Systems Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "菱電旭テクニカ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Ryoden Asahi Technica Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "三菱電機インダストリアルソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.036,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Mitsubishi Electric Industrial Solutions Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "九州三菱電機販売㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.024,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Kyushu Mitsubishi Electric Sales Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "山陽三菱電機販売㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": null,
+    "wageGapRegular": null,
+    "wageGapNonRegular": null,
+    "nameEn": "Sanyo Mitsubishi Electric Sales Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   }
+  ]
+ }
+]

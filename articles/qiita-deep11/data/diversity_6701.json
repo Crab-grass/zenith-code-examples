@@ -1,0 +1,340 @@
+[
+ {
+  "symbol": "6701",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YBFV",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-18T06:35:00Z",
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YBFV",
+  "reportingCompany": {
+   "femaleManagerRatio": 0.121,
+   "maleChildcareLeaveRatio": 0.856,
+   "maleChildcareLeaveBasis": "childcare-leave",
+   "wageGapAll": 0.762,
+   "wageGapRegular": 0.75,
+   "wageGapNonRegular": 0.801
+  },
+  "subsidiaries": [
+   {
+    "name": "ＮＥＣプラットフォームズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.061,
+    "maleChildcareLeaveRatio": 0.65,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.781,
+    "wageGapRegular": 0.762,
+    "wageGapNonRegular": 0.743,
+    "nameEn": "NEC Platforms, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣフィールディング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.054,
+    "maleChildcareLeaveRatio": 0.738,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.723,
+    "wageGapRegular": 0.706,
+    "wageGapNonRegular": 0.678,
+    "nameEn": "NEC Fielding, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣフィールディングシステムテクノロジー㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.148,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.752,
+    "wageGapRegular": 0.752,
+    "wageGapNonRegular": null,
+    "nameEn": "NEC Fielding System Technology, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣソリューションイノベータ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.122,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.863,
+    "wageGapRegular": 0.845,
+    "wageGapNonRegular": 0.804,
+    "nameEn": "NEC Solution Innovators, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "アビームコンサルティング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.162,
+    "maleChildcareLeaveRatio": 0.79,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.826,
+    "wageGapRegular": 0.834,
+    "wageGapNonRegular": 0.948,
+    "nameEn": "ABeam Consulting Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "アビームシステムズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.123,
+    "maleChildcareLeaveRatio": 0.806,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.897,
+    "wageGapRegular": 0.911,
+    "wageGapNonRegular": 0.98,
+    "nameEn": "ABeam Systems Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣネッツエスアイ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.085,
+    "maleChildcareLeaveRatio": 0.646,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.788,
+    "wageGapRegular": 0.764,
+    "wageGapNonRegular": 0.729,
+    "nameEn": "NEC Networks & System Integration Corporation"
+   },
+   {
+    "name": "キューアンドエー㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.216,
+    "maleChildcareLeaveRatio": 0.923,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.56,
+    "wageGapRegular": 0.821,
+    "wageGapNonRegular": 0.73,
+    "nameEn": "Q&A Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣマグナスコミュニケーションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.075,
+    "maleChildcareLeaveRatio": 0.333,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.846,
+    "wageGapRegular": 0.792,
+    "wageGapNonRegular": null,
+    "nameEn": "NEC Magnus Communications, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣネッツエスアイ・サービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.037,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.83,
+    "wageGapRegular": 0.822,
+    "wageGapNonRegular": 0.915,
+    "nameEn": "NESIC Service, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣネットワーク・センサ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.019,
+    "maleChildcareLeaveRatio": 0.8,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.818,
+    "wageGapRegular": 0.791,
+    "wageGapNonRegular": 0.664,
+    "nameEn": "NEC Network and Sensor Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱オーシーシー",
+    "notes": [],
+    "femaleManagerRatio": 0.033,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.768,
+    "wageGapRegular": 0.773,
+    "wageGapNonRegular": 0.588,
+    "nameEn": "OCC Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日本電気通信システム㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.063,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.816,
+    "wageGapRegular": 0.8,
+    "wageGapNonRegular": 0.823,
+    "nameEn": "NEC Communication Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣネクサソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.106,
+    "maleChildcareLeaveRatio": 0.941,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.824,
+    "wageGapRegular": 0.763,
+    "wageGapNonRegular": 0.893,
+    "nameEn": "NEC Nexsolutions, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣファシリティーズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.051,
+    "maleChildcareLeaveRatio": 0.622,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.838,
+    "wageGapRegular": 0.77,
+    "wageGapNonRegular": 0.867,
+    "nameEn": "NEC Facilities, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣプラントエンジニアリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.429,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.797,
+    "wageGapRegular": 0.761,
+    "wageGapNonRegular": 0.574,
+    "nameEn": "NEC Plant Engineering, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣビジネスインテリジェンス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.173,
+    "maleChildcareLeaveRatio": 0.875,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.773,
+    "wageGapRegular": 0.701,
+    "wageGapNonRegular": 0.823,
+    "nameEn": "NEC Business Intelligence, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ＮＥＣ ＶＡＬＷＡＹ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.326,
+    "maleChildcareLeaveRatio": 0.636,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.76,
+    "wageGapRegular": 0.774,
+    "wageGapNonRegular": 0.893,
+    "nameEn": "NEC VALWAY, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱ＮＥＣライベックス",
+    "notes": [],
+    "femaleManagerRatio": 0.167,
+    "maleChildcareLeaveRatio": 0,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.645,
+    "wageGapRegular": 0.701,
+    "wageGapNonRegular": 0.719,
+    "nameEn": "NEC Livex, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日本電気航空宇宙システム㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.094,
+    "maleChildcareLeaveRatio": 1.077,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.851,
+    "wageGapRegular": 0.851,
+    "wageGapNonRegular": null,
+    "nameEn": "NEC Aerospace Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱サンネット",
+    "notes": [],
+    "femaleManagerRatio": 0.069,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.713,
+    "wageGapRegular": 0.701,
+    "wageGapNonRegular": 0.702,
+    "nameEn": "Sunnet Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱ＫＩＳ",
+    "notes": [],
+    "femaleManagerRatio": 0.091,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.901,
+    "wageGapRegular": 0.901,
+    "wageGapNonRegular": null,
+    "nameEn": "KIS Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱ワイイーシーソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.033,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.665,
+    "wageGapRegular": 0.749,
+    "wageGapNonRegular": 0.555,
+    "nameEn": "YEC Solutions Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,144 @@
+[
+ {
+  "symbol": "6702",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YM3K",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-26T06:30:00Z",
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YM3K",
+  "reportingCompany": {
+   "femaleManagerRatio": 0.131,
+   "maleChildcareLeaveRatio": 0.941,
+   "maleChildcareLeaveBasis": "childcare-leave-and-purpose-leave",
+   "wageGapAll": 0.792,
+   "wageGapRegular": 0.782,
+   "wageGapNonRegular": 0.814
+  },
+  "subsidiaries": [
+   {
+    "name": "富士通Japan㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.111,
+    "maleChildcareLeaveRatio": 0.864,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.763,
+    "wageGapRegular": 0.758,
+    "wageGapNonRegular": 0.756,
+    "nameEn": "Fujitsu Japan Limited",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "富士通ネットワークソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.03,
+    "maleChildcareLeaveRatio": 0.933,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.762,
+    "wageGapRegular": 0.726,
+    "wageGapNonRegular": 0.893,
+    "nameEn": "Fujitsu Network Solutions Limited",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "富士通ディフェンス＆ナショナルセキュリティ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.044,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.78,
+    "wageGapRegular": 0.72,
+    "wageGapNonRegular": 1.139,
+    "nameEn": "Fujitsu Defense & National Security Limited",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "Ridgelinez㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.183,
+    "maleChildcareLeaveRatio": 0.727,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.719,
+    "wageGapRegular": 0.741,
+    "wageGapNonRegular": 0.409,
+    "nameEn": "Ridgelinez Limited",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱トランストロン",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.824,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.651,
+    "wageGapRegular": 0.648,
+    "wageGapNonRegular": 0.381,
+    "nameEn": "Transtron Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "エフサステクノロジーズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.054,
+    "maleChildcareLeaveRatio": 0.905,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.784,
+    "wageGapRegular": 0.782,
+    "wageGapNonRegular": 0.789,
+    "nameEn": "Fsas Technologies Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "富士通フロンテック㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.065,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.715,
+    "wageGapRegular": 0.701,
+    "wageGapNonRegular": 0.536,
+    "nameEn": "FUJITSU FRONTECH LIMITED"
+   },
+   {
+    "name": "1FINITY㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.051,
+    "maleChildcareLeaveRatio": 0.846,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.8,
+    "wageGapRegular": 0.795,
+    "wageGapNonRegular": 0.922,
+    "nameEn": "1FINITY Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱富士通パーソナルズ",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.787,
+    "wageGapRegular": 0.725,
+    "wageGapNonRegular": 1.317,
+    "nameEn": "Fujitsu Personal System Limited",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   }
+  ]
+ }
+]

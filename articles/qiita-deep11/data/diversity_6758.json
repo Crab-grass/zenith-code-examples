@@ -1,0 +1,144 @@
+[
+ {
+  "symbol": "6758",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YE2C",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-18T06:38:00Z",
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YE2C",
+  "reportingCompany": {
+   "femaleManagerRatio": 0.205,
+   "maleChildcareLeaveRatio": 0.84,
+   "maleChildcareLeaveBasis": "childcare-leave-and-purpose-leave",
+   "wageGapAll": 0.828,
+   "wageGapRegular": 0.834,
+   "wageGapNonRegular": 0.669
+  },
+  "subsidiaries": [
+   {
+    "name": "㈱ソニー・インタラクティブエンタテインメント",
+    "notes": [],
+    "femaleManagerRatio": 0.146,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.806,
+    "wageGapRegular": 0.809,
+    "wageGapNonRegular": 0.835,
+    "nameEn": "Sony Interactive Entertainment Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱ソニー・ミュージックエンタテインメント",
+    "notes": [],
+    "femaleManagerRatio": 0.281,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.681,
+    "wageGapRegular": 0.715,
+    "wageGapNonRegular": 0.609,
+    "nameEn": "Sony Music Entertainment (Japan) Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニー㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.101,
+    "maleChildcareLeaveRatio": 0.94,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.816,
+    "wageGapRegular": 0.811,
+    "wageGapNonRegular": 0.799,
+    "nameEn": "Sony Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニーセミコンダクタソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.046,
+    "maleChildcareLeaveRatio": 0.92,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.738,
+    "wageGapRegular": 0.754,
+    "wageGapNonRegular": 0.597,
+    "nameEn": "Sony Semiconductor Solutions Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニーセミコンダクタマニュファクチャリング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.021,
+    "maleChildcareLeaveRatio": 0.93,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.797,
+    "wageGapRegular": 0.799,
+    "wageGapNonRegular": 0.826,
+    "nameEn": "Sony Semiconductor Manufacturing Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニーグローバルマニュファクチャリング＆オペレーションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.06,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.768,
+    "wageGapRegular": 0.759,
+    "wageGapNonRegular": 1.13,
+    "nameEn": "Sony Global Manufacturing & Operations Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニーストレージメディア㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.771,
+    "wageGapRegular": 0.768,
+    "wageGapNonRegular": 0.654,
+    "nameEn": "Sony Storage Media Solutions Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニーマーケティング㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.106,
+    "maleChildcareLeaveRatio": 0.92,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.805,
+    "wageGapRegular": 0.785,
+    "wageGapNonRegular": 0.95,
+    "nameEn": "Sony Marketing Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "ソニーネットワークコミュニケーションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.105,
+    "maleChildcareLeaveRatio": 0.78,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.723,
+    "wageGapRegular": 0.725,
+    "wageGapNonRegular": 0.779,
+    "nameEn": "Sony Network Communications Inc."
+   }
+  ]
+ }
+]

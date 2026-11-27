@@ -1,0 +1,917 @@
+[
+ {
+  "symbol": "6501",
+  "fiscalPeriod": "2026-03",
+  "period": "FY",
+  "docId": "S100YGBO",
+  "docTypeCode": "120",
+  "submittedAt": "2026-06-22T06:56:00Z",
+  "sourceUrl": "https://disclosure2.edinet-fsa.go.jp/WZEK0040.aspx?S100YGBO",
+  "reportingCompany": {
+   "femaleManagerRatio": 0.089,
+   "maleChildcareLeaveRatio": 0.945,
+   "maleChildcareLeaveBasis": "childcare-leave",
+   "wageGapAll": 0.716,
+   "wageGapRegular": 0.728,
+   "wageGapNonRegular": 0.593
+  },
+  "subsidiaries": [
+   {
+    "name": "㈱日立アイイーシステム",
+    "notes": [],
+    "femaleManagerRatio": 0.014,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.749,
+    "wageGapRegular": 0.764,
+    "wageGapNonRegular": 0.496,
+    "nameEn": "Hitachi IE Systems Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ＩＣＴビジネスサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.134,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.793,
+    "wageGapRegular": 0.716,
+    "wageGapNonRegular": 0.842,
+    "nameEn": "Hitachi ICT Business Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立アカデミー",
+    "notes": [],
+    "femaleManagerRatio": 0.26,
+    "maleChildcareLeaveRatio": 0.6,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.948,
+    "wageGapRegular": 0.926,
+    "wageGapNonRegular": 1.031,
+    "nameEn": "Hitachi Academy Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立アドバンストシステムズ",
+    "notes": [],
+    "femaleManagerRatio": 0.021,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.684,
+    "wageGapRegular": 0.669,
+    "wageGapNonRegular": 1.012,
+    "nameEn": "Hitachi Advanced Systems Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立アプライアンステクノサービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.674,
+    "wageGapRegular": 0.721,
+    "wageGapNonRegular": 0.707,
+    "nameEn": "Hitachi Appliance Techno Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立医薬情報ソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.098,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.7,
+    "wageGapRegular": 0.686,
+    "wageGapNonRegular": 0.87,
+    "nameEn": "Hitachi Pharma Information Solutions, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立インダストリアルプロダクツ",
+    "notes": [],
+    "femaleManagerRatio": 0.013,
+    "maleChildcareLeaveRatio": 0.885,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.698,
+    "wageGapRegular": 0.704,
+    "wageGapNonRegular": 0.638,
+    "nameEn": "Hitachi Industrial Products, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立ヴァンタラ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.042,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.683,
+    "wageGapRegular": 0.673,
+    "wageGapNonRegular": 0.699,
+    "nameEn": "Hitachi Vantara, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立エナジージャパン㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.037,
+    "maleChildcareLeaveRatio": 0.714,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.747,
+    "wageGapRegular": 0.75,
+    "wageGapNonRegular": 0.678,
+    "nameEn": "Hitachi Energy Japan, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "沖縄日立ネットワークシステムズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.8,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.765,
+    "wageGapRegular": 0.773,
+    "wageGapNonRegular": 0.489,
+    "nameEn": "Okinawa Hitachi Network Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "関西日立㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1.231,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.672,
+    "wageGapRegular": 0.671,
+    "wageGapNonRegular": 0.543,
+    "nameEn": "Kansai Hitachi Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱関東日立",
+    "notes": [],
+    "femaleManagerRatio": 0.02,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.65,
+    "wageGapRegular": 0.636,
+    "wageGapNonRegular": 0.586,
+    "nameEn": "Kanto Hitachi Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱九州日立",
+    "notes": [],
+    "femaleManagerRatio": 0.029,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.559,
+    "wageGapRegular": 0.796,
+    "wageGapNonRegular": 0.322,
+    "nameEn": "Kyushu Hitachi Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱九州日立システムズ",
+    "notes": [],
+    "femaleManagerRatio": 0.081,
+    "maleChildcareLeaveRatio": 0.714,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.792,
+    "wageGapRegular": 0.795,
+    "wageGapNonRegular": 0.499,
+    "nameEn": "Kyushu Hitachi Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立空調ソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.035,
+    "maleChildcareLeaveRatio": 0.333,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.681,
+    "wageGapRegular": 0.667,
+    "wageGapNonRegular": 1.056,
+    "nameEn": "Hitachi Air Conditioning Solutions, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立グローバルライフソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.031,
+    "maleChildcareLeaveRatio": 0.743,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.698,
+    "wageGapRegular": 0.707,
+    "wageGapNonRegular": 0.616,
+    "nameEn": "Hitachi Global Life Solutions, Inc.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ケーイーシステムズ",
+    "notes": [],
+    "femaleManagerRatio": 0.042,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.798,
+    "wageGapRegular": 0.867,
+    "wageGapNonRegular": 0.575,
+    "nameEn": "Hitachi KE Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立交通テクノロジー㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.013,
+    "maleChildcareLeaveRatio": 0.833,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.75,
+    "wageGapRegular": 0.751,
+    "wageGapNonRegular": 0.525,
+    "nameEn": "Hitachi Transportation Technology, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立コンサルティング",
+    "notes": [],
+    "femaleManagerRatio": 0.17,
+    "maleChildcareLeaveRatio": 0.846,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.747,
+    "wageGapRegular": 0.742,
+    "wageGapNonRegular": 0.853,
+    "nameEn": "Hitachi Consulting Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立産機システム",
+    "notes": [],
+    "femaleManagerRatio": 0.035,
+    "maleChildcareLeaveRatio": 0.867,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.732,
+    "wageGapRegular": 0.728,
+    "wageGapNonRegular": 0.631,
+    "nameEn": "Hitachi Industrial Equipment Systems Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立産機グリーンテック",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.616,
+    "wageGapRegular": 0.641,
+    "wageGapNonRegular": 0.818,
+    "nameEn": "Hitachi Industrial Equipment Greentech Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立産機テクノサービス",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.777,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.515,
+    "wageGapRegular": 0.619,
+    "wageGapNonRegular": 0.304,
+    "nameEn": "Hitachi Industrial Equipment Techno Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立産業制御ソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.021,
+    "maleChildcareLeaveRatio": 0.789,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.738,
+    "wageGapRegular": 0.722,
+    "wageGapNonRegular": 0.614,
+    "nameEn": "Hitachi Industry & Control Solutions, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱静岡日立",
+    "notes": [],
+    "femaleManagerRatio": 0.027,
+    "maleChildcareLeaveRatio": 0,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.764,
+    "wageGapRegular": 0.813,
+    "wageGapNonRegular": 0.614,
+    "nameEn": "Shizuoka Hitachi Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立システムズ",
+    "notes": [],
+    "femaleManagerRatio": 0.08,
+    "maleChildcareLeaveRatio": 0.994,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.755,
+    "wageGapRegular": 0.74,
+    "wageGapNonRegular": 0.744,
+    "nameEn": "Hitachi Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立システムズエンジニアリングサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.074,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.765,
+    "wageGapRegular": 0.764,
+    "wageGapNonRegular": 0.621,
+    "nameEn": "Hitachi Systems Engineering Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立システムズパワーサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.144,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.808,
+    "wageGapRegular": 0.793,
+    "wageGapNonRegular": 0.514,
+    "nameEn": "Hitachi Systems Power Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立システムズフィールドサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.036,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.647,
+    "wageGapRegular": 0.688,
+    "wageGapNonRegular": 0.644,
+    "nameEn": "Hitachi Systems Field Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立社会情報サービス",
+    "notes": [],
+    "femaleManagerRatio": 0.084,
+    "maleChildcareLeaveRatio": 0.714,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.754,
+    "wageGapRegular": 0.755,
+    "wageGapNonRegular": 0.536,
+    "nameEn": "Hitachi Social Information Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立情報通信エンジニアリング",
+    "notes": [],
+    "femaleManagerRatio": 0.041,
+    "maleChildcareLeaveRatio": 0.786,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.787,
+    "wageGapRegular": 0.765,
+    "wageGapNonRegular": 0.729,
+    "nameEn": "Hitachi Information & Telecommunication Engineering, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.1,
+    "maleChildcareLeaveRatio": 1.013,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.752,
+    "wageGapRegular": 0.746,
+    "wageGapNonRegular": 0.778,
+    "nameEn": "Hitachi Solutions, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ソリューションズ・クリエイト",
+    "notes": [],
+    "femaleManagerRatio": 0.067,
+    "maleChildcareLeaveRatio": 0.922,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.763,
+    "wageGapRegular": 0.754,
+    "wageGapNonRegular": 0.753,
+    "nameEn": "Hitachi Solutions Create, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ソリューションズ・テクノロジー",
+    "notes": [],
+    "femaleManagerRatio": 0.027,
+    "maleChildcareLeaveRatio": 0.875,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.758,
+    "wageGapRegular": 0.742,
+    "wageGapNonRegular": 0.823,
+    "nameEn": "Hitachi Solutions Technology, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ソリューションズ西日本",
+    "notes": [],
+    "femaleManagerRatio": 0.065,
+    "maleChildcareLeaveRatio": 0.962,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.746,
+    "wageGapRegular": 0.746,
+    "wageGapNonRegular": 0.537,
+    "nameEn": "Hitachi Solutions West Japan, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ソリューションズ東日本",
+    "notes": [],
+    "femaleManagerRatio": 0.067,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.768,
+    "wageGapRegular": 0.77,
+    "wageGapNonRegular": 0.493,
+    "nameEn": "Hitachi Solutions East Japan, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立ターミナルメカトロニクス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.65,
+    "wageGapRegular": 0.622,
+    "wageGapNonRegular": 0.538,
+    "nameEn": "Hitachi Terminal Mechatronics Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日立チャネルソリューションズ㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.052,
+    "maleChildcareLeaveRatio": 0.444,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.763,
+    "wageGapRegular": 0.753,
+    "wageGapNonRegular": 0.772,
+    "nameEn": "Hitachi Channel Solutions, Corp.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱中国日立",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.796,
+    "wageGapRegular": 0.762,
+    "wageGapNonRegular": 1.157,
+    "nameEn": "Chugoku Hitachi Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立テクノロジ－アンドサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.017,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.828,
+    "wageGapRegular": 0.728,
+    "wageGapNonRegular": 0.788,
+    "nameEn": "Hitachi Technology and Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱東北日立",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.688,
+    "wageGapRegular": 0.71,
+    "wageGapNonRegular": 0.7,
+    "nameEn": "Tohoku Hitachi Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ドキュメントソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.048,
+    "maleChildcareLeaveRatio": 0.769,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.69,
+    "wageGapRegular": 0.7,
+    "wageGapNonRegular": 0.584,
+    "nameEn": "Hitachi Document Solutions Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ニコトランスミッション",
+    "notes": [],
+    "femaleManagerRatio": 0.034,
+    "maleChildcareLeaveRatio": 0.8,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.72,
+    "wageGapRegular": 0.73,
+    "wageGapNonRegular": 0.66,
+    "nameEn": "Hitachi Nico Transmission Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "日和サービス㈱",
+    "notes": [],
+    "femaleManagerRatio": 0.068,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.561,
+    "wageGapRegular": 0.744,
+    "wageGapNonRegular": 0.625,
+    "nameEn": "Nichie Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイシステム２１",
+    "notes": [],
+    "femaleManagerRatio": 0.105,
+    "maleChildcareLeaveRatio": 0.733,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.784,
+    "wageGapRegular": 0.787,
+    "wageGapNonRegular": 0.712,
+    "nameEn": "Hitachi High-System 21 Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテク",
+    "notes": [],
+    "femaleManagerRatio": 0.061,
+    "maleChildcareLeaveRatio": 1.01,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.77,
+    "wageGapRegular": 0.767,
+    "wageGapNonRegular": 0.673,
+    "nameEn": "Hitachi High-Tech Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテクアナリシス",
+    "notes": [],
+    "femaleManagerRatio": 0.042,
+    "maleChildcareLeaveRatio": 0.818,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.743,
+    "wageGapRegular": 0.765,
+    "wageGapNonRegular": 0.505,
+    "nameEn": "Hitachi High-Tech Analysis Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテク九州",
+    "notes": [],
+    "femaleManagerRatio": 0.333,
+    "maleChildcareLeaveRatio": 0.4,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.61,
+    "wageGapRegular": 0.63,
+    "wageGapNonRegular": 0.94,
+    "nameEn": "Hitachi High-Tech Kyushu Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテクサポート",
+    "notes": [],
+    "femaleManagerRatio": 0.083,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.955,
+    "wageGapRegular": 0.992,
+    "wageGapNonRegular": 0.72,
+    "nameEn": "Hitachi High-Tech Support Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテクソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.04,
+    "maleChildcareLeaveRatio": 0.667,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.729,
+    "wageGapRegular": 0.711,
+    "wageGapNonRegular": 0.695,
+    "nameEn": "Hitachi High-Tech Solutions Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテクネクサス",
+    "notes": [],
+    "femaleManagerRatio": 0.085,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.716,
+    "wageGapRegular": 0.716,
+    "wageGapNonRegular": 0.618,
+    "nameEn": "Hitachi High-Tech Nexus Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテクフィールディング",
+    "notes": [],
+    "femaleManagerRatio": 0.036,
+    "maleChildcareLeaveRatio": 0.917,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.783,
+    "wageGapRegular": 0.688,
+    "wageGapNonRegular": 0.861,
+    "nameEn": "Hitachi High-Tech Fielding Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ハイテクマニファクチャ＆サービス",
+    "notes": [],
+    "femaleManagerRatio": 0.015,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.658,
+    "wageGapRegular": 0.66,
+    "wageGapNonRegular": 0.726,
+    "nameEn": "Hitachi High-Tech Manufacturing & Service Corporation",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立パワーソリューションズ",
+    "notes": [],
+    "femaleManagerRatio": 0.019,
+    "maleChildcareLeaveRatio": 0.786,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.682,
+    "wageGapRegular": 0.889,
+    "wageGapNonRegular": 0.446,
+    "nameEn": "Hitachi Power Solutions Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ビルシステム",
+    "notes": [],
+    "femaleManagerRatio": 0.03,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.663,
+    "wageGapRegular": 0.708,
+    "wageGapNonRegular": 0.654,
+    "nameEn": "Hitachi Building Systems Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ビルシステムエンジニアリング",
+    "notes": [],
+    "femaleManagerRatio": 0,
+    "maleChildcareLeaveRatio": 0.75,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.7,
+    "wageGapRegular": 0.765,
+    "wageGapNonRegular": 0.64,
+    "nameEn": "Hitachi Building Systems Engineering Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立プラントコンストラクション",
+    "notes": [],
+    "femaleManagerRatio": 0.026,
+    "maleChildcareLeaveRatio": 0.762,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.714,
+    "wageGapRegular": 0.759,
+    "wageGapNonRegular": 0.592,
+    "nameEn": "Hitachi Plant Construction, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立プラントサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.014,
+    "maleChildcareLeaveRatio": 0.429,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.673,
+    "wageGapRegular": 0.694,
+    "wageGapNonRegular": 0.533,
+    "nameEn": "Hitachi Plant Services, Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立プラントメカニクス",
+    "notes": [],
+    "femaleManagerRatio": 0.022,
+    "maleChildcareLeaveRatio": 0.125,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.707,
+    "wageGapRegular": 0.708,
+    "wageGapNonRegular": 0.61,
+    "nameEn": "Hitachi Plant Mechanics Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立プロパティアンドサービス",
+    "notes": [],
+    "femaleManagerRatio": 0.087,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.592,
+    "wageGapRegular": 0.622,
+    "wageGapNonRegular": 0.604,
+    "nameEn": "Hitachi Property and Service Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立保険サービス",
+    "notes": [],
+    "femaleManagerRatio": 0.112,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.544,
+    "wageGapRegular": 0.858,
+    "wageGapNonRegular": 0.743,
+    "nameEn": "Hitachi Insurance Services, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱北海道日立システムズ",
+    "notes": [],
+    "femaleManagerRatio": 0.076,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.789,
+    "wageGapRegular": 0.79,
+    "wageGapNonRegular": 0.477,
+    "nameEn": "Hokkaido Hitachi Systems, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立マネジメントパートナー",
+    "notes": [],
+    "femaleManagerRatio": 0.111,
+    "maleChildcareLeaveRatio": 0.5,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.672,
+    "wageGapRegular": 0.65,
+    "wageGapNonRegular": 0.565,
+    "nameEn": "Hitachi Management Partner, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立ゆうあんどあい",
+    "notes": [],
+    "femaleManagerRatio": 0.188,
+    "maleChildcareLeaveRatio": null,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 1.065,
+    "wageGapRegular": 1.095,
+    "wageGapNonRegular": 0.95,
+    "nameEn": "Hitachi You and I Co., Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   },
+   {
+    "name": "㈱日立リアルエステートパートナーズ",
+    "notes": [],
+    "femaleManagerRatio": 0.05,
+    "maleChildcareLeaveRatio": 1,
+    "maleChildcareLeaveBasis": null,
+    "wageGapAll": 0.665,
+    "wageGapRegular": 0.639,
+    "wageGapNonRegular": 0.59,
+    "nameEn": "Hitachi Real Estate Partners, Ltd.",
+    "machineTranslatedFields": [
+     "nameEn"
+    ]
+   }
+  ]
+ }
+]
