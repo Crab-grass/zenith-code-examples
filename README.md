@@ -10,6 +10,8 @@ Service screenshot as of 2026-10-26. Select the image to visit the website.
 
 Official, runnable Python and JavaScript examples from Crabgrass Inc., the operator of [ZENITH Code](https://zenithcode.net/en).
 
+All plans, including Free, also cover NYSE, NASDAQ and AMEX listings, including ETFs. Look up listings, company profiles, daily prices, the previous trading day’s close and dividends. FMP supplies the US data for personal use only. Third-party display and redistribution are prohibited. [US stock documentation](https://zenithcode.net/en/docs/us-stock-list)
+
 ZENITH Code provides Japanese end-of-day stock prices under formal exchange agreements, alongside normalized company financials and as-reported financial statement hierarchies. Use the same securities code and API key to retrieve prices and financials for your own analysis. Prices are **end-of-day, not real-time**.
 
 ## Choose your starting point
